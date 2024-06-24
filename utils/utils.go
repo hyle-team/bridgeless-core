@@ -5,6 +5,7 @@ package utils
 
 import (
 	"fmt"
+	"github.com/evmos/evmos/v18/types"
 	"strings"
 
 	ibctransfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
@@ -168,4 +169,8 @@ func ComputeIBCDenom(
 	denom string,
 ) string {
 	return ComputeIBCDenomTrace(portID, channelID, denom).IBCDenom()
+}
+
+func NewnNativeTokens(amount int64) sdk.Coins {
+	return sdk.NewCoins(sdk.NewCoin(types.NativeToken, sdk.NewInt(amount)))
 }

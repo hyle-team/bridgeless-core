@@ -1,0 +1,14 @@
+syntax = "proto3";
+package accumulator;
+
+import "gogoproto/gogo.proto";
+import "accumulator/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/evmos/evmos/v18/x/accumulator/types";
+
+// GenesisState defines the bruhaccumulator module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

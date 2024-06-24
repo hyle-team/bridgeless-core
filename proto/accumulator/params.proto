@@ -1,0 +1,20 @@
+syntax = "proto3";
+package accumulator;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/evmos/evmos/v18/x/accumulator/types";
+
+// Params defines the parameters for the module.
+message Params {
+  map<string, ModuleInfo> modulesInfo = 1;
+  option (gogoproto.goproto_stringer) = false;
+}
+
+message ModuleInfo {
+  string address = 1;
+  int32 amount = 2;
+  string moduleName = 3;
+}
+
+// Define a message that contains the map
