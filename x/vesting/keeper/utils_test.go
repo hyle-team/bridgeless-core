@@ -12,10 +12,10 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 
-	evmante "github.com/evmos/evmos/v18/app/ante/evm"
-	"github.com/evmos/evmos/v18/contracts"
-	"github.com/evmos/evmos/v18/testutil"
-	"github.com/evmos/evmos/v18/x/vesting/types"
+	evmante "github.com/hyle-team/bridgeless-core/app/ante/evm"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	"github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 // Commit commits and starts a new block with an updated context.

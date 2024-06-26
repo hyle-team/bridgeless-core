@@ -41,18 +41,18 @@ import (
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 
-	evmosclient "github.com/evmos/evmos/v18/client"
-	"github.com/evmos/evmos/v18/client/block"
-	"github.com/evmos/evmos/v18/client/debug"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/ethereum/eip712"
-	evmosserver "github.com/evmos/evmos/v18/server"
-	servercfg "github.com/evmos/evmos/v18/server/config"
-	srvflags "github.com/evmos/evmos/v18/server/flags"
+	evmosclient "github.com/hyle-team/bridgeless-core/client"
+	"github.com/hyle-team/bridgeless-core/client/block"
+	"github.com/hyle-team/bridgeless-core/client/debug"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
+	evmosserver "github.com/hyle-team/bridgeless-core/server"
+	servercfg "github.com/hyle-team/bridgeless-core/server/config"
+	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
 
-	"github.com/evmos/evmos/v18/app"
-	cmdcfg "github.com/evmos/evmos/v18/cmd/config"
-	evmoskr "github.com/evmos/evmos/v18/crypto/keyring"
+	"github.com/hyle-team/bridgeless-core/app"
+	cmdcfg "github.com/hyle-team/bridgeless-core/cmd/config"
+	evmoskr "github.com/hyle-team/bridgeless-core/crypto/keyring"
 )
 
 const (

@@ -5,7 +5,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/evmos/evmos/v18/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/x/feemarket/types"
 
 	"cosmossdk.io/math"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"

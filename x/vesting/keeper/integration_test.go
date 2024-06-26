@@ -25,14 +25,14 @@ import (
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/contracts"
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v18/testutil"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
-	erc20types "github.com/evmos/evmos/v18/x/erc20/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
-	"github.com/evmos/evmos/v18/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
+	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 func TestKeeperIntegrationTestSuite(t *testing.T) {

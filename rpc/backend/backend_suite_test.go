@@ -18,15 +18,15 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/crypto/hd"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/indexer"
-	"github.com/evmos/evmos/v18/rpc/backend/mocks"
-	rpctypes "github.com/evmos/evmos/v18/rpc/types"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/indexer"
+	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
+	rpctypes "github.com/hyle-team/bridgeless-core/rpc/types"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 type BackendTestSuite struct {

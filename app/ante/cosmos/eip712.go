@@ -19,11 +19,11 @@ import (
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v18/ethereum/eip712"
-	"github.com/evmos/evmos/v18/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
+	"github.com/hyle-team/bridgeless-core/types"
 
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 var evmosCodec codec.ProtoCodecMarshaler

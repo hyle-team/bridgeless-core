@@ -5,10 +5,10 @@ import (
 
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	anteutils "github.com/evmos/evmos/v18/app/ante/utils"
-	"github.com/evmos/evmos/v18/testutil"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
+	anteutils "github.com/hyle-team/bridgeless-core/app/ante/utils"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 // TestClaimStakingRewardsIfNecessary tests the ClaimStakingRewardsIfNecessary function

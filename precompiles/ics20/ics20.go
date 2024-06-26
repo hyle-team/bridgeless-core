@@ -14,10 +14,10 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/precompiles/authorization"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	transferkeeper "github.com/evmos/evmos/v18/x/ibc/transfer/keeper"
-	stakingkeeper "github.com/evmos/evmos/v18/x/staking/keeper"
+	"github.com/hyle-team/bridgeless-core/precompiles/authorization"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	transferkeeper "github.com/hyle-team/bridgeless-core/x/ibc/transfer/keeper"
+	stakingkeeper "github.com/hyle-team/bridgeless-core/x/staking/keeper"
 )
 
 // PrecompileAddress of the ICS-20 EVM extension in hex format.

@@ -9,11 +9,11 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	"github.com/evmos/evmos/v18/precompiles/bech32"
-	"github.com/evmos/evmos/v18/precompiles/p256"
-	"github.com/evmos/evmos/v18/utils"
-	evmkeeper "github.com/evmos/evmos/v18/x/evm/keeper"
-	inflationkeeper "github.com/evmos/evmos/v18/x/inflation/v1/keeper"
+	"github.com/hyle-team/bridgeless-core/precompiles/bech32"
+	"github.com/hyle-team/bridgeless-core/precompiles/p256"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmkeeper "github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	inflationkeeper "github.com/hyle-team/bridgeless-core/x/inflation/v1/keeper"
 )
 
 // CreateUpgradeHandler creates an SDK upgrade handler for v16.0.0

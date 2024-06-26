@@ -13,8 +13,8 @@ import (
 	"github.com/spf13/cobra"
 
 	versiondbclient "github.com/crypto-org-chain/cronos/versiondb/client"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/cmd/evmosd/opendb"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/cmd/evmosd/opendb"
 )
 
 // ChangeSetCmd returns a Cobra command for interacting with change sets.

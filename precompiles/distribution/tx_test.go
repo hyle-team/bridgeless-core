@@ -6,16 +6,16 @@ import (
 
 	"cosmossdk.io/math"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/precompiles/testutil"
+	"github.com/hyle-team/bridgeless-core/precompiles/testutil"
 
 	"github.com/ethereum/go-ethereum/common"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/distribution/types"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	"github.com/evmos/evmos/v18/precompiles/distribution"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	"github.com/hyle-team/bridgeless-core/precompiles/distribution"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 func (s *PrecompileTestSuite) TestSetWithdrawAddress() {

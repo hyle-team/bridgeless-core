@@ -12,11 +12,11 @@ import (
 	"github.com/cometbft/cometbft/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/evmos/evmos/v18/indexer"
-	"github.com/evmos/evmos/v18/rpc/backend/mocks"
-	rpctypes "github.com/evmos/evmos/v18/rpc/types"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/indexer"
+	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
+	rpctypes "github.com/hyle-team/bridgeless-core/rpc/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 	"google.golang.org/grpc/metadata"
 )
 

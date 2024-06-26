@@ -22,11 +22,11 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	rpctypes "github.com/evmos/evmos/v18/rpc/types"
-	"github.com/evmos/evmos/v18/server/config"
-	"github.com/evmos/evmos/v18/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	rpctypes "github.com/hyle-team/bridgeless-core/rpc/types"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	"github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // Accounts returns the list of accounts available to this node.

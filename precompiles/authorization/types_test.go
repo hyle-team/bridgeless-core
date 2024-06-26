@@ -5,12 +5,12 @@ import (
 	"testing"
 
 	"cosmossdk.io/math"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/precompiles/authorization"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/precompiles/authorization"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
 	"github.com/stretchr/testify/require"
 )
 

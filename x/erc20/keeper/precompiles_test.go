@@ -6,11 +6,11 @@ package keeper_test
 import (
 	"slices"
 
-	erc20precompile "github.com/evmos/evmos/v18/precompiles/erc20"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
-	"github.com/evmos/evmos/v18/x/erc20/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	erc20precompile "github.com/hyle-team/bridgeless-core/precompiles/erc20"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestRegisterERC20Extensions() {

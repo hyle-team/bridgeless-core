@@ -5,8 +5,8 @@ import (
 
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/evmos/v18/precompiles/common"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/precompiles/common"
+	"github.com/hyle-team/bridgeless-core/utils"
 	"github.com/stretchr/testify/require"
 )
 

@@ -20,9 +20,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/evmos/evmos/v18/x/evm/client/cli"
-	"github.com/evmos/evmos/v18/x/evm/keeper"
-	"github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/x/evm/client/cli"
+	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	"github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // consensusVersion defines the current x/evm module consensus version.

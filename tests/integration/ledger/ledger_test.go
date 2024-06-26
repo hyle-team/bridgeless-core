@@ -10,12 +10,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/crypto/hd"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/tests/integration/ledger/mocks"
-	"github.com/evmos/evmos/v18/testutil"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/tests/integration/ledger/mocks"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
 
 	"github.com/spf13/cobra"
 

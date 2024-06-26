@@ -5,10 +5,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
-	"github.com/evmos/evmos/v18/testutil"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/x/vesting"
-	vestingtypes "github.com/evmos/evmos/v18/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/x/vesting"
+	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 var (

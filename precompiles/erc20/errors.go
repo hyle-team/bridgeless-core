@@ -11,9 +11,9 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos/v18/ibc"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/ibc"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // Errors that have formatted information are defined here as a string.

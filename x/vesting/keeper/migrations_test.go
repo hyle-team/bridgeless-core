@@ -6,10 +6,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/x/vesting/keeper"
-	v1vestingtypes "github.com/evmos/evmos/v18/x/vesting/migrations/types"
-	vestingtypes "github.com/evmos/evmos/v18/x/vesting/types"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/x/vesting/keeper"
+	v1vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/migrations/types"
+	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestMigrate1to2() {

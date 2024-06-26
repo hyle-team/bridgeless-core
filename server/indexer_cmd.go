@@ -12,7 +12,7 @@ import (
 	tmstore "github.com/cometbft/cometbft/store"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/evmos/evmos/v18/indexer"
+	"github.com/hyle-team/bridgeless-core/indexer"
 )
 
 func NewIndexTxCmd() *cobra.Command {

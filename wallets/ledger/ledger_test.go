@@ -8,11 +8,11 @@ import (
 	gethaccounts "github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/ethereum/eip712"
-	"github.com/evmos/evmos/v18/wallets/accounts"
-	"github.com/evmos/evmos/v18/wallets/ledger"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
+	"github.com/hyle-team/bridgeless-core/wallets/accounts"
+	"github.com/hyle-team/bridgeless-core/wallets/ledger"
 )
 
 // Test Mnemonic:

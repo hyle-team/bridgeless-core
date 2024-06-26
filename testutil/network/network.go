@@ -52,13 +52,13 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
 
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/server/config"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // package-wide network lock to only allow one test network at a time

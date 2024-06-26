@@ -7,10 +7,10 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	evmostypes "github.com/evmos/evmos/v18/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
 
-	utils "github.com/evmos/evmos/v18/utils"
-	"github.com/evmos/evmos/v18/x/inflation/v1/types"
+	utils "github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/x/inflation/v1/types"
 )
 
 // 200M token at year 4 allocated to the team

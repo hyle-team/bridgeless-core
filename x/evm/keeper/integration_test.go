@@ -13,19 +13,19 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/contracts"
-	"github.com/evmos/evmos/v18/precompiles/staking"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	"github.com/hyle-team/bridgeless-core/precompiles/staking"
 
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	testkeyring "github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	integrationutils "github.com/evmos/evmos/v18/testutil/integration/evmos/utils"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	testkeyring "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	integrationutils "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/utils"
 
 	abcitypes "github.com/cometbft/cometbft/abci/types"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 type IntegrationTestSuite struct {

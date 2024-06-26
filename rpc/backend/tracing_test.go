@@ -11,10 +11,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto"
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v18/indexer"
-	"github.com/evmos/evmos/v18/rpc/backend/mocks"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/indexer"
+	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (suite *BackendTestSuite) TestTraceTransaction() {

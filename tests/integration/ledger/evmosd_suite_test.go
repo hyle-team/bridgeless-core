@@ -20,11 +20,11 @@ import (
 
 	"github.com/cometbft/cometbft/crypto/tmhash"
 	"github.com/cometbft/cometbft/version"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/crypto/hd"
-	"github.com/evmos/evmos/v18/tests/integration/ledger/mocks"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/tests/integration/ledger/mocks"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
 	"github.com/stretchr/testify/suite"
 
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -32,9 +32,9 @@ import (
 	rpcclientmock "github.com/cometbft/cometbft/rpc/client/mock"
 	cosmosledger "github.com/cosmos/cosmos-sdk/crypto/ledger"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clientkeys "github.com/evmos/evmos/v18/client/keys"
-	evmoskeyring "github.com/evmos/evmos/v18/crypto/keyring"
-	feemarkettypes "github.com/evmos/evmos/v18/x/feemarket/types"
+	clientkeys "github.com/hyle-team/bridgeless-core/client/keys"
+	evmoskeyring "github.com/hyle-team/bridgeless-core/crypto/keyring"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
 
 	//nolint:revive // dot imports are fine for Ginkgo
 	. "github.com/onsi/ginkgo/v2"

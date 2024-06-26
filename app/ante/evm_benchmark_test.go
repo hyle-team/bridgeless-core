@@ -9,17 +9,17 @@ import (
 
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/app/ante"
-	ethante "github.com/evmos/evmos/v18/app/ante/evm"
-	"github.com/evmos/evmos/v18/encoding"
-	cmmnfactory "github.com/evmos/evmos/v18/testutil/integration/common/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	testkeyring "github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/app/ante"
+	ethante "github.com/hyle-team/bridgeless-core/app/ante/evm"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	cmmnfactory "github.com/hyle-team/bridgeless-core/testutil/integration/common/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	testkeyring "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 type benchmarkSuite struct {

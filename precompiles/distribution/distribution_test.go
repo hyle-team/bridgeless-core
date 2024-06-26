@@ -9,10 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/precompiles/distribution"
-	"github.com/evmos/evmos/v18/utils"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/precompiles/distribution"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (s *PrecompileTestSuite) TestIsTransaction() {

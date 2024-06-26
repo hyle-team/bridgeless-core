@@ -14,10 +14,10 @@ import (
 
 	proto "github.com/cosmos/gogoproto/proto"
 
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/encoding"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
 	"github.com/stretchr/testify/require"
 )

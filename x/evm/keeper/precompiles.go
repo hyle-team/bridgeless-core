@@ -9,7 +9,7 @@ import (
 	"maps"
 	"sort"
 
-	"github.com/evmos/evmos/v18/precompiles/bech32"
+	"github.com/hyle-team/bridgeless-core/precompiles/bech32"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
@@ -19,16 +19,16 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	distributionkeeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"
 	channelkeeper "github.com/cosmos/ibc-go/v7/modules/core/04-channel/keeper"
-	bankprecompile "github.com/evmos/evmos/v18/precompiles/bank"
-	distprecompile "github.com/evmos/evmos/v18/precompiles/distribution"
-	ics20precompile "github.com/evmos/evmos/v18/precompiles/ics20"
-	"github.com/evmos/evmos/v18/precompiles/p256"
-	stakingprecompile "github.com/evmos/evmos/v18/precompiles/staking"
-	vestingprecompile "github.com/evmos/evmos/v18/precompiles/vesting"
-	erc20Keeper "github.com/evmos/evmos/v18/x/erc20/keeper"
-	transferkeeper "github.com/evmos/evmos/v18/x/ibc/transfer/keeper"
-	stakingkeeper "github.com/evmos/evmos/v18/x/staking/keeper"
-	vestingkeeper "github.com/evmos/evmos/v18/x/vesting/keeper"
+	bankprecompile "github.com/hyle-team/bridgeless-core/precompiles/bank"
+	distprecompile "github.com/hyle-team/bridgeless-core/precompiles/distribution"
+	ics20precompile "github.com/hyle-team/bridgeless-core/precompiles/ics20"
+	"github.com/hyle-team/bridgeless-core/precompiles/p256"
+	stakingprecompile "github.com/hyle-team/bridgeless-core/precompiles/staking"
+	vestingprecompile "github.com/hyle-team/bridgeless-core/precompiles/vesting"
+	erc20Keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
+	transferkeeper "github.com/hyle-team/bridgeless-core/x/ibc/transfer/keeper"
+	stakingkeeper "github.com/hyle-team/bridgeless-core/x/staking/keeper"
+	vestingkeeper "github.com/hyle-team/bridgeless-core/x/vesting/keeper"
 )
 
 // AvailablePrecompiles returns the list of all available precompiled contracts.

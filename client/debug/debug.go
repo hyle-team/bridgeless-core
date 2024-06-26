@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/evmos/evmos/v18/ethereum/eip712"
-	evmos "github.com/evmos/evmos/v18/types"
+	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
+	evmos "github.com/hyle-team/bridgeless-core/types"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

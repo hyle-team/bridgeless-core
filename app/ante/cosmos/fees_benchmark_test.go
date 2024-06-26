@@ -6,8 +6,8 @@ import (
 	"time"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/evmos/evmos/v18/testutil"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
 )
 
 // This tests setup contains expensive operations.

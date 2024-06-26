@@ -10,10 +10,10 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/tests/e2e/upgrade"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/tests/e2e/upgrade"
+	"github.com/hyle-team/bridgeless-core/utils"
 	"github.com/stretchr/testify/suite"
 )
 

@@ -12,14 +12,14 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/evmos/evmos/v18/testutil"
-	"github.com/evmos/evmos/v18/testutil/integration/common/factory"
-	evmosfactory "github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	"github.com/evmos/evmos/v18/utils"
-	vestingtypes "github.com/evmos/evmos/v18/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/common/factory"
+	evmosfactory "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	"github.com/hyle-team/bridgeless-core/utils"
+	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
 
 	//nolint:revive // dot imports are fine for Ginkgo
 	. "github.com/onsi/ginkgo/v2"

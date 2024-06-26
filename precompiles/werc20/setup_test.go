@@ -3,12 +3,12 @@ package werc20_test
 import (
 	"testing"
 
-	"github.com/evmos/evmos/v18/precompiles/werc20"
+	"github.com/hyle-team/bridgeless-core/precompiles/werc20"
 
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	testkeyring "github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	testkeyring "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
 	"github.com/stretchr/testify/suite"
 
 	//nolint:revive // dot imports are fine for Ginkgo

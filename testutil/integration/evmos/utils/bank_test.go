@@ -6,10 +6,10 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	grpchandler "github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	testkeyring "github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/utils"
+	grpchandler "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	testkeyring "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/utils"
 	"github.com/stretchr/testify/require"
 )
 

@@ -11,7 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	"github.com/evmos/evmos/v18/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/x/feemarket/types"
 )
 
 // KeyPrefixBaseFeeV1 TODO: Temporary will be removed with params refactor PR

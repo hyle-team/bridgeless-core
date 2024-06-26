@@ -7,10 +7,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	cosmosante "github.com/evmos/evmos/v18/app/ante/cosmos"
-	"github.com/evmos/evmos/v18/testutil"
-	testutiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/utils"
+	cosmosante "github.com/hyle-team/bridgeless-core/app/ante/cosmos"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 var execTypes = []struct {

@@ -9,10 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos/v18/cmd/config"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	"github.com/evmos/evmos/v18/precompiles/distribution"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/cmd/config"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	"github.com/hyle-team/bridgeless-core/precompiles/distribution"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 func (s *PrecompileTestSuite) TestSetWithdrawAddressEvent() {

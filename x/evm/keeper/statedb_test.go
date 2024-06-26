@@ -16,10 +16,10 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
-	"github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
+	"github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestCreateAccount() {

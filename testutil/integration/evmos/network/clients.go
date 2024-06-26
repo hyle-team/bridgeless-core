@@ -11,12 +11,12 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/encoding"
-	erc20types "github.com/evmos/evmos/v18/x/erc20/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
-	feemarkettypes "github.com/evmos/evmos/v18/x/feemarket/types"
-	infltypes "github.com/evmos/evmos/v18/x/inflation/v1/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	infltypes "github.com/hyle-team/bridgeless-core/x/inflation/v1/types"
 )
 
 func getQueryHelper(ctx sdktypes.Context) *baseapp.QueryServiceTestHelper {

@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 	"github.com/stretchr/testify/require"
 )
 

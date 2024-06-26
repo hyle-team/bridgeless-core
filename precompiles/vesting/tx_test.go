@@ -9,16 +9,16 @@ import (
 
 	"cosmossdk.io/math"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/precompiles/testutil"
+	"github.com/hyle-team/bridgeless-core/precompiles/testutil"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	"github.com/evmos/evmos/v18/precompiles/vesting"
-	evmosutil "github.com/evmos/evmos/v18/testutil"
-	evmosutiltx "github.com/evmos/evmos/v18/testutil/tx"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	"github.com/evmos/evmos/v18/utils"
-	vestingtypes "github.com/evmos/evmos/v18/x/vesting/types"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	"github.com/hyle-team/bridgeless-core/precompiles/vesting"
+	evmosutil "github.com/hyle-team/bridgeless-core/testutil"
+	evmosutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/utils"
+	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 var (

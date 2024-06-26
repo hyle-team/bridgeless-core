@@ -6,10 +6,10 @@ package distribution
 import (
 	"fmt"
 
-	"github.com/evmos/evmos/v18/utils"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
+	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
 
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
 
 	"github.com/ethereum/go-ethereum/common"
 

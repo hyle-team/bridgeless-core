@@ -7,7 +7,7 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v18/types"
+	"github.com/hyle-team/bridgeless-core/types"
 )
 
 const (

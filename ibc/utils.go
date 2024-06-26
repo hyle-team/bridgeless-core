@@ -13,9 +13,9 @@ import (
 
 	transfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
-	transferkeeper "github.com/evmos/evmos/v18/x/ibc/transfer/keeper"
+	transferkeeper "github.com/hyle-team/bridgeless-core/x/ibc/transfer/keeper"
 
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 // GetTransferSenderRecipient returns the sender and recipient sdk.AccAddresses

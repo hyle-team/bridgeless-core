@@ -17,10 +17,10 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	"github.com/evmos/evmos/v18/x/evm/keeper"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestGetHashFn() {

@@ -12,11 +12,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/precompiles/authorization"
-	"github.com/evmos/evmos/v18/precompiles/staking"
-	"github.com/evmos/evmos/v18/utils"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/precompiles/authorization"
+	"github.com/hyle-team/bridgeless-core/precompiles/staking"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (s *PrecompileTestSuite) TestIsTransaction() {

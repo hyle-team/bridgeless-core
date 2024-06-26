@@ -10,16 +10,16 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/evmos/evmos/v18/rpc/backend"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/debug"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/eth"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/eth/filters"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/miner"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/net"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/personal"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/txpool"
-	"github.com/evmos/evmos/v18/rpc/namespaces/ethereum/web3"
-	"github.com/evmos/evmos/v18/types"
+	"github.com/hyle-team/bridgeless-core/rpc/backend"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/debug"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/eth"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/eth/filters"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/miner"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/net"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/personal"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/txpool"
+	"github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/web3"
+	"github.com/hyle-team/bridgeless-core/types"
 
 	rpcclient "github.com/cometbft/cometbft/rpc/jsonrpc/client"
 )

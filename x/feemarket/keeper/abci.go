@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	abci "github.com/cometbft/cometbft/abci/types"
-	"github.com/evmos/evmos/v18/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/x/feemarket/types"
 
 	"cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/telemetry"

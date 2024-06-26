@@ -42,15 +42,15 @@ import (
 	govv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	cmdcfg "github.com/evmos/evmos/v18/cmd/config"
-	"github.com/evmos/evmos/v18/crypto/hd"
-	evmoskr "github.com/evmos/evmos/v18/crypto/keyring"
-	"github.com/evmos/evmos/v18/server/config"
-	srvflags "github.com/evmos/evmos/v18/server/flags"
-	"github.com/evmos/evmos/v18/testutil/network"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
-	feemarkettypes "github.com/evmos/evmos/v18/x/feemarket/types"
+	cmdcfg "github.com/hyle-team/bridgeless-core/cmd/config"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	evmoskr "github.com/hyle-team/bridgeless-core/crypto/keyring"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
+	"github.com/hyle-team/bridgeless-core/testutil/network"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
 )
 
 var (

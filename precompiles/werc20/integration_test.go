@@ -4,18 +4,18 @@ import (
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	auth "github.com/evmos/evmos/v18/precompiles/authorization"
-	"github.com/evmos/evmos/v18/precompiles/erc20"
-	evmosutiltx "github.com/evmos/evmos/v18/testutil/tx"
+	auth "github.com/hyle-team/bridgeless-core/precompiles/authorization"
+	"github.com/hyle-team/bridgeless-core/precompiles/erc20"
+	evmosutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/precompiles/testutil"
-	"github.com/evmos/evmos/v18/precompiles/werc20"
-	"github.com/evmos/evmos/v18/precompiles/werc20/testdata"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	erc20types "github.com/evmos/evmos/v18/x/erc20/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/precompiles/testutil"
+	"github.com/hyle-team/bridgeless-core/precompiles/werc20"
+	"github.com/hyle-team/bridgeless-core/precompiles/werc20/testdata"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
 	//nolint:revive // dot imports are fine for Ginkgo
 	. "github.com/onsi/ginkgo/v2"

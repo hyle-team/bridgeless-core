@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/encoding"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
 
 	"cosmossdk.io/simapp"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -29,12 +29,12 @@ import (
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	epochstypes "github.com/evmos/evmos/v18/x/epochs/types"
-	infltypes "github.com/evmos/evmos/v18/x/inflation/v1/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	epochstypes "github.com/hyle-team/bridgeless-core/x/epochs/types"
+	infltypes "github.com/hyle-team/bridgeless-core/x/inflation/v1/types"
 
-	evmosutil "github.com/evmos/evmos/v18/utils"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	evmosutil "github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // createValidatorSetAndSigners creates validator set with the amount of validators specified

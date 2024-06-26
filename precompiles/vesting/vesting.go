@@ -8,7 +8,7 @@ import (
 	"embed"
 	"fmt"
 
-	"github.com/evmos/evmos/v18/precompiles/authorization"
+	"github.com/hyle-team/bridgeless-core/precompiles/authorization"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -18,8 +18,8 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
-	cmn "github.com/evmos/evmos/v18/precompiles/common"
-	vestingkeeper "github.com/evmos/evmos/v18/x/vesting/keeper"
+	cmn "github.com/hyle-team/bridgeless-core/precompiles/common"
+	vestingkeeper "github.com/hyle-team/bridgeless-core/x/vesting/keeper"
 )
 
 // PrecompileAddress of the vesting EVM extension in hex format.

@@ -21,17 +21,17 @@ import (
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/evmos/evmos/v18/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v18/encoding"
-	"github.com/evmos/evmos/v18/testutil"
-	utiltx "github.com/evmos/evmos/v18/testutil/tx"
-	evmostypes "github.com/evmos/evmos/v18/types"
-	"github.com/evmos/evmos/v18/utils"
-	epochstypes "github.com/evmos/evmos/v18/x/epochs/types"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/utils"
+	epochstypes "github.com/hyle-team/bridgeless-core/x/epochs/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 var (

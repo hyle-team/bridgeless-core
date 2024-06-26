@@ -1,4 +1,4 @@
-module github.com/evmos/evmos/v18
+module github.com/hyle-team/bridgeless-core
 
 go 1.22.2
 

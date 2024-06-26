@@ -5,7 +5,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/evmos/evmos/v18/types"
+	"github.com/hyle-team/bridgeless-core/types"
 )
 
 // Validate performs a basic validation of a GenesisAccount fields.

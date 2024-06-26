@@ -9,14 +9,14 @@ import (
 
 	"cosmossdk.io/math"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/contracts"
-	stakingprecompile "github.com/evmos/evmos/v18/precompiles/staking"
-	testfactory "github.com/evmos/evmos/v18/testutil/integration/evmos/factory"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/grpc"
-	testkeyring "github.com/evmos/evmos/v18/testutil/integration/evmos/keyring"
-	testnetwork "github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	"github.com/evmos/evmos/v18/x/evm/statedb/testdata"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	stakingprecompile "github.com/hyle-team/bridgeless-core/precompiles/staking"
+	testfactory "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/factory"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/grpc"
+	testkeyring "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/keyring"
+	testnetwork "github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb/testdata"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
 	//nolint:revive // okay to use dot imports for Ginkgo
 	. "github.com/onsi/ginkgo/v2"

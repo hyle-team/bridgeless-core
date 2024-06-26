@@ -12,9 +12,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	evmostypes "github.com/evmos/evmos/v18/types"
-	"github.com/evmos/evmos/v18/x/evm/keeper"
-	"github.com/evmos/evmos/v18/x/evm/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	"github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // InitGenesis initializes genesis state based on exported genesis

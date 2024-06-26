@@ -5,9 +5,9 @@ package network
 import (
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v18/app"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
-	inflationtypes "github.com/evmos/evmos/v18/x/inflation/v1/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
+	inflationtypes "github.com/hyle-team/bridgeless-core/x/inflation/v1/types"
 )
 
 // UnitTestNetwork is the implementation of the Network interface for unit tests.

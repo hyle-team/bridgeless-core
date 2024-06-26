@@ -12,9 +12,9 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/precompiles/authorization"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
-	stakingkeeper "github.com/evmos/evmos/v18/x/staking/keeper"
+	"github.com/hyle-team/bridgeless-core/precompiles/authorization"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
+	stakingkeeper "github.com/hyle-team/bridgeless-core/x/staking/keeper"
 )
 
 const (

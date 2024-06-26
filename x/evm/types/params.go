@@ -17,9 +17,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/evmos/evmos/v18/precompiles/p256"
-	"github.com/evmos/evmos/v18/types"
-	"github.com/evmos/evmos/v18/utils"
+	"github.com/hyle-team/bridgeless-core/precompiles/p256"
+	"github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/utils"
 )
 
 var (

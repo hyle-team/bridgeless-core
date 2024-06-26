@@ -9,9 +9,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/evmos/evmos/v18/contracts"
-	"github.com/evmos/evmos/v18/testutil/integration/evmos/network"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	"github.com/hyle-team/bridgeless-core/testutil/integration/evmos/network"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // GetERC20Balance returns the token balance of a given account address for

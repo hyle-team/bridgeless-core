@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/evmos/evmos/v18/cmd/config"
-	"github.com/evmos/evmos/v18/precompiles/bech32"
+	"github.com/hyle-team/bridgeless-core/cmd/config"
+	"github.com/hyle-team/bridgeless-core/precompiles/bech32"
 )
 
 func (s *PrecompileTestSuite) TestNewPrecompile() {

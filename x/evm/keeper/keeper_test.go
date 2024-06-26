@@ -5,10 +5,10 @@ import (
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	evmostypes "github.com/evmos/evmos/v18/types"
-	"github.com/evmos/evmos/v18/x/evm/keeper"
-	"github.com/evmos/evmos/v18/x/evm/statedb"
-	evmtypes "github.com/evmos/evmos/v18/x/evm/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 
