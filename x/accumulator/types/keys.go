@@ -12,6 +12,8 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_accumulator"
+
+	ParamsKey = "params"
 )
 
 func KeyPrefix(p string) []byte {

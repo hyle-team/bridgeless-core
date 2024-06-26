@@ -4,4 +4,4 @@ import (
 	"github.com/evmos/evmos/v18/x/accumulator/types"
 )
 
-var _ types.QueryServer = Keeper{}
+var _ types.QueryServer = BaseKeeper{}

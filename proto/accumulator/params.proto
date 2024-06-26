@@ -7,14 +7,16 @@ option go_package = "github.com/evmos/evmos/v18/x/accumulator/types";
 
 // Params defines the parameters for the module.
 message Params {
-  map<string, ModuleInfo> modulesInfo = 1;
   option (gogoproto.goproto_stringer) = false;
+  map<string, ModuleInfo> modulesInfo = 2;
+
 }
 
-message ModuleInfo {
-  string address = 1;
-  int32 amount = 2;
-  string moduleName = 3;
-}
 
 // Define a message that contains the map
+
+message ModuleInfo {
+  string moduleName = 1;
+  int64 amount = 2;
+  string address = 3;
+}
