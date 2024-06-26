@@ -8,21 +8,18 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(nil, "accumulator/MintAllTokens", nil)
-	cdc.RegisterConcrete(nil, "accumulator/MintAllTokens", nil)
-	cdc.RegisterConcrete(nil, "accumulator/MintAllTokens", nil)
-	cdc.RegisterConcrete(nil, "accumulator/MintAllTokens", nil)
 	// this line is used by starport scaffolding # 2
+	cdc.RegisterConcrete(&DistributeTokensRequest{}, "accumulator/DistributeTokens", nil)
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
-	registry.RegisterImplementations((*sdk.Msg)(nil))
-	registry.RegisterImplementations((*sdk.Msg)(nil))
-	registry.RegisterImplementations((*sdk.Msg)(nil))
-	registry.RegisterImplementations((*sdk.Msg)(nil))
 	// this line is used by starport scaffolding # 3
 
-	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&DistributeTokensRequest{},
+	)
+
+	msgservice.RegisterMsgServiceDesc(registry, &_MsgService_serviceDesc)
 }
 
 var (

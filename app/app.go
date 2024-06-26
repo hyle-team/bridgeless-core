@@ -140,6 +140,8 @@ import (
 	vestingprecompile "github.com/evmos/evmos/v18/precompiles/vesting"
 	srvflags "github.com/evmos/evmos/v18/server/flags"
 	evmostypes "github.com/evmos/evmos/v18/types"
+	accKeeper "github.com/evmos/evmos/v18/x/accumulator/keeper"
+	accTypes "github.com/evmos/evmos/v18/x/accumulator/types"
 	"github.com/evmos/evmos/v18/x/epochs"
 	epochskeeper "github.com/evmos/evmos/v18/x/epochs/keeper"
 	epochstypes "github.com/evmos/evmos/v18/x/epochs/types"
@@ -169,6 +171,8 @@ import (
 	transferkeeper "github.com/evmos/evmos/v18/x/ibc/transfer/keeper"
 
 	memiavlstore "github.com/crypto-org-chain/cronos/store"
+
+	acc "github.com/evmos/evmos/v18/x/accumulator"
 
 	// Force-load the tracer engines to trigger registration due to Go-Ethereum v1.10.15 changes
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
@@ -218,6 +222,8 @@ var (
 				vestingclient.RegisterClawbackProposalHandler,
 			},
 		),
+
+		acc.AppModuleBasic{}, //TODO set up
 		params.AppModuleBasic{},
 		slashing.AppModuleBasic{},
 		ibc.AppModuleBasic{},
@@ -416,6 +422,10 @@ func NewEvmos(
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, authAddr,
 	)
+	accumulatorKeeper := accKeeper.NewKeeper(
+		appCodec, keys[stakingtypes.StoreKey], keys[accTypes.MemStoreKey], app.AccountKeeper, app.BankKeeper,
+	)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.AccountKeeper, app.BankKeeper,
 		stakingKeeper, authtypes.FeeCollectorName, authAddr,
@@ -629,6 +639,8 @@ func NewEvmos(
 			app.GetSubspace(erc20types.ModuleName)),
 		epochs.NewAppModule(appCodec, app.EpochsKeeper),
 		vesting.NewAppModule(app.VestingKeeper, app.AccountKeeper, app.BankKeeper, *app.StakingKeeper.Keeper),
+
+		acc.NewAppModule(appCodec, accumulatorKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -663,6 +675,7 @@ func NewEvmos(
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
 		consensusparamtypes.ModuleName,
+		accTypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
@@ -693,6 +706,7 @@ func NewEvmos(
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
 		consensusparamtypes.ModuleName,
+		accTypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -729,6 +743,7 @@ func NewEvmos(
 		erc20types.ModuleName,
 		epochstypes.ModuleName,
 		consensusparamtypes.ModuleName,
+		accTypes.ModuleName,
 	)
 
 	app.configurator = module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())

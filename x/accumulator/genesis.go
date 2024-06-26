@@ -15,6 +15,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 			// TODO handle error
 		}
 	}
+
 	k.SetParams(ctx, genState.Params)
 }
 

@@ -6,7 +6,6 @@ import (
 )
 
 // GetParams get all parameters as types.Params
-// GetParams get all parameters as types.Params
 func (k BaseKeeper) GetParams(ctx sdk.Context) (params types.Params) {
 	store := ctx.KVStore(k.storeKey)
 
@@ -21,5 +20,10 @@ func (k BaseKeeper) GetParams(ctx sdk.Context) (params types.Params) {
 
 // SetParams set the params
 func (k BaseKeeper) SetParams(ctx sdk.Context, params types.Params) {
-	k.paramstore.SetParamSet(ctx, &params)
+	if err := params.Validate(); err != nil {
+		panic("failed to set params: " + err.Error())
+	}
+
+	b := k.cdc.MustMarshal(&params)
+	ctx.KVStore(k.storeKey).Set(types.KeyPrefix(types.ParamsKey), b)
 }

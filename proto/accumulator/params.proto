@@ -9,9 +9,7 @@ option go_package = "github.com/evmos/evmos/v18/x/accumulator/types";
 message Params {
   option (gogoproto.goproto_stringer) = false;
   map<string, ModuleInfo> modulesInfo = 2;
-
 }
-
 
 // Define a message that contains the map
 

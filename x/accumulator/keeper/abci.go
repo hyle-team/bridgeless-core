@@ -4,6 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k BaseKeeper) EndBlocker(ctx sdk.Context) {
+// TODO implement this function or remove
 
+func (k BaseKeeper) EndBlocker(ctx sdk.Context) {
 }

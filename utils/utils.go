@@ -171,6 +171,6 @@ func ComputeIBCDenom(
 	return ComputeIBCDenomTrace(portID, channelID, denom).IBCDenom()
 }
 
-func NewnNativeTokens(amount int64) sdk.Coins {
+func NewNativeTokens(amount int64) sdk.Coins {
 	return sdk.NewCoins(sdk.NewCoin(types.NativeToken, sdk.NewInt(amount)))
 }
