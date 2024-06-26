@@ -27,6 +27,7 @@ type (
 		Params(ctx context.Context, req *types.QueryParamsRequest)
 		MintTokens(ctx sdk.Context, amount int64, moduleName string) error
 		DistributeTokens(ctx sdk.Context, amount int64, moduleNameFrom, moduleNameTo string, address *string) error
+
 		sendToModuleAddress(c sdk.Context, moduleFrom, moduleTo string, coins sdk.Coins) error
 		sendToAddress(c sdk.Context, moduleFrom string, address sdk.AccAddress, coins sdk.Coins) error
 		validateBalance(ctx sdk.Context, moduleName string, amount int64) error
