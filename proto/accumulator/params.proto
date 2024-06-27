@@ -12,9 +12,16 @@ message Params {
 }
 
 // Define a message that contains the map
-
 message ModuleInfo {
   string moduleName = 1;
   int64 amount = 2;
   string address = 3;
+  VestingInfo vesting  = 4;
+}
+
+message VestingInfo {
+  int64 startTime = 1;
+  int64 stepTime = 2;
+  int64 vesting_step_amount = 3; // count of coins
+  int64 total_locked_amount = 4;
 }

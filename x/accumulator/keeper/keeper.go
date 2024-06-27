@@ -11,6 +11,7 @@ import (
 	globaltypes "github.com/evmos/evmos/v18/types"
 	"github.com/evmos/evmos/v18/x/accumulator/types"
 	"golang.org/x/net/context"
+	"time"
 )
 
 type (
@@ -21,7 +22,7 @@ type (
 		SetParams(c sdk.Context, params types.Params)
 		Params(c context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error)
 		MintTokens(ctx sdk.Context, amount int64, moduleName string) error
-		//DistributeTokens(ctx sdk.Context, amount int64, moduleNameFrom, moduleNameTo string, address *string) error
+		SetLastVestingTime(lastTime time.Time)
 
 		sendToModuleAddress(ctx sdk.Context, moduleNameFrom, moduleNameTo string, amount int64) error
 		sendToAddress(ctx sdk.Context, moduleNameFrom, address string, amount int64) error
@@ -29,11 +30,12 @@ type (
 	}
 
 	BaseKeeper struct {
-		cdc        codec.BinaryCodec
-		storeKey   storetypes.StoreKey
-		memKey     storetypes.StoreKey
-		bankKeeper bankkeeper.Keeper
-		ak         accountKeeper.AccountKeeper
+		cdc             codec.BinaryCodec
+		storeKey        storetypes.StoreKey
+		memKey          storetypes.StoreKey
+		bankKeeper      bankkeeper.Keeper
+		ak              accountKeeper.AccountKeeper
+		lastVestingTime time.Time
 	}
 )
 
@@ -75,4 +77,8 @@ func (k BaseKeeper) validateBalance(ctx sdk.Context, moduleName string, amount i
 		return fmt.Errorf("invalid balance")
 	}
 	return nil
+}
+
+func (k BaseKeeper) SetLastVestingTime(lastTime time.Time) {
+	k.lastVestingTime = lastTime
 }

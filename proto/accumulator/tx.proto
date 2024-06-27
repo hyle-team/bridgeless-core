@@ -9,6 +9,10 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/evmos/evmos/v18/x/accumulator/types";
 
+service MsgService {
+  rpc DistributeTokens(DistributeTokensRequest) returns (DistributeTokensResponse);
+}
+
 message DistributeTokensRequest {
   int64 amount = 1;
   string module_name_from = 2;
@@ -20,8 +24,7 @@ message DistributeTokensResponse {
   // This is empty because the function only returns an error.
 }
 
-service MsgService {
-  rpc DistributeTokens(DistributeTokensRequest) returns (DistributeTokensResponse);
-}
+
+
 
 // this line is used by starport scaffolding # proto/tx/message

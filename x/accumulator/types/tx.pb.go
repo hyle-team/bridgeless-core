@@ -6,7 +6,6 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
@@ -60,16 +59,9 @@ func (m *DistributeTokensRequest) XXX_Marshal(b []byte, deterministic bool) ([]b
 		return b[:n], nil
 	}
 }
-
 func (m *DistributeTokensRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DistributeTokensRequest.Merge(m, src)
 }
-
-// TODO implement it
-func (m *DistributeTokensRequest) ValidateBasic() error {return nil}
-func (m *DistributeTokensRequest) GetSigners()[]sdk.AccAddress {return nil}
-//
-
 func (m *DistributeTokensRequest) XXX_Size() int {
 	return m.Size()
 }
