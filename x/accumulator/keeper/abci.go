@@ -2,10 +2,11 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/evmos/evmos/v18/x/accumulator/types"
 )
 
 func (k BaseKeeper) EndBlocker(ctx sdk.Context) {
-	module := k.GetParams(ctx).ModulesInfo["accumulator"]
+	module := k.GetModuleInfo(ctx, types.ModuleName)
 	vesting := NewBaseAdminVesting(k, module.Address, k.lastVestingTime, module.Vesting)
 	lastTime, err := vesting.Unlock()
 	if err != nil {

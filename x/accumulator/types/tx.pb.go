@@ -6,6 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
@@ -36,6 +37,20 @@ type DistributeTokensRequest struct {
 	ModuleNameFrom string `protobuf:"bytes,2,opt,name=module_name_from,json=moduleNameFrom,proto3" json:"module_name_from,omitempty"`
 	ModuleNameTo   string `protobuf:"bytes,3,opt,name=module_name_to,json=moduleNameTo,proto3" json:"module_name_to,omitempty"`
 	Address        string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+
+var _ sdk.Msg = &DistributeTokensRequest{}
+
+
+func (m *DistributeTokensRequest) ValidateBasic() error {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (m *DistributeTokensRequest) GetSigners() []sdk.AccAddress {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (m *DistributeTokensRequest) Reset()         { *m = DistributeTokensRequest{} }

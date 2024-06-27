@@ -223,7 +223,7 @@ var (
 			},
 		),
 
-		acc.AppModuleBasic{}, //TODO set up
+		acc.AppModuleBasic{},
 		params.AppModuleBasic{},
 		slashing.AppModuleBasic{},
 		ibc.AppModuleBasic{},

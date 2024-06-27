@@ -8,10 +8,9 @@ import (
 	"time"
 )
 
-const accumulator = "accumulator"
-
 type AdminVesting interface {
 	Unlock() error
+	UnlockImmediately(amount int64) error
 }
 
 type BaseAdminVesting struct {
@@ -31,7 +30,7 @@ func NewBaseAdminVesting(keeper Keeper, address string, lastVestingTime time.Tim
 }
 
 func (av BaseAdminVesting) UnlockImmediately(amount int64) error {
-	err := av.keeper.sendToAddress(sdk.UnwrapSDKContext(context.Background()), accumulator, av.address, amount)
+	err := av.keeper.sendToAddress(sdk.UnwrapSDKContext(context.Background()), types.ModuleName, av.address, amount)
 	if err != nil {
 		return errors.Wrap(err, "failed to unlock money")
 	}
@@ -45,7 +44,7 @@ func (av BaseAdminVesting) Unlock() (*time.Time, error) {
 		return nil, nil
 	}
 
-	err := av.keeper.sendToAddress(sdk.UnwrapSDKContext(context.Background()), accumulator, av.address, av.vesting.VestingStepAmount)
+	err := av.keeper.sendToAddress(sdk.UnwrapSDKContext(context.Background()), types.ModuleName, av.address, av.vesting.VestingStepAmount)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to unlock money")
 	}
