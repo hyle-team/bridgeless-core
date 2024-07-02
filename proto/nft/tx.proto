@@ -18,7 +18,7 @@ service Msg {
 message MsgMintTokens {
     google.protobuf.Timestamp unlockTimestemp = 1;
     string owner  = 2;
-    int64 amount = 3;
+    uint64 amount = 3;
     string uri = 4;
 }
 

@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 	"time"
 )
@@ -17,12 +18,13 @@ type BaseNFT struct {
 	uri             string
 	owner           string
 	delegator       string
-	amount          int64
+	amount          uint32
 	timestamp       time.Time
 	unlockTimestamp time.Time
+	rewards         uint32
 }
 
-func NewNft(owner string, uri string, amount int64, unlockTimestamp time.Time) NFT {
+func NewNft(owner string, uri string, amount uint32, unlockTimestamp time.Time) NFT {
 	id, err := uuid.NewUUID()
 	if err != nil {
 		return nil
@@ -51,4 +53,22 @@ func (n BaseNFT) URI() string {
 
 func (n BaseNFT) Delegate(address string) {
 	n.delegator = address
+}
+
+func (n BaseNFT) CheckIsDelegated() bool {
+	return n.delegator != ""
+}
+
+func (n BaseNFT) UnlockRewards() error {
+	if n.CheckIsDelegated() {
+		return fmt.Errorf("nft is delegated to %s", n.delegator)
+	}
+
+	if n.rewards == 0 {
+		return fmt.Errorf("nft has no rewards to unlock")
+	}
+
+	// TODO make call to accumulator
+
+	return nil
 }

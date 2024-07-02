@@ -19,6 +19,7 @@ type (
 
 		nfts          map[string][]NFT
 		delegatedNfts map[string][]NFT
+		commonAmount  uint64
 	}
 )
 
@@ -77,6 +78,7 @@ func (k Keeper) DelegateNft(recipient, owner string, id uint32) error {
 
 	for _, nft := range nfts {
 		if nft.ID().ID() == id {
+			nft.Delegate(recipient)
 			k.AppendDelegatedNft(recipient, nft)
 			return nil
 		}

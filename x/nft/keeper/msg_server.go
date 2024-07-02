@@ -18,7 +18,9 @@ func (m msgServer) Mint(ctx context.Context, tokens *types.MsgMintTokens) (*type
 		tokens.UnlockTimestemp.AsTime(),
 	)
 
-	m.AppendDelegatedNft(tokens.Owner, nft)
+	// TODO valid basic
+	m.commonAmount += tokens.Amount
+	m.AppendNft(tokens.Owner, nft)
 
 	return nil, nil
 }
