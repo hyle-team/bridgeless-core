@@ -1,0 +1,27 @@
+syntax = "proto3";
+package accumulator;
+
+// this line is used by starport scaffolding # proto/tx/import
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/evmos/evmos/v12/x/accumulator/types";
+
+service MsgService {
+  rpc DistributeTokens(DistributeTokensRequest) returns (DistributeTokensResponse);
+}
+
+message DistributeTokensRequest {
+  int64 amount = 1;
+  string module_name_from = 2;
+  string module_name_to = 3;
+  string address = 4;
+}
+
+message DistributeTokensResponse {
+  // This is empty because the function only returns an error.
+}
+
+// this line is used by starport scaffolding # proto/tx/message
