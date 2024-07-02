@@ -65,6 +65,10 @@ func (k BaseKeeper) GetModuleInfo(ctx sdk.Context, moduleName string) *types.Mod
 
 func (k BaseKeeper) validateBalance(ctx sdk.Context, moduleName string, amount int64) error {
 	moduleInfo := k.GetModuleInfo(ctx, moduleName)
+	if moduleInfo == nil {
+		return fmt.Errorf("module info not found")
+	}
+
 	address := sdk.AccAddress(moduleInfo.Address)
 
 	if moduleInfo.Address == "" {

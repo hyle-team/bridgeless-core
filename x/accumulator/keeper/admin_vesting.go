@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"cosmossdk.io/errors"
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/evmos/evmos/v12/x/accumulator/types"
 	"time"
@@ -29,8 +30,15 @@ func NewBaseAdminVesting(keeper Keeper, address string, lastVestingTime time.Tim
 	}
 }
 
-func (av BaseAdminVesting) UnlockImmediately(amount int64) error {
-	err := av.keeper.sendToAddress(sdk.UnwrapSDKContext(context.Background()), types.ModuleName, av.address, amount)
+func (av BaseAdminVesting) UnlockImmediately(ctx sdk.Context, amount int64) error {
+	fmt.Println("UnlockImmediately")
+
+	fmt.Println("ctx: ", ctx)
+	fmt.Println("av: ", av)
+	fmt.Println("av.address: ", av.address)
+	fmt.Println("amount: ", amount)
+
+	err := av.keeper.sendToAddress(ctx, types.ModuleName, av.address, amount)
 	if err != nil {
 		return errors.Wrap(err, "failed to unlock money")
 	}

@@ -13,6 +13,8 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	// this line is used by starport scaffolding # genesis/module/init
 
 	fmt.Println("INIT GENESIS")
+	fmt.Printf("%+v\n", genState)
+
 	for key, m := range genState.Params.ModulesInfo {
 		fmt.Println("Module: ", key)
 
@@ -23,7 +25,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 		if m.Vesting != nil {
 			vesting := keeper.NewBaseAdminVesting(k, m.Address, time.Time{}, m.Vesting)
-			err := vesting.UnlockImmediately(m.Amount - m.Vesting.TotalLockedAmount)
+			err := vesting.UnlockImmediately(ctx, m.Amount-m.Vesting.TotalLockedAmount)
 			if err != nil {
 				k.Logger(ctx).Error(err.Error())
 				return

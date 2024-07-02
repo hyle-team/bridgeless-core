@@ -7,6 +7,10 @@ import (
 
 func (k BaseKeeper) EndBlocker(ctx sdk.Context) {
 	module := k.GetModuleInfo(ctx, types.ModuleName)
+	if module == nil {
+		k.Logger(ctx).Error("module info not found")
+		return
+	}
 	vesting := NewBaseAdminVesting(k, module.Address, k.lastVestingTime, module.Vesting)
 	lastTime, err := vesting.Unlock()
 	if err != nil {
