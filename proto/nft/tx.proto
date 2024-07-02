@@ -1,0 +1,47 @@
+syntax = "proto3";
+package evmos.v12.nft;
+
+// this line is used by starport scaffolding # proto/tx/import
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/evmos/evmos/v12/x/nft/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+    rpc Mint (MsgMintTokens)  returns (MsgMontTokensResponse);
+    rpc UnlockRewards (MsgUnlockRewards) returns (MsgUnlockRewardsResponse);
+    rpc Delegate (MsgDelegate) returns (MsgDelegateResponse);
+
+}
+
+// this line is used by starport scaffolding # proto/tx/message
+message MsgMintTokens {
+    google.protobuf.Timestamp unlockTimestemp = 1;
+    string owner  = 2;
+    int64 amount = 3;
+    string uri = 4;
+}
+
+message MsgMontTokensResponse {
+
+}
+
+message MsgUnlockRewards {
+
+}
+
+message MsgUnlockRewardsResponse{
+
+}
+
+message MsgDelegate{
+    string recipient = 1;
+    string owner = 2;
+    uint32 id = 3;
+}
+
+message MsgDelegateResponse {
+
+}
+
+
