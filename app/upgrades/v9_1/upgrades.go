@@ -24,9 +24,9 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	distrKeeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	"github.com/evmos/evmos/v12/utils"
+	distrKeeper "github.com/evmos/evmos/v12/x/distribution/keeper"
 )
 
 // CreateUpgradeHandler creates an SDK upgrade handler for v9

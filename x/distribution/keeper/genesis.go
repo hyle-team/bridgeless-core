@@ -2,9 +2,9 @@ package keeper
 
 import (
 	"fmt"
+	"github.com/evmos/evmos/v12/x/distribution/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/distribution/types"
 )
 
 // InitGenesis sets distribution information for genesis

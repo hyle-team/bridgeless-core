@@ -1,6 +1,7 @@
 package keeper_test
 
 import (
+	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -11,9 +12,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/bank/testutil"
-	disttypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"github.com/cosmos/cosmos-sdk/x/staking/teststaking"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	disttypes "github.com/evmos/evmos/v12/x/distribution/types"
 )
 
 func TestAllocateTokensToValidatorWithCommission(t *testing.T) {
@@ -50,7 +51,7 @@ func TestAllocateTokensToManyValidators(t *testing.T) {
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 
 	// reset fee pool
-	app.DistrKeeper.SetFeePool(ctx, disttypes.InitialFeePool())
+	app.DistrKeeper.SetFeePool(ctx, distributiontypes.FeePool(disttypes.InitialFeePool()))
 
 	addrs := simapp.AddTestAddrs(app, ctx, 2, sdk.NewInt(1234))
 	valAddrs := simapp.ConvertAddrsToValAddrs(addrs)
@@ -124,7 +125,7 @@ func TestAllocateTokensTruncation(t *testing.T) {
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 
 	// reset fee pool
-	app.DistrKeeper.SetFeePool(ctx, disttypes.InitialFeePool())
+	app.DistrKeeper.SetFeePool(ctx, distributiontypes.FeePool(disttypes.InitialFeePool()))
 
 	addrs := simapp.AddTestAddrs(app, ctx, 3, sdk.NewInt(1234))
 	valAddrs := simapp.ConvertAddrsToValAddrs(addrs)

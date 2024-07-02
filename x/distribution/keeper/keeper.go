@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/tendermint/tendermint/libs/log"
@@ -10,8 +9,8 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/cosmos/cosmos-sdk/x/distribution/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	"github.com/evmos/evmos/v12/x/distribution/types"
 )
 
 // Keeper of the distribution store
@@ -24,11 +23,6 @@ type Keeper struct {
 	stakingKeeper types.StakingKeeper
 
 	feeCollectorName string // name of the FeeCollector ModuleAccount
-}
-
-func (k Keeper) ValidatorDistributionInfo(ctx context.Context, request *types.QueryValidatorDistributionInfoRequest) (*types.QueryValidatorDistributionInfoResponse, error) {
-	//TODO implement me
-	panic("implement me")
 }
 
 // NewKeeper creates a new distribution Keeper instance

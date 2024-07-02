@@ -1,6 +1,7 @@
 package keeper_test
 
 import (
+	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,7 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/bank/testutil"
-	"github.com/cosmos/cosmos-sdk/x/distribution/types"
+	"github.com/evmos/evmos/v12/x/distribution/types"
 )
 
 func TestSetWithdrawAddr(t *testing.T) {
@@ -61,10 +62,10 @@ func TestWithdrawValidatorCommission(t *testing.T) {
 	require.Equal(t, expCoins, balance)
 
 	// set outstanding rewards
-	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[0], types.ValidatorOutstandingRewards{Rewards: valCommission})
+	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[0], distributiontypes.ValidatorOutstandingRewards(types.ValidatorOutstandingRewards{Rewards: valCommission}))
 
 	// set commission
-	app.DistrKeeper.SetValidatorAccumulatedCommission(ctx, valAddrs[0], types.ValidatorAccumulatedCommission{Commission: valCommission})
+	app.DistrKeeper.SetValidatorAccumulatedCommission(ctx, valAddrs[0], distributiontypes.ValidatorAccumulatedCommission(types.ValidatorAccumulatedCommission{Commission: valCommission}))
 
 	// withdraw commission
 	_, err := app.DistrKeeper.WithdrawValidatorCommission(ctx, valAddrs[0])
@@ -99,8 +100,8 @@ func TestGetTotalRewards(t *testing.T) {
 	addr := simapp.AddTestAddrs(app, ctx, 2, sdk.NewInt(1000000000))
 	valAddrs := simapp.ConvertAddrsToValAddrs(addr)
 
-	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[0], types.ValidatorOutstandingRewards{Rewards: valCommission})
-	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[1], types.ValidatorOutstandingRewards{Rewards: valCommission})
+	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[0], distributiontypes.ValidatorOutstandingRewards(types.ValidatorOutstandingRewards{Rewards: valCommission}))
+	app.DistrKeeper.SetValidatorOutstandingRewards(ctx, valAddrs[1], distributiontypes.ValidatorOutstandingRewards(types.ValidatorOutstandingRewards{Rewards: valCommission}))
 
 	expectedRewards := valCommission.MulDec(sdk.NewDec(2))
 	totalRewards := app.DistrKeeper.GetTotalRewards(ctx)
@@ -113,7 +114,7 @@ func TestFundCommunityPool(t *testing.T) {
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 
 	// reset fee pool
-	app.DistrKeeper.SetFeePool(ctx, types.InitialFeePool())
+	app.DistrKeeper.SetFeePool(ctx, distributiontypes.FeePool(types.InitialFeePool()))
 
 	addr := simapp.AddTestAddrs(app, ctx, 2, sdk.ZeroInt())
 
