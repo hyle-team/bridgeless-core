@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
+	globaltypes "github.com/cosmos/cosmos-sdk/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/errors"
 	accountKeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
-	globaltypes "github.com/evmos/evmos/v12/types"
 	"github.com/evmos/evmos/v12/x/accumulator/types"
 	"github.com/tendermint/tendermint/libs/log"
 	"golang.org/x/net/context"
@@ -21,12 +22,11 @@ type (
 		GetParams(c sdk.Context) types.Params
 		SetParams(c sdk.Context, params types.Params)
 		Params(c context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error)
-		MintTokens(ctx sdk.Context, amount int64, moduleName string) error
-		SetLastVestingTime(lastTime time.Time)
 
-		sendToModuleAddress(ctx sdk.Context, moduleNameFrom, moduleNameTo string, amount int64) error
-		sendToAddress(ctx sdk.Context, moduleNameFrom, address string, amount int64) error
-		validateBalance(ctx sdk.Context, moduleName string, amount int64) error
+		SendFromModuleToAddress(ctx sdk.Context, moduleNameFrom string, address sdk.AccAddress, amount sdk.Coins) error
+		SendToModuleAddress(ctx sdk.Context, moduleNameFrom, moduleNameTo string, amount sdk.Coins) error
+		SendFromAddressToAddress(ctx sdk.Context, moduleNameFrom, address string, amount sdk.Coins) error
+		ValidateBalance(ctx sdk.Context, moduleName string, amount sdk.Coins) error
 	}
 
 	BaseKeeper struct {
@@ -63,13 +63,18 @@ func (k BaseKeeper) GetModuleInfo(ctx sdk.Context, moduleName string) *types.Mod
 	return k.GetParams(ctx).ModulesInfo[moduleName]
 }
 
-func (k BaseKeeper) validateBalance(ctx sdk.Context, moduleName string, amount int64) error {
+func (k BaseKeeper) ValidateBalance(ctx sdk.Context, moduleName string, amount sdk.Coins) error {
+	k.Logger(ctx).Info("ValidateBalance", "module", moduleName, "amount", amount)
 	moduleInfo := k.GetModuleInfo(ctx, moduleName)
 	if moduleInfo == nil {
 		return fmt.Errorf("module info not found")
 	}
 
-	address := sdk.AccAddress(moduleInfo.Address)
+	address, err := sdk.AccAddressFromBech32(moduleInfo.Address)
+
+	if err != nil {
+		return errors.Wrap(err, "invalid address")
+	}
 
 	if moduleInfo.Address == "" {
 		moduleAddress := k.ak.GetModuleAccount(ctx, moduleName)
@@ -77,12 +82,11 @@ func (k BaseKeeper) validateBalance(ctx sdk.Context, moduleName string, amount i
 	}
 
 	balance := k.bankKeeper.GetBalance(ctx, address, globaltypes.NativeToken)
-	if !balance.IsValid() || !balance.IsPositive() || balance.Amount.Int64() < amount {
+	fmt.Println("balance: ", balance)
+	fmt.Println("amount: ", amount)
+	if !balance.IsValid() || !balance.IsPositive() || amount.AmountOf(globaltypes.NativeToken).Sub(balance.Amount).IsPositive() {
 		return fmt.Errorf("invalid balance")
 	}
-	return nil
-}
 
-func (k BaseKeeper) SetLastVestingTime(lastTime time.Time) {
-	k.lastVestingTime = lastTime
+	return nil
 }

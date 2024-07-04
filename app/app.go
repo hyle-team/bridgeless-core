@@ -20,6 +20,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/cosmos/cosmos-sdk/x/mint"
+	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
+	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	"github.com/evmos/evmos/v12/x/accumulator"
 	accumulatorkeeper "github.com/evmos/evmos/v12/x/accumulator/keeper"
 	accumulatortypes "github.com/evmos/evmos/v12/x/accumulator/types"
@@ -250,11 +253,12 @@ var (
 		claims.AppModuleBasic{},
 		recovery.AppModuleBasic{},
 		revenue.AppModuleBasic{},
+		mint.AppModuleBasic{},
 	)
 
 	// module account permissions
 	maccPerms = map[string][]string{
-		accumulatortypes.ModuleName:    {authtypes.Minter, authtypes.Staking, authtypes.Burner},
+		accumulatortypes.ModuleName:    {authtypes.Minter, authtypes.Staking, authtypes.Burner, authtypes.FeeCollectorName},
 		authtypes.FeeCollectorName:     nil,
 		distrtypes.ModuleName:          nil,
 		stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
@@ -267,6 +271,7 @@ var (
 		erc20types.ModuleName:          {authtypes.Minter, authtypes.Burner},
 		claimstypes.ModuleName:         nil,
 		incentivestypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
+		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -335,6 +340,8 @@ type Evmos struct {
 	RecoveryKeeper   *recoverykeeper.Keeper
 	RevenueKeeper    revenuekeeper.Keeper
 
+	MintKeeper mintkeeper.Keeper
+
 	// the module manager
 	mm *module.Manager
 
@@ -393,6 +400,7 @@ func NewEvmos(
 		epochstypes.StoreKey, claimstypes.StoreKey, vestingtypes.StoreKey,
 		revenuetypes.StoreKey, recoverytypes.StoreKey,
 		accumulatortypes.StoreKey,
+		minttypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -442,6 +450,10 @@ func NewEvmos(
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
+
+	accumulatorKeeper := accumulatorkeeper.NewKeeper(
+		appCodec, keys[accumulatortypes.StoreKey], keys[accumulatortypes.MemStoreKey], app.AccountKeeper, app.BankKeeper)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName,
@@ -503,6 +515,11 @@ func NewEvmos(
 		keys[inflationtypes.StoreKey], appCodec, authtypes.NewModuleAddress(govtypes.ModuleName),
 		app.AccountKeeper, app.BankKeeper, app.DistrKeeper, &stakingKeeper,
 		authtypes.FeeCollectorName,
+	)
+
+	app.MintKeeper = mintkeeper.NewKeeper(
+		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
+		app.AccountKeeper, app.BankKeeper, accumulatorKeeper, authtypes.FeeCollectorName,
 	)
 
 	app.ClaimsKeeper = claimskeeper.NewKeeper(
@@ -584,9 +601,6 @@ func NewEvmos(
 		app.TransferKeeper,
 		app.ClaimsKeeper,
 	)
-
-	accumulatorKeeper := accumulatorkeeper.NewKeeper(
-		appCodec, keys[accumulatortypes.StoreKey], keys[accumulatortypes.MemStoreKey], app.AccountKeeper, app.BankKeeper)
 
 	// NOTE: app.Erc20Keeper is already initialized elsewhere
 
@@ -704,6 +718,7 @@ func NewEvmos(
 			app.GetSubspace(recoverytypes.ModuleName)),
 		revenue.NewAppModule(app.RevenueKeeper, app.AccountKeeper,
 			app.GetSubspace(revenuetypes.ModuleName)),
+		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -713,8 +728,6 @@ func NewEvmos(
 	// NOTE: staking module is required if HistoricalEntries param > 0.
 	// NOTE: capability module's beginblocker must come before any modules using capabilities (e.g. IBC)
 	app.mm.SetOrderBeginBlockers(
-		accumulatortypes.ModuleName,
-
 		upgradetypes.ModuleName,
 		capabilitytypes.ModuleName,
 		// Note: epochs' begin should be "real" start of epochs, we keep epochs beginblock at the beginning
@@ -744,11 +757,12 @@ func NewEvmos(
 		incentivestypes.ModuleName,
 		recoverytypes.ModuleName,
 		revenuetypes.ModuleName,
+		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
 	app.mm.SetOrderEndBlockers(
-		accumulatortypes.ModuleName,
 
 		crisistypes.ModuleName,
 		govtypes.ModuleName,
@@ -782,6 +796,7 @@ func NewEvmos(
 		revenuetypes.ModuleName,
 
 		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -790,7 +805,6 @@ func NewEvmos(
 	// so that other modules that want to create or claim capabilities afterwards in InitChain
 	// can do so safely.
 	app.mm.SetOrderInitGenesis(
-		accumulatortypes.ModuleName,
 
 		// SDK modules
 		capabilitytypes.ModuleName,
@@ -827,6 +841,8 @@ func NewEvmos(
 		revenuetypes.ModuleName,
 		// NOTE: crisis module must go at the end to check for invariants on each module
 		crisistypes.ModuleName,
+		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -1165,6 +1181,7 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(incentivestypes.ModuleName)
 	paramsKeeper.Subspace(recoverytypes.ModuleName)
 	paramsKeeper.Subspace(revenuetypes.ModuleName)
+	paramsKeeper.Subspace(minttypes.ModuleName)
 	return paramsKeeper
 }
 

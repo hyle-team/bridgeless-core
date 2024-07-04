@@ -3,9 +3,10 @@ package accumulator;
 
 // this line is used by starport scaffolding # proto/tx/import
 import "gogoproto/gogo.proto";
-import "cosmos/base/v1beta1/coin.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
 
 option go_package = "github.com/evmos/evmos/v12/x/accumulator/types";
 
@@ -14,7 +15,8 @@ service MsgService {
 }
 
 message DistributeTokensRequest {
-  int64 amount = 1;
+  repeated cosmos.base.v1beta1.Coin amount = 1
+  [(gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"];
   string module_name_from = 2;
   string module_name_to = 3;
   string address = 4;

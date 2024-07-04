@@ -22,8 +22,6 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"strings"
 
-	"github.com/evmos/evmos/v12/types"
-
 	"github.com/evmos/evmos/v12/crypto/ethsecp256k1"
 
 	errorsmod "cosmossdk.io/errors"
@@ -182,8 +180,4 @@ func ComputeIBCDenom(
 	denom string,
 ) string {
 	return ComputeIBCDenomTrace(portID, channelID, denom).IBCDenom()
-}
-
-func NewNativeTokens(amount int64) sdk.Coins {
-	return sdk.NewCoins(sdk.NewCoin(types.NativeToken, sdk.NewInt(amount)))
 }
