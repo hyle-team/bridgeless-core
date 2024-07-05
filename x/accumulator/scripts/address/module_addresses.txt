@@ -1,2 +1,0 @@
-mint: evmos16zymkgh42u6nccqz0s3jnclv3dfgyvd8elshmh
-noaccumulator: evmos1kc9tq2sus07d4xujyf6k9pa2pcwwu8xemexxx4

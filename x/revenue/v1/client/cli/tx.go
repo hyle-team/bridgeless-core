@@ -27,9 +27,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
 
-	"github.com/evmos/evmos/v12/x/revenue/v1/types"
+	"github.com/hyle-team/bridgeless-core/x/revenue/v1/types"
 )
 
 // NewTxCmd returns a root CLI command handler for certain modules/revenue

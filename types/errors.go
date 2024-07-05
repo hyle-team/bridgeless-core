@@ -24,4 +24,4 @@ import (
 const RootCodespace = "evmos"
 
 // ErrInvalidChainID returns an error resulting from an invalid chain ID.
-var ErrInvalidChainID = errorsmod.Register(RootCodespace, 3, "invalid chain ID")
+var ErrInvalidChainID = errorsmod.Register(RootCodespace, 188, "invalid chain ID")

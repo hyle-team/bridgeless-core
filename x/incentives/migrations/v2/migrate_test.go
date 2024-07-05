@@ -8,11 +8,11 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/encoding"
-	v2 "github.com/evmos/evmos/v12/x/incentives/migrations/v2"
-	v2types "github.com/evmos/evmos/v12/x/incentives/migrations/v2/types"
-	"github.com/evmos/evmos/v12/x/incentives/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	v2 "github.com/hyle-team/bridgeless-core/x/incentives/migrations/v2"
+	v2types "github.com/hyle-team/bridgeless-core/x/incentives/migrations/v2/types"
+	"github.com/hyle-team/bridgeless-core/x/incentives/types"
 	"github.com/stretchr/testify/require"
 )
 
