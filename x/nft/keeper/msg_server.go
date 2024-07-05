@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"cosmossdk.io/errors"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/evmos/evmos/v12/x/nft/types"
 )
 
@@ -14,12 +15,12 @@ func (m msgServer) Mint(ctx context.Context, tokens *types.MsgMintTokens) (*type
 	nft := NewNft(
 		tokens.Owner,
 		tokens.Uri,
-		tokens.Amount,
+		sdk.NewCoins(tokens.Amount),
 		tokens.UnlockTimestemp.AsTime(),
 	)
 
 	// TODO valid basic
-	m.commonAmount += tokens.Amount
+	m.commonAmount.Add(tokens.Amount)
 	m.AppendNft(tokens.Owner, nft)
 
 	return nil, nil

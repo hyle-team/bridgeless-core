@@ -19,7 +19,7 @@ type (
 
 		nfts          map[string][]NFT
 		delegatedNfts map[string][]NFT
-		commonAmount  uint64
+		commonAmount  sdk.Coins
 	}
 )
 

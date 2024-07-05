@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"fmt"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/google/uuid"
 	"time"
 )
@@ -18,13 +19,13 @@ type BaseNFT struct {
 	uri             string
 	owner           string
 	delegator       string
-	amount          uint32
+	amount          sdk.Coins
 	timestamp       time.Time
 	unlockTimestamp time.Time
 	rewards         uint32
 }
 
-func NewNft(owner string, uri string, amount uint32, unlockTimestamp time.Time) NFT {
+func NewNft(owner string, uri string, coins sdk.Coins, unlockTimestamp time.Time) NFT {
 	id, err := uuid.NewUUID()
 	if err != nil {
 		return nil
@@ -34,7 +35,7 @@ func NewNft(owner string, uri string, amount uint32, unlockTimestamp time.Time) 
 		id:              id,
 		owner:           owner,
 		uri:             uri,
-		amount:          amount,
+		amount:          coins,
 		unlockTimestamp: unlockTimestamp,
 	}
 }
