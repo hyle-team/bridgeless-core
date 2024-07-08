@@ -5,8 +5,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/errors"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"github.com/evmos/evmos/v12/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 	"github.com/tendermint/tendermint/libs/log"
 )
 
@@ -17,9 +18,9 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
-		nfts          map[string][]NFT
-		delegatedNfts map[string][]NFT
-		commonAmount  sdk.Coins
+		bankKeeper    types.BankKeeper
+		stakingKeeper types.StakingKeeper
+		nfts          map[string]NFT
 	}
 )
 
@@ -28,9 +29,10 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
+	bankKeeper types.BankKeeper,
+	stakingKeeper types.StakingKeeper,
 
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}
@@ -40,8 +42,9 @@ func NewKeeper(
 		storeKey:      storeKey,
 		memKey:        memKey,
 		paramstore:    ps,
-		delegatedNfts: make(map[string][]NFT),
-		nfts:          make(map[string][]NFT),
+		nfts:          make(map[string]NFT),
+		bankKeeper:    bankKeeper,
+		stakingKeeper: stakingKeeper,
 	}
 }
 
@@ -49,40 +52,40 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-func (k Keeper) checkIsAdmin(address string) bool {
-	// TODO call accumulator module
-	return true
-}
-
-func (k Keeper) AppendNft(address string, nft NFT) {
-	k.nfts[address] = append(k.nfts[address], nft)
-}
-
-func (k Keeper) AppendDelegatedNft(address string, nft NFT) {
-	k.delegatedNfts[address] = append(k.delegatedNfts[address], nft)
-}
-
-func (k Keeper) DelegatedNft(address string) []NFT {
-	return k.delegatedNfts[address]
-}
-
-func (k Keeper) NFTsByAddress(address string) []NFT {
-	return k.nfts[address]
-}
-
-func (k Keeper) DelegateNft(recipient, owner string, id uint32) error {
-	nfts, ok := k.nfts[owner]
-	if !ok {
-		return fmt.Errorf("owner not found")
+func (k Keeper) DistributeToAddress(ctx sdk.Context, amount sdk.Coins, owner sdk.AccAddress, nftAddress sdk.AccAddress) error {
+	err := k.bankKeeper.SendCoinsFromAccountToModule(ctx, nftAddress, types.ModuleName, amount)
+	if err != nil {
+		err = errors.Wrap(err, "failed to distribute tokens to nft module")
+		k.Logger(ctx).Error(err.Error())
+		return err
 	}
 
-	for _, nft := range nfts {
-		if nft.ID().ID() == id {
-			nft.Delegate(recipient)
-			k.AppendDelegatedNft(recipient, nft)
-			return nil
-		}
+	err = k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, owner, amount)
+	if err != nil {
+		err = errors.Wrap(err, "failed to distribute tokens to nft module")
+		k.Logger(ctx).Error(err.Error())
+		return err
 	}
 
-	return fmt.Errorf("ntf with id %d not found", id)
+	return nil
+}
+
+func (k Keeper) Mint(rawNft types.NFT) NFT {
+	return NewNft(
+		k,
+		rawNft.Owner,
+		rawNft.Uri,
+		rawNft.RewardPerPeriod,
+		rawNft.VestingPeriodsCount,
+		rawNft.VestingPeriod,
+		rawNft.Address,
+	)
+}
+
+func (k Keeper) AppendNFT(nft NFT) {
+	k.nfts[nft.GetAddress()] = nft
+}
+
+func (k Keeper) GetNFTs() map[string]NFT {
+	return k.nfts
 }

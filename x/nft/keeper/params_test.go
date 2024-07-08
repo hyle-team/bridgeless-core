@@ -3,9 +3,9 @@ package keeper_test
 import (
 	"testing"
 
+	testkeeper "github.com/hyle-team/bridgeless-core/testutil/keeper"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 	"github.com/stretchr/testify/require"
-	testkeeper "github.com/evmos/evmos/v12/testutil/keeper"
-	"github.com/evmos/evmos/v12/x/nft/types"
 )
 
 func TestGetParams(t *testing.T) {

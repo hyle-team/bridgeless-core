@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/evmos/evmos/v12/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 )
 
 var _ types.QueryServer = Keeper{}

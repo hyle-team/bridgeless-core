@@ -26,6 +26,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/mint"
 	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
+	"github.com/hyle-team/bridgeless-core/x/nft"
+	nftkeeper "github.com/hyle-team/bridgeless-core/x/nft/keeper"
+	nfttypes "github.com/hyle-team/bridgeless-core/x/nft/types"
+
 	"io"
 	"net/http"
 	"os"
@@ -254,6 +258,7 @@ var (
 		recovery.AppModuleBasic{},
 		revenue.AppModuleBasic{},
 		mint.AppModuleBasic{},
+		nft.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -272,6 +277,7 @@ var (
 		claimstypes.ModuleName:         nil,
 		incentivestypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
+		nfttypes.ModuleName:            nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -602,6 +608,15 @@ func NewEvmos(
 		app.ClaimsKeeper,
 	)
 
+	nftKeeper := nftkeeper.NewKeeper(
+		appCodec,
+		keys[nfttypes.StoreKey],
+		keys[nfttypes.StoreKey],
+		app.GetSubspace(nfttypes.ModuleName),
+		app.BankKeeper,
+		stakingKeeper,
+	)
+
 	// NOTE: app.Erc20Keeper is already initialized elsewhere
 
 	// Set the ICS4 wrappers for custom module middlewares
@@ -719,6 +734,7 @@ func NewEvmos(
 		revenue.NewAppModule(app.RevenueKeeper, app.AccountKeeper,
 			app.GetSubspace(revenuetypes.ModuleName)),
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		nft.NewAppModule(appCodec, *nftKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -759,6 +775,7 @@ func NewEvmos(
 		revenuetypes.ModuleName,
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
@@ -797,6 +814,7 @@ func NewEvmos(
 
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -843,6 +861,7 @@ func NewEvmos(
 		crisistypes.ModuleName,
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -1182,6 +1201,7 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(recoverytypes.ModuleName)
 	paramsKeeper.Subspace(revenuetypes.ModuleName)
 	paramsKeeper.Subspace(minttypes.ModuleName)
+	paramsKeeper.Subspace(nfttypes.ModuleName)
 	return paramsKeeper
 }
 

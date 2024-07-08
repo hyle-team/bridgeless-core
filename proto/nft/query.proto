@@ -1,21 +1,26 @@
+
+// this line is used by starport scaffolding #
 syntax = "proto3";
-package evmos.v12.nft;
+package core.nft;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "cosmos/base/query/v1beta1/pagination.proto";
 import "nft/params.proto";
-// this line is used by starport scaffolding # 1
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "google/protobuf/any.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "nft/nft.proto";
 
-option go_package = "github.com/evmos/evmos/v12/x/nft/types";
+
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  // Parameters queries the parameters of the module.
+
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/evmos/v12/nft/params";
+    option (google.api.http).get = "/core/nft/params";
   }
-  // this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -26,5 +31,3 @@ message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
-
-// this line is used by starport scaffolding # 3

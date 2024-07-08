@@ -2,13 +2,19 @@ package nft
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/evmos/v12/x/nft/keeper"
-	"github.com/evmos/evmos/v12/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/x/nft/keeper"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
-    // this line is used by starport scaffolding # genesis/module/init
+	// this line is used by starport scaffolding # genesis/module/init
+
+	for _, rawNft := range genState.Params.Nfts {
+		nft := k.Mint(*rawNft)
+		k.AppendNFT(nft)
+	}
+
 	k.SetParams(ctx, genState.Params)
 }
 
@@ -17,7 +23,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 	genesis.Params = k.GetParams(ctx)
 
-    // this line is used by starport scaffolding # genesis/module/export
+	// this line is used by starport scaffolding # genesis/module/export
 
-    return genesis
+	return genesis
 }

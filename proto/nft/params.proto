@@ -1,11 +1,13 @@
 syntax = "proto3";
-package evmos.v12.nft;
+package core.nft;
 
 import "gogoproto/gogo.proto";
+import "nft/nft.proto";
 
-option go_package = "github.com/evmos/evmos/v12/x/nft/types";
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
 // Params defines the parameters for the module.
 message Params {
+  repeated core.nft.NFT nfts = 1;
   option (gogoproto.goproto_stringer) = false;
 }

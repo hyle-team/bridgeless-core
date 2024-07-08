@@ -1,50 +1,14 @@
 syntax = "proto3";
-package evmos.v12.nft;
+package core.nft;
 import "cosmos/base/v1beta1/coin.proto";
 import "google/protobuf/timestamp.proto";
 import "gogoproto/gogo.proto";
 
+
 // this line is used by starport scaffolding # proto/tx/import
-option go_package = "github.com/evmos/evmos/v12/x/nft/types";
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
-    rpc Mint (MsgMintTokens)  returns (MsgMontTokensResponse);
-    rpc UnlockRewards (MsgUnlockRewards) returns (MsgUnlockRewardsResponse);
-    rpc Delegate (MsgDelegate) returns (MsgDelegateResponse);
-
 }
-
-// this line is used by starport scaffolding # proto/tx/message
-message MsgMintTokens {
-    google.protobuf.Timestamp unlockTimestemp = 1;
-    string owner  = 2;
-    cosmos.base.v1beta1.Coin amount = 3
-    [(gogoproto.nullable) = false, (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Coin"];
-    string uri = 4;
-}
-
-message MsgMontTokensResponse {
-
-}
-
-message MsgUnlockRewards {
-
-}
-
-message MsgUnlockRewardsResponse{
-
-}
-
-message MsgDelegate{
-    string recipient = 1;
-    string owner = 2;
-    uint32 id = 3;
-}
-
-message MsgDelegateResponse {
-
-}
-
-

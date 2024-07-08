@@ -1,0 +1,31 @@
+syntax = "proto3";
+package core.nft;
+
+import "google/protobuf/any.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
+
+
+// NFT defines the NFT.
+message NFT {
+  // id is a unique identifier of the NFT
+  string id = 1;
+  // uri for the NFT metadata stored off chain
+  string uri = 2;
+
+  string owner = 3;
+
+  string address = 4;
+  // replace with timestemp
+  int64 vesting_period = 5;
+
+  cosmos.base.v1beta1.Coin reward_per_period = 6 [(gogoproto.nullable) = false];
+
+  int64 vesting_periods_count  = 7;
+  // data is an app specific data of the NFT. Optional
+  google.protobuf.Any data = 10;
+}

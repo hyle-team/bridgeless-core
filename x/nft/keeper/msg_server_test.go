@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/evmos/evmos/v12/x/nft/types"
-    "github.com/evmos/evmos/v12/x/nft/keeper"
-    keepertest "github.com/evmos/evmos/v12/testutil/keeper"
+	keepertest "github.com/hyle-team/bridgeless-core/testutil/keeper"
+	"github.com/hyle-team/bridgeless-core/x/nft/keeper"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

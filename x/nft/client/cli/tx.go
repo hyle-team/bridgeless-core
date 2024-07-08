@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/evmos/evmos/v12/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 )
 
 var (
@@ -32,5 +32,5 @@ func GetTxCmd() *cobra.Command {
 
 	// this line is used by starport scaffolding # 1
 
-	return cmd 
+	return cmd
 }

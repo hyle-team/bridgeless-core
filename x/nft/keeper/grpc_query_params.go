@@ -4,7 +4,7 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/evmos/v12/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
