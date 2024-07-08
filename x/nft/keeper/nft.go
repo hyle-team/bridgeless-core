@@ -17,6 +17,7 @@ type NFT interface {
 	GetStakedBalance(ctx sdk.Context, delegatorAddr sdk.AccAddress) (sdk.Coin, error)
 	UpdateVesting(ctx sdk.Context)
 	GetAddress() string
+	Send(recipient string)
 }
 
 type BaseNFT struct {
@@ -164,8 +165,13 @@ func (n BaseNFT) UpdateVesting(ctx sdk.Context) {
 
 	n.availableBalance.Add(sdk.NewCoin(sdk.NativeToken, sdk.NewInt(n.VestingPeriod).Mul(n.RewardPerPeriod.Amount)))
 	n.vestingCounter++
+	n.lastVestingTime = ctx.BlockTime()
 }
 
 func (n BaseNFT) GetAddress() string {
 	return n.Address
+}
+
+func (n BaseNFT) Send(recipient string) {
+	n.Owner = recipient
 }

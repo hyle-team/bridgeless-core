@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
@@ -88,4 +89,38 @@ func (k Keeper) AppendNFT(nft NFT) {
 
 func (k Keeper) GetNFTs() map[string]NFT {
 	return k.nfts
+}
+
+func (k Keeper) Undelegate(goctx context.Context, request *types.QueryUndelegateRequest) (*types.QueryUndelegateResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+
+	validator, err := sdk.ValAddressFromBech32(request.Address)
+	if err != nil {
+		return new(types.QueryUndelegateResponse), err
+	}
+	return new(types.QueryUndelegateResponse), k.nfts[request.Address].Unstake(ctx, validator)
+}
+
+func (k Keeper) Delegate(goctx context.Context, request *types.QueryDelegateRequest) (*types.QueryDelegateResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+
+	validator, err := sdk.ValAddressFromBech32(request.Address)
+	if err != nil {
+		return new(types.QueryDelegateResponse), err
+	}
+	return new(types.QueryDelegateResponse), k.nfts[request.Address].Stake(ctx, validator)
+
+}
+
+func (k Keeper) Send(goctx context.Context, request *types.QuerySendRequest) (*types.QuerySendResponse, error) {
+	k.nfts[request.Address].Send(request.Recipient)
+	return new(types.QuerySendResponse), nil
+
+}
+
+func (k Keeper) Withdraw(goctx context.Context, request *types.QueryWithdrawalRequest) (*types.QueryWithdrawalResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+
+	return new(types.QueryWithdrawalResponse), k.nfts[request.Address].Withdraw(ctx)
+
 }
