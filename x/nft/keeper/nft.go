@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"cosmossdk.io/errors"
-	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/hyle-team/bridgeless-core/x/nft/types"
@@ -70,22 +69,22 @@ func (n BaseNFT) Stake(ctx sdk.Context, validatorAddress sdk.ValAddress) error {
 	balances := n.keeper.bankKeeper.GetAllBalances(ctx, address)
 
 	if balances.AmountOf(sdk.NativeToken).IsZero() {
-		return fmt.Errorf("invalid amount")
+		return types.ErrInvalidAmount
 	}
 
 	validator, found := n.keeper.stakingKeeper.GetValidator(ctx, validatorAddress)
 	if !found {
-		return fmt.Errorf("validator not found")
+		return types.ErrValidatorNotFound
 	}
 
 	_, err = n.keeper.stakingKeeper.Delegate(ctx, address, balances.AmountOf(sdk.NativeToken), stakingtypes.Unbonded, validator, true)
 	if err != nil {
-		return err
+		return types.ErrFailedToDelegate
 	}
 
 	err = n.keeper.bankKeeper.SendCoinsFromAccountToModule(ctx, address, stakingtypes.BondedPoolName, balances)
 	if err != nil {
-		return err
+		return types.ErrFailedToSendTokenAmount
 	}
 
 	return nil
@@ -109,11 +108,11 @@ func (n BaseNFT) Unstake(ctx sdk.Context, validatorAddress sdk.ValAddress) error
 func (n BaseNFT) Withdraw(ctx sdk.Context) error {
 	isDelegated, err := n.CheckIsDelegated(ctx)
 	if !isDelegated {
-		return fmt.Errorf("nft is delegated")
+		return types.ErrTokenIsDelegated
 	}
 
 	if n.availableBalance.IsZero() {
-		return fmt.Errorf("nft has no rewards to unlock")
+		return types.ErrInvalidAmount
 	}
 
 	nftAddress, err := sdk.AccAddressFromBech32(n.Address)
@@ -144,7 +143,7 @@ func (n BaseNFT) GetStakedBalance(ctx sdk.Context, delegatorAddr sdk.AccAddress)
 	for _, delegation := range delegations {
 		validator, found := n.keeper.stakingKeeper.GetValidator(ctx, delegation.GetValidatorAddr())
 		if !found {
-			return sdk.Coin{}, fmt.Errorf("validator not found")
+			return sdk.Coin{}, types.ErrValidatorNotFound
 		}
 		shares := delegation.Shares
 		tokens := validator.TokensFromSharesTruncated(shares)
