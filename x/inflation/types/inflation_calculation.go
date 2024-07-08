@@ -19,7 +19,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
 )
 
 // CalculateEpochProvisions returns mint provision per epoch

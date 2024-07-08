@@ -14,13 +14,13 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v12/crypto/ethsecp256k1"
-	feemarkettypes "github.com/evmos/evmos/v12/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
 
-	"github.com/evmos/evmos/v12/app"
-	v9 "github.com/evmos/evmos/v12/app/upgrades/v9"
-	"github.com/evmos/evmos/v12/utils"
-	"github.com/evmos/evmos/v12/x/erc20/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	v9 "github.com/hyle-team/bridgeless-core/app/upgrades/v9"
+	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/x/erc20/types"
 )
 
 type UpgradeTestSuite struct {

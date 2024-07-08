@@ -42,11 +42,11 @@ import (
 	rpcclient "github.com/tendermint/tendermint/rpc/jsonrpc/client"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/evmos/evmos/v12/rpc/ethereum/pubsub"
-	rpcfilters "github.com/evmos/evmos/v12/rpc/namespaces/ethereum/eth/filters"
-	"github.com/evmos/evmos/v12/rpc/types"
-	"github.com/evmos/evmos/v12/server/config"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/rpc/ethereum/pubsub"
+	rpcfilters "github.com/hyle-team/bridgeless-core/rpc/namespaces/ethereum/eth/filters"
+	"github.com/hyle-team/bridgeless-core/rpc/types"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 type WebsocketsServer interface {

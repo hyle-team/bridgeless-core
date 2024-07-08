@@ -12,12 +12,12 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
-	"github.com/evmos/evmos/v12/x/erc20/keeper"
-	"github.com/evmos/evmos/v12/x/erc20/types"
-	inflationtypes "github.com/evmos/evmos/v12/x/inflation/types"
+	"github.com/hyle-team/bridgeless-core/x/erc20/keeper"
+	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	inflationtypes "github.com/hyle-team/bridgeless-core/x/inflation/types"
 )
 
 const (

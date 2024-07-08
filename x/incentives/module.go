@@ -34,9 +34,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/evmos/evmos/v12/x/incentives/client/cli"
-	"github.com/evmos/evmos/v12/x/incentives/keeper"
-	"github.com/evmos/evmos/v12/x/incentives/types"
+	"github.com/hyle-team/bridgeless-core/x/incentives/client/cli"
+	"github.com/hyle-team/bridgeless-core/x/incentives/keeper"
+	"github.com/hyle-team/bridgeless-core/x/incentives/types"
 )
 
 // type check to ensure the interface is properly implemented

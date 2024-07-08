@@ -34,9 +34,9 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 
-	"github.com/evmos/evmos/v12/x/vesting/client/cli"
-	"github.com/evmos/evmos/v12/x/vesting/keeper"
-	"github.com/evmos/evmos/v12/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/x/vesting/client/cli"
+	"github.com/hyle-team/bridgeless-core/x/vesting/keeper"
+	"github.com/hyle-team/bridgeless-core/x/vesting/types"
 )
 
 var (

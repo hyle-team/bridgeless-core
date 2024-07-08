@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	epochstypes "github.com/evmos/evmos/v12/x/epochs/types"
+	epochstypes "github.com/hyle-team/bridgeless-core/x/epochs/types"
 	"github.com/stretchr/testify/suite"
 )
 
