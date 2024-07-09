@@ -347,6 +347,7 @@ type Evmos struct {
 	RevenueKeeper    revenuekeeper.Keeper
 
 	MintKeeper mintkeeper.Keeper
+	NftKeeper  *nftkeeper.Keeper
 
 	// the module manager
 	mm *module.Manager
@@ -407,6 +408,7 @@ func NewEvmos(
 		revenuetypes.StoreKey, recoverytypes.StoreKey,
 		accumulatortypes.StoreKey,
 		minttypes.StoreKey,
+		nfttypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -608,7 +610,7 @@ func NewEvmos(
 		app.ClaimsKeeper,
 	)
 
-	nftKeeper := nftkeeper.NewKeeper(
+	app.NftKeeper = nftkeeper.NewKeeper(
 		appCodec,
 		keys[nfttypes.StoreKey],
 		keys[nfttypes.StoreKey],
@@ -734,7 +736,7 @@ func NewEvmos(
 		revenue.NewAppModule(app.RevenueKeeper, app.AccountKeeper,
 			app.GetSubspace(revenuetypes.ModuleName)),
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
-		nft.NewAppModule(appCodec, *nftKeeper, app.AccountKeeper, app.BankKeeper),
+		nft.NewAppModule(appCodec, *app.NftKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that

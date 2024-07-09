@@ -2,16 +2,13 @@
 // this line is used by starport scaffolding #
 syntax = "proto3";
 package core.nft;
+import "google/api/annotations.proto";
+
 
 import "gogoproto/gogo.proto";
-import "google/api/annotations.proto";
 import "nft/params.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "google/protobuf/any.proto";
-import "cosmos/base/v1beta1/coin.proto";
-import "nft/nft.proto";
-
-
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
@@ -19,24 +16,6 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/core/nft/params";
-  }
-
-  // Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721
-  rpc Undelegate(QueryUndelegateRequest) returns (QueryUndelegateResponse) {
-    option (google.api.http).get = "/core/nft/balance/{address}";
-  }
-
-  rpc Delegate(QueryDelegateRequest) returns (QueryDelegateResponse) {
-    option (google.api.http).get = "/core/nft/owner/{address}";
-  }
-
-  // Class queries an NFT class based on its id
-  rpc Send(QuerySendRequest) returns (QuerySendResponse) {
-    option (google.api.http).get = "/core/nft/send/{address}";
-  }
-
-  rpc Withdraw (QueryWithdrawalRequest) returns (QueryWithdrawalResponse) {
-    option (google.api.http).get = "/core/nft/withdrawal";
   }
 }
 
@@ -48,31 +27,3 @@ message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
-
-message QueryWithdrawalRequest {
-  string address = 1;
-  string owner = 2;
-}
-
-message QueryWithdrawalResponse {}
-
-message QueryDelegateRequest {
-  string address = 1;
-  string validator = 2;
-}
-
-message QueryDelegateResponse {}
-
-message QueryUndelegateRequest {
-  string address = 1;
-  string owner = 2;
-}
-
-message QueryUndelegateResponse {}
-
-message QuerySendRequest {
-  string address = 1;
-  string recipient = 2;
-}
-
-message QuerySendResponse {}

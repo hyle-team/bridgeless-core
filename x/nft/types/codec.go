@@ -16,16 +16,14 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	// this line is used by starport scaffolding # 3
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&QueryParamsRequest{},
-		&QueryParamsResponse{},
-		&QueryWithdrawalRequest{},
-		&QueryWithdrawalResponse{},
-		&QueryDelegateRequest{},
-		&QueryDelegateResponse{},
-		&QueryUndelegateRequest{},
-		&QueryUndelegateResponse{},
-		&QuerySendRequest{},
-		&QuerySendResponse{},
+		&MsgWithdrawal{},
+		&MsgWithdrawalResponse{},
+		&MsgDelegate{},
+		&MsgDelegateResponse{},
+		&MsgUndelegate{},
+		&MsgUndelegateResponse{},
+		&MsgSend{},
+		&MsgSendResponse{},
 	)
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)

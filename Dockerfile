@@ -1,4 +1,4 @@
-FROM golang:1.21.2-bullseye AS build-env
+FROM golang:1.20.2-bullseye AS build-env
 
 WORKDIR /go/src/github.com/evmos/evmos
 
@@ -18,7 +18,7 @@ RUN go mod tidy && go mod verify
 RUN make build
 
 
-FROM golang:1.21.2-bullseye
+FROM golang:1.20.2-bullseye
 
 RUN apt-get update -y
 RUN apt-get install ca-certificates jq -y

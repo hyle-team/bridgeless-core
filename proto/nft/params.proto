@@ -8,6 +8,4 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
 // Params defines the parameters for the module.
 message Params {
-  repeated core.nft.NFT nfts = 1;
-  option (gogoproto.goproto_stringer) = false;
 }

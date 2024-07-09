@@ -10,9 +10,8 @@ import (
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// this line is used by starport scaffolding # genesis/module/init
 
-	for _, rawNft := range genState.Params.Nfts {
-		nft := k.Mint(*rawNft)
-		k.AppendNFT(nft)
+	for _, rawNft := range genState.Nfts {
+		k.SetNFT(ctx, rawNft)
 	}
 
 	k.SetParams(ctx, genState.Params)
