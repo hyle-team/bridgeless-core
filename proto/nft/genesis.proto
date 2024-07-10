@@ -1,0 +1,19 @@
+syntax = "proto3";
+package core.nft;
+
+import "gogoproto/gogo.proto";
+import "nft/params.proto";
+import "nft/nft.proto";
+
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
+
+// GenesisState defines the nft module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated core.nft.NFT nfts = 2 [(gogoproto.nullable) = false];
+
+  // this line is used by starport scaffolding # genesis/proto/state
+}

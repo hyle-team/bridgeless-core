@@ -6,9 +6,9 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	incentivestypes "github.com/evmos/evmos/v12/x/incentives/types"
-	"github.com/evmos/evmos/v12/x/inflation/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	incentivestypes "github.com/hyle-team/bridgeless-core/x/incentives/types"
+	"github.com/hyle-team/bridgeless-core/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestMintAndAllocateInflation() {

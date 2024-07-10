@@ -5,9 +5,18 @@ WORKDIR /go/src/github.com/evmos/evmos
 RUN apt-get update -y
 RUN apt-get install git -y
 
+# Copy source code
 COPY . .
 
+# Ensure dependencies are properly handled
+RUN sed -i '/toolchain/d' go.mod
+
+# Download Go modules and verify
+RUN go mod tidy && go mod verify
+
+# Build the project
 RUN make build
+
 
 FROM golang:1.20.2-bullseye
 

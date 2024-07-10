@@ -4,11 +4,11 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/testutil"
-	epochstypes "github.com/evmos/evmos/v12/x/epochs/types"
-	evm "github.com/evmos/evmos/v12/x/evm/types"
-	"github.com/evmos/evmos/v12/x/inflation/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	epochstypes "github.com/hyle-team/bridgeless-core/x/epochs/types"
+	evm "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/x/inflation/types"
 )
 
 // Test helpers

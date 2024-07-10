@@ -18,15 +18,15 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/crypto/hd"
-	"github.com/evmos/evmos/v12/encoding"
-	"github.com/evmos/evmos/v12/indexer"
-	"github.com/evmos/evmos/v12/rpc/backend/mocks"
-	rpctypes "github.com/evmos/evmos/v12/rpc/types"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	"github.com/evmos/evmos/v12/utils"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/indexer"
+	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
+	rpctypes "github.com/hyle-team/bridgeless-core/rpc/types"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 type BackendTestSuite struct {

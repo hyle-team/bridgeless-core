@@ -14,10 +14,10 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/evmos/evmos/v12/app"
-	ibctesting "github.com/evmos/evmos/v12/ibc/testing"
-	"github.com/evmos/evmos/v12/x/erc20/types"
-	evm "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	ibctesting "github.com/hyle-team/bridgeless-core/ibc/testing"
+	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	evm "github.com/hyle-team/bridgeless-core/x/evm/types"
 	"github.com/stretchr/testify/suite"
 )
 

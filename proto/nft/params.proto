@@ -1,0 +1,11 @@
+syntax = "proto3";
+package core.nft;
+
+import "gogoproto/gogo.proto";
+import "nft/nft.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
+
+// Params defines the parameters for the module.
+message Params {
+}

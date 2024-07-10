@@ -31,10 +31,10 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/server/config"
-	"github.com/evmos/evmos/v12/utils"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	"github.com/hyle-team/bridgeless-core/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 // PrepareEthTx creates an ethereum tx and signs it with the provided messages and private key.

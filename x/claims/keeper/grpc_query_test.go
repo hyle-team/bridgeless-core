@@ -6,9 +6,9 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v12/testutil"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	"github.com/evmos/evmos/v12/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestTotalUnclaimed() {

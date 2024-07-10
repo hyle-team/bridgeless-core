@@ -22,7 +22,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
 )
 
 // NewTransactionLogs creates a new NewTransactionLogs instance.

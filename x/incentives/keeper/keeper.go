@@ -24,7 +24,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/evmos/evmos/v12/x/incentives/types"
+	"github.com/hyle-team/bridgeless-core/x/incentives/types"
 )
 
 // Keeper of this module maintains collections of incentives.

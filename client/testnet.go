@@ -53,13 +53,13 @@ import (
 	mintypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/evmos/evmos/v12/crypto/hd"
-	"github.com/evmos/evmos/v12/server/config"
-	srvflags "github.com/evmos/evmos/v12/server/flags"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/server/config"
+	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 
-	"github.com/evmos/evmos/v12/testutil/network"
+	"github.com/hyle-team/bridgeless-core/testutil/network"
 )
 
 var (

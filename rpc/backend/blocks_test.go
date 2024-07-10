@@ -16,10 +16,10 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/evmos/evmos/v12/rpc/backend/mocks"
-	ethrpc "github.com/evmos/evmos/v12/rpc/types"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
+	ethrpc "github.com/hyle-team/bridgeless-core/rpc/types"
+	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
 )
 
 func (suite *BackendTestSuite) TestBlockNumber() {

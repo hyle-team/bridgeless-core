@@ -20,6 +20,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/cosmos/cosmos-sdk/x/accumulator"
+	accumulatorkeeper "github.com/cosmos/cosmos-sdk/x/accumulator/keeper"
+	accumulatortypes "github.com/cosmos/cosmos-sdk/x/accumulator/types"
+	"github.com/cosmos/cosmos-sdk/x/mint"
+	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
+	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
+	"github.com/hyle-team/bridgeless-core/x/nft"
+	nftkeeper "github.com/hyle-team/bridgeless-core/x/nft/keeper"
+	nfttypes "github.com/hyle-team/bridgeless-core/x/nft/types"
+
 	"io"
 	"net/http"
 	"os"
@@ -123,60 +133,60 @@ import (
 	icahosttypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/host/types"
 	icatypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/types"
 
-	ethante "github.com/evmos/evmos/v12/app/ante/evm"
-	"github.com/evmos/evmos/v12/encoding"
-	"github.com/evmos/evmos/v12/ethereum/eip712"
-	srvflags "github.com/evmos/evmos/v12/server/flags"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	"github.com/evmos/evmos/v12/x/evm"
-	evmkeeper "github.com/evmos/evmos/v12/x/evm/keeper"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
-	"github.com/evmos/evmos/v12/x/feemarket"
-	feemarketkeeper "github.com/evmos/evmos/v12/x/feemarket/keeper"
-	feemarkettypes "github.com/evmos/evmos/v12/x/feemarket/types"
+	ethante "github.com/hyle-team/bridgeless-core/app/ante/evm"
+	"github.com/hyle-team/bridgeless-core/encoding"
+	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
+	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
+	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/x/evm"
+	evmkeeper "github.com/hyle-team/bridgeless-core/x/evm/keeper"
+	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/x/feemarket"
+	feemarketkeeper "github.com/hyle-team/bridgeless-core/x/feemarket/keeper"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
 
 	// unnamed import of statik for swagger UI support
-	_ "github.com/evmos/evmos/v12/client/docs/statik"
+	_ "github.com/hyle-team/bridgeless-core/client/docs/statik"
 
-	"github.com/evmos/evmos/v12/app/ante"
-	v10 "github.com/evmos/evmos/v12/app/upgrades/v10"
-	v11 "github.com/evmos/evmos/v12/app/upgrades/v11"
-	v12 "github.com/evmos/evmos/v12/app/upgrades/v12"
-	v8 "github.com/evmos/evmos/v12/app/upgrades/v8"
-	v81 "github.com/evmos/evmos/v12/app/upgrades/v8_1"
-	v82 "github.com/evmos/evmos/v12/app/upgrades/v8_2"
-	v9 "github.com/evmos/evmos/v12/app/upgrades/v9"
-	v91 "github.com/evmos/evmos/v12/app/upgrades/v9_1"
-	"github.com/evmos/evmos/v12/x/claims"
-	claimskeeper "github.com/evmos/evmos/v12/x/claims/keeper"
-	claimstypes "github.com/evmos/evmos/v12/x/claims/types"
-	"github.com/evmos/evmos/v12/x/epochs"
-	epochskeeper "github.com/evmos/evmos/v12/x/epochs/keeper"
-	epochstypes "github.com/evmos/evmos/v12/x/epochs/types"
-	"github.com/evmos/evmos/v12/x/erc20"
-	erc20client "github.com/evmos/evmos/v12/x/erc20/client"
-	erc20keeper "github.com/evmos/evmos/v12/x/erc20/keeper"
-	erc20types "github.com/evmos/evmos/v12/x/erc20/types"
-	"github.com/evmos/evmos/v12/x/incentives"
-	incentivesclient "github.com/evmos/evmos/v12/x/incentives/client"
-	incentiveskeeper "github.com/evmos/evmos/v12/x/incentives/keeper"
-	incentivestypes "github.com/evmos/evmos/v12/x/incentives/types"
-	"github.com/evmos/evmos/v12/x/inflation"
-	inflationkeeper "github.com/evmos/evmos/v12/x/inflation/keeper"
-	inflationtypes "github.com/evmos/evmos/v12/x/inflation/types"
-	"github.com/evmos/evmos/v12/x/recovery"
-	recoverykeeper "github.com/evmos/evmos/v12/x/recovery/keeper"
-	recoverytypes "github.com/evmos/evmos/v12/x/recovery/types"
-	revenue "github.com/evmos/evmos/v12/x/revenue/v1"
-	revenuekeeper "github.com/evmos/evmos/v12/x/revenue/v1/keeper"
-	revenuetypes "github.com/evmos/evmos/v12/x/revenue/v1/types"
-	"github.com/evmos/evmos/v12/x/vesting"
-	vestingkeeper "github.com/evmos/evmos/v12/x/vesting/keeper"
-	vestingtypes "github.com/evmos/evmos/v12/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/app/ante"
+	v10 "github.com/hyle-team/bridgeless-core/app/upgrades/v10"
+	v11 "github.com/hyle-team/bridgeless-core/app/upgrades/v11"
+	v12 "github.com/hyle-team/bridgeless-core/app/upgrades/v12"
+	v8 "github.com/hyle-team/bridgeless-core/app/upgrades/v8"
+	v81 "github.com/hyle-team/bridgeless-core/app/upgrades/v8_1"
+	v82 "github.com/hyle-team/bridgeless-core/app/upgrades/v8_2"
+	v9 "github.com/hyle-team/bridgeless-core/app/upgrades/v9"
+	v91 "github.com/hyle-team/bridgeless-core/app/upgrades/v9_1"
+	"github.com/hyle-team/bridgeless-core/x/claims"
+	claimskeeper "github.com/hyle-team/bridgeless-core/x/claims/keeper"
+	claimstypes "github.com/hyle-team/bridgeless-core/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/x/epochs"
+	epochskeeper "github.com/hyle-team/bridgeless-core/x/epochs/keeper"
+	epochstypes "github.com/hyle-team/bridgeless-core/x/epochs/types"
+	"github.com/hyle-team/bridgeless-core/x/erc20"
+	erc20client "github.com/hyle-team/bridgeless-core/x/erc20/client"
+	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
+	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
+	"github.com/hyle-team/bridgeless-core/x/incentives"
+	incentivesclient "github.com/hyle-team/bridgeless-core/x/incentives/client"
+	incentiveskeeper "github.com/hyle-team/bridgeless-core/x/incentives/keeper"
+	incentivestypes "github.com/hyle-team/bridgeless-core/x/incentives/types"
+	"github.com/hyle-team/bridgeless-core/x/inflation"
+	inflationkeeper "github.com/hyle-team/bridgeless-core/x/inflation/keeper"
+	inflationtypes "github.com/hyle-team/bridgeless-core/x/inflation/types"
+	"github.com/hyle-team/bridgeless-core/x/recovery"
+	recoverykeeper "github.com/hyle-team/bridgeless-core/x/recovery/keeper"
+	recoverytypes "github.com/hyle-team/bridgeless-core/x/recovery/types"
+	revenue "github.com/hyle-team/bridgeless-core/x/revenue/v1"
+	revenuekeeper "github.com/hyle-team/bridgeless-core/x/revenue/v1/keeper"
+	revenuetypes "github.com/hyle-team/bridgeless-core/x/revenue/v1/types"
+	"github.com/hyle-team/bridgeless-core/x/vesting"
+	vestingkeeper "github.com/hyle-team/bridgeless-core/x/vesting/keeper"
+	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
 
 	// NOTE: override ICS20 keeper to support IBC transfers of ERC20 tokens
-	"github.com/evmos/evmos/v12/x/ibc/transfer"
-	transferkeeper "github.com/evmos/evmos/v12/x/ibc/transfer/keeper"
+	"github.com/hyle-team/bridgeless-core/x/ibc/transfer"
+	transferkeeper "github.com/hyle-team/bridgeless-core/x/ibc/transfer/keeper"
 
 	// Force-load the tracer engines to trigger registration due to Go-Ethereum v1.10.15 changes
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
@@ -213,6 +223,7 @@ var (
 	ModuleBasics = module.NewBasicManager(
 		auth.AppModuleBasic{},
 		genutil.AppModuleBasic{},
+		accumulator.AppModuleBasic{},
 		bank.AppModuleBasic{},
 		capability.AppModuleBasic{},
 		staking.AppModuleBasic{},
@@ -246,10 +257,13 @@ var (
 		claims.AppModuleBasic{},
 		recovery.AppModuleBasic{},
 		revenue.AppModuleBasic{},
+		mint.AppModuleBasic{},
+		nft.AppModuleBasic{},
 	)
 
 	// module account permissions
 	maccPerms = map[string][]string{
+		accumulatortypes.ModuleName:    {authtypes.Minter, authtypes.Staking, authtypes.Burner, authtypes.FeeCollectorName},
 		authtypes.FeeCollectorName:     nil,
 		distrtypes.ModuleName:          nil,
 		stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
@@ -262,6 +276,8 @@ var (
 		erc20types.ModuleName:          {authtypes.Minter, authtypes.Burner},
 		claimstypes.ModuleName:         nil,
 		incentivestypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
+		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
+		nfttypes.ModuleName:            nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -294,22 +310,23 @@ type Evmos struct {
 	memKeys map[string]*storetypes.MemoryStoreKey
 
 	// keepers
-	AccountKeeper    authkeeper.AccountKeeper
-	BankKeeper       bankkeeper.Keeper
-	CapabilityKeeper *capabilitykeeper.Keeper
-	StakingKeeper    stakingkeeper.Keeper
-	SlashingKeeper   slashingkeeper.Keeper
-	DistrKeeper      distrkeeper.Keeper
-	GovKeeper        govkeeper.Keeper
-	CrisisKeeper     crisiskeeper.Keeper
-	UpgradeKeeper    upgradekeeper.Keeper
-	ParamsKeeper     paramskeeper.Keeper
-	FeeGrantKeeper   feegrantkeeper.Keeper
-	AuthzKeeper      authzkeeper.Keeper
-	IBCKeeper        *ibckeeper.Keeper // IBC Keeper must be a pointer in the app, so we can SetRouter on it correctly
-	ICAHostKeeper    icahostkeeper.Keeper
-	EvidenceKeeper   evidencekeeper.Keeper
-	TransferKeeper   transferkeeper.Keeper
+	AccountKeeper     authkeeper.AccountKeeper
+	AccumulatorKeeper accumulatorkeeper.Keeper
+	BankKeeper        bankkeeper.Keeper
+	CapabilityKeeper  *capabilitykeeper.Keeper
+	StakingKeeper     stakingkeeper.Keeper
+	SlashingKeeper    slashingkeeper.Keeper
+	DistrKeeper       distrkeeper.Keeper
+	GovKeeper         govkeeper.Keeper
+	CrisisKeeper      crisiskeeper.Keeper
+	UpgradeKeeper     upgradekeeper.Keeper
+	ParamsKeeper      paramskeeper.Keeper
+	FeeGrantKeeper    feegrantkeeper.Keeper
+	AuthzKeeper       authzkeeper.Keeper
+	IBCKeeper         *ibckeeper.Keeper // IBC Keeper must be a pointer in the app, so we can SetRouter on it correctly
+	ICAHostKeeper     icahostkeeper.Keeper
+	EvidenceKeeper    evidencekeeper.Keeper
+	TransferKeeper    transferkeeper.Keeper
 
 	// make scoped keepers public for test purposes
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
@@ -328,6 +345,9 @@ type Evmos struct {
 	VestingKeeper    vestingkeeper.Keeper
 	RecoveryKeeper   *recoverykeeper.Keeper
 	RevenueKeeper    revenuekeeper.Keeper
+
+	MintKeeper mintkeeper.Keeper
+	NftKeeper  *nftkeeper.Keeper
 
 	// the module manager
 	mm *module.Manager
@@ -386,6 +406,9 @@ func NewEvmos(
 		inflationtypes.StoreKey, erc20types.StoreKey, incentivestypes.StoreKey,
 		epochstypes.StoreKey, claimstypes.StoreKey, vestingtypes.StoreKey,
 		revenuetypes.StoreKey, recoverytypes.StoreKey,
+		accumulatortypes.StoreKey,
+		minttypes.StoreKey,
+		nfttypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -435,6 +458,10 @@ func NewEvmos(
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
+
+	accumulatorKeeper := accumulatorkeeper.NewKeeper(
+		appCodec, keys[accumulatortypes.StoreKey], keys[accumulatortypes.MemStoreKey], app.AccountKeeper, app.BankKeeper)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName,
@@ -496,6 +523,11 @@ func NewEvmos(
 		keys[inflationtypes.StoreKey], appCodec, authtypes.NewModuleAddress(govtypes.ModuleName),
 		app.AccountKeeper, app.BankKeeper, app.DistrKeeper, &stakingKeeper,
 		authtypes.FeeCollectorName,
+	)
+
+	app.MintKeeper = mintkeeper.NewKeeper(
+		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
+		app.AccountKeeper, app.BankKeeper, accumulatorKeeper, authtypes.FeeCollectorName,
 	)
 
 	app.ClaimsKeeper = claimskeeper.NewKeeper(
@@ -578,6 +610,15 @@ func NewEvmos(
 		app.ClaimsKeeper,
 	)
 
+	app.NftKeeper = nftkeeper.NewKeeper(
+		appCodec,
+		keys[nfttypes.StoreKey],
+		keys[nfttypes.StoreKey],
+		app.GetSubspace(nfttypes.ModuleName),
+		app.BankKeeper,
+		stakingKeeper,
+	)
+
 	// NOTE: app.Erc20Keeper is already initialized elsewhere
 
 	// Set the ICS4 wrappers for custom module middlewares
@@ -651,10 +692,13 @@ func NewEvmos(
 	// must be passed by reference here.
 	app.mm = module.NewManager(
 		// SDK app modules
+		accumulator.NewAppModule(appCodec, accumulatorKeeper, app.AccountKeeper, app.BankKeeper),
+
 		genutil.NewAppModule(
 			app.AccountKeeper, app.StakingKeeper, app.BaseApp.DeliverTx,
 			encodingConfig.TxConfig,
 		),
+
 		auth.NewAppModule(appCodec, app.AccountKeeper, authsims.RandomGenesisAccounts),
 		bank.NewAppModule(appCodec, app.BankKeeper, app.AccountKeeper),
 		capability.NewAppModule(appCodec, *app.CapabilityKeeper),
@@ -691,6 +735,8 @@ func NewEvmos(
 			app.GetSubspace(recoverytypes.ModuleName)),
 		revenue.NewAppModule(app.RevenueKeeper, app.AccountKeeper,
 			app.GetSubspace(revenuetypes.ModuleName)),
+		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		nft.NewAppModule(appCodec, *app.NftKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -729,10 +775,14 @@ func NewEvmos(
 		incentivestypes.ModuleName,
 		recoverytypes.ModuleName,
 		revenuetypes.ModuleName,
+		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
 	app.mm.SetOrderEndBlockers(
+
 		crisistypes.ModuleName,
 		govtypes.ModuleName,
 		stakingtypes.ModuleName,
@@ -763,6 +813,10 @@ func NewEvmos(
 		incentivestypes.ModuleName,
 		recoverytypes.ModuleName,
 		revenuetypes.ModuleName,
+
+		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -771,6 +825,7 @@ func NewEvmos(
 	// so that other modules that want to create or claim capabilities afterwards in InitChain
 	// can do so safely.
 	app.mm.SetOrderInitGenesis(
+
 		// SDK modules
 		capabilitytypes.ModuleName,
 		authtypes.ModuleName,
@@ -806,6 +861,9 @@ func NewEvmos(
 		revenuetypes.ModuleName,
 		// NOTE: crisis module must go at the end to check for invariants on each module
 		crisistypes.ModuleName,
+		accumulatortypes.ModuleName,
+		minttypes.ModuleName,
+		nfttypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -1123,6 +1181,7 @@ func initParamsKeeper(
 	paramsKeeper := paramskeeper.NewKeeper(appCodec, legacyAmino, key, tkey)
 
 	// SDK subspaces
+	paramsKeeper.Subspace(accumulatortypes.ModuleName)
 	paramsKeeper.Subspace(authtypes.ModuleName)
 	paramsKeeper.Subspace(banktypes.ModuleName)
 	paramsKeeper.Subspace(stakingtypes.ModuleName)
@@ -1143,6 +1202,8 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(incentivestypes.ModuleName)
 	paramsKeeper.Subspace(recoverytypes.ModuleName)
 	paramsKeeper.Subspace(revenuetypes.ModuleName)
+	paramsKeeper.Subspace(minttypes.ModuleName)
+	paramsKeeper.Subspace(nfttypes.ModuleName)
 	return paramsKeeper
 }
 
