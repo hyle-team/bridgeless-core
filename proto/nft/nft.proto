@@ -11,13 +11,12 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/nft/types";
 
 // NFT defines the NFT.
 message NFT {
-  // uri for the NFT metadata stored off chain
   string address = 1;
 
   string owner = 2;
 
   string  uri = 3;
-  // replace with timestemp
+
   int64 vesting_period = 4;
 
   cosmos.base.v1beta1.Coin reward_per_period = 5 [(gogoproto.nullable) = false];
@@ -30,6 +29,7 @@ message NFT {
 
   int64 vestingCounter = 9;
 
+  string Denom = 10;
   // data is an app specific data of the NFT. Optional
-  google.protobuf.Any data = 10;
+  google.protobuf.Any data = 11;
 }

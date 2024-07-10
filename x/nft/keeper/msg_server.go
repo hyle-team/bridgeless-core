@@ -32,21 +32,19 @@ func (k msgServer) Undelegate(goctx context.Context, request *types.MsgUndelegat
 		return nil, types.ErrNFTInvalidOwner
 	}
 
-	validator, err := sdk.ValAddressFromBech32(request.Validator)
+	valAddr, err := sdk.ValAddressFromBech32(request.Validator)
 	if err != nil {
 		return nil, err
 	}
 
-	if _, found := k.stakingKeeper.GetValidator(ctx, validator); !found {
+	nftAddress, _ := sdk.AccAddressFromBech32(request.Address)
+
+	_, found := k.stakingKeeper.GetValidator(ctx, valAddr)
+	if !found {
 		return nil, types.ErrValidatorNotFound
 	}
 
-	address, err := sdk.AccAddressFromBech32(request.Address)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode address")
-	}
-
-	_, err = k.stakingKeeper.Undelegate(ctx, address, validator, sdk.NewDecCoinFromCoin(request.Amount).Amount)
+	_, err = k.stakingKeeper.Undelegate(ctx, nftAddress, valAddr, sdk.NewDecCoinFromCoin(request.Amount).Amount)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to undelegate tokens")
 	}
@@ -67,14 +65,14 @@ func (k msgServer) Delegate(goctx context.Context, request *types.MsgDelegate) (
 	}
 
 	valAddr, _ := sdk.ValAddressFromBech32(request.Address)
-	address, _ := sdk.AccAddressFromBech32(request.Address)
+	nftAddress, _ := sdk.AccAddressFromBech32(request.Address)
 
 	validator, found := k.stakingKeeper.GetValidator(ctx, valAddr)
 	if !found {
 		return nil, types.ErrValidatorNotFound
 	}
 
-	_, err := k.stakingKeeper.Delegate(ctx, address, request.Amount.Amount, stakingtypes.Unbonded, validator, true)
+	_, err := k.stakingKeeper.Delegate(ctx, nftAddress, request.Amount.Amount, stakingtypes.Unbonded, validator, true)
 	if err != nil {
 		return nil, types.ErrFailedToDelegate
 	}
@@ -113,18 +111,18 @@ func (k msgServer) Withdraw(goctx context.Context, request *types.MsgWithdrawal)
 		return nil, types.ErrNFTInvalidOwner
 	}
 
-	address, _ := sdk.AccAddressFromBech32(request.Address)
+	nftAddress, _ := sdk.AccAddressFromBech32(request.Address)
 	ownerAddress, _ := sdk.AccAddressFromBech32(request.Owner)
 
-	balance := k.bankKeeper.GetAllBalances(ctx, address).AmountOf(sdk.NativeToken)
+	balance := k.bankKeeper.GetAllBalances(ctx, nftAddress).AmountOf(nft.Denom)
 	amount := sdk.MinInt(nft.AvalableToWithdraw.Amount, balance)
 
-	err := k.DistributeToAddress(ctx, sdk.NewCoins(sdk.NewCoin(sdk.NativeToken, amount)), ownerAddress, address)
+	err := k.DistributeToAddress(ctx, sdk.NewCoins(sdk.NewCoin(nft.Denom, amount)), ownerAddress, nftAddress)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to distribute to address")
 	}
 
-	nft.AvalableToWithdraw = nft.AvalableToWithdraw.Sub(sdk.NewCoin(sdk.NativeToken, amount))
+	nft.AvalableToWithdraw = nft.AvalableToWithdraw.Sub(sdk.NewCoin(nft.Denom, amount))
 	return new(types.MsgWithdrawalResponse), nil
 }
 
@@ -140,11 +138,11 @@ func (k msgServer) Redelegate(goctx context.Context, request *types.MsgRedelegat
 		return nil, types.ErrNFTInvalidOwner
 	}
 
-	address, _ := sdk.AccAddressFromBech32(request.Address)
+	nftAddress, _ := sdk.AccAddressFromBech32(request.Address)
 	validatorSrcAddress, _ := sdk.ValAddressFromBech32(request.ValidatorSrc)
 	validatorNEwAddress, _ := sdk.ValAddressFromBech32(request.ValidatorNew)
 
-	_, err := k.stakingKeeper.BeginRedelegation(ctx, address, validatorSrcAddress, validatorNEwAddress, sdk.NewDecCoinFromCoin(request.Amount).Amount)
+	_, err := k.stakingKeeper.BeginRedelegation(ctx, nftAddress, validatorSrcAddress, validatorNEwAddress, sdk.NewDecCoinFromCoin(request.Amount).Amount)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to begin redelegation")
 	}

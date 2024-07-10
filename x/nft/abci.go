@@ -3,8 +3,8 @@ package nft
 import (
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
 	"github.com/hyle-team/bridgeless-core/x/nft/keeper"
+	"github.com/hyle-team/bridgeless-core/x/nft/types"
 	"time"
 )
 
@@ -21,7 +21,7 @@ func EndBlocker(ctx sdk.Context, k keeper.Keeper) {
 			return
 		}
 
-		nft.AvalableToWithdraw.Add(sdk.NewCoin(sdk.NativeToken, sdk.NewInt(nft.VestingPeriod).Mul(nft.RewardPerPeriod.Amount)))
+		nft.AvalableToWithdraw.Add(sdk.NewCoin(nft.Denom, sdk.NewInt(nft.VestingPeriod).Mul(nft.RewardPerPeriod.Amount)))
 		nft.VestingCounter++
 		nft.LastVestingTime = ctx.BlockTime().Unix()
 

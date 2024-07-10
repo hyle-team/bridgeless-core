@@ -57,5 +57,10 @@ func (msg *MsgUndelegate) ValidateBasic() error {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid validator address (%s)", err)
 	}
 
+	_, err = sdk.ValAddressFromBech32(msg.Validator)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid validator address (%s)", err)
+	}
+
 	return nil
 }
