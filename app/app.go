@@ -26,9 +26,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/mint"
 	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
-	"github.com/hyle-team/bridgeless-core/x/nft"
-	nftkeeper "github.com/hyle-team/bridgeless-core/x/nft/keeper"
-	nfttypes "github.com/hyle-team/bridgeless-core/x/nft/types"
+	"github.com/cosmos/cosmos-sdk/x/nft"
+	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
+	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
+	"github.com/hyle-team/bridgeless-core/docs"
 
 	"io"
 	"net/http"
@@ -347,7 +348,7 @@ type Evmos struct {
 	RevenueKeeper    revenuekeeper.Keeper
 
 	MintKeeper mintkeeper.Keeper
-	NftKeeper  *nftkeeper.Keeper
+	NFTKeeper  *nftkeeper.Keeper
 
 	// the module manager
 	mm *module.Manager
@@ -462,9 +463,18 @@ func NewEvmos(
 	accumulatorKeeper := accumulatorkeeper.NewKeeper(
 		appCodec, keys[accumulatortypes.StoreKey], keys[accumulatortypes.MemStoreKey], app.AccountKeeper, app.BankKeeper)
 
+	app.NFTKeeper = nftkeeper.NewKeeper(
+		appCodec,
+		keys[nfttypes.StoreKey],
+		keys[nfttypes.StoreKey],
+		app.GetSubspace(nfttypes.ModuleName),
+		app.BankKeeper,
+		stakingKeeper,
+	)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
-		&stakingKeeper, authtypes.FeeCollectorName,
+		&stakingKeeper, app.NFTKeeper, authtypes.FeeCollectorName,
 	)
 	app.SlashingKeeper = slashingkeeper.NewKeeper(
 		appCodec, keys[slashingtypes.StoreKey], &stakingKeeper, app.GetSubspace(slashingtypes.ModuleName),
@@ -610,15 +620,6 @@ func NewEvmos(
 		app.ClaimsKeeper,
 	)
 
-	app.NftKeeper = nftkeeper.NewKeeper(
-		appCodec,
-		keys[nfttypes.StoreKey],
-		keys[nfttypes.StoreKey],
-		app.GetSubspace(nfttypes.ModuleName),
-		app.BankKeeper,
-		stakingKeeper,
-	)
-
 	// NOTE: app.Erc20Keeper is already initialized elsewhere
 
 	// Set the ICS4 wrappers for custom module middlewares
@@ -736,7 +737,7 @@ func NewEvmos(
 		revenue.NewAppModule(app.RevenueKeeper, app.AccountKeeper,
 			app.GetSubspace(revenuetypes.ModuleName)),
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
-		nft.NewAppModule(appCodec, *app.NftKeeper, app.AccountKeeper, app.BankKeeper),
+		nft.NewAppModule(appCodec, *app.NFTKeeper, app.AccountKeeper, app.BankKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -1098,6 +1099,9 @@ func (app *Evmos) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConf
 	if apiConfig.Swagger {
 		RegisterSwaggerAPI(clientCtx, apiSvr.Router)
 	}
+
+	// register app's OpenAPI routes.
+	docs.RegisterOpenAPIService(Name, apiSvr.Router)
 }
 
 func (app *Evmos) RegisterTxService(clientCtx client.Context) {
