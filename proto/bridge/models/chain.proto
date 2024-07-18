@@ -1,0 +1,25 @@
+syntax = "proto3";
+package core.bridge;
+
+import "google/protobuf/any.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+enum ChainType {
+  EVM = 0;
+  BITCOIN = 1;
+  COSMOS = 2;
+  OTHER = 3;
+}
+
+message Chain {
+  string id = 1;
+  ChainType type =2;
+  // bridge_address is the address of the bridge contract on the chain
+  string bridge_address = 3;
+  // operator is the address of the operator of the bridge contract
+  string operator = 4;
+}

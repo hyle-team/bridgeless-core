@@ -1,0 +1,22 @@
+syntax = "proto3";
+package core.bridge;
+
+import "google/protobuf/any.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+message TokenInfo {
+  uint64 decimals = 2;
+  string address = 1;
+}
+
+message Token {
+  uint64 id = 1;
+  string name = 2;
+  string symbol = 3;
+  // mapping from chain id to token info
+  map<string, TokenInfo> info = 4;
+}

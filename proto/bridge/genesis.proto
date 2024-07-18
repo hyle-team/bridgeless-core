@@ -1,0 +1,18 @@
+syntax = "proto3";
+package core.bridge;
+
+import "gogoproto/gogo.proto";
+import "bridge/params.proto";
+import "bridge/models/token.proto";
+import "bridge/models/chain.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+// GenesisState defines the bridge module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated core.bridge.Chain chains = 2 [(gogoproto.nullable) = false];
+  repeated core.bridge.Token tokens = 3 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}
