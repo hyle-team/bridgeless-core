@@ -12,10 +12,9 @@ ENV GONOSUMDB=github.com/*
 ENV GONOPROXY=github.com/*
 
 COPY ./go.mod ./go.sum ./
-RUN git config --global url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf "https://github.com/" && \
-    go mod download && \
-    git config --global --unset url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf
+RUN git config --global url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf "https://github.com/"
 RUN go mod download
+RUN git config --global --unset url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf
 
 COPY . .
 
