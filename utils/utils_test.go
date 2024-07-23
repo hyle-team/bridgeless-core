@@ -88,7 +88,7 @@ func TestGetEvmosAddressFromBech32(t *testing.T) {
 		},
 		{
 			"invalid bech32 address",
-			"evmos",
+			"abridge",
 			"",
 			true,
 		},
@@ -137,7 +137,7 @@ func TestEvmosCoinDenom(t *testing.T) {
 	}{
 		{
 			"valid denom - native coin",
-			"aevmos",
+			"abridge",
 			false,
 		},
 		{

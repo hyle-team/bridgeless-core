@@ -6,8 +6,8 @@ TMVERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::'
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 BINDIR ?= $(GOPATH)/bin
-EVMOS_BINARY = bridgeless-cored
-EVMOS_DIR = bridgeless-core
+BINARY = bridgeless-cored
+DIR = bridgeless-core
 BUILDDIR ?= $(CURDIR)/build
 HTTPS_GIT := https:///github.com/hyle-team/bridgeless-core.git
 DOCKER := $(shell which docker)
@@ -16,7 +16,7 @@ PROJECT := bridgeless-core
 DOCKER_IMAGE := $(NAMESPACE)/$(PROJECT)
 COMMIT_HASH := $(shell git rev-parse --short=7 HEAD)
 DOCKER_TAG := $(COMMIT_HASH)
-CHAIN_ID := evmos
+CHAIN_ID := bridge
 # e2e env
 MOUNT_PATH := $(shell pwd)/build/:/root/
 E2E_SKIP_CLEANUP := false
@@ -63,7 +63,7 @@ build_tags := $(strip $(build_tags))
 # process linker flags
 
 ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=bridgeless-core \
-          -X github.com/cosmos/cosmos-sdk/version.AppName=$(EVMOS_BINARY) \
+          -X github.com/cosmos/cosmos-sdk/version.AppName=$(BINARY) \
           -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
           -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
           -X github.com/tendermint/tendermint/version.TMCoreSemVer=$(TMVERSION)
@@ -134,7 +134,7 @@ build-reproducible: go.sum
 	$(DOCKER) rm latest-build || true
 	$(DOCKER) run --volume=$(CURDIR):/sources:ro \
         --env TARGET_PLATFORMS='linux/amd64' \
-        --env APP=$(EVMOS_BINARY) \
+        --env APP=$(BINARY) \
         --env VERSION=$(VERSION) \
         --env COMMIT=$(COMMIT) \
         --env CGO_ENABLED=1 \
@@ -490,7 +490,7 @@ localnet-build:
 
 # Start a 4-node testnet locally
 localnet-start: localnet-stop localnet-build
-	@if ! [ -f build/node0/$(EVMOS_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/bridgeless-core:Z bridgeless-core/node "./bridgeless-cored testnet init-files --v 4 -o /bridgeless-core --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
+	@if ! [ -f build/node0/$(BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/bridgeless-core:Z bridgeless-core/node "./bridgeless-cored testnet init-files --v 4 -o /bridgeless-core --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
 	docker-compose up -d
 
 # Stop testnet

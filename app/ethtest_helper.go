@@ -58,13 +58,13 @@ var EthDefaultConsensusParams = &abci.ConsensusParams{
 }
 
 // EthSetup initializes a new EvmosApp. A Nop logger is set in EvmosApp.
-func EthSetup(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisState) simapp.GenesisState) *Evmos {
+func EthSetup(isCheckTx bool, patchGenesis func(*Bridge, simapp.GenesisState) simapp.GenesisState) *Bridge {
 	return EthSetupWithDB(isCheckTx, patchGenesis, dbm.NewMemDB())
 }
 
 // EthSetupWithDB initializes a new EvmosApp. A Nop logger is set in EvmosApp.
-func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Evmos {
-	app := NewEvmos(log.NewNopLogger(),
+func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Bridge, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Bridge {
+	app := NewBridge(log.NewNopLogger(),
 		db,
 		nil,
 		true,
@@ -88,7 +88,7 @@ func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisStat
 		// Initialize the chain
 		app.InitChain(
 			abci.RequestInitChain{
-				ChainId:         "evmos_9000-1",
+				ChainId:         "bridge_9000-1",
 				Validators:      []abci.ValidatorUpdate{},
 				ConsensusParams: DefaultConsensusParams,
 				AppStateBytes:   stateBytes,
