@@ -14,10 +14,10 @@ ENV GONOSUMDB=github.com/*
 ENV GONOPROXY=github.com/*
 
 COPY ./go.mod ./go.sum ./
-# Read the GITHUB_ACCESS_TOKEN from the .env file
+# Read the CI_ACCESS_TOKEN from the .env file
 RUN --mount=type=secret,id=_env,dst=/.env
 
-RUN git config --global url."https://${GITHUB_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+RUN git config --global url."https://${GCI_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 RUN go mod download
 
 COPY . .
