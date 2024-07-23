@@ -2,8 +2,6 @@ FROM golang:1.20-alpine as buildbase
 
 RUN apk add build-base git
 
-ARG CI_JOB_TOKEN
-
 WORKDIR /go/src/github.com/hyle-team/bridgeless-core
 
 ENV GO111MODULE="on"
@@ -13,9 +11,10 @@ ENV GOPRIVATE=github.com/*
 ENV GONOSUMDB=github.com/*
 ENV GONOPROXY=github.com/*
 
-RUN echo "machine github.com login gitlab-ci-token password $CI_JOB_TOKEN" > ~/.netrc
-COPY go.mod .
-COPY go.sum .
+COPY ./go.mod ./go.sum ./
+RUN git config --global url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf "https://github.com/" && \
+    go mod download && \
+    git config --global --unset url."https://${GITHUB_ACCESS_TOKEN}:@github.com/".insteadOf
 RUN go mod download
 
 COPY . .
