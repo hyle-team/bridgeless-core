@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/hyle-team/bridgeless-core/app"
-	evmosd "github.com/hyle-team/bridgeless-core/cmd/evmosd"
+	evmosd "github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored"
 	"github.com/hyle-team/bridgeless-core/utils"
 )
 
@@ -23,7 +23,7 @@ func TestInitCmd(t *testing.T) {
 		fmt.Sprintf("--%s=%s", flags.FlagChainID, utils.TestnetChainID+"-1"),
 	})
 
-	err := svrcmd.Execute(rootCmd, "evmosd", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "bridgeless-cored", app.DefaultNodeHome)
 	require.NoError(t, err)
 }
 

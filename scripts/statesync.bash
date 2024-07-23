@@ -8,8 +8,8 @@
 ## USAGE RUNDOWN
 # Not for use on live nodes
 # For use when testing.
-# Assumes that ~/.evmosd doesn't exist
-# can be modified to suit your purposes if ~/.evmosd does already exist
+# Assumes that ~/.bridgeless-cored doesn't exist
+# can be modified to suit your purposes if ~/.bridgeless-cored does already exist
 
 
 set -uxe
