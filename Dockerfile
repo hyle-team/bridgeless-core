@@ -16,8 +16,7 @@ ENV GONOPROXY=github.com/*
 COPY ./go.mod ./go.sum ./
 # Read the CI_ACCESS_TOKEN from the .env file
 RUN --mount=type=secret,id=_env,dst=./.env
-
-RUN git config --global url."https://${CI_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+RUN git config --global url."https://olegfomenkodev:${CI_ACCESS_TOKEN}@github.com/".insteadOf "https://github.com/"
 RUN go mod download
 
 COPY . .
