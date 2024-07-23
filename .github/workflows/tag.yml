@@ -26,6 +26,9 @@ jobs:
           key: skaffold-${{ hashFiles('**/cache') }}
           restore-keys: |
             skaffold-
+      
+      - name: Create env
+        run: echo ${{ secrets.GITHUB_ACCESS_TOKEN }} > /.env
 
       - name: Run Skaffold pipeline as command
         uses: hiberbee/github-action-skaffold@latest

@@ -4,29 +4,32 @@ on:
 
 jobs:
   converge-github:
-  name: Skaffold Build To Github
-  runs-on: ubuntu-22.04
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+    name: Skaffold Build To Github
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Log in to registry
-      # This is where you will update the personal access token to GITHUB_TOKEN
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Log in to registry
+        # This is where you will update the personal access token to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
-    - name: Cache layers
-      uses: actions/cache@v3
-      with:
-        path: "${{ github.workspace }}/.skaffold/cache"
-        key: skaffold-${{ hashFiles('**/cache') }}
-        restore-keys: |
-          skaffold-
+      - name: Cache layers
+        uses: actions/cache@v3
+        with:
+          path: "${{ github.workspace }}/.skaffold/cache"
+          key: skaffold-${{ hashFiles('**/cache') }}
+          restore-keys: |
+            skaffold-
+      
+      - name: Create env
+        run: echo ${{ secrets.GITHUB_ACCESS_TOKEN }} > /.env
 
-    - name: Run Skaffold pipeline as command
-      uses: hiberbee/github-action-skaffold@latest
-      id: build
-      with:
-        command: build --tag ${{ github.sha }}
-        repository: ghcr.io/${{ github.repository_owner }}
+      - name: Run Skaffold pipeline as command
+        uses: hiberbee/github-action-skaffold@latest
+        id: build
+        with:
+          command: build --tag ${{ github.sha }}
+          repository: ghcr.io/${{ github.repository_owner }}
