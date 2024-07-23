@@ -1,0 +1,59 @@
+name: Build Bridgeless Core docker image tag
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+
+jobs:
+  converge:
+    name: Converge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install werf
+        uses: werf/actions/install@v1.2
+
+      - name: Log in to registry
+        # This is where you will update the personal access token to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Run echo
+        run: |
+          werf version
+          docker version
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_REF_NAME
+
+      - name: Run Build
+        run: |
+          . $(werf ci-env github --as-file) 
+          werf export service --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF_NAME
+
+      - uses: shrink/actions-docker-extract@v3
+        id: extract
+        with:
+          image: ghcr.io/$GITHUB_REPOSITORY:$GITHUB_REF_NAME
+          path: "/usr/local/bin/bridgeless-core"
+
+      - uses: ncipollo/release-action@v1
+        id: create-release
+        with:
+          allowUpdates: true
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ${{steps.extract.outputs.destination}}/bridgeless-core
+          asset_name: bridgeless-core-alpine-linux-amd64
+          asset_content_type: application/octet-stream

@@ -12,6 +12,7 @@ require (
 	github.com/cosmos/cosmos-sdk v0.46.13
 	github.com/cosmos/go-bip39 v1.0.0
 	github.com/cosmos/gogoproto v1.5.0
+	github.com/cosmos/ibc-go/v6 v6.1.1
 	github.com/davecgh/go-spew v1.1.1
 	github.com/ethereum/go-ethereum v1.10.26
 	github.com/gogo/protobuf v1.3.3
@@ -46,8 +47,6 @@ require (
 	google.golang.org/protobuf v1.34.1
 	sigs.k8s.io/yaml v1.3.0
 )
-
-require github.com/cosmos/ibc-go/v6 v6.1.1
 
 require (
 	cloud.google.com/go v0.112.1 // indirect
@@ -230,7 +229,7 @@ replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
 	github.com/cosmos/cosmos-sdk v0.46.13 => github.com/hyle-team/cosmos-sdk v0.46.15
-	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.1.2+incompatible
+	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.1.3
 
 	// use Evmos geth fork
 	github.com/ethereum/go-ethereum => github.com/evmos/go-ethereum v1.10.26

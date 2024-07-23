@@ -44,7 +44,7 @@ INITIAL_VERSION
 TARGET_VERSION
 
 # mount point for the upgraded node container, to mount new node version to
-# previous node state folder. By default this is './build/.evmosd:/root/.evmosd'
+# previous node state folder. By default this is './build/.bridgeless-cored:/root/.bridgeless-cored'
 # More info at https://docs.docker.com/engine/reference/builder/#volume
 MOUNT_PATH
 

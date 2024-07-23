@@ -20,7 +20,7 @@ KEY="dev0"
 CHAINID="evmos_9000-1"
 MONIKER="mymoniker"
 
-## default port prefixes for evmosd
+## default port prefixes for bridgeless-cored
 NODE_P2P_PORT="2660"
 NODE_PORT="2663"
 NODE_RPC_PORT="2666"
@@ -60,7 +60,7 @@ if [[ ! "$DATA_DIR" ]]; then
 fi
 
 # Compile evmos
-echo "compiling evmos"
+echo "compiling bridgeless core"
 make build
 
 # PID array declaration
