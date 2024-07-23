@@ -20,7 +20,7 @@ jobs:
 
       - name: Log in to registry
         # This is where you will update the personal access token to GITHUB_TOKEN
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+        run: echo "${{ secrets.CI_ACCESS_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - name: Cache layers
         uses: actions/cache@v3
