@@ -5,6 +5,9 @@ build:
     useBuildkit: true
   artifacts:
   - image: bridgeless-core # Change it on your own repo-name
+    docker:
+      buildArgs:
+        CI_ACCESS_TOKEN: "{{ secrets.CI_ACCESS_TOKEN }}"
 
 # Uncomment the following lines if you want to deploy your application
 # profiles:
