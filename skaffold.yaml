@@ -1,6 +1,8 @@
 apiVersion: skaffold/v2beta28
 kind: Config
 build:
+  local:
+    useBuildkit: true
   artifacts:
   - image: bridgeless-core # Change it on your own repo-name
 
