@@ -21,7 +21,7 @@ import (
 )
 
 // RootCodespace is the codespace for all errors defined in this package
-const RootCodespace = "evmos"
+const RootCodespace = "bridgeless"
 
 // ErrInvalidChainID returns an error resulting from an invalid chain ID.
 var ErrInvalidChainID = errorsmod.Register(RootCodespace, 188, "invalid chain ID")
