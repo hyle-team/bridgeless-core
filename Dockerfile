@@ -14,6 +14,7 @@ ENV GONOSUMDB=github.com/*
 ENV GONOPROXY=github.com/*
 
 COPY ./go.mod ./go.sum ./
+COPY ./config/genesis.json ./config/genesis.json
 # Read the CI_ACCESS_TOKEN from the .env file
 ARG CI_ACCESS_TOKEN
 RUN git config --global url."https://olegfomenkodev:${CI_ACCESS_TOKEN}@github.com/".insteadOf "https://github.com/"
