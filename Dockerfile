@@ -23,6 +23,9 @@ COPY . .
 
 RUN go mod vendor
 
+RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
+
 RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored
 
 
@@ -34,5 +37,5 @@ FROM alpine:3.9
 RUN apk add --no-cache ca-certificates
 COPY ./config/genesis.json /config/genesis.json
 COPY --from=buildbase /usr/local/bin/bridgeless-core /usr/local/bin/bridgeless-core
-
+COPY --from=buildbase /usr/local/bin/cosmovisor /usr/local/bin/cosmovisor
 ENTRYPOINT ["bridgeless-core"]
