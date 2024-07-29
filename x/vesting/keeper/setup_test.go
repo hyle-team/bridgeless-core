@@ -60,7 +60,3 @@ func TestKeeperTestSuite(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Keeper Suite")
 }
-
-func (suite *KeeperTestSuite) SetupTest() {
-	suite.DoSetupTest(suite.T())
-}
