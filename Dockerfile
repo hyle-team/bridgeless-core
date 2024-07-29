@@ -14,7 +14,6 @@ ENV GONOSUMDB=github.com/*
 ENV GONOPROXY=github.com/*
 
 COPY ./go.mod ./go.sum ./
-COPY ./config/genesis.json ./config/genesis.json
 # Read the CI_ACCESS_TOKEN from the .env file
 ARG CI_ACCESS_TOKEN
 RUN git config --global url."https://olegfomenkodev:${CI_ACCESS_TOKEN}@github.com/".insteadOf "https://github.com/"
@@ -33,7 +32,7 @@ RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-c
 FROM alpine:3.9
 
 RUN apk add --no-cache ca-certificates
-
+COPY ./config/genesis.json /config/genesis.json
 COPY --from=buildbase /usr/local/bin/bridgeless-core /usr/local/bin/bridgeless-core
 
 ENTRYPOINT ["bridgeless-core"]
