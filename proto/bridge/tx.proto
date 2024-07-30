@@ -1,12 +1,27 @@
 syntax = "proto3";
 package core.bridge;
+
+
 // this line is used by starport scaffolding # proto/tx/import
+import "cosmos/msg/v1/msg.proto";
+import "bridge/models/transaction.proto";
+import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
+    rpc SubmitTransaction(MsgSubmitTransaction) returns (MsgSubmitTransactionResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
+message MsgSubmitTransaction {
+  option (cosmos.msg.v1.signer) = "submitter";
+
+  string submitter = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  core.bridge.Transaction transaction = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgSubmitTransactionResponse {}

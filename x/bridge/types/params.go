@@ -19,14 +19,14 @@ func ParamKeyTable() paramtypes.KeyTable {
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(KeyPrefix(ParamStoreKeyModuleAdmin), &p.ModuleAdmin, validateModuleAdmin),
+		paramtypes.NewParamSetPair(KeyPrefix(ParamEvmAdminKey), &p.EvmAdmin, validateModuleAdmin),
 	}
 }
 
 // NewParams creates a new Params instance
-func NewParams(moduleAdmin string) Params {
+func NewParams(evmAdmin string) Params {
 	return Params{
-		ModuleAdmin: moduleAdmin,
+		EvmAdmin: evmAdmin,
 	}
 }
 
@@ -37,7 +37,7 @@ func DefaultParams() Params {
 
 // Validate validates the set of params
 func (p Params) Validate() error {
-	return validateModuleAdmin(p.ModuleAdmin)
+	return validateModuleAdmin(p.EvmAdmin)
 }
 
 func validateModuleAdmin(i interface{}) error {
