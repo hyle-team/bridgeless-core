@@ -8,8 +8,8 @@
 
 ## Local installation
 
-
-Also, you can build core from sources by yourself: use “https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7” release information.
+You can get binary file from github release and also, you can build core from sources by yourself:
+use “https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7” release information.
 
 If you are using Ubuntu linux, please install musl-dev using `sudo apt install musl-dev` command to be able to use Alpine binary on your machine
 
@@ -72,4 +72,84 @@ and become a validator. You need to stake exactly `100000000000000000000bridge` 
     bridgeless-core tx staking create-validator --amount 100000000000000000000bridge --commission-max-change-rate "0.01" --commission-max-rate "0.2" --commission-rate "0.1" --min-self-delegation "1" --details "Meet new bridgeless validator" --pubkey $(bridgless-core tendermint show-validator --home=$BRIDGELESS_HOME) --moniker $MONIKER_NAME --chain-id bridge_2607-1 --fees 0bridge --from $LOCAL_VALIDATOR_ADDRESS --home=$BRIDGELESS_HOME --node=$BRIDGELESS_NODE --keyring-backend=test
 
 
+## Docker compose 
 
+First of all init folders struct, it should be structured like this 
+
+```
+BRIDGELESS_HOME
+│   docker-compose.yaml
+└───config
+   └───validator
+        └───config
+            │  app.toml     
+            │  genesis.json     
+            │  client.toml
+            │  node_key.json
+            │  priv_validator_key.json
+            │  config.toml
+
+```
+
+
+To generate folder struct execute the command:
+
+    docker run --volume $BRIDGELESS_HOME/config/validator:/config/validator  ghcr.io/hyle-team/bridgeless-core:{last_tag}   init $MONIKER_NAME main--chain-id bridge_2607-1  --home=$BRIDGELESS_HOME --keyring-backend test
+
+Modify docker-compose.yml:
+
+    version: "3.7"
+
+    services:
+    
+    validator:
+    image: ghcr.io/hyle-team/bridgeless-core:{last_tag}
+    entrypoint: sh -c "bridgeless-core start --home=$BRIDGELESS_HOME --rpc.laddr tcp://0.0.0.0:26657 --p2p.external-address tcp://validator:26656"
+    volumes:
+      - $BRIDGELESS_HOME/config:/config/validator/config
+      - .$BRIDGELESS_HOME/data:/config/validator/data
+      ports:
+      - "26657:26657" # RPC
+      - "1317:1317" # REST
+      - "9090:9090" # Cosmos gRPC
+      - "8545:8545" # EVM HTTP RPC
+      - "8546:8546" # EVM WS RPC
+
+
+Move the genesis file to `$BRIDGELESS_HOME/config`
+
+Create validator private key:
+
+    bridgeless-core keys add <key-name> --keyring-backend test --home=$BRIDGELESS_HOME
+
+
+Dont forget to save the mnemonic and address. That address will be used for your validator staking.
+Send you address (bridge…) to `vl@distributedlab.com`.
+
+Please, backup the following files and folders:
+
+    $BRIDGELESS_HOME/config/priv_validator_key.json
+    $BRIDGELESS_HOME/config/node_key.json
+    $BRIDGELESS_HOME/keyring-test
+
+
+Get the node id:
+
+    docker run ghcr.io/hyle-team/bridgeless-core:{last_tag} tendermint show-node-id --home=$BRIDGELESS_HOME
+
+The next step is a setting peers into config.toml. Find a `persistent_peers` field and set here at least your node info(`node_id@node_ip:26656`) and one or two the others.
+In our case, past should past `0b872fe5d809863a94fe0e666a334ff06cd8d2cf@167.99.26.8:26656`. It's good to have at least 3 peers
+
+Run a command `docker compose start` to launch the node. 
+
+### Finishing with the validator
+After receiving confirmation from ourside about token transfer, execute command to stake tokens
+and become a validator. You need to stake exactly `100000000000000000000bridge` (10^18) that is equal to 1 ABRIDGE.
+
+Find docker container id
+
+    docker ps
+
+Init validator
+
+    docker exec -it <container-id> tx staking create-validator --amount 100000000000000000000bridge --commission-max-change-rate "0.01" --commission-max-rate "0.2" --commission-rate "0.1" --min-self-delegation "1" --details "Meet new bridgeless validator" --pubkey $(bridgless-core tendermint show-validator --home=$BRIDGELESS_HOME) --moniker $MONIKER_NAME --chain-id bridge_2607-1 --fees 0bridge --from $LOCAL_VALIDATOR_ADDRESS --home=$BRIDGELESS_HOME --node=$BRIDGELESS_NODE --keyring-backend=test
