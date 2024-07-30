@@ -58,13 +58,13 @@ var EthDefaultConsensusParams = &abci.ConsensusParams{
 }
 
 // EthSetup initializes a new EvmosApp. A Nop logger is set in EvmosApp.
-func EthSetup(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisState) simapp.GenesisState) *Evmos {
+func EthSetup(isCheckTx bool, patchGenesis func(*Bridge, simapp.GenesisState) simapp.GenesisState) *Bridge {
 	return EthSetupWithDB(isCheckTx, patchGenesis, dbm.NewMemDB())
 }
 
 // EthSetupWithDB initializes a new EvmosApp. A Nop logger is set in EvmosApp.
-func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Evmos {
-	app := NewEvmos(log.NewNopLogger(),
+func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Bridge, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Bridge {
+	app := NewBridge(log.NewNopLogger(),
 		db,
 		nil,
 		true,
@@ -88,7 +88,7 @@ func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Evmos, simapp.GenesisStat
 		// Initialize the chain
 		app.InitChain(
 			abci.RequestInitChain{
-				ChainId:         "evmos_9000-1",
+				ChainId:         "bridge_9000-1",
 				Validators:      []abci.ValidatorUpdate{},
 				ConsensusParams: DefaultConsensusParams,
 				AppStateBytes:   stateBytes,
@@ -158,7 +158,7 @@ func genesisStateWithValSet(codec codec.Codec, genesisState simapp.GenesisState,
 			MinSelfDelegation: sdk.ZeroInt(),
 		}
 		validators = append(validators, validator)
-		delegations = append(delegations, stakingtypes.NewDelegation(genAccs[0].GetAddress(), val.Address.Bytes(), sdk.OneDec()))
+		delegations = append(delegations, stakingtypes.NewDelegation(genAccs[0].GetAddress(), val.Address.Bytes(), sdk.OneDec(), sdk.OneDec()))
 	}
 	// set validators and delegations
 	stakingGenesis := stakingtypes.NewGenesisState(stakingtypes.DefaultParams(), validators, delegations)

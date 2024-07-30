@@ -1,0 +1,23 @@
+FROM golang:1.20-alpine as buildbase
+
+WORKDIR /go/src/github.com/hyle-team/bridgeless-core
+COPY vendor .
+COPY . .
+
+RUN apk add build-base
+
+ENV GO111MODULE="on"
+ENV CGO_ENABLED=1
+ENV GOOS="linux"
+
+RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored
+
+###
+
+FROM alpine:3.9
+
+RUN apk add --no-cache ca-certificates
+
+COPY --from=buildbase /usr/local/bin/bridgeless-core /usr/local/bin/bridgeless-core
+
+ENTRYPOINT ["bridgeless-core"]

@@ -1,32 +1,41 @@
-FROM golang:1.20.2-bullseye AS build-env
+FROM golang:1.20-alpine as buildbase
 
-WORKDIR /go/src/github.com/evmos/evmos
+RUN apk add build-base git
 
-RUN apt-get update -y
-RUN apt-get install git -y
 
-# Copy source code
+
+WORKDIR /go/src/github.com/hyle-team/bridgeless-core
+
+ENV GO111MODULE="on"
+ENV CGO_ENABLED=1
+ENV GOOS="linux"
+ENV GOPRIVATE=github.com/*
+ENV GONOSUMDB=github.com/*
+ENV GONOPROXY=github.com/*
+
+COPY ./go.mod ./go.sum ./
+# Read the CI_ACCESS_TOKEN from the .env file
+ARG CI_ACCESS_TOKEN
+RUN git config --global url."https://olegfomenkodev:${CI_ACCESS_TOKEN}@github.com/".insteadOf "https://github.com/"
+RUN go mod download
+
 COPY . .
 
-# Ensure dependencies are properly handled
-RUN sed -i '/toolchain/d' go.mod
+RUN go mod vendor
 
-# Download Go modules and verify
-RUN go mod tidy && go mod verify
+RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
 
-# Build the project
-RUN make build
+RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored
 
 
-FROM golang:1.20.2-bullseye
 
-RUN apt-get update -y
-RUN apt-get install ca-certificates jq -y
+###
 
-WORKDIR /root
+FROM alpine:3.9
 
-COPY --from=build-env /go/src/github.com/evmos/evmos/build/evmosd /usr/bin/evmosd
-
-EXPOSE 26656 26657 1317 9090 8545 8546
-
-CMD ["evmosd"]
+RUN apk add --no-cache ca-certificates
+COPY ./config/genesis.json /config/genesis.json
+COPY --from=buildbase /usr/local/bin/bridgeless-core /usr/local/bin/bridgeless-core
+COPY --from=buildbase /usr/local/bin/cosmovisor /usr/local/bin/cosmovisor
+ENTRYPOINT ["bridgeless-core"]

@@ -25,7 +25,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Evmos
+	app              *app.Bridge
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address
@@ -69,8 +69,4 @@ func TestKeeperTestSuite(t *testing.T) {
 	// Run Ginkgo integration tests
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Keeper Suite")
-}
-
-func (suite *KeeperTestSuite) SetupTest() {
-	suite.DoSetupTest(suite.T())
 }

@@ -4,18 +4,18 @@
       "description": "The native staking and governance token of the Evmos chain",
       "denom_units": [
         {
-          "denom": "aevmos",
+          "denom": "abridge",
           "exponent": 0
         },
         {
-          "denom": "evmos",
+          "denom": "abridge",
           "exponent": 18
         }
       ],
-      "base": "aevmos",
-      "display": "aevmos",
-      "name": "aevmos",
-      "symbol": "EVMOS"
+      "base": "abridge",
+      "display": "abridge",
+      "name": "abridge",
+      "symbol": "BRIDGE"
     }
   ]
 }
