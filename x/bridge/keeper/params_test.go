@@ -18,5 +18,6 @@ func TestGetParams(t *testing.T) {
 	require.EqualValues(t, params, k.GetParams(ctx))
 
 	acc, _ := sdk.AccAddressFromBech32(params.EvmAdmin)
-	require.EqualValues(t, acc, k.GetModuleAdmin(ctx, types.ChainType_EVM))
+	adm, _ := k.GetAdmin(ctx, types.ChainType_EVM)
+	require.EqualValues(t, acc, adm)
 }

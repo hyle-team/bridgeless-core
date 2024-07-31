@@ -19,23 +19,12 @@ func CmdSubmitTx() *cobra.Command {
 				return err
 			}
 
-			stx, err := parseTx(args[0])
-			if err != nil {
-				return err
+			var msg types.MsgSubmitTransaction
+			if err = types.ModuleCdc.UnmarshalJSON([]byte(args[0]), &msg); err != nil {
+				return errors.Wrap(err, "failed to unmarshal transaction")
 			}
 
-			msg := types.NewMsgSubmitTransaction(stx.Submitter, stx.Transaction)
-
-			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &msg)
 		},
 	}
-}
-
-func parseTx(raw string) (types.MsgSubmitTransaction, error) {
-	var stx types.MsgSubmitTransaction
-	if err := types.ModuleCdc.UnmarshalJSON([]byte(raw), &stx); err != nil {
-		return stx, errors.Wrap(err, "failed to unmarshal transaction")
-	}
-
-	return stx, nil
 }

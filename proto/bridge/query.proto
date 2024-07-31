@@ -4,6 +4,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "bridge/params.proto";
+import "bridge/models/transaction.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
@@ -12,7 +13,12 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/params";
+    option (google.api.http).get = "/cosmos/bridge/params";
+  }
+
+  // Transactions queries all the transactions.
+  rpc Transactions(QueryTransactionsRequest) returns (QueryTransactionsResponse) {
+    option (google.api.http).get = "/cosmos/bridge/transactions";
   }
   // this line is used by starport scaffolding # 2
 }
@@ -24,6 +30,19 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryTransactionsRequest is request type for the Query/Transactions RPC method.
+message QueryTransactionsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryTransactionsResponse is response type for the Query/Transactions RPC method.
+message QueryTransactionsResponse {
+  // Transactions is a list of transactions.
+  repeated core.bridge.Transaction transactions = 1 [(gogoproto.nullable) = false];
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

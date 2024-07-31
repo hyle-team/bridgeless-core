@@ -20,9 +20,9 @@ func (m msgServer) SubmitTransaction(goCtx context.Context, msg *types.MsgSubmit
 	if !found {
 		return nil, types.ErrDestinationChainNotSupported
 	}
-	admin := m.GetModuleAdmin(ctx, dstChain.Type)
 
-	if !admin.Equals(msg.GetSigners()[0]) {
+	admin, found := m.GetAdmin(ctx, dstChain.Type)
+	if !found || !admin.Equals(msg.GetSigners()[0]) {
 		return nil, types.ErrOperationNotAllowed
 	}
 
