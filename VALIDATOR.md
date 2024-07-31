@@ -2,7 +2,7 @@
 
 * Chain id: `bridge_2607-1`
 * Bridgeless-core binary (linux/amd64): https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7
-* Genesis file: https://github.com/hyle-team/bridgeless-core/blob/develop/config/genesis.json
+* Genesis file: https://github.com/hyle-team/bridgeless-core/blob/chains/devnet/config/genesis.json
 
 ## Local installation
 
