@@ -1,4 +1,4 @@
-# Validators’ Guide
+# Validators’ Devnet Guide
 
 * Chain id: `bridge_2607-1`
 * Bridgeless-core binary (linux/amd64): https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7
