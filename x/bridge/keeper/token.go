@@ -5,7 +5,10 @@ import (
 	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (k Keeper) SetToken(sdkCtx sdk.Context, token types.Token) {
@@ -34,12 +37,22 @@ func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, foun
 
 func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
-	tStore.Delete(types.KeyToken(id))
 
-	// TODO: rm token pairs
+	token, found := k.GetToken(sdkCtx, id)
+	if !found {
+		return
+	}
+
+	for chain, info := range token.Info {
+		if info != nil {
+			k.RemoveTokenPairs(sdkCtx, chain, info.Address)
+		}
+	}
+
+	tStore.Delete(types.KeyToken(id))
 }
 
-func (k Keeper) GetTokens(sdkCtx sdk.Context) (tokens []types.Token) {
+func (k Keeper) GetAllTokens(sdkCtx sdk.Context) (tokens []types.Token) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
 	iterator := tStore.Iterator(nil, nil)
 	defer iterator.Close()
@@ -51,6 +64,26 @@ func (k Keeper) GetTokens(sdkCtx sdk.Context) (tokens []types.Token) {
 	}
 
 	return
+}
+
+func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Token, *query.PageResponse, error) {
+	tStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	var chains []types.Token
+
+	pageRes, err := query.Paginate(tStore, pagination, func(key []byte, value []byte) error {
+		var chain types.Token
+
+		k.cdc.MustUnmarshal(value, &chain)
+
+		chains = append(chains, chain)
+		return nil
+	})
+
+	if err != nil {
+		return nil, pageRes, status.Error(codes.Internal, err.Error())
+	}
+
+	return chains, pageRes, nil
 }
 
 func (k Keeper) SetTokenPairs(sdkCtx sdk.Context, srcChain, srcAddress string, info map[string]*types.TokenInfo) {
@@ -88,4 +121,9 @@ func (k Keeper) GetTokenPair(sdk sdk.Context, srcChain, srcAddress, dstChain str
 	info, found = pairs[dstChain]
 
 	return
+}
+
+func (k Keeper) RemoveTokenPairs(sdkCtx sdk.Context, srcChain, srcAddress string) {
+	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
+	pStore.Delete(types.KeyTokenPair(srcChain, srcAddress))
 }

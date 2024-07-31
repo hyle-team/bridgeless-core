@@ -5,6 +5,8 @@ package core.bridge;
 // this line is used by starport scaffolding # proto/tx/import
 import "cosmos/msg/v1/msg.proto";
 import "bridge/models/transaction.proto";
+import "bridge/models/token.proto";
+import "bridge/models/chain.proto";
 import "gogoproto/gogo.proto";
 import "cosmos_proto/cosmos.proto";
 
@@ -14,6 +16,10 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
     rpc SubmitTransaction(MsgSubmitTransaction) returns (MsgSubmitTransactionResponse);
+    rpc SetAndUpdateChain(MsgSetChain) returns (MsgSetChainResponse);
+    rpc RemoveChainInfo(MsgRemoveChain) returns (MsgRemoveChainResponse);
+    rpc SetAndUpdateToken(MsgSetToken) returns (MsgSetTokenResponse);
+    rpc RemoveTokenInfo(MsgRemoveToken) returns (MsgRemoveTokenResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -25,3 +31,32 @@ message MsgSubmitTransaction {
 }
 
 message MsgSubmitTransactionResponse {}
+
+message MsgSetToken {
+  string creator = 1;
+  Token token  = 2;
+}
+
+message MsgSetTokenResponse {}
+
+
+message MsgRemoveToken {
+  string creator = 1;
+  uint64 token_id = 2;
+}
+
+message MsgRemoveTokenResponse {}
+
+message MsgSetChain {
+  string creator = 1;
+  Chain chain  = 2;
+}
+
+message MsgSetChainResponse {}
+
+message MsgRemoveChain {
+  string creator = 1;
+  string chain_id = 2;
+}
+
+message MsgRemoveChainResponse {}

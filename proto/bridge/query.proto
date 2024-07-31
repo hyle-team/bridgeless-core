@@ -4,6 +4,9 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "bridge/params.proto";
+import "bridge/models/token.proto";
+import "bridge/models/chain.proto";
+
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
@@ -14,6 +17,32 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/params";
   }
+
+  rpc GetTokenById(QueryGetTokenById) returns (QueryGetTokenByIdResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token/{id}";
+  }
+
+  rpc GetTokens(QueryGetTokens) returns (QueryGetTokensResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/tokens";
+  }
+
+  rpc GetTokenPairForDstChain(QueryGetTokenPair) returns (QueryGetTokenPairResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pair/{src_chain}/{src_address}/{dst_chain}";
+  }
+
+  rpc GetAllTokenPairs(QueryGetTokenPairs) returns (QueryGetTokenPairsResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pairs/{src_chain}/{src_address}";
+  }
+
+  rpc GetChainById(QueryGetChainById) returns (QueryGetChainByIdResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/chain/{id}";
+  }
+
+  rpc GetChains(QueryGetChains) returns (QueryGetChainsResponse) {
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/chains";
+  }
+
+
   // this line is used by starport scaffolding # 2
 }
 
@@ -25,5 +54,62 @@ message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetTokenById {
+  string id = 1;
+}
+
+message QueryGetTokenByIdResponse {
+  Token token = 1;
+}
+
+message QueryGetTokens {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryGetTokensResponse {
+  repeated Token tokens = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetChains {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryGetChainsResponse {
+  repeated Chain chains = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetTokenPairs {
+    string src_chain = 1;
+    string src_address = 2;
+}
+
+message QueryGetTokenPairsResponse {
+  map<string, TokenInfo> info = 1;
+}
+
+message QueryGetTokenPair {
+  string src_chain = 1;
+  string src_address = 2;
+  string dst_chain = 3;
+}
+
+message QueryGetTokenPairResponse {
+  TokenInfo info = 1;
+}
+
+
+message QueryGetChainById {
+  string id = 1;
+}
+
+message QueryGetChainByIdResponse {
+  Chain chain = 1;
+}
+
+
+
+
 
 // this line is used by starport scaffolding # 3

@@ -3,7 +3,10 @@ package keeper
 import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (k Keeper) SetChain(sdkCtx sdk.Context, chain types.Chain) {
@@ -24,7 +27,7 @@ func (k Keeper) GetChain(sdkCtx sdk.Context, id string) (chain types.Chain, foun
 	return
 }
 
-func (k Keeper) GetChains(sdkCtx sdk.Context) (chains []types.Chain) {
+func (k Keeper) GetAllChains(sdkCtx sdk.Context) (chains []types.Chain) {
 	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
 	iterator := cStore.Iterator(nil, nil)
 	defer iterator.Close()
@@ -36,4 +39,29 @@ func (k Keeper) GetChains(sdkCtx sdk.Context) (chains []types.Chain) {
 	}
 
 	return
+}
+
+func (k Keeper) RemoveChain(sdkCtx sdk.Context, id string) {
+	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
+	cStore.Delete(types.KeyChain(id))
+}
+
+func (k Keeper) GetChainsWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Chain, *query.PageResponse, error) {
+	cStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
+	var chains []types.Chain
+
+	pageRes, err := query.Paginate(cStore, pagination, func(key []byte, value []byte) error {
+		var chain types.Chain
+
+		k.cdc.MustUnmarshal(value, &chain)
+
+		chains = append(chains, chain)
+		return nil
+	})
+
+	if err != nil {
+		return nil, pageRes, status.Error(codes.Internal, err.Error())
+	}
+
+	return chains, pageRes, nil
 }
