@@ -32,7 +32,7 @@ func NewParams(evmAdmin string) Params {
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return NewParams("cosmos1v4xjvmka36peq6lp2vahxax96540nek53cfyrq")
+	return NewParams("bridge1s44rn9k2sjks0zvv9vx9dr8u58j6h6h25cehed")
 }
 
 // Validate validates the set of params
