@@ -98,9 +98,7 @@ func InitCmd(mbm module.BasicManager, defaultNodeHome string) *cobra.Command {
 			config.P2P.MaxNumOutboundPeers = 30
 
 			// Set default seeds
-			seeds := []string{
-				"0b872fe5d809863a94fe0e666a334ff06cd8d2cf@p2p.node1.devnet.bridgeless.com:443",
-			}
+			var seeds []string
 			config.P2P.Seeds = strings.Join(seeds, ",")
 
 			config.Mempool.Size = 10000
