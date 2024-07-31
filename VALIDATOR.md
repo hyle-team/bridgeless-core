@@ -72,6 +72,9 @@ Note, that your node has several ports that is required to be omen on your machi
     - "8545" # EVM HTTP RPC
     - "8546" # EVM WS RPC
 
+Also, please note that `app.toml` file contains the configuration for the gas price accepted by your validator. 
+    - `minimum-gas-prices = "1abridge"`
+
 ### Finishing with the validator
 
 After receiving confirmation from ourside about token transfer, execute command to stake tokens
