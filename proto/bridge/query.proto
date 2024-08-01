@@ -31,7 +31,7 @@ service Query {
   }
 
   rpc GetAllTokenPairs(QueryGetTokenPairs) returns (QueryGetTokenPairsResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pairs/{src_chain}/{src_address}";
+    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pairs";
   }
 
   rpc GetChainById(QueryGetChainById) returns (QueryGetChainByIdResponse) {
@@ -60,7 +60,7 @@ message QueryGetTokenById {
 }
 
 message QueryGetTokenByIdResponse {
-  Token token = 1;
+  Token token = 1 [(gogoproto.nullable) = false];;
 }
 
 message QueryGetTokens {
@@ -81,12 +81,10 @@ message QueryGetChainsResponse {
 }
 
 message QueryGetTokenPairs {
-    string src_chain = 1;
-    string src_address = 2;
 }
 
 message QueryGetTokenPairsResponse {
-   repeated TokenInfo pairs = 1;
+   repeated TokenInfo pairs = 1 [(gogoproto.nullable) = false];;
 }
 
 message QueryGetTokenPair {
@@ -96,7 +94,7 @@ message QueryGetTokenPair {
 }
 
 message QueryGetTokenPairResponse {
-  TokenInfo info = 1;
+  TokenInfo info = 1 [(gogoproto.nullable) = false];;
 }
 
 
@@ -105,7 +103,7 @@ message QueryGetChainById {
 }
 
 message QueryGetChainByIdResponse {
-  Chain chain = 1;
+  Chain chain = 1 [(gogoproto.nullable) = false];;
 }
 
 

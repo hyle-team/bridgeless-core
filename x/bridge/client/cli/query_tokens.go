@@ -81,12 +81,7 @@ func CmdQueryTokenPairs() *cobra.Command {
 			}
 			queryClient := types.NewQueryClient(clientCtx)
 
-			req := &types.QueryGetTokenPairs{
-				SrcChain:   args[0],
-				SrcAddress: args[1],
-			}
-
-			res, err := queryClient.GetAllTokenPairs(context.Background(), req)
+			res, err := queryClient.GetAllTokenPairs(context.Background(), &types.QueryGetTokenPairs{})
 			if err != nil {
 				return err
 			}

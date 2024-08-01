@@ -28,7 +28,7 @@ func (k Keeper) GetTokenById(goctx context.Context, req *types.QueryGetTokenById
 	}
 
 	return &types.QueryGetTokenByIdResponse{
-		Token: &token,
+		Token: token,
 	}, nil
 }
 
@@ -55,13 +55,13 @@ func (k Keeper) GetTokenPairForDstChain(goctx context.Context, req *types.QueryG
 
 	ctx := sdk.UnwrapSDKContext(goctx)
 
-	token, found := k.GetTokenPair(ctx, req.SrcChain, req.SrcAddress, req.DstChain)
+	pair, found := k.GetTokenPair(ctx, req.SrcChain, req.SrcAddress, req.DstChain)
 	if !found {
 		return nil, types.ErrTokenPairsNotFound
 	}
 
 	return &types.QueryGetTokenPairResponse{
-		Info: token,
+		Info: pair,
 	}, nil
 }
 
@@ -71,7 +71,7 @@ func (k Keeper) GetAllTokenPairs(goctx context.Context, req *types.QueryGetToken
 	}
 
 	ctx := sdk.UnwrapSDKContext(goctx)
-	pairs := k.GetTokenPairs(ctx, req.SrcChain, req.SrcAddress)
+	pairs := k.GetTokenPairs(ctx)
 
 	return &types.QueryGetTokenPairsResponse{
 		Pairs: pairs,
@@ -91,7 +91,7 @@ func (k Keeper) GetChainById(goctx context.Context, req *types.QueryGetChainById
 	}
 
 	return &types.QueryGetChainByIdResponse{
-		Chain: &token,
+		Chain: token,
 	}, nil
 }
 

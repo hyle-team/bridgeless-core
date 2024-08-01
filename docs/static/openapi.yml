@@ -752,10 +752,16 @@ paths:
               info:
                 type: object
                 properties:
+                  address:
+                    type: string
                   decimals:
                     type: string
                     format: uint64
-                  address:
+                  source_chain:
+                    type: string
+                  destination_chain:
+                    type: string
+                  token_id:
                     type: string
         default:
           description: An unexpected error response.
@@ -957,7 +963,7 @@ paths:
           type: string
       tags:
         - Query
-  '/hyle-team/bridgeless-core/bridge/token-pairs/{src_chain}/{src_address}':
+  /hyle-team/bridgeless-core/bridge/token-pairs:
     get:
       operationId: CoreBridgeGetAllTokenPairs
       responses:
@@ -966,15 +972,21 @@ paths:
           schema:
             type: object
             properties:
-              info:
-                type: object
-                additionalProperties:
+              pairs:
+                type: array
+                items:
                   type: object
                   properties:
+                    address:
+                      type: string
                     decimals:
                       type: string
                       format: uint64
-                    address:
+                    source_chain:
+                      type: string
+                    destination_chain:
+                      type: string
+                    token_id:
                       type: string
         default:
           description: An unexpected error response.
@@ -1161,15 +1173,6 @@ paths:
                           "@type": "type.googleapis.com/google.protobuf.Duration",
                           "value": "1.212s"
                         }
-      parameters:
-        - name: src_chain
-          in: path
-          required: true
-          type: string
-        - name: src_address
-          in: path
-          required: true
-          type: string
       tags:
         - Query
   '/hyle-team/bridgeless-core/bridge/token/{id}':
@@ -1191,17 +1194,6 @@ paths:
                     type: string
                   symbol:
                     type: string
-                  info:
-                    type: object
-                    additionalProperties:
-                      type: object
-                      properties:
-                        decimals:
-                          type: string
-                          format: uint64
-                        address:
-                          type: string
-                    title: mapping from chain id to token info
         default:
           description: An unexpected error response.
           schema:
@@ -1415,17 +1407,6 @@ paths:
                       type: string
                     symbol:
                       type: string
-                    info:
-                      type: object
-                      additionalProperties:
-                        type: object
-                        properties:
-                          decimals:
-                            type: string
-                            format: uint64
-                          address:
-                            type: string
-                      title: mapping from chain id to token info
               pagination:
                 type: object
                 properties:
@@ -45571,9 +45552,13 @@ definitions:
     default: EVM
   core.bridge.MsgRemoveChainResponse:
     type: object
+  core.bridge.MsgRemovePairResponse:
+    type: object
   core.bridge.MsgRemoveTokenResponse:
     type: object
   core.bridge.MsgSetChainResponse:
+    type: object
+  core.bridge.MsgSetPairResponse:
     type: object
   core.bridge.MsgSetTokenResponse:
     type: object
@@ -45672,40 +45657,41 @@ definitions:
             type: string
           symbol:
             type: string
-          info:
-            type: object
-            additionalProperties:
-              type: object
-              properties:
-                decimals:
-                  type: string
-                  format: uint64
-                address:
-                  type: string
-            title: mapping from chain id to token info
   core.bridge.QueryGetTokenPairResponse:
     type: object
     properties:
       info:
         type: object
         properties:
+          address:
+            type: string
           decimals:
             type: string
             format: uint64
-          address:
+          source_chain:
+            type: string
+          destination_chain:
+            type: string
+          token_id:
             type: string
   core.bridge.QueryGetTokenPairsResponse:
     type: object
     properties:
-      info:
-        type: object
-        additionalProperties:
+      pairs:
+        type: array
+        items:
           type: object
           properties:
+            address:
+              type: string
             decimals:
               type: string
               format: uint64
-            address:
+            source_chain:
+              type: string
+            destination_chain:
+              type: string
+            token_id:
               type: string
   core.bridge.QueryGetTokensResponse:
     type: object
@@ -45722,17 +45708,6 @@ definitions:
               type: string
             symbol:
               type: string
-            info:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  decimals:
-                    type: string
-                    format: uint64
-                  address:
-                    type: string
-              title: mapping from chain id to token info
       pagination:
         type: object
         properties:
@@ -45779,24 +45754,19 @@ definitions:
         type: string
       symbol:
         type: string
-      info:
-        type: object
-        additionalProperties:
-          type: object
-          properties:
-            decimals:
-              type: string
-              format: uint64
-            address:
-              type: string
-        title: mapping from chain id to token info
   core.bridge.TokenInfo:
     type: object
     properties:
+      address:
+        type: string
       decimals:
         type: string
         format: uint64
-      address:
+      source_chain:
+        type: string
+      destination_chain:
+        type: string
+      token_id:
         type: string
   core.bridge.Transaction:
     type: object

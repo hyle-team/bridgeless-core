@@ -243,35 +243,6 @@ func request_Query_GetAllTokenPairs_0(ctx context.Context, marshaler runtime.Mar
 	var protoReq QueryGetTokenPairs
 	var metadata runtime.ServerMetadata
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["src_chain"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "src_chain")
-	}
-
-	protoReq.SrcChain, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "src_chain", err)
-	}
-
-	val, ok = pathParams["src_address"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "src_address")
-	}
-
-	protoReq.SrcAddress, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "src_address", err)
-	}
-
 	msg, err := client.GetAllTokenPairs(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -280,35 +251,6 @@ func request_Query_GetAllTokenPairs_0(ctx context.Context, marshaler runtime.Mar
 func local_request_Query_GetAllTokenPairs_0(ctx context.Context, marshaler runtime.Marshaler, server QueryServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq QueryGetTokenPairs
 	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["src_chain"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "src_chain")
-	}
-
-	protoReq.SrcChain, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "src_chain", err)
-	}
-
-	val, ok = pathParams["src_address"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "src_address")
-	}
-
-	protoReq.SrcAddress, err = runtime.String(val)
-
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "src_address", err)
-	}
 
 	msg, err := server.GetAllTokenPairs(ctx, &protoReq)
 	return msg, metadata, err
@@ -765,7 +707,7 @@ var (
 
 	pattern_Query_GetTokenPairForDstChain_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5, 1, 0, 4, 1, 5, 6}, []string{"hyle-team", "bridgeless-core", "bridge", "token-pair", "src_chain", "src_address", "dst_chain"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetAllTokenPairs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"hyle-team", "bridgeless-core", "bridge", "token-pairs", "src_chain", "src_address"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetAllTokenPairs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"hyle-team", "bridgeless-core", "bridge", "token-pairs"}, "", runtime.AssumeColonVerbOpt(false)))
 
 	pattern_Query_GetChainById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"hyle-team", "bridgeless-core", "bridge", "chain", "id"}, "", runtime.AssumeColonVerbOpt(false)))
 

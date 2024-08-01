@@ -20,6 +20,8 @@ service Msg {
     rpc RemoveChainInfo(MsgRemoveChain) returns (MsgRemoveChainResponse);
     rpc SetAndUpdateToken(MsgSetToken) returns (MsgSetTokenResponse);
     rpc RemoveTokenInfo(MsgRemoveToken) returns (MsgRemoveTokenResponse);
+    rpc RemovePairInfo(MsgRemovePair) returns (MsgRemovePairResponse);
+    rpc SetPairInfo(MsgSetPair) returns (MsgSetPairResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -60,3 +62,19 @@ message MsgRemoveChain {
 }
 
 message MsgRemoveChainResponse {}
+
+message MsgRemovePair {
+  string creator = 1;
+  string src_chain = 2;
+  string dst_chain = 3;
+  string address = 4;
+}
+
+message MsgRemovePairResponse {}
+
+message MsgSetPair {
+  string creator = 1;
+  TokenInfo pair = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgSetPairResponse {}

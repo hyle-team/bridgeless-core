@@ -28,6 +28,12 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case *types.MsgRemoveToken:
 			res, err := msgServer.RemoveTokenInfo(ctx, msg)
 			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgSetPair:
+			res, err := msgServer.SetPairInfo(ctx, msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgRemovePair:
+			res, err := msgServer.RemovePairInfo(ctx, msg)
+			return sdk.WrapServiceResult(ctx, res, err)
 		}
 
 		return nil, nil

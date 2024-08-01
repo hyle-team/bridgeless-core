@@ -10,6 +10,26 @@ type msgServer struct {
 	Keeper
 }
 
+func (k msgServer) RemovePairInfo(goctx context.Context, msg *types.MsgRemovePair) (*types.MsgRemovePairResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	k.RemoveTokenPair(ctx, msg.SrcChain, msg.DstChain, msg.Address)
+	return &types.MsgRemovePairResponse{}, nil
+}
+
+func (k msgServer) SetPairInfo(goctx context.Context, msg *types.MsgSetPair) (*types.MsgSetPairResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	k.SetTokenPair(ctx, msg.Pair.SourceChain, msg.Pair.DestinationChain, msg.Pair.Address, msg.Pair)
+	return &types.MsgSetPairResponse{}, nil
+}
+
 // NewMsgServerImpl returns an implementation of the MsgServer interface
 // for the provided Keeper.
 func NewMsgServerImpl(keeper Keeper) types.MsgServer {
@@ -23,7 +43,10 @@ func (k msgServer) RemoveTokenInfo(goctx context.Context, msg *types.MsgRemoveTo
 	if k.GetParams(ctx).EvmAdmin != msg.Creator {
 		return nil, types.ErrPermissionDenied
 	}
-	return nil, nil
+
+	k.RemoveToken(ctx, msg.TokenId)
+
+	return &types.MsgRemoveTokenResponse{}, nil
 
 }
 

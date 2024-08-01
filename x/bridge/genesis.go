@@ -21,6 +21,9 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, tx := range genState.Transactions {
 		k.SetTransaction(ctx, tx)
 	}
+	for _, pair := range genState.Pairs {
+		k.SetTokenPair(ctx, pair.SourceChain, pair.DestinationChain, pair.Address, pair)
+	}
 }
 
 // ExportGenesis returns the module's exported genesis
@@ -31,10 +34,10 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	}
 
 	return &types.GenesisState{
-		Params: k.GetParams(ctx),
-		Chains: k.GetAllChains(ctx),
-		Tokens: k.GetAllTokens(ctx),
-
+		Params:       k.GetParams(ctx),
+		Chains:       k.GetAllChains(ctx),
+		Tokens:       k.GetAllTokens(ctx),
+		Pairs:        k.GetTokenPairs(ctx),
 		Transactions: txs,
 	}
 }
