@@ -71,13 +71,10 @@ func (k Keeper) GetAllTokenPairs(goctx context.Context, req *types.QueryGetToken
 	}
 
 	ctx := sdk.UnwrapSDKContext(goctx)
-	pairs, found := k.GetTokenPairs(ctx, req.SrcChain, req.SrcAddress)
-	if !found {
-		return nil, types.ErrTokenPairsNotFound
-	}
+	pairs := k.GetTokenPairs(ctx, req.SrcChain, req.SrcAddress)
 
 	return &types.QueryGetTokenPairsResponse{
-		Info: pairs,
+		Pairs: pairs,
 	}, nil
 }
 

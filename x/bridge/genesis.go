@@ -31,9 +31,10 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	}
 
 	return &types.GenesisState{
-		Params:       k.GetParams(ctx),
-		Chains:       k.GetAllChains(ctx),
-		Tokens:       k.GetAllTokens(ctx),
+		Params: k.GetParams(ctx),
+		Chains: k.GetAllChains(ctx),
+		Tokens: k.GetAllTokens(ctx),
+
 		Transactions: txs,
 	}
 }

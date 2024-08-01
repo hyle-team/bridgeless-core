@@ -55,17 +55,18 @@ func (gs GenesisState) Validate() error {
 		if err := validateToken(&token); err != nil {
 			return fmt.Errorf("invalid token %v: %w", token.Id, err)
 		}
-
-		for chainStr, info := range token.Info {
-			chain, ok := chains[chainStr]
-			if !ok {
-				return fmt.Errorf("unknown chain id: %s for token %v", chainStr, token.Id)
-			}
-			if err := validateTokenInfo(info, &chain.Type); err != nil {
-				return fmt.Errorf("invalid token info %v for chain %s: %w", token.Id, chainStr, err)
-			}
-		}
 	}
 
+	for _, pair := range gs.Pairs {
+
+		chain, ok := chains[pair.SourceChain]
+		if !ok {
+			return fmt.Errorf("unknown chain id: %s for token %v", pair.SourceChain, pair.TokenId)
+		}
+
+		if err := validateTokenInfo(&pair, &chain.Type); err != nil {
+			return fmt.Errorf("invalid token info %v for chain %s: %w", pair.TokenId, pair.SourceChain, err)
+		}
+	}
 	return nil
 }

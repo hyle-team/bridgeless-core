@@ -86,7 +86,7 @@ message QueryGetTokenPairs {
 }
 
 message QueryGetTokenPairsResponse {
-  map<string, TokenInfo> info = 1;
+   repeated TokenInfo pairs = 1;
 }
 
 message QueryGetTokenPair {

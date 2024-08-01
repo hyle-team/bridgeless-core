@@ -27,8 +27,11 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type TokenInfo struct {
-	Decimals uint64 `protobuf:"varint,2,opt,name=decimals,proto3" json:"decimals,omitempty"`
-	Address  string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	Address          string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	Decimals         uint64 `protobuf:"varint,2,opt,name=decimals,proto3" json:"decimals,omitempty"`
+	SourceChain      string `protobuf:"bytes,3,opt,name=source_chain,json=sourceChain,proto3" json:"source_chain,omitempty"`
+	DestinationChain string `protobuf:"bytes,4,opt,name=destination_chain,json=destinationChain,proto3" json:"destination_chain,omitempty"`
+	TokenId          string `protobuf:"bytes,5,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
 }
 
 func (m *TokenInfo) Reset()         { *m = TokenInfo{} }
@@ -64,6 +67,13 @@ func (m *TokenInfo) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TokenInfo proto.InternalMessageInfo
 
+func (m *TokenInfo) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
 func (m *TokenInfo) GetDecimals() uint64 {
 	if m != nil {
 		return m.Decimals
@@ -71,9 +81,23 @@ func (m *TokenInfo) GetDecimals() uint64 {
 	return 0
 }
 
-func (m *TokenInfo) GetAddress() string {
+func (m *TokenInfo) GetSourceChain() string {
 	if m != nil {
-		return m.Address
+		return m.SourceChain
+	}
+	return ""
+}
+
+func (m *TokenInfo) GetDestinationChain() string {
+	if m != nil {
+		return m.DestinationChain
+	}
+	return ""
+}
+
+func (m *TokenInfo) GetTokenId() string {
+	if m != nil {
+		return m.TokenId
 	}
 	return ""
 }
@@ -82,8 +106,6 @@ type Token struct {
 	Id     uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name   string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Symbol string `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	// mapping from chain id to token info
-	Info map[string]*TokenInfo `protobuf:"bytes,4,rep,name=info,proto3" json:"info,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (m *Token) Reset()         { *m = Token{} }
@@ -140,47 +162,38 @@ func (m *Token) GetSymbol() string {
 	return ""
 }
 
-func (m *Token) GetInfo() map[string]*TokenInfo {
-	if m != nil {
-		return m.Info
-	}
-	return nil
-}
-
 func init() {
 	proto.RegisterType((*TokenInfo)(nil), "core.bridge.TokenInfo")
 	proto.RegisterType((*Token)(nil), "core.bridge.Token")
-	proto.RegisterMapType((map[string]*TokenInfo)(nil), "core.bridge.Token.InfoEntry")
 }
 
 func init() { proto.RegisterFile("bridge/models/token.proto", fileDescriptor_68574e97ac2633fb) }
 
 var fileDescriptor_68574e97ac2633fb = []byte{
-	// 372 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0xc1, 0xca, 0xd3, 0x40,
-	0x14, 0x85, 0x3b, 0x69, 0xfe, 0x6a, 0xa6, 0x20, 0x32, 0x48, 0x49, 0x43, 0x09, 0xa5, 0xab, 0x22,
-	0x36, 0x63, 0xdb, 0x8d, 0xb8, 0x53, 0x70, 0xe1, 0x42, 0x84, 0xe0, 0xca, 0xdd, 0x24, 0xb9, 0x4d,
-	0x87, 0x26, 0x73, 0x63, 0x66, 0x52, 0xcc, 0x5b, 0xf8, 0x54, 0xe2, 0xb2, 0x4b, 0x97, 0xd2, 0xbe,
-	0x88, 0x64, 0x12, 0x8b, 0xf0, 0xef, 0xce, 0x3d, 0xe7, 0xce, 0x37, 0x87, 0x4b, 0xe7, 0x49, 0x2d,
-	0xb3, 0x1c, 0x78, 0x89, 0x19, 0x14, 0x9a, 0x1b, 0x3c, 0x81, 0x8a, 0xaa, 0x1a, 0x0d, 0xb2, 0x69,
-	0x8a, 0x35, 0x44, 0x7d, 0x1e, 0xcc, 0x73, 0xc4, 0xbc, 0x00, 0x6e, 0xa3, 0xa4, 0x39, 0x70, 0xa1,
-	0xda, 0x7e, 0x2f, 0x78, 0x99, 0xa2, 0x2e, 0x51, 0xf3, 0x44, 0x68, 0xe0, 0xdf, 0x1a, 0xa8, 0x5b,
-	0x7e, 0xde, 0x26, 0x60, 0xc4, 0x96, 0x57, 0x22, 0x97, 0x4a, 0x18, 0x89, 0x03, 0x33, 0x58, 0x0c,
-	0x18, 0x51, 0x49, 0x2e, 0x94, 0x42, 0x63, 0x43, 0x3d, 0xa4, 0x2f, 0x72, 0xcc, 0xd1, 0x4a, 0xde,
-	0xa9, 0xde, 0x5d, 0xbd, 0xa3, 0xde, 0x97, 0xae, 0xd6, 0x47, 0x75, 0x40, 0x16, 0xd0, 0xa7, 0x19,
-	0xa4, 0xb2, 0x14, 0x85, 0xf6, 0x9d, 0x25, 0x59, 0xbb, 0xf1, 0x7d, 0x66, 0x3e, 0x7d, 0x22, 0xb2,
-	0xac, 0x06, 0xad, 0x7d, 0xb2, 0x24, 0x6b, 0x2f, 0xfe, 0x37, 0xae, 0x7e, 0x12, 0xfa, 0x60, 0x19,
-	0xec, 0x19, 0x75, 0x64, 0x66, 0x63, 0x37, 0x76, 0x64, 0xc6, 0x18, 0x75, 0x95, 0x28, 0xc1, 0xb2,
-	0xbc, 0xd8, 0x6a, 0x36, 0xa3, 0x13, 0xdd, 0x96, 0x09, 0x16, 0xfe, 0xd8, 0xba, 0xc3, 0xc4, 0x5e,
-	0x53, 0x57, 0xaa, 0x03, 0xfa, 0xee, 0x72, 0xbc, 0x9e, 0xee, 0x16, 0xd1, 0x7f, 0xf7, 0x89, 0x2c,
-	0x3d, 0xea, 0x2a, 0x7e, 0x50, 0xa6, 0x6e, 0x63, 0xbb, 0x19, 0x7c, 0xa6, 0xde, 0xdd, 0x62, 0xcf,
-	0xe9, 0xf8, 0x04, 0xed, 0x50, 0xad, 0x93, 0xec, 0x15, 0x7d, 0x38, 0x8b, 0xa2, 0xe9, 0x7f, 0x9f,
-	0xee, 0x66, 0x8f, 0x89, 0xdd, 0xeb, 0xb8, 0x5f, 0x7a, 0xeb, 0xbc, 0x21, 0xef, 0x3f, 0xfd, 0xba,
-	0x86, 0xe4, 0x72, 0x0d, 0xc9, 0x9f, 0x6b, 0x48, 0x7e, 0xdc, 0xc2, 0xd1, 0xe5, 0x16, 0x8e, 0x7e,
-	0xdf, 0xc2, 0xd1, 0xd7, 0x7d, 0x2e, 0xcd, 0xb1, 0x49, 0xa2, 0x14, 0x4b, 0x7e, 0x6c, 0x0b, 0xd8,
-	0x18, 0x10, 0x25, 0xef, 0x59, 0x05, 0x68, 0xbd, 0xe9, 0xd8, 0xfc, 0xfb, 0xe0, 0x70, 0xd3, 0x56,
-	0xa0, 0x93, 0x89, 0xbd, 0xf0, 0xfe, 0x6f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x54, 0x17, 0xe9, 0xdc,
-	0x06, 0x02, 0x00, 0x00,
+	// 359 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x4c, 0x91, 0x4d, 0x6e, 0xda, 0x40,
+	0x14, 0xc7, 0x31, 0x35, 0x14, 0x86, 0xaa, 0x6a, 0x47, 0x55, 0x65, 0xac, 0xca, 0xa2, 0xac, 0x50,
+	0x2b, 0x18, 0x21, 0x6e, 0x50, 0x56, 0x2c, 0xba, 0xb1, 0xb2, 0xca, 0x06, 0x8d, 0x3d, 0x0f, 0x33,
+	0x8a, 0x3d, 0xcf, 0xf1, 0x8c, 0xa3, 0xf8, 0x16, 0x39, 0x48, 0x0e, 0x92, 0x25, 0xcb, 0x2c, 0x23,
+	0xb8, 0x48, 0xe4, 0xf1, 0x24, 0xca, 0xee, 0xfd, 0x3f, 0x66, 0xf4, 0xd3, 0x7b, 0x64, 0x9a, 0x54,
+	0x52, 0x64, 0xc0, 0x0a, 0x14, 0x90, 0x6b, 0x66, 0xf0, 0x06, 0xd4, 0xaa, 0xac, 0xd0, 0x20, 0x9d,
+	0xa4, 0x58, 0xc1, 0xaa, 0xcb, 0xc3, 0x69, 0x86, 0x98, 0xe5, 0xc0, 0x6c, 0x94, 0xd4, 0x07, 0xc6,
+	0x55, 0xd3, 0xf5, 0xc2, 0x3f, 0x29, 0xea, 0x02, 0x35, 0x4b, 0xb8, 0x06, 0x76, 0x5b, 0x43, 0xd5,
+	0xb0, 0xbb, 0x75, 0x02, 0x86, 0xaf, 0x59, 0xc9, 0x33, 0xa9, 0xb8, 0x91, 0xe8, 0xfe, 0x0c, 0x7f,
+	0xb9, 0x6f, 0x78, 0x29, 0x19, 0x57, 0x0a, 0x8d, 0x0d, 0xb5, 0x4b, 0x7f, 0x64, 0x98, 0xa1, 0x1d,
+	0x59, 0x3b, 0x75, 0xee, 0xfc, 0xd1, 0x23, 0xe3, 0xab, 0x96, 0x6b, 0xa7, 0x0e, 0x48, 0x03, 0xf2,
+	0x99, 0x0b, 0x51, 0x81, 0xd6, 0x81, 0x37, 0xf3, 0x16, 0xe3, 0xf8, 0x4d, 0xd2, 0x90, 0x8c, 0x04,
+	0xa4, 0xb2, 0xe0, 0xb9, 0x0e, 0xfa, 0x33, 0x6f, 0xe1, 0xc7, 0xef, 0x9a, 0xfe, 0x26, 0x5f, 0x34,
+	0xd6, 0x55, 0x0a, 0xfb, 0xf4, 0xc8, 0xa5, 0x0a, 0x3e, 0xd9, 0xa7, 0x93, 0xce, 0xdb, 0xb6, 0x16,
+	0xfd, 0x4b, 0xbe, 0x0b, 0xd0, 0xc6, 0xf1, 0xba, 0x9e, 0x6f, 0x7b, 0xdf, 0x3e, 0x04, 0x5d, 0x79,
+	0x4a, 0x46, 0x76, 0x55, 0x7b, 0x29, 0x82, 0x41, 0x87, 0x61, 0xf5, 0x4e, 0xcc, 0xb7, 0x64, 0x60,
+	0x69, 0xe9, 0x57, 0xd2, 0x97, 0xc2, 0x42, 0xfa, 0x71, 0x5f, 0x0a, 0x4a, 0x89, 0xaf, 0x78, 0x01,
+	0x96, 0x6d, 0x1c, 0xdb, 0x99, 0xfe, 0x24, 0x43, 0xdd, 0x14, 0x09, 0xe6, 0x8e, 0xc8, 0xa9, 0x7f,
+	0xff, 0x9f, 0xce, 0x91, 0x77, 0x3a, 0x47, 0xde, 0xcb, 0x39, 0xf2, 0x1e, 0x2e, 0x51, 0xef, 0x74,
+	0x89, 0x7a, 0xcf, 0x97, 0xa8, 0x77, 0xbd, 0xc9, 0xa4, 0x39, 0xd6, 0xc9, 0x2a, 0xc5, 0x82, 0x1d,
+	0x9b, 0x1c, 0x96, 0x06, 0x78, 0xc1, 0xba, 0x2b, 0xe5, 0xa0, 0xf5, 0xb2, 0xbd, 0x1a, 0xbb, 0x77,
+	0x0e, 0x33, 0x4d, 0x09, 0x3a, 0x19, 0xda, 0x4d, 0x6e, 0x5e, 0x03, 0x00, 0x00, 0xff, 0xff, 0x66,
+	0xb6, 0x8b, 0x2a, 0xee, 0x01, 0x00, 0x00,
 }
 
 func (m *TokenInfo) Marshal() (dAtA []byte, err error) {
@@ -203,6 +216,27 @@ func (m *TokenInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.TokenId) > 0 {
+		i -= len(m.TokenId)
+		copy(dAtA[i:], m.TokenId)
+		i = encodeVarintToken(dAtA, i, uint64(len(m.TokenId)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.DestinationChain) > 0 {
+		i -= len(m.DestinationChain)
+		copy(dAtA[i:], m.DestinationChain)
+		i = encodeVarintToken(dAtA, i, uint64(len(m.DestinationChain)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.SourceChain) > 0 {
+		i -= len(m.SourceChain)
+		copy(dAtA[i:], m.SourceChain)
+		i = encodeVarintToken(dAtA, i, uint64(len(m.SourceChain)))
+		i--
+		dAtA[i] = 0x1a
+	}
 	if m.Decimals != 0 {
 		i = encodeVarintToken(dAtA, i, uint64(m.Decimals))
 		i--
@@ -238,32 +272,6 @@ func (m *Token) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Info) > 0 {
-		for k := range m.Info {
-			v := m.Info[k]
-			baseI := i
-			if v != nil {
-				{
-					size, err := v.MarshalToSizedBuffer(dAtA[:i])
-					if err != nil {
-						return 0, err
-					}
-					i -= size
-					i = encodeVarintToken(dAtA, i, uint64(size))
-				}
-				i--
-				dAtA[i] = 0x12
-			}
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintToken(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintToken(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x22
-		}
-	}
 	if len(m.Symbol) > 0 {
 		i -= len(m.Symbol)
 		copy(dAtA[i:], m.Symbol)
@@ -310,6 +318,18 @@ func (m *TokenInfo) Size() (n int) {
 	if m.Decimals != 0 {
 		n += 1 + sovToken(uint64(m.Decimals))
 	}
+	l = len(m.SourceChain)
+	if l > 0 {
+		n += 1 + l + sovToken(uint64(l))
+	}
+	l = len(m.DestinationChain)
+	if l > 0 {
+		n += 1 + l + sovToken(uint64(l))
+	}
+	l = len(m.TokenId)
+	if l > 0 {
+		n += 1 + l + sovToken(uint64(l))
+	}
 	return n
 }
 
@@ -329,19 +349,6 @@ func (m *Token) Size() (n int) {
 	l = len(m.Symbol)
 	if l > 0 {
 		n += 1 + l + sovToken(uint64(l))
-	}
-	if len(m.Info) > 0 {
-		for k, v := range m.Info {
-			_ = k
-			_ = v
-			l = 0
-			if v != nil {
-				l = v.Size()
-				l += 1 + sovToken(uint64(l))
-			}
-			mapEntrySize := 1 + len(k) + sovToken(uint64(len(k))) + l
-			n += mapEntrySize + 1 + sovToken(uint64(mapEntrySize))
-		}
 	}
 	return n
 }
@@ -432,6 +439,102 @@ func (m *TokenInfo) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SourceChain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowToken
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthToken
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthToken
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SourceChain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DestinationChain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowToken
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthToken
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthToken
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DestinationChain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowToken
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthToken
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthToken
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TokenId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipToken(dAtA[iNdEx:])
@@ -564,135 +667,6 @@ func (m *Token) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Symbol = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Info", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowToken
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthToken
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthToken
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Info == nil {
-				m.Info = make(map[string]*TokenInfo)
-			}
-			var mapkey string
-			var mapvalue *TokenInfo
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowToken
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowToken
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthToken
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthToken
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var mapmsglen int
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowToken
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						mapmsglen |= int(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					if mapmsglen < 0 {
-						return ErrInvalidLengthToken
-					}
-					postmsgIndex := iNdEx + mapmsglen
-					if postmsgIndex < 0 {
-						return ErrInvalidLengthToken
-					}
-					if postmsgIndex > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapvalue = &TokenInfo{}
-					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
-						return err
-					}
-					iNdEx = postmsgIndex
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipToken(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if (skippy < 0) || (iNdEx+skippy) < 0 {
-						return ErrInvalidLengthToken
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
-			}
-			m.Info[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

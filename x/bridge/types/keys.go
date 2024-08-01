@@ -33,8 +33,8 @@ func KeyToken(id uint64) []byte {
 	return []byte(strconv.FormatInt(int64(id), 10))
 }
 
-func KeyTokenPair(chain, address string) []byte {
-	return []byte(chain + "/" + address)
+func KeyTokenPair(key string) []byte {
+	return []byte(key)
 }
 
 func KeyChain(chain string) []byte {
