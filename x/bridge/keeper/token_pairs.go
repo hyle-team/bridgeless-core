@@ -7,14 +7,24 @@ import (
 	"github.com/hyle-team/bridgeless-core/x/bridge/types"
 )
 
-func (k Keeper) SetTokenPair(sdkCtx sdk.Context, srcChain, dstChain, srcAddress string, pair types.TokenInfo) {
+func (k Keeper) SetTokenInfo(sdkCtx sdk.Context, srcChain, dstChain, srcAddress string, pair types.TokenInfo) error {
+	token, found := k.GetToken(sdkCtx, pair.TokenId)
+	if !found {
+		return types.ErrTokenNotFound
+	}
+
+	token.Info = append(token.Info, pair)
+	k.SetToken(sdkCtx, token)
+
 	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	srcBranchStore := prefix.NewStore(pStore, types.KeyPrefix(fmt.Sprintf("%s-%s", srcChain, srcAddress)))
 
 	srcBranchStore.Set(types.KeyTokenPair(dstChain), k.cdc.MustMarshal(&pair))
+
+	return nil
 }
 
-func (k Keeper) GetTokenPair(sdkCtx sdk.Context, srcChain, dstChain, srcAddress string) (info types.TokenInfo, found bool) {
+func (k Keeper) GetTokenInfo(sdkCtx sdk.Context, srcChain, dstChain, srcAddress string) (info types.TokenInfo, found bool) {
 	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	srcBranchStore := prefix.NewStore(pStore, types.KeyPrefix(fmt.Sprintf("%s-%s", srcChain, srcAddress)))
 
@@ -27,7 +37,17 @@ func (k Keeper) GetTokenPair(sdkCtx sdk.Context, srcChain, dstChain, srcAddress 
 	return info, true
 }
 
-func (k Keeper) GetTokenPairs(ctx sdk.Context) (list []types.TokenInfo) {
+func (k Keeper) GetBaseTokenInfo(sdkCtx sdk.Context, tokenId uint64) types.Token {
+	token, found := k.GetToken(sdkCtx, tokenId)
+	if !found {
+		return token
+	}
+
+	token.Info = make([]types.TokenInfo, 0)
+	return token
+}
+
+func (k Keeper) GetTokenPairsByTokenId(ctx sdk.Context) (list []types.TokenInfo) {
 	pStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	iterator := sdk.KVStorePrefixIterator(pStore, []byte{})
 
@@ -42,9 +62,29 @@ func (k Keeper) GetTokenPairs(ctx sdk.Context) (list []types.TokenInfo) {
 	return
 }
 
-func (k Keeper) RemoveTokenPair(sdkCtx sdk.Context, srcChain, srcAddress, dstChain string) {
+func (k Keeper) RemoveTokenPair(sdkCtx sdk.Context, srcChain, srcAddress, dstChain string) error {
 	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	srcBranchStore := prefix.NewStore(pStore, types.KeyPrefix(fmt.Sprintf("%s-%s", srcChain, srcAddress)))
 
+	pair, found := k.GetTokenInfo(sdkCtx, srcChain, dstChain, srcAddress)
+	if !found {
+		return types.ErrTokenPairsNotFound
+	}
+
+	token, found := k.GetToken(sdkCtx, pair.TokenId)
+	if !found {
+		return types.ErrTokenNotFound
+	}
+
+	for id, tokenInfo := range token.Info {
+		if tokenInfo.Address == pair.Address && tokenInfo.DestinationChain == dstChain {
+			token.Info = append(token.Info[:id], token.Info[id+1:]...)
+		}
+	}
+
+	k.SetToken(sdkCtx, token)
+
 	srcBranchStore.Delete(types.KeyTokenPair(dstChain))
+
+	return nil
 }

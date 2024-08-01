@@ -119,23 +119,23 @@ func (m *MsgSubmitTransactionResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgSubmitTransactionResponse proto.InternalMessageInfo
 
-type MsgSetToken struct {
+type MsgInsertToken struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Token   *Token `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 }
 
-func (m *MsgSetToken) Reset()         { *m = MsgSetToken{} }
-func (m *MsgSetToken) String() string { return proto.CompactTextString(m) }
-func (*MsgSetToken) ProtoMessage()    {}
-func (*MsgSetToken) Descriptor() ([]byte, []int) {
+func (m *MsgInsertToken) Reset()         { *m = MsgInsertToken{} }
+func (m *MsgInsertToken) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertToken) ProtoMessage()    {}
+func (*MsgInsertToken) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{2}
 }
-func (m *MsgSetToken) XXX_Unmarshal(b []byte) error {
+func (m *MsgInsertToken) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgInsertToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetToken.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgInsertToken.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -145,47 +145,47 @@ func (m *MsgSetToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *MsgSetToken) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetToken.Merge(m, src)
+func (m *MsgInsertToken) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertToken.Merge(m, src)
 }
-func (m *MsgSetToken) XXX_Size() int {
+func (m *MsgInsertToken) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetToken) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetToken.DiscardUnknown(m)
+func (m *MsgInsertToken) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertToken.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetToken proto.InternalMessageInfo
+var xxx_messageInfo_MsgInsertToken proto.InternalMessageInfo
 
-func (m *MsgSetToken) GetCreator() string {
+func (m *MsgInsertToken) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetToken) GetToken() *Token {
+func (m *MsgInsertToken) GetToken() *Token {
 	if m != nil {
 		return m.Token
 	}
 	return nil
 }
 
-type MsgSetTokenResponse struct {
+type MsgInsertTokenResponse struct {
 }
 
-func (m *MsgSetTokenResponse) Reset()         { *m = MsgSetTokenResponse{} }
-func (m *MsgSetTokenResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgSetTokenResponse) ProtoMessage()    {}
-func (*MsgSetTokenResponse) Descriptor() ([]byte, []int) {
+func (m *MsgInsertTokenResponse) Reset()         { *m = MsgInsertTokenResponse{} }
+func (m *MsgInsertTokenResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertTokenResponse) ProtoMessage()    {}
+func (*MsgInsertTokenResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{3}
 }
-func (m *MsgSetTokenResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgInsertTokenResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgInsertTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetTokenResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgInsertTokenResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -195,35 +195,37 @@ func (m *MsgSetTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgSetTokenResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetTokenResponse.Merge(m, src)
+func (m *MsgInsertTokenResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertTokenResponse.Merge(m, src)
 }
-func (m *MsgSetTokenResponse) XXX_Size() int {
+func (m *MsgInsertTokenResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetTokenResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetTokenResponse.DiscardUnknown(m)
+func (m *MsgInsertTokenResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertTokenResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetTokenResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgInsertTokenResponse proto.InternalMessageInfo
 
-type MsgRemoveToken struct {
+type MsgUpdateToken struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	TokenId uint64 `protobuf:"varint,2,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Symbol  string `protobuf:"bytes,3,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	TokenId uint64 `protobuf:"varint,4,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
 }
 
-func (m *MsgRemoveToken) Reset()         { *m = MsgRemoveToken{} }
-func (m *MsgRemoveToken) String() string { return proto.CompactTextString(m) }
-func (*MsgRemoveToken) ProtoMessage()    {}
-func (*MsgRemoveToken) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateToken) Reset()         { *m = MsgUpdateToken{} }
+func (m *MsgUpdateToken) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateToken) ProtoMessage()    {}
+func (*MsgUpdateToken) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{4}
 }
-func (m *MsgRemoveToken) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateToken) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgRemoveToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgRemoveToken.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateToken.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -233,47 +235,61 @@ func (m *MsgRemoveToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *MsgRemoveToken) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemoveToken.Merge(m, src)
+func (m *MsgUpdateToken) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateToken.Merge(m, src)
 }
-func (m *MsgRemoveToken) XXX_Size() int {
+func (m *MsgUpdateToken) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgRemoveToken) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemoveToken.DiscardUnknown(m)
+func (m *MsgUpdateToken) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateToken.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgRemoveToken proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateToken proto.InternalMessageInfo
 
-func (m *MsgRemoveToken) GetCreator() string {
+func (m *MsgUpdateToken) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgRemoveToken) GetTokenId() uint64 {
+func (m *MsgUpdateToken) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *MsgUpdateToken) GetSymbol() string {
+	if m != nil {
+		return m.Symbol
+	}
+	return ""
+}
+
+func (m *MsgUpdateToken) GetTokenId() uint64 {
 	if m != nil {
 		return m.TokenId
 	}
 	return 0
 }
 
-type MsgRemoveTokenResponse struct {
+type MsgUpdateTokenResponse struct {
 }
 
-func (m *MsgRemoveTokenResponse) Reset()         { *m = MsgRemoveTokenResponse{} }
-func (m *MsgRemoveTokenResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgRemoveTokenResponse) ProtoMessage()    {}
-func (*MsgRemoveTokenResponse) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateTokenResponse) Reset()         { *m = MsgUpdateTokenResponse{} }
+func (m *MsgUpdateTokenResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateTokenResponse) ProtoMessage()    {}
+func (*MsgUpdateTokenResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{5}
 }
-func (m *MsgRemoveTokenResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateTokenResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgRemoveTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgRemoveTokenResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateTokenResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -283,35 +299,35 @@ func (m *MsgRemoveTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgRemoveTokenResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemoveTokenResponse.Merge(m, src)
+func (m *MsgUpdateTokenResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateTokenResponse.Merge(m, src)
 }
-func (m *MsgRemoveTokenResponse) XXX_Size() int {
+func (m *MsgUpdateTokenResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgRemoveTokenResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemoveTokenResponse.DiscardUnknown(m)
+func (m *MsgUpdateTokenResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateTokenResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgRemoveTokenResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateTokenResponse proto.InternalMessageInfo
 
-type MsgSetChain struct {
+type MsgDeleteToken struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Chain   *Chain `protobuf:"bytes,2,opt,name=chain,proto3" json:"chain,omitempty"`
+	TokenId uint64 `protobuf:"varint,2,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
 }
 
-func (m *MsgSetChain) Reset()         { *m = MsgSetChain{} }
-func (m *MsgSetChain) String() string { return proto.CompactTextString(m) }
-func (*MsgSetChain) ProtoMessage()    {}
-func (*MsgSetChain) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteToken) Reset()         { *m = MsgDeleteToken{} }
+func (m *MsgDeleteToken) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteToken) ProtoMessage()    {}
+func (*MsgDeleteToken) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{6}
 }
-func (m *MsgSetChain) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteToken) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetChain.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteToken.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -321,47 +337,135 @@ func (m *MsgSetChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *MsgSetChain) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetChain.Merge(m, src)
+func (m *MsgDeleteToken) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteToken.Merge(m, src)
 }
-func (m *MsgSetChain) XXX_Size() int {
+func (m *MsgDeleteToken) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetChain) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetChain.DiscardUnknown(m)
+func (m *MsgDeleteToken) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteToken.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetChain proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteToken proto.InternalMessageInfo
 
-func (m *MsgSetChain) GetCreator() string {
+func (m *MsgDeleteToken) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetChain) GetChain() *Chain {
+func (m *MsgDeleteToken) GetTokenId() uint64 {
+	if m != nil {
+		return m.TokenId
+	}
+	return 0
+}
+
+type MsgDeleteTokenResponse struct {
+}
+
+func (m *MsgDeleteTokenResponse) Reset()         { *m = MsgDeleteTokenResponse{} }
+func (m *MsgDeleteTokenResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteTokenResponse) ProtoMessage()    {}
+func (*MsgDeleteTokenResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{7}
+}
+func (m *MsgDeleteTokenResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgDeleteTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgDeleteTokenResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgDeleteTokenResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteTokenResponse.Merge(m, src)
+}
+func (m *MsgDeleteTokenResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgDeleteTokenResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteTokenResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgDeleteTokenResponse proto.InternalMessageInfo
+
+type MsgInsertChain struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Chain   *Chain `protobuf:"bytes,2,opt,name=chain,proto3" json:"chain,omitempty"`
+}
+
+func (m *MsgInsertChain) Reset()         { *m = MsgInsertChain{} }
+func (m *MsgInsertChain) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertChain) ProtoMessage()    {}
+func (*MsgInsertChain) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{8}
+}
+func (m *MsgInsertChain) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgInsertChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgInsertChain.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgInsertChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertChain.Merge(m, src)
+}
+func (m *MsgInsertChain) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgInsertChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertChain.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgInsertChain proto.InternalMessageInfo
+
+func (m *MsgInsertChain) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgInsertChain) GetChain() *Chain {
 	if m != nil {
 		return m.Chain
 	}
 	return nil
 }
 
-type MsgSetChainResponse struct {
+type MsgInsertChainResponse struct {
 }
 
-func (m *MsgSetChainResponse) Reset()         { *m = MsgSetChainResponse{} }
-func (m *MsgSetChainResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgSetChainResponse) ProtoMessage()    {}
-func (*MsgSetChainResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{7}
+func (m *MsgInsertChainResponse) Reset()         { *m = MsgInsertChainResponse{} }
+func (m *MsgInsertChainResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgInsertChainResponse) ProtoMessage()    {}
+func (*MsgInsertChainResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{9}
 }
-func (m *MsgSetChainResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgInsertChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgInsertChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetChainResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgInsertChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -371,35 +475,35 @@ func (m *MsgSetChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgSetChainResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetChainResponse.Merge(m, src)
+func (m *MsgInsertChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgInsertChainResponse.Merge(m, src)
 }
-func (m *MsgSetChainResponse) XXX_Size() int {
+func (m *MsgInsertChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetChainResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetChainResponse.DiscardUnknown(m)
+func (m *MsgInsertChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgInsertChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetChainResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgInsertChainResponse proto.InternalMessageInfo
 
-type MsgRemoveChain struct {
+type MsgDeleteChain struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ChainId string `protobuf:"bytes,2,opt,name=chain_id,json=chainId,proto3" json:"chain_id,omitempty"`
 }
 
-func (m *MsgRemoveChain) Reset()         { *m = MsgRemoveChain{} }
-func (m *MsgRemoveChain) String() string { return proto.CompactTextString(m) }
-func (*MsgRemoveChain) ProtoMessage()    {}
-func (*MsgRemoveChain) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{8}
+func (m *MsgDeleteChain) Reset()         { *m = MsgDeleteChain{} }
+func (m *MsgDeleteChain) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteChain) ProtoMessage()    {}
+func (*MsgDeleteChain) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{10}
 }
-func (m *MsgRemoveChain) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteChain) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgRemoveChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgRemoveChain.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteChain.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -409,151 +513,47 @@ func (m *MsgRemoveChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *MsgRemoveChain) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemoveChain.Merge(m, src)
+func (m *MsgDeleteChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteChain.Merge(m, src)
 }
-func (m *MsgRemoveChain) XXX_Size() int {
+func (m *MsgDeleteChain) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgRemoveChain) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemoveChain.DiscardUnknown(m)
+func (m *MsgDeleteChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteChain.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgRemoveChain proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteChain proto.InternalMessageInfo
 
-func (m *MsgRemoveChain) GetCreator() string {
+func (m *MsgDeleteChain) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgRemoveChain) GetChainId() string {
+func (m *MsgDeleteChain) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-type MsgRemoveChainResponse struct {
+type MsgDeleteChainResponse struct {
 }
 
-func (m *MsgRemoveChainResponse) Reset()         { *m = MsgRemoveChainResponse{} }
-func (m *MsgRemoveChainResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgRemoveChainResponse) ProtoMessage()    {}
-func (*MsgRemoveChainResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{9}
-}
-func (m *MsgRemoveChainResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgRemoveChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgRemoveChainResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgRemoveChainResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemoveChainResponse.Merge(m, src)
-}
-func (m *MsgRemoveChainResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgRemoveChainResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemoveChainResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgRemoveChainResponse proto.InternalMessageInfo
-
-type MsgRemovePair struct {
-	Creator  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	SrcChain string `protobuf:"bytes,2,opt,name=src_chain,json=srcChain,proto3" json:"src_chain,omitempty"`
-	DstChain string `protobuf:"bytes,3,opt,name=dst_chain,json=dstChain,proto3" json:"dst_chain,omitempty"`
-	Address  string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
-}
-
-func (m *MsgRemovePair) Reset()         { *m = MsgRemovePair{} }
-func (m *MsgRemovePair) String() string { return proto.CompactTextString(m) }
-func (*MsgRemovePair) ProtoMessage()    {}
-func (*MsgRemovePair) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{10}
-}
-func (m *MsgRemovePair) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgRemovePair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgRemovePair.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgRemovePair) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemovePair.Merge(m, src)
-}
-func (m *MsgRemovePair) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgRemovePair) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemovePair.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgRemovePair proto.InternalMessageInfo
-
-func (m *MsgRemovePair) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgRemovePair) GetSrcChain() string {
-	if m != nil {
-		return m.SrcChain
-	}
-	return ""
-}
-
-func (m *MsgRemovePair) GetDstChain() string {
-	if m != nil {
-		return m.DstChain
-	}
-	return ""
-}
-
-func (m *MsgRemovePair) GetAddress() string {
-	if m != nil {
-		return m.Address
-	}
-	return ""
-}
-
-type MsgRemovePairResponse struct {
-}
-
-func (m *MsgRemovePairResponse) Reset()         { *m = MsgRemovePairResponse{} }
-func (m *MsgRemovePairResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgRemovePairResponse) ProtoMessage()    {}
-func (*MsgRemovePairResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteChainResponse) Reset()         { *m = MsgDeleteChainResponse{} }
+func (m *MsgDeleteChainResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteChainResponse) ProtoMessage()    {}
+func (*MsgDeleteChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{11}
 }
-func (m *MsgRemovePairResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgRemovePairResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgRemovePairResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -563,17 +563,17 @@ func (m *MsgRemovePairResponse) XXX_Marshal(b []byte, deterministic bool) ([]byt
 		return b[:n], nil
 	}
 }
-func (m *MsgRemovePairResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgRemovePairResponse.Merge(m, src)
+func (m *MsgDeleteChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteChainResponse.Merge(m, src)
 }
-func (m *MsgRemovePairResponse) XXX_Size() int {
+func (m *MsgDeleteChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgRemovePairResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgRemovePairResponse.DiscardUnknown(m)
+func (m *MsgDeleteChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgRemovePairResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteChainResponse proto.InternalMessageInfo
 
 type MsgSetPair struct {
 	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
@@ -663,68 +663,278 @@ func (m *MsgSetPairResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgSetPairResponse proto.InternalMessageInfo
 
+type MsgRemovePairByPath struct {
+	Creator  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	SrcChain string `protobuf:"bytes,2,opt,name=src_chain,json=srcChain,proto3" json:"src_chain,omitempty"`
+	DstChain string `protobuf:"bytes,3,opt,name=dst_chain,json=dstChain,proto3" json:"dst_chain,omitempty"`
+	Address  string `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *MsgRemovePairByPath) Reset()         { *m = MsgRemovePairByPath{} }
+func (m *MsgRemovePairByPath) String() string { return proto.CompactTextString(m) }
+func (*MsgRemovePairByPath) ProtoMessage()    {}
+func (*MsgRemovePairByPath) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{14}
+}
+func (m *MsgRemovePairByPath) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRemovePairByPath) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRemovePairByPath.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRemovePairByPath) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemovePairByPath.Merge(m, src)
+}
+func (m *MsgRemovePairByPath) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRemovePairByPath) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemovePairByPath.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRemovePairByPath proto.InternalMessageInfo
+
+func (m *MsgRemovePairByPath) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgRemovePairByPath) GetSrcChain() string {
+	if m != nil {
+		return m.SrcChain
+	}
+	return ""
+}
+
+func (m *MsgRemovePairByPath) GetDstChain() string {
+	if m != nil {
+		return m.DstChain
+	}
+	return ""
+}
+
+func (m *MsgRemovePairByPath) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type MsgRemovePairByPathResponse struct {
+}
+
+func (m *MsgRemovePairByPathResponse) Reset()         { *m = MsgRemovePairByPathResponse{} }
+func (m *MsgRemovePairByPathResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgRemovePairByPathResponse) ProtoMessage()    {}
+func (*MsgRemovePairByPathResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{15}
+}
+func (m *MsgRemovePairByPathResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRemovePairByPathResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRemovePairByPathResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRemovePairByPathResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemovePairByPathResponse.Merge(m, src)
+}
+func (m *MsgRemovePairByPathResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRemovePairByPathResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemovePairByPathResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRemovePairByPathResponse proto.InternalMessageInfo
+
+type MsgRemovePairById struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	TokenId uint64 `protobuf:"varint,2,opt,name=token_id,json=tokenId,proto3" json:"token_id,omitempty"`
+	ChainId string `protobuf:"bytes,3,opt,name=chain_id,json=chainId,proto3" json:"chain_id,omitempty"`
+}
+
+func (m *MsgRemovePairById) Reset()         { *m = MsgRemovePairById{} }
+func (m *MsgRemovePairById) String() string { return proto.CompactTextString(m) }
+func (*MsgRemovePairById) ProtoMessage()    {}
+func (*MsgRemovePairById) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{16}
+}
+func (m *MsgRemovePairById) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRemovePairById) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRemovePairById.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRemovePairById) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemovePairById.Merge(m, src)
+}
+func (m *MsgRemovePairById) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRemovePairById) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemovePairById.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRemovePairById proto.InternalMessageInfo
+
+func (m *MsgRemovePairById) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgRemovePairById) GetTokenId() uint64 {
+	if m != nil {
+		return m.TokenId
+	}
+	return 0
+}
+
+func (m *MsgRemovePairById) GetChainId() string {
+	if m != nil {
+		return m.ChainId
+	}
+	return ""
+}
+
+type MsgRemovePairByIdResponse struct {
+}
+
+func (m *MsgRemovePairByIdResponse) Reset()         { *m = MsgRemovePairByIdResponse{} }
+func (m *MsgRemovePairByIdResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgRemovePairByIdResponse) ProtoMessage()    {}
+func (*MsgRemovePairByIdResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_41dc2e30e6049cae, []int{17}
+}
+func (m *MsgRemovePairByIdResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRemovePairByIdResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRemovePairByIdResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRemovePairByIdResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRemovePairByIdResponse.Merge(m, src)
+}
+func (m *MsgRemovePairByIdResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRemovePairByIdResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRemovePairByIdResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRemovePairByIdResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgSubmitTransaction)(nil), "core.bridge.MsgSubmitTransaction")
 	proto.RegisterType((*MsgSubmitTransactionResponse)(nil), "core.bridge.MsgSubmitTransactionResponse")
-	proto.RegisterType((*MsgSetToken)(nil), "core.bridge.MsgSetToken")
-	proto.RegisterType((*MsgSetTokenResponse)(nil), "core.bridge.MsgSetTokenResponse")
-	proto.RegisterType((*MsgRemoveToken)(nil), "core.bridge.MsgRemoveToken")
-	proto.RegisterType((*MsgRemoveTokenResponse)(nil), "core.bridge.MsgRemoveTokenResponse")
-	proto.RegisterType((*MsgSetChain)(nil), "core.bridge.MsgSetChain")
-	proto.RegisterType((*MsgSetChainResponse)(nil), "core.bridge.MsgSetChainResponse")
-	proto.RegisterType((*MsgRemoveChain)(nil), "core.bridge.MsgRemoveChain")
-	proto.RegisterType((*MsgRemoveChainResponse)(nil), "core.bridge.MsgRemoveChainResponse")
-	proto.RegisterType((*MsgRemovePair)(nil), "core.bridge.MsgRemovePair")
-	proto.RegisterType((*MsgRemovePairResponse)(nil), "core.bridge.MsgRemovePairResponse")
+	proto.RegisterType((*MsgInsertToken)(nil), "core.bridge.MsgInsertToken")
+	proto.RegisterType((*MsgInsertTokenResponse)(nil), "core.bridge.MsgInsertTokenResponse")
+	proto.RegisterType((*MsgUpdateToken)(nil), "core.bridge.MsgUpdateToken")
+	proto.RegisterType((*MsgUpdateTokenResponse)(nil), "core.bridge.MsgUpdateTokenResponse")
+	proto.RegisterType((*MsgDeleteToken)(nil), "core.bridge.MsgDeleteToken")
+	proto.RegisterType((*MsgDeleteTokenResponse)(nil), "core.bridge.MsgDeleteTokenResponse")
+	proto.RegisterType((*MsgInsertChain)(nil), "core.bridge.MsgInsertChain")
+	proto.RegisterType((*MsgInsertChainResponse)(nil), "core.bridge.MsgInsertChainResponse")
+	proto.RegisterType((*MsgDeleteChain)(nil), "core.bridge.MsgDeleteChain")
+	proto.RegisterType((*MsgDeleteChainResponse)(nil), "core.bridge.MsgDeleteChainResponse")
 	proto.RegisterType((*MsgSetPair)(nil), "core.bridge.MsgSetPair")
 	proto.RegisterType((*MsgSetPairResponse)(nil), "core.bridge.MsgSetPairResponse")
+	proto.RegisterType((*MsgRemovePairByPath)(nil), "core.bridge.MsgRemovePairByPath")
+	proto.RegisterType((*MsgRemovePairByPathResponse)(nil), "core.bridge.MsgRemovePairByPathResponse")
+	proto.RegisterType((*MsgRemovePairById)(nil), "core.bridge.MsgRemovePairById")
+	proto.RegisterType((*MsgRemovePairByIdResponse)(nil), "core.bridge.MsgRemovePairByIdResponse")
 }
 
 func init() { proto.RegisterFile("bridge/tx.proto", fileDescriptor_41dc2e30e6049cae) }
 
 var fileDescriptor_41dc2e30e6049cae = []byte{
-	// 652 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x55, 0xcf, 0x6e, 0xd3, 0x4e,
-	0x10, 0x8e, 0x7f, 0xcd, 0x8f, 0x36, 0x13, 0xd1, 0xaa, 0x26, 0x6d, 0x5d, 0x17, 0xb9, 0xc5, 0xbd,
-	0x14, 0xa4, 0xc6, 0xd0, 0x4a, 0x1c, 0x38, 0xd1, 0x22, 0x84, 0x7a, 0x88, 0x28, 0x4e, 0x91, 0x10,
-	0x97, 0xca, 0xb1, 0x17, 0xc7, 0x22, 0xf6, 0x46, 0xbb, 0xdb, 0xaa, 0x3d, 0x70, 0xe1, 0x09, 0x78,
-	0x04, 0x1e, 0x81, 0x03, 0x0f, 0xd1, 0x1b, 0x15, 0x27, 0x4e, 0x08, 0x25, 0x07, 0x5e, 0x03, 0x79,
-	0x77, 0xfd, 0x2f, 0xb1, 0x93, 0x53, 0xb2, 0xfb, 0xcd, 0x7c, 0xf3, 0x7d, 0x33, 0xb3, 0x32, 0xac,
-	0xf4, 0x48, 0xe0, 0xf9, 0xc8, 0x62, 0x57, 0xed, 0x21, 0xc1, 0x0c, 0xab, 0x4d, 0x17, 0x13, 0xd4,
-	0x16, 0xb7, 0xfa, 0x86, 0x8b, 0x69, 0x88, 0xa9, 0x15, 0x52, 0xdf, 0xba, 0x7c, 0x12, 0xff, 0x88,
-	0x28, 0x7d, 0x5b, 0xa6, 0x85, 0xd8, 0x43, 0x03, 0x6a, 0x31, 0xe2, 0x44, 0xd4, 0x71, 0x59, 0x80,
-	0x23, 0x19, 0xb0, 0x39, 0x11, 0x80, 0x3f, 0xa2, 0x0a, 0xc8, 0xed, 0x3b, 0x41, 0x02, 0xb5, 0x7c,
-	0xec, 0x63, 0xfe, 0xd7, 0x8a, 0xff, 0x25, 0x09, 0x42, 0xc5, 0xb9, 0x00, 0xc4, 0x41, 0x40, 0xe6,
-	0x57, 0x05, 0x5a, 0x1d, 0xea, 0x77, 0x2f, 0x7a, 0x61, 0xc0, 0xce, 0x32, 0x15, 0xea, 0x53, 0x68,
-	0x50, 0x7e, 0xc9, 0x10, 0xd1, 0x94, 0x1d, 0x65, 0xaf, 0x71, 0xac, 0xfd, 0xfc, 0xbe, 0xdf, 0x92,
-	0xd9, 0x47, 0x9e, 0x47, 0x10, 0xa5, 0x5d, 0x46, 0x82, 0xc8, 0xb7, 0xb3, 0x50, 0xf5, 0x39, 0x34,
-	0x73, 0x66, 0xb4, 0xff, 0x76, 0x94, 0xbd, 0xe6, 0x81, 0xd6, 0xce, 0x35, 0xa5, 0x9d, 0x2b, 0x73,
-	0x5c, 0xbf, 0xf9, 0xbd, 0x5d, 0xb3, 0xf3, 0x29, 0xcf, 0x96, 0x3f, 0xff, 0xfd, 0xf6, 0x28, 0x63,
-	0x34, 0x0d, 0xb8, 0x5f, 0xa6, 0xd0, 0x46, 0x74, 0x88, 0x23, 0x8a, 0xcc, 0x37, 0xd0, 0x8c, 0x71,
-	0xc4, 0xce, 0xe2, 0x1e, 0xa9, 0x1a, 0x2c, 0xba, 0x04, 0x39, 0x0c, 0x4b, 0xd9, 0x76, 0x72, 0x54,
-	0xf7, 0xe0, 0x7f, 0xde, 0x46, 0x29, 0x4a, 0x2d, 0x8a, 0x8a, 0x11, 0x5b, 0x04, 0x98, 0x6b, 0x70,
-	0x2f, 0x47, 0x99, 0x56, 0x7a, 0x09, 0xcb, 0x1d, 0xea, 0xdb, 0x28, 0xc4, 0x97, 0x68, 0x5e, 0xb1,
-	0x4d, 0x58, 0xe2, 0x5c, 0xe7, 0x81, 0xc7, 0xeb, 0xd5, 0xed, 0x45, 0x7e, 0x3e, 0xf1, 0x4c, 0x0d,
-	0xd6, 0x8b, 0x34, 0xd3, 0x56, 0x5e, 0xc4, 0x33, 0x9d, 0x6d, 0x85, 0x8f, 0xbd, 0xd4, 0x0a, 0x4f,
-	0xb6, 0x45, 0x40, 0x66, 0x45, 0xdc, 0x96, 0x59, 0x99, 0x57, 0x6c, 0x13, 0x96, 0x38, 0x57, 0x62,
-	0x25, 0x86, 0xe2, 0xf3, 0x84, 0x95, 0x62, 0x81, 0x4f, 0x70, 0x37, 0x45, 0x4e, 0x9d, 0x80, 0xcc,
-	0xe0, 0xdf, 0x82, 0x06, 0x25, 0xee, 0x79, 0x66, 0xa8, 0x61, 0x2f, 0x51, 0xe2, 0x0a, 0x59, 0x5b,
-	0xd0, 0xf0, 0x28, 0x93, 0xe0, 0x82, 0x00, 0x3d, 0x9a, 0x35, 0xc8, 0x11, 0x8b, 0xa8, 0xd5, 0x05,
-	0xa7, 0x3c, 0x9a, 0x1b, 0xb0, 0x56, 0x28, 0x9f, 0xea, 0x7a, 0x07, 0x20, 0xfa, 0x31, 0x47, 0xd4,
-	0x63, 0xa8, 0x0f, 0x9d, 0x80, 0xc8, 0x06, 0xaf, 0x4f, 0xef, 0xca, 0x49, 0xf4, 0x01, 0xcb, 0xf5,
-	0xe5, 0x91, 0x66, 0x0b, 0xd4, 0x8c, 0x39, 0xa9, 0x77, 0xf0, 0xa3, 0x0e, 0x0b, 0x1d, 0xea, 0xab,
-	0x0e, 0xac, 0x4e, 0x3f, 0xb2, 0x07, 0x05, 0xda, 0xb2, 0x2d, 0xd7, 0x1f, 0xce, 0x0d, 0x49, 0x4a,
-	0xa9, 0xaf, 0x61, 0xb5, 0x8b, 0xd8, 0x51, 0xe4, 0xbd, 0x1d, 0x7a, 0x0e, 0x4b, 0xc6, 0x3a, 0x95,
-	0x2f, 0x57, 0x41, 0xdf, 0xa9, 0x42, 0x52, 0xc2, 0x2e, 0xac, 0xe4, 0x46, 0x1b, 0x1b, 0x56, 0xb7,
-	0x26, 0x93, 0x72, 0x01, 0xfa, 0xee, 0x0c, 0xb0, 0x4a, 0xa5, 0x7c, 0x47, 0x25, 0x5a, 0x38, 0x52,
-	0xaa, 0xb2, 0xf0, 0x68, 0x32, 0x95, 0xe9, 0x58, 0xaa, 0x54, 0x0a, 0xc6, 0xdd, 0x19, 0x60, 0x4a,
-	0x7a, 0x0a, 0xcb, 0xd9, 0xf2, 0x70, 0x4e, 0xbd, 0x3c, 0x2d, 0xc6, 0x75, 0xb3, 0x1a, 0x4b, 0x19,
-	0x5f, 0x41, 0x53, 0xee, 0x06, 0xa7, 0xdb, 0x28, 0xf1, 0xc5, 0xb9, 0xb6, 0x2b, 0x80, 0x84, 0xe8,
-	0xb8, 0x73, 0x33, 0x32, 0x94, 0xdb, 0x91, 0xa1, 0xfc, 0x19, 0x19, 0xca, 0x97, 0xb1, 0x51, 0xbb,
-	0x1d, 0x1b, 0xb5, 0x5f, 0x63, 0xa3, 0xf6, 0xfe, 0xd0, 0x0f, 0x58, 0xff, 0xa2, 0xd7, 0x76, 0x71,
-	0x68, 0xf5, 0xaf, 0x07, 0x68, 0x9f, 0x21, 0x27, 0xb4, 0x04, 0xd3, 0x00, 0x51, 0xba, 0x1f, 0x33,
-	0x5b, 0x57, 0x56, 0xf2, 0xc9, 0xba, 0x1e, 0x22, 0xda, 0xbb, 0xc3, 0x3f, 0x04, 0x87, 0xff, 0x02,
-	0x00, 0x00, 0xff, 0xff, 0xb9, 0x77, 0xbc, 0xca, 0xc9, 0x06, 0x00, 0x00,
+	// 749 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x56, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0x8d, 0xdb, 0xd0, 0x26, 0x13, 0x29, 0x50, 0x13, 0xb5, 0x4e, 0x02, 0x6e, 0x08, 0x12, 0x0a,
+	0x48, 0x8d, 0xa1, 0x95, 0x38, 0x70, 0x82, 0x00, 0x87, 0x20, 0x45, 0x54, 0x6e, 0x91, 0x2a, 0x0e,
+	0x54, 0x8e, 0xbd, 0x38, 0x16, 0x71, 0x36, 0x78, 0xb7, 0x55, 0x73, 0xa5, 0x3f, 0xc0, 0x27, 0xf0,
+	0x09, 0x1c, 0xf8, 0x88, 0x1e, 0x2b, 0x4e, 0x9c, 0x10, 0x6a, 0x0f, 0xfc, 0x06, 0xda, 0x5d, 0x3b,
+	0x5e, 0xc7, 0x4e, 0x22, 0x71, 0xaa, 0x77, 0xdf, 0xcc, 0x7b, 0x6f, 0x66, 0x67, 0xb7, 0x81, 0x9b,
+	0xfd, 0xc0, 0x73, 0x5c, 0x64, 0xd0, 0xb3, 0xf6, 0x38, 0xc0, 0x14, 0xab, 0x25, 0x1b, 0x07, 0xa8,
+	0x2d, 0x76, 0x6b, 0x5b, 0x36, 0x26, 0x3e, 0x26, 0x86, 0x4f, 0x5c, 0xe3, 0xf4, 0x09, 0xfb, 0x23,
+	0xa2, 0x6a, 0xdb, 0x61, 0x9a, 0x8f, 0x1d, 0x34, 0x24, 0x06, 0x0d, 0xac, 0x11, 0xb1, 0x6c, 0xea,
+	0xe1, 0x51, 0x18, 0x50, 0x9d, 0x09, 0xc0, 0x9f, 0xd0, 0x1c, 0xc8, 0x1e, 0x58, 0x5e, 0x04, 0x55,
+	0x5c, 0xec, 0x62, 0xfe, 0x69, 0xb0, 0xaf, 0x28, 0x41, 0xb8, 0x38, 0x16, 0x80, 0x58, 0x08, 0xa8,
+	0xf9, 0x4d, 0x81, 0x4a, 0x8f, 0xb8, 0x07, 0x27, 0x7d, 0xdf, 0xa3, 0x87, 0xb1, 0x0b, 0xf5, 0x29,
+	0x14, 0x09, 0xdf, 0xa4, 0x28, 0xd0, 0x94, 0x86, 0xd2, 0x2a, 0x76, 0xb4, 0x9f, 0x3f, 0x76, 0x2a,
+	0x61, 0xf6, 0x0b, 0xc7, 0x09, 0x10, 0x21, 0x07, 0x34, 0xf0, 0x46, 0xae, 0x19, 0x87, 0xaa, 0xcf,
+	0xa1, 0x24, 0x15, 0xa3, 0xad, 0x34, 0x94, 0x56, 0x69, 0x57, 0x6b, 0x4b, 0x4d, 0x69, 0x4b, 0x32,
+	0x9d, 0xfc, 0xc5, 0xef, 0xed, 0x9c, 0x29, 0xa7, 0x3c, 0x2b, 0x7f, 0xf9, 0xfb, 0xfd, 0x51, 0xcc,
+	0xd8, 0xd4, 0xe1, 0x4e, 0x96, 0x43, 0x13, 0x91, 0x31, 0x1e, 0x11, 0xd4, 0x3c, 0x84, 0x72, 0x8f,
+	0xb8, 0xdd, 0x11, 0x41, 0x01, 0x3d, 0x64, 0x6d, 0x52, 0x35, 0x58, 0xb7, 0x03, 0x64, 0x51, 0x1c,
+	0x3a, 0x37, 0xa3, 0xa5, 0xda, 0x82, 0x1b, 0xbc, 0x93, 0xa1, 0x2f, 0x35, 0xe9, 0x8b, 0x21, 0xa6,
+	0x08, 0x68, 0x6a, 0xb0, 0x99, 0x64, 0x9d, 0xea, 0x7d, 0xe6, 0x7a, 0xef, 0xc6, 0x8e, 0x45, 0xd1,
+	0x32, 0x3d, 0x15, 0xf2, 0x23, 0xcb, 0x47, 0x5c, 0xae, 0x68, 0xf2, 0x6f, 0x75, 0x13, 0xd6, 0xc8,
+	0xc4, 0xef, 0xe3, 0xa1, 0xb6, 0xca, 0x77, 0xc3, 0x95, 0x5a, 0x85, 0x02, 0x97, 0x3e, 0xf6, 0x1c,
+	0x2d, 0xdf, 0x50, 0x5a, 0x79, 0x73, 0x9d, 0xaf, 0xbb, 0x4e, 0x68, 0x46, 0x92, 0x9c, 0x9a, 0x79,
+	0xcd, 0xcd, 0xbc, 0x42, 0x43, 0xb4, 0xdc, 0x8c, 0x2c, 0xb0, 0x92, 0x25, 0x20, 0xd1, 0x64, 0x76,
+	0xf7, 0x25, 0x9b, 0xb4, 0xc5, 0xdd, 0xe5, 0xc3, 0x98, 0xd9, 0x5d, 0x9e, 0x6c, 0x8a, 0x80, 0x44,
+	0x77, 0x05, 0x90, 0x55, 0xd0, 0x32, 0xbd, 0x2a, 0x14, 0x38, 0x5d, 0x54, 0x10, 0x83, 0xd8, 0x7a,
+	0xa6, 0xa0, 0xa4, 0xc0, 0x11, 0x00, 0x1b, 0x27, 0x44, 0xf7, 0x2d, 0x2f, 0x58, 0x40, 0xfe, 0x18,
+	0xf2, 0x63, 0xcb, 0x0b, 0xc2, 0x5a, 0x36, 0xd3, 0x93, 0xd2, 0x1d, 0x7d, 0xc4, 0xe1, 0xfc, 0xf2,
+	0xc8, 0x66, 0x05, 0xd4, 0x98, 0x79, 0xaa, 0x77, 0xae, 0xc0, 0xed, 0x1e, 0x71, 0x4d, 0xe4, 0xe3,
+	0x53, 0xc4, 0x90, 0xce, 0x64, 0xdf, 0xa2, 0x83, 0x05, 0xca, 0x75, 0x28, 0x92, 0xc0, 0x3e, 0x8e,
+	0x5b, 0x59, 0x34, 0x0b, 0x24, 0xb0, 0x45, 0x37, 0xea, 0x50, 0x74, 0x08, 0x0d, 0x41, 0x31, 0x40,
+	0x05, 0x87, 0xc4, 0x47, 0x63, 0x89, 0x8b, 0xc9, 0x27, 0xa8, 0x68, 0x46, 0xcb, 0xe6, 0x5d, 0xa8,
+	0x67, 0x98, 0x98, 0x9a, 0xb4, 0x61, 0x63, 0x06, 0xee, 0x3a, 0xff, 0x35, 0x49, 0x89, 0x33, 0x59,
+	0x4d, 0x9e, 0x49, 0x1d, 0xaa, 0x29, 0x91, 0xc8, 0xc1, 0xee, 0xf9, 0x1a, 0xac, 0xf6, 0x88, 0xab,
+	0x5a, 0xb0, 0x91, 0x7e, 0x8c, 0xee, 0x25, 0xba, 0x9f, 0xf5, 0x1a, 0xd4, 0x1e, 0x2e, 0x0d, 0x89,
+	0xa4, 0xd4, 0xb7, 0x50, 0x92, 0xe7, 0xb9, 0x3e, 0x9b, 0x29, 0x81, 0xb5, 0xfb, 0x0b, 0x40, 0x99,
+	0x50, 0x1e, 0xd8, 0x14, 0xa1, 0x04, 0xa6, 0x09, 0x33, 0x66, 0x34, 0x76, 0x28, 0xae, 0xf4, 0x1c,
+	0x87, 0x1c, 0x9c, 0xe7, 0x30, 0x71, 0x8b, 0x19, 0xa1, 0xfc, 0x60, 0xa5, 0x08, 0x25, 0x30, 0x4d,
+	0x98, 0xf1, 0xee, 0xc4, 0x25, 0xcf, 0x21, 0x94, 0xc0, 0x79, 0x25, 0x27, 0x09, 0xdf, 0x40, 0x59,
+	0x18, 0x67, 0x93, 0xc1, 0xae, 0x96, 0xba, 0x95, 0x3a, 0x51, 0x71, 0xb3, 0x6a, 0xdb, 0x73, 0x80,
+	0x29, 0xd7, 0x11, 0x94, 0x67, 0x46, 0x59, 0x9f, 0x4d, 0x49, 0xe2, 0xb5, 0x07, 0x8b, 0xf1, 0x29,
+	0xf3, 0x07, 0xb8, 0x95, 0xba, 0xc8, 0x8d, 0x45, 0xb9, 0x2c, 0xa2, 0xd6, 0x5a, 0x16, 0x11, 0xf1,
+	0x77, 0x7a, 0x17, 0x57, 0xba, 0x72, 0x79, 0xa5, 0x2b, 0x7f, 0xae, 0x74, 0xe5, 0xeb, 0xb5, 0x9e,
+	0xbb, 0xbc, 0xd6, 0x73, 0xbf, 0xae, 0xf5, 0xdc, 0xfb, 0x3d, 0xd7, 0xa3, 0x83, 0x93, 0x7e, 0xdb,
+	0xc6, 0xbe, 0x31, 0x98, 0x0c, 0xd1, 0x0e, 0x45, 0x96, 0x6f, 0x08, 0xca, 0x21, 0x22, 0x64, 0x87,
+	0x49, 0x18, 0x67, 0x46, 0xf4, 0x73, 0x64, 0x32, 0x46, 0xa4, 0xbf, 0xc6, 0xff, 0xc9, 0xef, 0xfd,
+	0x0b, 0x00, 0x00, 0xff, 0xff, 0xe2, 0x94, 0xd8, 0xc9, 0xa5, 0x08, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -741,12 +951,14 @@ const _ = grpc.SupportPackageIsVersion4
 type MsgClient interface {
 	// this line is used by starport scaffolding # proto/tx/rpc
 	SubmitTransaction(ctx context.Context, in *MsgSubmitTransaction, opts ...grpc.CallOption) (*MsgSubmitTransactionResponse, error)
-	SetAndUpdateChain(ctx context.Context, in *MsgSetChain, opts ...grpc.CallOption) (*MsgSetChainResponse, error)
-	RemoveChainInfo(ctx context.Context, in *MsgRemoveChain, opts ...grpc.CallOption) (*MsgRemoveChainResponse, error)
-	SetAndUpdateToken(ctx context.Context, in *MsgSetToken, opts ...grpc.CallOption) (*MsgSetTokenResponse, error)
-	RemoveTokenInfo(ctx context.Context, in *MsgRemoveToken, opts ...grpc.CallOption) (*MsgRemoveTokenResponse, error)
-	RemovePairInfo(ctx context.Context, in *MsgRemovePair, opts ...grpc.CallOption) (*MsgRemovePairResponse, error)
-	SetPairInfo(ctx context.Context, in *MsgSetPair, opts ...grpc.CallOption) (*MsgSetPairResponse, error)
+	InsertChain(ctx context.Context, in *MsgInsertChain, opts ...grpc.CallOption) (*MsgInsertChainResponse, error)
+	DeleteChain(ctx context.Context, in *MsgDeleteChain, opts ...grpc.CallOption) (*MsgDeleteChainResponse, error)
+	InsertToken(ctx context.Context, in *MsgInsertToken, opts ...grpc.CallOption) (*MsgInsertTokenResponse, error)
+	UpdateToken(ctx context.Context, in *MsgUpdateToken, opts ...grpc.CallOption) (*MsgUpdateTokenResponse, error)
+	DeleteToken(ctx context.Context, in *MsgDeleteToken, opts ...grpc.CallOption) (*MsgDeleteTokenResponse, error)
+	InsertPairInfo(ctx context.Context, in *MsgSetPair, opts ...grpc.CallOption) (*MsgSetPairResponse, error)
+	RemovePairById(ctx context.Context, in *MsgRemovePairById, opts ...grpc.CallOption) (*MsgRemovePairByIdResponse, error)
+	RemovePairByPath(ctx context.Context, in *MsgRemovePairByPath, opts ...grpc.CallOption) (*MsgRemovePairByPathResponse, error)
 }
 
 type msgClient struct {
@@ -766,54 +978,72 @@ func (c *msgClient) SubmitTransaction(ctx context.Context, in *MsgSubmitTransact
 	return out, nil
 }
 
-func (c *msgClient) SetAndUpdateChain(ctx context.Context, in *MsgSetChain, opts ...grpc.CallOption) (*MsgSetChainResponse, error) {
-	out := new(MsgSetChainResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetAndUpdateChain", in, out, opts...)
+func (c *msgClient) InsertChain(ctx context.Context, in *MsgInsertChain, opts ...grpc.CallOption) (*MsgInsertChainResponse, error) {
+	out := new(MsgInsertChainResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/InsertChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) RemoveChainInfo(ctx context.Context, in *MsgRemoveChain, opts ...grpc.CallOption) (*MsgRemoveChainResponse, error) {
-	out := new(MsgRemoveChainResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/RemoveChainInfo", in, out, opts...)
+func (c *msgClient) DeleteChain(ctx context.Context, in *MsgDeleteChain, opts ...grpc.CallOption) (*MsgDeleteChainResponse, error) {
+	out := new(MsgDeleteChainResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/DeleteChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) SetAndUpdateToken(ctx context.Context, in *MsgSetToken, opts ...grpc.CallOption) (*MsgSetTokenResponse, error) {
-	out := new(MsgSetTokenResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetAndUpdateToken", in, out, opts...)
+func (c *msgClient) InsertToken(ctx context.Context, in *MsgInsertToken, opts ...grpc.CallOption) (*MsgInsertTokenResponse, error) {
+	out := new(MsgInsertTokenResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/InsertToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) RemoveTokenInfo(ctx context.Context, in *MsgRemoveToken, opts ...grpc.CallOption) (*MsgRemoveTokenResponse, error) {
-	out := new(MsgRemoveTokenResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/RemoveTokenInfo", in, out, opts...)
+func (c *msgClient) UpdateToken(ctx context.Context, in *MsgUpdateToken, opts ...grpc.CallOption) (*MsgUpdateTokenResponse, error) {
+	out := new(MsgUpdateTokenResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/UpdateToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) RemovePairInfo(ctx context.Context, in *MsgRemovePair, opts ...grpc.CallOption) (*MsgRemovePairResponse, error) {
-	out := new(MsgRemovePairResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/RemovePairInfo", in, out, opts...)
+func (c *msgClient) DeleteToken(ctx context.Context, in *MsgDeleteToken, opts ...grpc.CallOption) (*MsgDeleteTokenResponse, error) {
+	out := new(MsgDeleteTokenResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/DeleteToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) SetPairInfo(ctx context.Context, in *MsgSetPair, opts ...grpc.CallOption) (*MsgSetPairResponse, error) {
+func (c *msgClient) InsertPairInfo(ctx context.Context, in *MsgSetPair, opts ...grpc.CallOption) (*MsgSetPairResponse, error) {
 	out := new(MsgSetPairResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetPairInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/InsertPairInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RemovePairById(ctx context.Context, in *MsgRemovePairById, opts ...grpc.CallOption) (*MsgRemovePairByIdResponse, error) {
+	out := new(MsgRemovePairByIdResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/RemovePairById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RemovePairByPath(ctx context.Context, in *MsgRemovePairByPath, opts ...grpc.CallOption) (*MsgRemovePairByPathResponse, error) {
+	out := new(MsgRemovePairByPathResponse)
+	err := c.cc.Invoke(ctx, "/core.bridge.Msg/RemovePairByPath", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -824,12 +1054,14 @@ func (c *msgClient) SetPairInfo(ctx context.Context, in *MsgSetPair, opts ...grp
 type MsgServer interface {
 	// this line is used by starport scaffolding # proto/tx/rpc
 	SubmitTransaction(context.Context, *MsgSubmitTransaction) (*MsgSubmitTransactionResponse, error)
-	SetAndUpdateChain(context.Context, *MsgSetChain) (*MsgSetChainResponse, error)
-	RemoveChainInfo(context.Context, *MsgRemoveChain) (*MsgRemoveChainResponse, error)
-	SetAndUpdateToken(context.Context, *MsgSetToken) (*MsgSetTokenResponse, error)
-	RemoveTokenInfo(context.Context, *MsgRemoveToken) (*MsgRemoveTokenResponse, error)
-	RemovePairInfo(context.Context, *MsgRemovePair) (*MsgRemovePairResponse, error)
-	SetPairInfo(context.Context, *MsgSetPair) (*MsgSetPairResponse, error)
+	InsertChain(context.Context, *MsgInsertChain) (*MsgInsertChainResponse, error)
+	DeleteChain(context.Context, *MsgDeleteChain) (*MsgDeleteChainResponse, error)
+	InsertToken(context.Context, *MsgInsertToken) (*MsgInsertTokenResponse, error)
+	UpdateToken(context.Context, *MsgUpdateToken) (*MsgUpdateTokenResponse, error)
+	DeleteToken(context.Context, *MsgDeleteToken) (*MsgDeleteTokenResponse, error)
+	InsertPairInfo(context.Context, *MsgSetPair) (*MsgSetPairResponse, error)
+	RemovePairById(context.Context, *MsgRemovePairById) (*MsgRemovePairByIdResponse, error)
+	RemovePairByPath(context.Context, *MsgRemovePairByPath) (*MsgRemovePairByPathResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -839,23 +1071,29 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) SubmitTransaction(ctx context.Context, req *MsgSubmitTransaction) (*MsgSubmitTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitTransaction not implemented")
 }
-func (*UnimplementedMsgServer) SetAndUpdateChain(ctx context.Context, req *MsgSetChain) (*MsgSetChainResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetAndUpdateChain not implemented")
+func (*UnimplementedMsgServer) InsertChain(ctx context.Context, req *MsgInsertChain) (*MsgInsertChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertChain not implemented")
 }
-func (*UnimplementedMsgServer) RemoveChainInfo(ctx context.Context, req *MsgRemoveChain) (*MsgRemoveChainResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveChainInfo not implemented")
+func (*UnimplementedMsgServer) DeleteChain(ctx context.Context, req *MsgDeleteChain) (*MsgDeleteChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChain not implemented")
 }
-func (*UnimplementedMsgServer) SetAndUpdateToken(ctx context.Context, req *MsgSetToken) (*MsgSetTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetAndUpdateToken not implemented")
+func (*UnimplementedMsgServer) InsertToken(ctx context.Context, req *MsgInsertToken) (*MsgInsertTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertToken not implemented")
 }
-func (*UnimplementedMsgServer) RemoveTokenInfo(ctx context.Context, req *MsgRemoveToken) (*MsgRemoveTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveTokenInfo not implemented")
+func (*UnimplementedMsgServer) UpdateToken(ctx context.Context, req *MsgUpdateToken) (*MsgUpdateTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateToken not implemented")
 }
-func (*UnimplementedMsgServer) RemovePairInfo(ctx context.Context, req *MsgRemovePair) (*MsgRemovePairResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemovePairInfo not implemented")
+func (*UnimplementedMsgServer) DeleteToken(ctx context.Context, req *MsgDeleteToken) (*MsgDeleteTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteToken not implemented")
 }
-func (*UnimplementedMsgServer) SetPairInfo(ctx context.Context, req *MsgSetPair) (*MsgSetPairResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetPairInfo not implemented")
+func (*UnimplementedMsgServer) InsertPairInfo(ctx context.Context, req *MsgSetPair) (*MsgSetPairResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertPairInfo not implemented")
+}
+func (*UnimplementedMsgServer) RemovePairById(ctx context.Context, req *MsgRemovePairById) (*MsgRemovePairByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePairById not implemented")
+}
+func (*UnimplementedMsgServer) RemovePairByPath(ctx context.Context, req *MsgRemovePairByPath) (*MsgRemovePairByPathResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePairByPath not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -880,110 +1118,146 @@ func _Msg_SubmitTransaction_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SetAndUpdateChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetChain)
+func _Msg_InsertChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgInsertChain)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SetAndUpdateChain(ctx, in)
+		return srv.(MsgServer).InsertChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetAndUpdateChain",
+		FullMethod: "/core.bridge.Msg/InsertChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetAndUpdateChain(ctx, req.(*MsgSetChain))
+		return srv.(MsgServer).InsertChain(ctx, req.(*MsgInsertChain))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_RemoveChainInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgRemoveChain)
+func _Msg_DeleteChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteChain)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).RemoveChainInfo(ctx, in)
+		return srv.(MsgServer).DeleteChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/RemoveChainInfo",
+		FullMethod: "/core.bridge.Msg/DeleteChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).RemoveChainInfo(ctx, req.(*MsgRemoveChain))
+		return srv.(MsgServer).DeleteChain(ctx, req.(*MsgDeleteChain))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SetAndUpdateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetToken)
+func _Msg_InsertToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgInsertToken)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SetAndUpdateToken(ctx, in)
+		return srv.(MsgServer).InsertToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetAndUpdateToken",
+		FullMethod: "/core.bridge.Msg/InsertToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetAndUpdateToken(ctx, req.(*MsgSetToken))
+		return srv.(MsgServer).InsertToken(ctx, req.(*MsgInsertToken))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_RemoveTokenInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgRemoveToken)
+func _Msg_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateToken)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).RemoveTokenInfo(ctx, in)
+		return srv.(MsgServer).UpdateToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/RemoveTokenInfo",
+		FullMethod: "/core.bridge.Msg/UpdateToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).RemoveTokenInfo(ctx, req.(*MsgRemoveToken))
+		return srv.(MsgServer).UpdateToken(ctx, req.(*MsgUpdateToken))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_RemovePairInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgRemovePair)
+func _Msg_DeleteToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteToken)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).RemovePairInfo(ctx, in)
+		return srv.(MsgServer).DeleteToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/RemovePairInfo",
+		FullMethod: "/core.bridge.Msg/DeleteToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).RemovePairInfo(ctx, req.(*MsgRemovePair))
+		return srv.(MsgServer).DeleteToken(ctx, req.(*MsgDeleteToken))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_SetPairInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Msg_InsertPairInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MsgSetPair)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).SetPairInfo(ctx, in)
+		return srv.(MsgServer).InsertPairInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetPairInfo",
+		FullMethod: "/core.bridge.Msg/InsertPairInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetPairInfo(ctx, req.(*MsgSetPair))
+		return srv.(MsgServer).InsertPairInfo(ctx, req.(*MsgSetPair))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RemovePairById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRemovePairById)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RemovePairById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/core.bridge.Msg/RemovePairById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RemovePairById(ctx, req.(*MsgRemovePairById))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RemovePairByPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRemovePairByPath)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RemovePairByPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/core.bridge.Msg/RemovePairByPath",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RemovePairByPath(ctx, req.(*MsgRemovePairByPath))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -997,28 +1271,36 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_SubmitTransaction_Handler,
 		},
 		{
-			MethodName: "SetAndUpdateChain",
-			Handler:    _Msg_SetAndUpdateChain_Handler,
+			MethodName: "InsertChain",
+			Handler:    _Msg_InsertChain_Handler,
 		},
 		{
-			MethodName: "RemoveChainInfo",
-			Handler:    _Msg_RemoveChainInfo_Handler,
+			MethodName: "DeleteChain",
+			Handler:    _Msg_DeleteChain_Handler,
 		},
 		{
-			MethodName: "SetAndUpdateToken",
-			Handler:    _Msg_SetAndUpdateToken_Handler,
+			MethodName: "InsertToken",
+			Handler:    _Msg_InsertToken_Handler,
 		},
 		{
-			MethodName: "RemoveTokenInfo",
-			Handler:    _Msg_RemoveTokenInfo_Handler,
+			MethodName: "UpdateToken",
+			Handler:    _Msg_UpdateToken_Handler,
 		},
 		{
-			MethodName: "RemovePairInfo",
-			Handler:    _Msg_RemovePairInfo_Handler,
+			MethodName: "DeleteToken",
+			Handler:    _Msg_DeleteToken_Handler,
 		},
 		{
-			MethodName: "SetPairInfo",
-			Handler:    _Msg_SetPairInfo_Handler,
+			MethodName: "InsertPairInfo",
+			Handler:    _Msg_InsertPairInfo_Handler,
+		},
+		{
+			MethodName: "RemovePairById",
+			Handler:    _Msg_RemovePairById_Handler,
+		},
+		{
+			MethodName: "RemovePairByPath",
+			Handler:    _Msg_RemovePairByPath_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1088,7 +1370,7 @@ func (m *MsgSubmitTransactionResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetToken) Marshal() (dAtA []byte, err error) {
+func (m *MsgInsertToken) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1098,12 +1380,12 @@ func (m *MsgSetToken) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetToken) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgInsertToken) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgInsertToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1130,7 +1412,7 @@ func (m *MsgSetToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetTokenResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgInsertTokenResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1140,12 +1422,12 @@ func (m *MsgSetTokenResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetTokenResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgInsertTokenResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgInsertTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1153,7 +1435,7 @@ func (m *MsgSetTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgRemoveToken) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateToken) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1163,12 +1445,84 @@ func (m *MsgRemoveToken) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgRemoveToken) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateToken) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgRemoveToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.TokenId != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.TokenId))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Symbol) > 0 {
+		i -= len(m.Symbol)
+		copy(dAtA[i:], m.Symbol)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Symbol)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgUpdateTokenResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgUpdateTokenResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgUpdateTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgDeleteToken) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgDeleteToken) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgDeleteToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1188,7 +1542,7 @@ func (m *MsgRemoveToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgRemoveTokenResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteTokenResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1198,12 +1552,12 @@ func (m *MsgRemoveTokenResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgRemoveTokenResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteTokenResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgRemoveTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1211,7 +1565,7 @@ func (m *MsgRemoveTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetChain) Marshal() (dAtA []byte, err error) {
+func (m *MsgInsertChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1221,12 +1575,12 @@ func (m *MsgSetChain) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetChain) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgInsertChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgInsertChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1253,7 +1607,7 @@ func (m *MsgSetChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetChainResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgInsertChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1263,12 +1617,12 @@ func (m *MsgSetChainResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetChainResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgInsertChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgInsertChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1276,7 +1630,7 @@ func (m *MsgSetChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgRemoveChain) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1286,12 +1640,12 @@ func (m *MsgRemoveChain) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgRemoveChain) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgRemoveChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1313,7 +1667,7 @@ func (m *MsgRemoveChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgRemoveChainResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1323,86 +1677,12 @@ func (m *MsgRemoveChainResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgRemoveChainResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgRemoveChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgRemovePair) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgRemovePair) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgRemovePair) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Address) > 0 {
-		i -= len(m.Address)
-		copy(dAtA[i:], m.Address)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.DstChain) > 0 {
-		i -= len(m.DstChain)
-		copy(dAtA[i:], m.DstChain)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.DstChain)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.SrcChain) > 0 {
-		i -= len(m.SrcChain)
-		copy(dAtA[i:], m.SrcChain)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.SrcChain)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgRemovePairResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgRemovePairResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgRemovePairResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1473,6 +1753,145 @@ func (m *MsgSetPairResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgRemovePairByPath) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRemovePairByPath) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRemovePairByPath) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.DstChain) > 0 {
+		i -= len(m.DstChain)
+		copy(dAtA[i:], m.DstChain)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DstChain)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.SrcChain) > 0 {
+		i -= len(m.SrcChain)
+		copy(dAtA[i:], m.SrcChain)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.SrcChain)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRemovePairByPathResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRemovePairByPathResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRemovePairByPathResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRemovePairById) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRemovePairById) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRemovePairById) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.ChainId) > 0 {
+		i -= len(m.ChainId)
+		copy(dAtA[i:], m.ChainId)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ChainId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.TokenId != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.TokenId))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRemovePairByIdResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRemovePairByIdResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRemovePairByIdResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -1508,7 +1927,7 @@ func (m *MsgSubmitTransactionResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetToken) Size() (n int) {
+func (m *MsgInsertToken) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1525,7 +1944,7 @@ func (m *MsgSetToken) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetTokenResponse) Size() (n int) {
+func (m *MsgInsertTokenResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1534,7 +1953,40 @@ func (m *MsgSetTokenResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgRemoveToken) Size() (n int) {
+func (m *MsgUpdateToken) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Symbol)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.TokenId != 0 {
+		n += 1 + sovTx(uint64(m.TokenId))
+	}
+	return n
+}
+
+func (m *MsgUpdateTokenResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgDeleteToken) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1550,7 +2002,7 @@ func (m *MsgRemoveToken) Size() (n int) {
 	return n
 }
 
-func (m *MsgRemoveTokenResponse) Size() (n int) {
+func (m *MsgDeleteTokenResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1559,7 +2011,7 @@ func (m *MsgRemoveTokenResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetChain) Size() (n int) {
+func (m *MsgInsertChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1576,7 +2028,7 @@ func (m *MsgSetChain) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetChainResponse) Size() (n int) {
+func (m *MsgInsertChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1585,7 +2037,7 @@ func (m *MsgSetChainResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgRemoveChain) Size() (n int) {
+func (m *MsgDeleteChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1602,41 +2054,7 @@ func (m *MsgRemoveChain) Size() (n int) {
 	return n
 }
 
-func (m *MsgRemoveChainResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *MsgRemovePair) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.SrcChain)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.DstChain)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Address)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	return n
-}
-
-func (m *MsgRemovePairResponse) Size() (n int) {
+func (m *MsgDeleteChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1661,6 +2079,69 @@ func (m *MsgSetPair) Size() (n int) {
 }
 
 func (m *MsgSetPairResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgRemovePairByPath) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.SrcChain)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.DstChain)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgRemovePairByPathResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgRemovePairById) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.TokenId != 0 {
+		n += 1 + sovTx(uint64(m.TokenId))
+	}
+	l = len(m.ChainId)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgRemovePairByIdResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1840,7 +2321,7 @@ func (m *MsgSubmitTransactionResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetToken) Unmarshal(dAtA []byte) error {
+func (m *MsgInsertToken) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1863,10 +2344,10 @@ func (m *MsgSetToken) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetToken: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgInsertToken: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetToken: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgInsertToken: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1958,7 +2439,7 @@ func (m *MsgSetToken) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetTokenResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgInsertTokenResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1981,10 +2462,10 @@ func (m *MsgSetTokenResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetTokenResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgInsertTokenResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgInsertTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2008,7 +2489,7 @@ func (m *MsgSetTokenResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgRemoveToken) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateToken) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2031,10 +2512,225 @@ func (m *MsgRemoveToken) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemoveToken: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateToken: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemoveToken: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateToken: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Symbol", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Symbol = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenId", wireType)
+			}
+			m.TokenId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TokenId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgUpdateTokenResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgUpdateTokenResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgUpdateTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgDeleteToken) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgDeleteToken: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgDeleteToken: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2109,7 +2805,7 @@ func (m *MsgRemoveToken) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgRemoveTokenResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteTokenResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2132,10 +2828,10 @@ func (m *MsgRemoveTokenResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemoveTokenResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteTokenResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemoveTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2159,7 +2855,7 @@ func (m *MsgRemoveTokenResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetChain) Unmarshal(dAtA []byte) error {
+func (m *MsgInsertChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2182,10 +2878,10 @@ func (m *MsgSetChain) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetChain: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgInsertChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetChain: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgInsertChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2277,7 +2973,7 @@ func (m *MsgSetChain) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetChainResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgInsertChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2300,10 +2996,10 @@ func (m *MsgSetChainResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetChainResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgInsertChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgInsertChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2327,7 +3023,7 @@ func (m *MsgSetChainResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgRemoveChain) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2350,10 +3046,10 @@ func (m *MsgRemoveChain) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemoveChain: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemoveChain: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2441,7 +3137,7 @@ func (m *MsgRemoveChain) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgRemoveChainResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2464,238 +3160,10 @@ func (m *MsgRemoveChainResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemoveChainResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemoveChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgRemovePair) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemovePair: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemovePair: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SrcChain", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.SrcChain = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DstChain", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DstChain = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Address = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgRemovePairResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgRemovePairResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgRemovePairResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2861,6 +3329,417 @@ func (m *MsgSetPairResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgSetPairResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRemovePairByPath) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRemovePairByPath: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRemovePairByPath: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SrcChain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SrcChain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DstChain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DstChain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRemovePairByPathResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRemovePairByPathResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRemovePairByPathResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRemovePairById) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRemovePairById: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRemovePairById: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenId", wireType)
+			}
+			m.TokenId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TokenId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChainId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ChainId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRemovePairByIdResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRemovePairByIdResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRemovePairByIdResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

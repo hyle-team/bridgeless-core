@@ -6,30 +6,29 @@ import (
 )
 
 const (
-	TypeMsgRemovePair = "remove-pair"
+	TypeMsgRemovePairById = "delete-pair-id"
 )
 
-var _ sdk.Msg = &MsgRemovePair{}
+var _ sdk.Msg = &MsgRemovePairById{}
 
 // TODO rename TokenInfo to PairInfo
-func NewMsgRemovePair(creator string, sourceChain, destinationChain, address string) *MsgRemovePair {
-	return &MsgRemovePair{
-		Creator:  creator,
-		SrcChain: sourceChain,
-		DstChain: destinationChain,
-		Address:  address,
+func NewMsgRemovePairById(creator string, chainId string, tokenId uint64) *MsgRemovePairById {
+	return &MsgRemovePairById{
+		Creator: creator,
+		ChainId: chainId,
+		TokenId: tokenId,
 	}
 }
 
-func (msg *MsgRemovePair) Route() string {
+func (msg *MsgRemovePairById) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgRemovePair) Type() string {
-	return TypeMsgRemovePair
+func (msg *MsgRemovePairById) Type() string {
+	return TypeMsgRemovePairById
 }
 
-func (msg *MsgRemovePair) GetSigners() []sdk.AccAddress {
+func (msg *MsgRemovePairById) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -37,12 +36,12 @@ func (msg *MsgRemovePair) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgRemovePair) GetSignBytes() []byte {
+func (msg *MsgRemovePairById) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgRemovePair) ValidateBasic() error {
+func (msg *MsgRemovePairById) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

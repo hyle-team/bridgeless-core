@@ -10,26 +10,6 @@ type msgServer struct {
 	Keeper
 }
 
-func (k msgServer) RemovePairInfo(goctx context.Context, msg *types.MsgRemovePair) (*types.MsgRemovePairResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
-		return nil, types.ErrPermissionDenied
-	}
-
-	k.RemoveTokenPair(ctx, msg.SrcChain, msg.DstChain, msg.Address)
-	return &types.MsgRemovePairResponse{}, nil
-}
-
-func (k msgServer) SetPairInfo(goctx context.Context, msg *types.MsgSetPair) (*types.MsgSetPairResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
-		return nil, types.ErrPermissionDenied
-	}
-
-	k.SetTokenPair(ctx, msg.Pair.SourceChain, msg.Pair.DestinationChain, msg.Pair.Address, msg.Pair)
-	return &types.MsgSetPairResponse{}, nil
-}
-
 // NewMsgServerImpl returns an implementation of the MsgServer interface
 // for the provided Keeper.
 func NewMsgServerImpl(keeper Keeper) types.MsgServer {
@@ -38,48 +18,120 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 
 var _ types.MsgServer = msgServer{}
 
-func (k msgServer) RemoveTokenInfo(goctx context.Context, msg *types.MsgRemoveToken) (*types.MsgRemoveTokenResponse, error) {
+func (m msgServer) DeleteToken(goctx context.Context, msg *types.MsgDeleteToken) (*types.MsgDeleteTokenResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
 		return nil, types.ErrPermissionDenied
 	}
 
-	k.RemoveToken(ctx, msg.TokenId)
+	m.RemoveToken(ctx, msg.TokenId)
 
-	return &types.MsgRemoveTokenResponse{}, nil
+	return &types.MsgDeleteTokenResponse{}, nil
 
 }
 
-func (k msgServer) SetAndUpdateToken(goctx context.Context, msg *types.MsgSetToken) (*types.MsgSetTokenResponse, error) {
+func (m msgServer) InsertToken(goctx context.Context, msg *types.MsgInsertToken) (*types.MsgInsertTokenResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
 		return nil, types.ErrPermissionDenied
 	}
 
-	k.SetToken(ctx, *msg.Token)
-	return &types.MsgSetTokenResponse{}, nil
+	m.SetToken(ctx, *msg.Token)
+	return &types.MsgInsertTokenResponse{}, nil
 
 }
 
-func (k msgServer) RemoveChainInfo(goctx context.Context, msg *types.MsgRemoveChain) (*types.MsgRemoveChainResponse, error) {
+func (m msgServer) DeleteChain(goctx context.Context, msg *types.MsgDeleteChain) (*types.MsgDeleteChainResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
 		return nil, types.ErrPermissionDenied
 	}
 
-	k.RemoveChain(ctx, msg.ChainId)
+	m.RemoveChain(ctx, msg.ChainId)
 
-	return &types.MsgRemoveChainResponse{}, nil
+	return &types.MsgDeleteChainResponse{}, nil
 
 }
 
-func (k msgServer) SetAndUpdateChain(goctx context.Context, msg *types.MsgSetChain) (*types.MsgSetChainResponse, error) {
+func (m msgServer) InsertChain(goctx context.Context, msg *types.MsgInsertChain) (*types.MsgInsertChainResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goctx)
-	if k.GetParams(ctx).EvmAdmin != msg.Creator {
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
 		return nil, types.ErrPermissionDenied
 	}
 
-	k.SetChain(ctx, *msg.Chain)
+	m.SetChain(ctx, *msg.Chain)
 
-	return &types.MsgSetChainResponse{}, nil
+	return &types.MsgInsertChainResponse{}, nil
+}
+
+func (m msgServer) UpdateToken(goctx context.Context, msg *types.MsgUpdateToken) (*types.MsgUpdateTokenResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	token, found := m.GetToken(ctx, msg.TokenId)
+	if !found {
+		return nil, types.ErrTokenNotFound
+	}
+
+	if msg.Name != "" {
+		token.Name = msg.Name
+	}
+
+	if msg.Symbol != "" {
+		token.Symbol = msg.Symbol
+	}
+
+	return &types.MsgUpdateTokenResponse{}, nil
+}
+
+func (m msgServer) RemovePairById(goctx context.Context, msg *types.MsgRemovePairById) (*types.MsgRemovePairByIdResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	token, found := m.GetToken(ctx, msg.TokenId)
+	if !found {
+		return nil, types.ErrTokenNotFound
+	}
+	for _, pair := range token.Info {
+		if pair.SourceChain == msg.ChainId {
+			err := m.RemoveTokenPair(ctx, pair.SourceChain, pair.DestinationChain, pair.Address)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	return &types.MsgRemovePairByIdResponse{}, nil
+}
+
+func (m msgServer) RemovePairByPath(goctx context.Context, msg *types.MsgRemovePairByPath) (*types.MsgRemovePairByPathResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	err := m.RemoveTokenPair(ctx, msg.SrcChain, msg.DstChain, msg.Address)
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MsgRemovePairByPathResponse{}, nil
+}
+
+func (m msgServer) InsertPairInfo(goctx context.Context, msg *types.MsgSetPair) (*types.MsgSetPairResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goctx)
+	if m.GetParams(ctx).EvmAdmin != msg.Creator {
+		return nil, types.ErrPermissionDenied
+	}
+
+	err := m.SetTokenInfo(ctx, msg.Pair.SourceChain, msg.Pair.DestinationChain, msg.Pair.Address, msg.Pair)
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MsgSetPairResponse{}, nil
 }

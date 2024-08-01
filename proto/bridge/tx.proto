@@ -16,12 +16,17 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
     rpc SubmitTransaction(MsgSubmitTransaction) returns (MsgSubmitTransactionResponse);
-    rpc SetAndUpdateChain(MsgSetChain) returns (MsgSetChainResponse);
-    rpc RemoveChainInfo(MsgRemoveChain) returns (MsgRemoveChainResponse);
-    rpc SetAndUpdateToken(MsgSetToken) returns (MsgSetTokenResponse);
-    rpc RemoveTokenInfo(MsgRemoveToken) returns (MsgRemoveTokenResponse);
-    rpc RemovePairInfo(MsgRemovePair) returns (MsgRemovePairResponse);
-    rpc SetPairInfo(MsgSetPair) returns (MsgSetPairResponse);
+
+    rpc InsertChain(MsgInsertChain) returns (MsgInsertChainResponse);
+    rpc DeleteChain(MsgDeleteChain) returns (MsgDeleteChainResponse);
+
+    rpc InsertToken(MsgInsertToken) returns (MsgInsertTokenResponse);
+    rpc UpdateToken(MsgUpdateToken) returns (MsgUpdateTokenResponse);
+    rpc DeleteToken(MsgDeleteToken) returns (MsgDeleteTokenResponse);
+
+    rpc InsertPairInfo(MsgSetPair) returns (MsgSetPairResponse);
+    rpc RemovePairById(MsgRemovePairById) returns (MsgRemovePairByIdResponse);
+    rpc RemovePairByPath(MsgRemovePairByPath) returns (MsgRemovePairByPathResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -32,45 +37,50 @@ message MsgSubmitTransaction {
   core.bridge.Transaction transaction = 2 [(gogoproto.nullable) = false];
 }
 
+// Tokens
+
 message MsgSubmitTransactionResponse {}
 
-message MsgSetToken {
+message MsgInsertToken {
   string creator = 1;
   Token token  = 2;
 }
 
-message MsgSetTokenResponse {}
+message MsgInsertTokenResponse {}
 
+message MsgUpdateToken {
+  string creator = 1;
+  string name = 2;
+  string symbol = 3;
+  uint64 token_id = 4;
+}
 
-message MsgRemoveToken {
+message MsgUpdateTokenResponse {}
+
+message MsgDeleteToken {
   string creator = 1;
   uint64 token_id = 2;
 }
 
-message MsgRemoveTokenResponse {}
+message MsgDeleteTokenResponse {}
 
-message MsgSetChain {
+// Chains
+
+message MsgInsertChain {
   string creator = 1;
   Chain chain  = 2;
 }
 
-message MsgSetChainResponse {}
+message MsgInsertChainResponse {}
 
-message MsgRemoveChain {
+message MsgDeleteChain {
   string creator = 1;
   string chain_id = 2;
 }
 
-message MsgRemoveChainResponse {}
+message MsgDeleteChainResponse {}
 
-message MsgRemovePair {
-  string creator = 1;
-  string src_chain = 2;
-  string dst_chain = 3;
-  string address = 4;
-}
-
-message MsgRemovePairResponse {}
+// Pairs
 
 message MsgSetPair {
   string creator = 1;
@@ -78,3 +88,22 @@ message MsgSetPair {
 }
 
 message MsgSetPairResponse {}
+
+message MsgRemovePairByPath {
+  string creator = 1;
+  string src_chain = 2;
+  string dst_chain = 3;
+  string address = 4;
+}
+
+message MsgRemovePairByPathResponse {}
+
+message MsgRemovePairById {
+  string creator = 1;
+  uint64 token_id = 2;
+  string chain_id = 3;
+}
+
+message MsgRemovePairByIdResponse {}
+
+

@@ -27,11 +27,6 @@ func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, foun
 	return
 }
 
-func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
-	tStore.Delete(types.KeyToken(id))
-}
-
 func (k Keeper) GetAllTokens(sdkCtx sdk.Context) (tokens []types.Token) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
 	iterator := tStore.Iterator(nil, nil)
@@ -64,4 +59,22 @@ func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageR
 	}
 
 	return chains, pageRes, nil
+}
+
+func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) error {
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	token, found := k.GetToken(sdkCtx, id)
+	if !found {
+		return types.ErrTokenNotFound
+	}
+	for _, pair := range token.Info {
+		err := k.RemoveTokenPair(sdkCtx, pair.SourceChain, pair.SourceChain, pair.DestinationChain)
+		if err != nil {
+			return err
+		}
+	}
+
+	tStore.Delete(types.KeyToken(id))
+
+	return nil
 }

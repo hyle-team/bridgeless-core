@@ -27,25 +27,6 @@ func (k Keeper) GetChain(sdkCtx sdk.Context, id string) (chain types.Chain, foun
 	return
 }
 
-func (k Keeper) GetAllChains(sdkCtx sdk.Context) (chains []types.Chain) {
-	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
-	iterator := cStore.Iterator(nil, nil)
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var chain types.Chain
-		k.cdc.MustUnmarshal(iterator.Value(), &chain)
-		chains = append(chains, chain)
-	}
-
-	return
-}
-
-func (k Keeper) RemoveChain(sdkCtx sdk.Context, id string) {
-	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
-	cStore.Delete(types.KeyChain(id))
-}
-
 func (k Keeper) GetChainsWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Chain, *query.PageResponse, error) {
 	cStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
 	var chains []types.Chain
@@ -64,4 +45,23 @@ func (k Keeper) GetChainsWithPagination(ctx sdk.Context, pagination *query.PageR
 	}
 
 	return chains, pageRes, nil
+}
+
+func (k Keeper) GetAllChains(sdkCtx sdk.Context) (chains []types.Chain) {
+	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
+	iterator := cStore.Iterator(nil, nil)
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var chain types.Chain
+		k.cdc.MustUnmarshal(iterator.Value(), &chain)
+		chains = append(chains, chain)
+	}
+
+	return
+}
+
+func (k Keeper) RemoveChain(sdkCtx sdk.Context, id string) {
+	cStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreChainPrefix))
+	cStore.Delete(types.KeyChain(id))
 }

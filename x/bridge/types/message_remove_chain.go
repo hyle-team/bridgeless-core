@@ -6,28 +6,28 @@ import (
 )
 
 const (
-	TypeMsgRemoveChain = "remove-chain"
+	TypeMsgDeleteChain = "remove-chain"
 )
 
-var _ sdk.Msg = &MsgRemoveChain{}
+var _ sdk.Msg = &MsgDeleteChain{}
 
-func NewMsgRemoveChain(creator, chainId string,
-) *MsgRemoveChain {
-	return &MsgRemoveChain{
+func NewMsgDeleteChain(creator, chainId string,
+) *MsgDeleteChain {
+	return &MsgDeleteChain{
 		Creator: creator,
 		ChainId: chainId,
 	}
 }
 
-func (msg *MsgRemoveChain) Route() string {
+func (msg *MsgDeleteChain) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgRemoveChain) Type() string {
-	return TypeMsgRemoveChain
+func (msg *MsgDeleteChain) Type() string {
+	return TypeMsgDeleteChain
 }
 
-func (msg *MsgRemoveChain) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteChain) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -35,12 +35,12 @@ func (msg *MsgRemoveChain) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgRemoveChain) GetSignBytes() []byte {
+func (msg *MsgDeleteChain) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgRemoveChain) ValidateBasic() error {
+func (msg *MsgDeleteChain) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
