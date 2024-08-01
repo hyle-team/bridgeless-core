@@ -20,11 +20,27 @@ service Query {
   rpc Transactions(QueryTransactionsRequest) returns (QueryTransactionsResponse) {
     option (google.api.http).get = "/cosmos/bridge/transactions";
   }
+
+  // TransactionById queries a transaction by ID.
+  rpc TransactionById(QueryTransactionByIdRequest) returns (QueryTransactionByIdResponse) {
+    option (google.api.http).get = "/cosmos/bridge/transactions/{id}";
+  }
   // this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
+
+// QueryTransactionByIdRequest is request type for the Query/TransactionById RPC method.
+message QueryTransactionByIdRequest {
+  // id defines the unique transaction identifier.
+  string id = 1;
+}
+
+// QueryTransactionByIdResponse is response type for the Query/TransactionById RPC method.
+message QueryTransactionByIdResponse {
+  core.bridge.Transaction transaction = 1 [(gogoproto.nullable) = false];
+}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {

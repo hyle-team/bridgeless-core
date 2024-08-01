@@ -38,3 +38,29 @@ func CmdQueryTransactions() *cobra.Command {
 
 	return cmd
 }
+
+func CmdQueryTransactionById() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "transaction [id]",
+		Short: "Query bridge transaction by its id",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.TransactionById(cmd.Context(), &types.QueryTransactionByIdRequest{Id: args[0]})
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}

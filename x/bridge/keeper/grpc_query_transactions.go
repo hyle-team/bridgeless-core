@@ -21,3 +21,17 @@ func (k Keeper) Transactions(goCtx context.Context, req *types.QueryTransactions
 
 	return &types.QueryTransactionsResponse{Transactions: txs, Pagination: pages}, nil
 }
+
+func (k Keeper) TransactionById(goCtx context.Context, req *types.QueryTransactionByIdRequest) (*types.QueryTransactionByIdResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	tx, found := k.GetTransaction(ctx, req.Id)
+	if !found {
+		return nil, status.Error(codes.NotFound, "transaction not found")
+	}
+
+	return &types.QueryTransactionByIdResponse{Transaction: tx}, nil
+}
