@@ -13,23 +13,22 @@ func (k Keeper) GetParams(ctx sdk.Context) types.Params {
 	return params
 }
 
-// GetModuleAdmin get the module admin
-func (k Keeper) GetModuleAdmin(ctx sdk.Context, chainType types.ChainType) sdk.AccAddress {
+func (k Keeper) GetAdmin(ctx sdk.Context, chainType types.ChainType) (sdk.AccAddress, bool) {
 	var admin string
 
 	switch chainType {
 	case types.ChainType_EVM:
 		k.paramstore.Get(ctx, types.KeyPrefix(types.ParamEvmAdminKey), &admin)
 	default:
-		panic(fmt.Errorf("unsupported chain type: %s", chainType))
+		return nil, false
 	}
 
 	addr, err := sdk.AccAddressFromBech32(admin)
 	if err != nil {
-		panic(fmt.Errorf("invalid module admin address: %s", admin))
+		panic(fmt.Errorf("invalid admin address: %s", admin))
 	}
 
-	return addr
+	return addr, true
 }
 
 // SetParams set the params
