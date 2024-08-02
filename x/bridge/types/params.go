@@ -20,24 +20,34 @@ func ParamKeyTable() paramtypes.KeyTable {
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
 		paramtypes.NewParamSetPair(KeyPrefix(ParamEvmAdminKey), &p.EvmAdmin, validateModuleAdmin),
+		paramtypes.NewParamSetPair(KeyPrefix(ParamModuleAdminKey), &p.ModuleAdmin, validateModuleAdmin),
 	}
 }
 
 // NewParams creates a new Params instance
-func NewParams(evmAdmin string) Params {
+func NewParams(moduleAdmin, evmAdmin string) Params {
 	return Params{
-		EvmAdmin: evmAdmin,
+		ModuleAdmin: moduleAdmin,
+		EvmAdmin:    evmAdmin,
 	}
 }
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return NewParams("bridge1s44rn9k2sjks0zvv9vx9dr8u58j6h6h25cehed")
+	return NewParams("", "")
 }
 
 // Validate validates the set of params
 func (p Params) Validate() error {
-	return validateModuleAdmin(p.EvmAdmin)
+	if err := validateModuleAdmin(p.EvmAdmin); err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid evm admin address (%s)", err)
+	}
+
+	if err := validateModuleAdmin(p.ModuleAdmin); err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid module admin address (%s)", err)
+	}
+
+	return nil
 }
 
 func validateModuleAdmin(i interface{}) error {
@@ -48,7 +58,7 @@ func validateModuleAdmin(i interface{}) error {
 
 	_, err := sdk.AccAddressFromBech32(adm)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid admin address (%s)", err)
+		return fmt.Errorf("failed to parse address: %w", err)
 	}
 
 	return nil

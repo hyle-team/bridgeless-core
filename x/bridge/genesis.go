@@ -30,10 +30,20 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 		panic(fmt.Errorf("failed to export genesis transactions: %w", err))
 	}
 
+	tokens, _, err := k.GetTokensWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
+	if err != nil {
+		panic(fmt.Errorf("failed to export genesis tokens: %w", err))
+	}
+
+	chains, _, err := k.GetChainsWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
+	if err != nil {
+		panic(fmt.Errorf("failed to export genesis chains: %w", err))
+	}
+
 	return &types.GenesisState{
 		Params:       k.GetParams(ctx),
-		Chains:       k.GetChains(ctx),
-		Tokens:       k.GetTokens(ctx),
+		Chains:       chains,
+		Tokens:       tokens,
 		Transactions: txs,
 	}
 }
