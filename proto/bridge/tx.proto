@@ -24,9 +24,8 @@ service Msg {
     rpc UpdateToken(MsgUpdateToken) returns (MsgUpdateTokenResponse);
     rpc DeleteToken(MsgDeleteToken) returns (MsgDeleteTokenResponse);
 
-    rpc InsertPairInfo(MsgSetPair) returns (MsgSetPairResponse);
-    rpc RemovePairById(MsgRemovePairById) returns (MsgRemovePairByIdResponse);
-    rpc RemovePairByPath(MsgRemovePairByPath) returns (MsgRemovePairByPathResponse);
+    rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
+    rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -43,7 +42,7 @@ message MsgSubmitTransactionResponse {}
 
 message MsgInsertToken {
   string creator = 1;
-  Token token  = 2;
+  Token token  = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgInsertTokenResponse {}
@@ -68,7 +67,7 @@ message MsgDeleteTokenResponse {}
 
 message MsgInsertChain {
   string creator = 1;
-  Chain chain  = 2;
+  Chain chain  = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgInsertChainResponse {}
@@ -80,30 +79,19 @@ message MsgDeleteChain {
 
 message MsgDeleteChainResponse {}
 
-// Pairs
+// TokenInfo
 
-message MsgSetPair {
+message MsgAddTokenInfo {
   string creator = 1;
-  TokenInfo pair = 2 [(gogoproto.nullable) = false];
+  TokenInfo info = 3 [(gogoproto.nullable) = false];
 }
 
-message MsgSetPairResponse {}
+message MsgAddTokenInfoResponse {}
 
-message MsgRemovePairByPath {
-  string creator = 1;
-  string src_chain = 2;
-  string dst_chain = 3;
-  string address = 4;
-}
-
-message MsgRemovePairByPathResponse {}
-
-message MsgRemovePairById {
+message MsgRemoveTokenInfo {
   string creator = 1;
   uint64 token_id = 2;
   string chain_id = 3;
 }
 
-message MsgRemovePairByIdResponse {}
-
-
+message MsgRemoveTokenInfoResponse {}

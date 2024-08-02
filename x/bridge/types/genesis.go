@@ -32,12 +32,12 @@ func (gs GenesisState) Validate() error {
 		}
 	}
 
-	chains := make(map[string]Chain)
+	chains := make(map[string]struct{})
 	for _, chain := range gs.Chains {
 		if _, ok := chains[chain.Id]; ok {
 			return fmt.Errorf("duplicate chain id: %s", chain.Id)
 		} else {
-			chains[chain.Id] = chain
+			chains[chain.Id] = struct{}{}
 		}
 
 		if err := validateChain(&chain); err != nil {
@@ -52,20 +52,15 @@ func (gs GenesisState) Validate() error {
 		} else {
 			uniqueTokens[token.Id] = struct{}{}
 		}
+
 		if err := validateToken(&token); err != nil {
 			return fmt.Errorf("invalid token %v: %w", token.Id, err)
 		}
-	}
 
-	for _, pair := range gs.Pairs {
-
-		chain, ok := chains[pair.SourceChain]
-		if !ok {
-			return fmt.Errorf("unknown chain id: %s for token %v", pair.SourceChain, pair.TokenId)
-		}
-
-		if err := validateTokenInfo(&pair, &chain.Type); err != nil {
-			return fmt.Errorf("invalid token info %v for chain %s: %w", pair.TokenId, pair.SourceChain, err)
+		for _, info := range token.Info {
+			if err := validateTokenInfo(&info, nil); err != nil {
+				return fmt.Errorf("invalid token info for token %v: %w", token.Id, err)
+			}
 		}
 	}
 	return nil

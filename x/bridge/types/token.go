@@ -24,6 +24,10 @@ func validateTokenInfo(info *TokenInfo, chainType *ChainType) error {
 	if info == nil {
 		return fmt.Errorf("info is nil")
 	}
+	if info.ChainId == "" {
+		return fmt.Errorf("chain id cannot be empty")
+
+	}
 	if chainType == nil {
 		return nil
 	}

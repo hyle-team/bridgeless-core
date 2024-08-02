@@ -7,5 +7,6 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 
 // Params defines the parameters for the module.
 message Params {
-  string evm_admin = 1;
+  string module_admin = 1;
+  string evm_admin = 2;
 }

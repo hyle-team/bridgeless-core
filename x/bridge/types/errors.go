@@ -14,7 +14,7 @@ var (
 	ErrTranscationAlreadySubmitted  = sdkerrors.Register(ModuleName, 1103, "transaction already submitted")
 	ErrOperationNotAllowed          = sdkerrors.Register(ModuleName, 1104, "operation not allowed")
 	ErrTokenNotFound                = sdkerrors.Register(ModuleName, 1105, "token not found")
-	ErrTokenPairsNotFound           = sdkerrors.Register(ModuleName, 1106, "token pairs not found")
+	ErrTokenPairNotFound            = sdkerrors.Register(ModuleName, 1106, "token pair not found")
 	ErrChainNotFound                = sdkerrors.Register(ModuleName, 1107, "chain not found")
 	ErrPermissionDenied             = sdkerrors.Register(ModuleName, 1108, "permission denied")
 )

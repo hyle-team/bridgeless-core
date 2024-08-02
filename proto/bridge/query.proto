@@ -15,33 +15,28 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/params";
+    option (google.api.http).get = "/cosmos/bridge/params";
   }
 
   rpc GetTokenById(QueryGetTokenById) returns (QueryGetTokenByIdResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token/{id}";
+    option (google.api.http).get = "/cosmos/bridge/tokens/{id}";
   }
 
   rpc GetTokens(QueryGetTokens) returns (QueryGetTokensResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/tokens";
+    option (google.api.http).get = "/cosmos/bridge/tokens";
   }
 
-  rpc GetTokenPairForDstChain(QueryGetTokenPair) returns (QueryGetTokenPairResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pair/{src_chain}/{src_address}/{dst_chain}";
-  }
-
-  rpc GetAllTokenPairs(QueryGetTokenPairs) returns (QueryGetTokenPairsResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/token-pairs";
+  rpc GetTokenPair(QueryGetTokenPair) returns (QueryGetTokenPairResponse) {
+    option (google.api.http).get = "/cosmos/token-pair/{src_chain}/{src_address}/{dst_chain}";
   }
 
   rpc GetChainById(QueryGetChainById) returns (QueryGetChainByIdResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/chain/{id}";
+    option (google.api.http).get = "/cosmos/bridge/chains/{id}";
   }
 
   rpc GetChains(QueryGetChains) returns (QueryGetChainsResponse) {
-    option (google.api.http).get = "/hyle-team/bridgeless-core/bridge/chains";
+    option (google.api.http).get = "/cosmos/bridge/chains";
   }
-
 
   // this line is used by starport scaffolding # 2
 }
@@ -56,7 +51,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetTokenById {
-  string id = 1;
+  uint64 id = 1;
 }
 
 message QueryGetTokenByIdResponse {
@@ -80,13 +75,6 @@ message QueryGetChainsResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-message QueryGetTokenPairs {
-}
-
-message QueryGetTokenPairsResponse {
-   repeated TokenInfo pairs = 1 [(gogoproto.nullable) = false];;
-}
-
 message QueryGetTokenPair {
   string src_chain = 1;
   string src_address = 2;
@@ -97,7 +85,6 @@ message QueryGetTokenPairResponse {
   TokenInfo info = 1 [(gogoproto.nullable) = false];;
 }
 
-
 message QueryGetChainById {
   string id = 1;
 }
@@ -105,9 +92,6 @@ message QueryGetChainById {
 message QueryGetChainByIdResponse {
   Chain chain = 1 [(gogoproto.nullable) = false];;
 }
-
-
-
 
 
 // this line is used by starport scaffolding # 3

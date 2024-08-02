@@ -1,6 +1,9 @@
 package types
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 const (
 	// ModuleName defines the module name
@@ -16,7 +19,8 @@ const (
 	MemStoreKey = "mem_bridge"
 
 	// ----- Param Keys -----
-	ParamEvmAdminKey = "EvmAdmin"
+	ParamModuleAdminKey = "ModuleAdmin"
+	ParamEvmAdminKey    = "EvmAdmin"
 
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token/"
@@ -33,8 +37,12 @@ func KeyToken(id uint64) []byte {
 	return []byte(strconv.FormatInt(int64(id), 10))
 }
 
-func KeyTokenPair(key string) []byte {
-	return []byte(key)
+func TokenPairPrexif(srcChain, srcAddr string) []byte {
+	return []byte(fmt.Sprintf("%s-%s", srcChain, srcAddr))
+}
+
+func KeyTokenPair(dstChain string) []byte {
+	return []byte(dstChain)
 }
 
 func KeyChain(chain string) []byte {

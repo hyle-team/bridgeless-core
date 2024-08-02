@@ -21,9 +21,6 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, tx := range genState.Transactions {
 		k.SetTransaction(ctx, tx)
 	}
-	for _, pair := range genState.Pairs {
-		k.SetTokenPair(ctx, pair.SourceChain, pair.DestinationChain, pair.Address, pair)
-	}
 }
 
 // ExportGenesis returns the module's exported genesis
@@ -33,11 +30,20 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 		panic(fmt.Errorf("failed to export genesis transactions: %w", err))
 	}
 
+	tokens, _, err := k.GetTokensWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
+	if err != nil {
+		panic(fmt.Errorf("failed to export genesis tokens: %w", err))
+	}
+
+	chains, _, err := k.GetChainsWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
+	if err != nil {
+		panic(fmt.Errorf("failed to export genesis chains: %w", err))
+	}
+
 	return &types.GenesisState{
 		Params:       k.GetParams(ctx),
-		Chains:       k.GetAllChains(ctx),
-		Tokens:       k.GetAllTokens(ctx),
-		Pairs:        k.GetTokenPairs(ctx),
+		Chains:       chains,
+		Tokens:       tokens,
 		Transactions: txs,
 	}
 }

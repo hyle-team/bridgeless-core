@@ -27,29 +27,13 @@ func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, foun
 	return
 }
 
-func (k Keeper) GetAllTokens(sdkCtx sdk.Context) (tokens []types.Token) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
-	iterator := tStore.Iterator(nil, nil)
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var token types.Token
-		k.cdc.MustUnmarshal(iterator.Value(), &token)
-		tokens = append(tokens, token)
-	}
-
-	return
-}
-
 func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Token, *query.PageResponse, error) {
 	tStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
 	var chains []types.Token
 
 	pageRes, err := query.Paginate(tStore, pagination, func(key []byte, value []byte) error {
 		var chain types.Token
-
 		k.cdc.MustUnmarshal(value, &chain)
-
 		chains = append(chains, chain)
 		return nil
 	})
@@ -61,20 +45,7 @@ func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageR
 	return chains, pageRes, nil
 }
 
-func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) error {
+func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
-	token, found := k.GetToken(sdkCtx, id)
-	if !found {
-		return types.ErrTokenNotFound
-	}
-	for _, pair := range token.Info {
-		err := k.RemoveTokenPair(sdkCtx, pair.SourceChain, pair.SourceChain, pair.DestinationChain)
-		if err != nil {
-			return err
-		}
-	}
-
 	tStore.Delete(types.KeyToken(id))
-
-	return nil
 }
