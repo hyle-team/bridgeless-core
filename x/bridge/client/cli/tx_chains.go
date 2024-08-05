@@ -1,83 +1,79 @@
 package cli
 
 import (
-	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/hyle-team/bridgeless-core/x/bridge/types"
 	"github.com/spf13/cobra"
-	"io"
-	"os"
 )
 
-func CmdSetChain() *cobra.Command {
+func TxChainsCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "set-chain [from_key_or_address] [token_json_file]",
+		Use:                        "chains",
+		Short:                      "Chain transactions subcommands",
+		DisableFlagParsing:         true,
+		SuggestionsMinimumDistance: 2,
+		RunE:                       client.ValidateCmd,
+	}
+
+	cmd.AddCommand(
+		CmdInsertChain(),
+		CmdRemoveChain(),
+	)
+	// this line is used by starport scaffolding # 1
+
+	return cmd
+}
+
+func CmdInsertChain() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "insert [from_key_or_address] [token-json]",
 		Short: "Set a new chain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			chain := &types.Chain{}
-			rawChain, err := os.Open(args[1])
-			if err != nil {
-				return err
-			}
-			defer rawChain.Close()
-
-			byteValue, err := io.ReadAll(rawChain)
-			if err != nil {
+			chain := types.Chain{}
+			if err = types.ModuleCdc.UnmarshalJSON([]byte(args[1]), &chain); err != nil {
 				return err
 			}
 
-			err = json.Unmarshal(byteValue, chain)
-			if err != nil {
-				return err
-			}
-
-			msg := types.NewMsgSetChain(
+			msg := types.NewMsgInsertChain(
 				clientCtx.GetFromAddress().String(),
 				chain,
 			)
 
-			if err = msg.ValidateBasic(); err != nil {
-				return err
-			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}
 
 	flags.AddTxFlagsToCmd(cmd)
+
 	return cmd
 }
 
 func CmdRemoveChain() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "remove-chain [from_key_or_address] [chain_id]",
+		Use:   "remove [from_key_or_address] [chain_id]",
 		Short: "Remove the chain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgRemoveChain(
+			msg := types.NewMsgDeleteChain(
 				clientCtx.GetFromAddress().String(),
 				args[1],
 			)
 
-			if err = msg.ValidateBasic(); err != nil {
-				return err
-			}
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

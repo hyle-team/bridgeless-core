@@ -1,7 +1,6 @@
 package keeper_test
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"testing"
 
 	testkeeper "github.com/hyle-team/bridgeless-core/testutil/keeper"
@@ -17,7 +16,6 @@ func TestGetParams(t *testing.T) {
 
 	require.EqualValues(t, params, k.GetParams(ctx))
 
-	acc, _ := sdk.AccAddressFromBech32(params.EvmAdmin)
-	adm, _ := k.GetAdmin(ctx, types.ChainType_EVM)
-	require.EqualValues(t, acc, adm)
+	adm := k.GetParams(ctx).EvmAdmin
+	require.EqualValues(t, params.EvmAdmin, adm)
 }

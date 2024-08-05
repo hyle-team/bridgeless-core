@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -9,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdQueryGetTokenById() *cobra.Command {
+func CmdQueryTokenById() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "token [id]",
 		Short: "shows the token info by id",
@@ -17,11 +18,13 @@ func CmdQueryGetTokenById() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
-			queryClient := types.NewQueryClient(clientCtx)
-			req := &types.QueryGetTokenById{
-				Id: args[0],
+			tokenId, err := strconv.ParseUint(args[0], 10, 64)
+			if err != nil {
+				return err
 			}
-			res, err := queryClient.GetTokenById(context.Background(), req)
+
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.GetTokenById(context.Background(), &types.QueryGetTokenById{Id: tokenId})
 			if err != nil {
 				return err
 			}
@@ -69,35 +72,9 @@ func CmdQueryTokens() *cobra.Command {
 	return cmd
 }
 
-func CmdQueryTokenPairs() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "token-pairs [src_chain] [src_address] --flags",
-		Short: "Query the all token pairs",
-		Args:  cobra.ExactArgs(2),
-		RunE: func(cmd *cobra.Command, args []string) error {
-			clientCtx, err := client.GetClientQueryContext(cmd)
-			if err != nil {
-				return err
-			}
-			queryClient := types.NewQueryClient(clientCtx)
-
-			res, err := queryClient.GetAllTokenPairs(context.Background(), &types.QueryGetTokenPairs{})
-			if err != nil {
-				return err
-			}
-
-			return clientCtx.PrintProto(res)
-		},
-	}
-
-	flags.AddQueryFlagsToCmd(cmd)
-
-	return cmd
-}
-
 func CmdQueryTokenPair() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "token-pairs [src_chain] [src_address] [dst_chain] --flags",
+		Use:   "token-pairs [src_chain] [src_address] [dst_chain]",
 		Short: "Query the token pair",
 		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -113,7 +90,7 @@ func CmdQueryTokenPair() *cobra.Command {
 				DstChain:   args[2],
 			}
 
-			res, err := queryClient.GetTokenPairForDstChain(context.Background(), req)
+			res, err := queryClient.GetTokenPair(context.Background(), req)
 			if err != nil {
 				return err
 			}

@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdQueryGetChainById() *cobra.Command {
+func CmdQueryChainById() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "chain [id]",
 		Short: "shows the chain info by id",
@@ -35,10 +35,10 @@ func CmdQueryGetChainById() *cobra.Command {
 	return cmd
 }
 
-func CmdQueryGetChains() *cobra.Command {
+func CmdQueryChains() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "chains --flags",
-		Short: "Query the all chains",
+		Use:   "chains",
+		Short: "Query all chains",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)

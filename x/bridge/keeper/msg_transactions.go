@@ -3,11 +3,16 @@ package keeper
 import (
 	"context"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/hyle-team/bridgeless-core/x/bridge/types"
 )
 
 func (m msgServer) SubmitTransaction(goCtx context.Context, msg *types.MsgSubmitTransaction) (*types.MsgSubmitTransactionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	if msg.Submitter != m.GetParams(ctx).ModuleAdmin {
+		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+	}
 
 	if _, found := m.GetTransaction(ctx, types.TransactionId(&msg.Transaction)); found {
 		return nil, types.ErrTranscationAlreadySubmitted
@@ -15,15 +20,8 @@ func (m msgServer) SubmitTransaction(goCtx context.Context, msg *types.MsgSubmit
 	if _, found := m.GetChain(ctx, msg.Transaction.DepositChainId); !found {
 		return nil, types.ErrSourceChainNotSupported
 	}
-
-	dstChain, found := m.GetChain(ctx, msg.Transaction.WithdrawalChainId)
-	if !found {
+	if _, found := m.GetChain(ctx, msg.Transaction.WithdrawalChainId); !found {
 		return nil, types.ErrDestinationChainNotSupported
-	}
-
-	admin, found := m.GetAdmin(ctx, dstChain.Type)
-	if !found || !admin.Equals(msg.GetSigners()[0]) {
-		return nil, types.ErrOperationNotAllowed
 	}
 
 	m.SetTransaction(ctx, msg.Transaction)
