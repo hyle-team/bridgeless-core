@@ -17,7 +17,7 @@ func (k Keeper) GetChainById(goctx context.Context, req *types.QueryGetChainById
 
 	token, found := k.GetChain(ctx, req.Id)
 	if !found {
-		return nil, types.ErrTokenNotFound
+		return nil, types.ErrChainNotFound
 	}
 
 	return &types.QueryGetChainByIdResponse{Chain: token}, nil

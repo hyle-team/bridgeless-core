@@ -29,17 +29,21 @@ service Query {
     option (google.api.http).get = "/cosmos/bridge/transactions/{id}";
   }
 
+  // Token by id queries a token by id.
   rpc GetTokenById(QueryGetTokenById) returns (QueryGetTokenByIdResponse) {
     option (google.api.http).get = "/cosmos/bridge/tokens/{id}";
   }
 
+  // Tokens queries all the tokens.
   rpc GetTokens(QueryGetTokens) returns (QueryGetTokensResponse) {
     option (google.api.http).get = "/cosmos/bridge/tokens";
   }
 
+  // TokenPair queries an according token pair by src_chain, src_address and dst_chain.
   rpc GetTokenPair(QueryGetTokenPair) returns (QueryGetTokenPairResponse) {
-    option (google.api.http).get = "/cosmos/token-pair/{src_chain}/{src_address}/{dst_chain}";
+    option (google.api.http).get = "/cosmos/bridge/token-pair/{src_chain}/{src_address}/{dst_chain}";
   }
+
 
   rpc GetChainById(QueryGetChainById) returns (QueryGetChainByIdResponse) {
     option (google.api.http).get = "/cosmos/bridge/chains/{id}";

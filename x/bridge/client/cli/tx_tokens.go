@@ -122,7 +122,7 @@ func CmdAddTokenInfo() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "add-info [from_key_or_address] [token-info-json]",
 		Short: "Add token info to existing token",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			cmd.Flags().Set(flags.FlagFrom, args[0])
