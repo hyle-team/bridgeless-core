@@ -1,13 +1,13 @@
 # Validators’ Devnet Guide
 
 * Chain id: `bridge_2607-1`
-* Bridgeless-core binary (linux/amd64): https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7
+* Bridgeless-core binary (linux/amd64): https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.8-rc1
 * Genesis file: https://github.com/hyle-team/bridgeless-core/blob/chains/devnet/config/genesis.json
 
 ## Local installation
 
 You can get binary file from github release and also, you can build core from sources by yourself:
-use “https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.7” release information.
+use “https://github.com/hyle-team/bridgeless-core/releases/tag/v12.1.8-rc1” release information.
 
 The binary is built under Alpine linux. If you are using Ubuntu linux, please install musl-dev
 using `sudo apt install musl-dev` command to be able to use Alpine binary on your machine
