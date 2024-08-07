@@ -4,9 +4,9 @@ info:
   name: ''
   description: ''
 paths:
-  /cosmos/cosmos-sdk/accumulator/admins:
+  /cosmos/accumulator/admins:
     get:
-      operationId: AccumulatorGetAdmins
+      operationId: CosmosAccumulatorGetAdmins
       responses:
         '200':
           description: A successful response.
@@ -321,10 +321,10 @@ paths:
           type: boolean
       tags:
         - Query
-  /cosmos/cosmos-sdk/accumulator/params:
+  /cosmos/accumulator/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: AccumulatorParams
+      operationId: CosmosAccumulatorParams
       responses:
         '200':
           description: A successful response.
