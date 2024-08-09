@@ -2,6 +2,7 @@ package cli
 
 import (
 	"cosmossdk.io/errors"
+	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -36,12 +37,12 @@ func CmdSubmitTx() *cobra.Command {
 				return err
 			}
 
-			var tr types.Transaction
-			if err = types.ModuleCdc.UnmarshalJSON([]byte(args[1]), &tr); err != nil {
+			var tr []types.Transaction
+			if err = json.Unmarshal([]byte(args[1]), &tr); err != nil {
 				return errors.Wrap(err, "failed to unmarshal transaction")
 			}
 
-			msg := types.NewMsgSubmitTransaction(clientCtx.GetFromAddress().String(), tr)
+			msg := types.NewMsgSubmitTransaction(clientCtx.GetFromAddress().String(), tr...)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},

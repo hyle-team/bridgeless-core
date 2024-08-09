@@ -15,7 +15,7 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
-    rpc SubmitTransaction(MsgSubmitTransaction) returns (MsgSubmitTransactionResponse);
+    rpc SubmitTransactions(MsgSubmitTransactions) returns (MsgSubmitTransactionsResponse);
 
     rpc InsertChain(MsgInsertChain) returns (MsgInsertChainResponse);
     rpc DeleteChain(MsgDeleteChain) returns (MsgDeleteChainResponse);
@@ -29,16 +29,16 @@ service Msg {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
-message MsgSubmitTransaction {
+message MsgSubmitTransactions {
   option (cosmos.msg.v1.signer) = "submitter";
 
   string submitter = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  core.bridge.Transaction transaction = 2 [(gogoproto.nullable) = false];
+  repeated core.bridge.Transaction transactions = 2 [(gogoproto.nullable) = false];
 }
 
 // Tokens
 
-message MsgSubmitTransactionResponse {}
+message MsgSubmitTransactionsResponse {}
 
 message MsgInsertToken {
   string creator = 1;

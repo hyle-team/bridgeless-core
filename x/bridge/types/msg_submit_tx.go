@@ -1,30 +1,31 @@
 package types
 
 import (
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgSubmitTransaction = "submit_transaction"
+const TypeMsgSubmitTransactions = "submit_transactions"
 
-var _ sdk.Msg = &MsgSubmitTransaction{}
+var _ sdk.Msg = &MsgSubmitTransactions{}
 
-func NewMsgSubmitTransaction(submitter string, transaction Transaction) *MsgSubmitTransaction {
-	return &MsgSubmitTransaction{
-		Submitter:   submitter,
-		Transaction: transaction,
+func NewMsgSubmitTransaction(submitter string, transactions ...Transaction) *MsgSubmitTransactions {
+	return &MsgSubmitTransactions{
+		Submitter:    submitter,
+		Transactions: transactions,
 	}
 }
 
-func (msg *MsgSubmitTransaction) Route() string {
+func (msg *MsgSubmitTransactions) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgSubmitTransaction) Type() string {
-	return TypeMsgSubmitTransaction
+func (msg *MsgSubmitTransactions) Type() string {
+	return TypeMsgSubmitTransactions
 }
 
-func (msg *MsgSubmitTransaction) GetSigners() []sdk.AccAddress {
+func (msg *MsgSubmitTransactions) GetSigners() []sdk.AccAddress {
 	accAddress, err := sdk.AccAddressFromBech32(msg.Submitter)
 	if err != nil {
 		panic(err)
@@ -33,19 +34,27 @@ func (msg *MsgSubmitTransaction) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{accAddress}
 }
 
-func (msg *MsgSubmitTransaction) GetSignBytes() []byte {
+func (msg *MsgSubmitTransactions) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgSubmitTransaction) ValidateBasic() error {
+func (msg *MsgSubmitTransactions) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Submitter)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid submitter address: %s", err)
 	}
 
-	if err = validateTransaction(&msg.Transaction); err != nil {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, err.Error())
+	if len(msg.Transactions) == 0 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "transactions cannot be empty")
+	}
+
+	for _, tx := range msg.Transactions {
+		if err = validateTransaction(&tx); err != nil {
+			return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest,
+				fmt.Sprintf("invalid transaction %s: %s", TransactionId(&tx), err),
+			)
+		}
 	}
 
 	return nil
