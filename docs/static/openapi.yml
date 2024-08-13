@@ -2054,7 +2054,7 @@ paths:
           type: string
       tags:
         - Query
-  /cosmos/cosmos-sdk/accumulator/admins:
+  /cosmos/accumulator/admins:
     get:
       operationId: CosmosAccumulatorGetAdmins
       responses:
@@ -2371,7 +2371,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /cosmos/cosmos-sdk/accumulator/params:
+  /cosmos/accumulator/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: CosmosAccumulatorParams
@@ -46254,7 +46254,7 @@ definitions:
     type: object
   core.bridge.MsgRemoveTokenInfoResponse:
     type: object
-  core.bridge.MsgSubmitTransactionResponse:
+  core.bridge.MsgSubmitTransactionsResponse:
     type: object
   core.bridge.MsgUpdateTokenResponse:
     type: object

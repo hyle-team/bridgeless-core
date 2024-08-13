@@ -42,7 +42,7 @@ func CmdSubmitTx() *cobra.Command {
 				return errors.Wrap(err, "failed to unmarshal transaction")
 			}
 
-			msg := types.NewMsgSubmitTransaction(clientCtx.GetFromAddress().String(), tr...)
+			msg := types.NewMsgSubmitTransactions(clientCtx.GetFromAddress().String(), tr...)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},

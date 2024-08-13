@@ -10,7 +10,7 @@ const TypeMsgSubmitTransactions = "submit_transactions"
 
 var _ sdk.Msg = &MsgSubmitTransactions{}
 
-func NewMsgSubmitTransaction(submitter string, transactions ...Transaction) *MsgSubmitTransactions {
+func NewMsgSubmitTransactions(submitter string, transactions ...Transaction) *MsgSubmitTransactions {
 	return &MsgSubmitTransactions{
 		Submitter:    submitter,
 		Transactions: transactions,
