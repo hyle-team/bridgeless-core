@@ -983,7 +983,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/auth/v1beta1/accounts/{address}':
+  /cosmos/auth/v1beta1/accounts/{address}:
     get:
       summary: Account returns account details based on address.
       operationId: CosmosAuthV1Beta1Account
@@ -1251,7 +1251,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/auth/v1beta1/address_by_id/{id}':
+  /cosmos/auth/v1beta1/address_by_id/{id}:
     get:
       summary: AccountAddressByID returns account address based on account number.
       description: 'Since: cosmos-sdk 0.46.2'
@@ -1671,7 +1671,7 @@ paths:
                         }
       tags:
         - Query
-  '/cosmos/auth/v1beta1/bech32/{address_bytes}':
+  /cosmos/auth/v1beta1/bech32/{address_bytes}:
     get:
       summary: AddressBytesToString converts Account Address bytes to string
       description: 'Since: cosmos-sdk 0.46'
@@ -1883,7 +1883,7 @@ paths:
           format: byte
       tags:
         - Query
-  '/cosmos/auth/v1beta1/bech32/{address_string}':
+  /cosmos/auth/v1beta1/bech32/{address_string}:
     get:
       summary: AddressStringToBytes converts Address string to bytes
       description: 'Since: cosmos-sdk 0.46'
@@ -2474,7 +2474,7 @@ paths:
                         }
       tags:
         - Query
-  '/cosmos/auth/v1beta1/module_accounts/{name}':
+  /cosmos/auth/v1beta1/module_accounts/{name}:
     get:
       summary: ModuleAccountByName returns the module account info by module name
       operationId: CosmosAuthV1Beta1ModuleAccountByName
@@ -3069,7 +3069,7 @@ paths:
         - Query
   /cosmos/authz/v1beta1/grants:
     get:
-      summary: 'Returns list of `Authorization`, granted to the grantee by the granter.'
+      summary: Returns list of `Authorization`, granted to the grantee by the granter.
       operationId: CosmosAuthzV1Beta1Grants
       responses:
         '200':
@@ -3555,7 +3555,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/authz/v1beta1/grants/grantee/{grantee}':
+  /cosmos/authz/v1beta1/grants/grantee/{grantee}:
     get:
       summary: GranteeGrants returns a list of `GrantAuthorization` by grantee.
       description: 'Since: cosmos-sdk 0.46'
@@ -4029,9 +4029,9 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/authz/v1beta1/grants/granter/{granter}':
+  /cosmos/authz/v1beta1/grants/granter/{granter}:
     get:
-      summary: 'GranterGrants returns list of `GrantAuthorization`, granted by granter.'
+      summary: GranterGrants returns list of `GrantAuthorization`, granted by granter.
       description: 'Since: cosmos-sdk 0.46'
       operationId: CosmosAuthzV1Beta1GranterGrants
       responses:
@@ -4503,7 +4503,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/bank/v1beta1/balances/{address}':
+  /cosmos/bank/v1beta1/balances/{address}:
     get:
       summary: AllBalances queries the balance of all coins for a single account.
       operationId: CosmosBankV1Beta1AllBalances
@@ -4637,7 +4637,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/bank/v1beta1/balances/{address}/by_denom':
+  /cosmos/bank/v1beta1/balances/{address}/by_denom:
     get:
       summary: Balance queries the balance of a single coin for a single account.
       operationId: CosmosBankV1Beta1Balance
@@ -4689,7 +4689,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/bank/v1beta1/denom_owners/{denom}':
+  /cosmos/bank/v1beta1/denom_owners/{denom}:
     get:
       summary: >-
         DenomOwners queries for all account addresses that own a particular
@@ -5051,7 +5051,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/bank/v1beta1/denoms_metadata/{denom}':
+  /cosmos/bank/v1beta1/denoms_metadata/{denom}:
     get:
       summary: DenomsMetadata queries the client metadata of a given coin denomination.
       operationId: CosmosBankV1Beta1DenomMetadata
@@ -5234,7 +5234,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  '/cosmos/bank/v1beta1/spendable_balances/{address}':
+  /cosmos/bank/v1beta1/spendable_balances/{address}:
     get:
       summary: |-
         SpendableBalances queries the spenable balance of all coins for a single
@@ -7244,7 +7244,7 @@ paths:
                         }
       tags:
         - Service
-  '/cosmos/base/tendermint/v1beta1/blocks/{height}':
+  /cosmos/base/tendermint/v1beta1/blocks/{height}:
     get:
       summary: GetBlockByHeight queries block for given height.
       operationId: CosmosBaseTendermintV1Beta1GetBlockByHeight
@@ -9552,7 +9552,7 @@ paths:
           type: boolean
       tags:
         - Service
-  '/cosmos/base/tendermint/v1beta1/validatorsets/{height}':
+  /cosmos/base/tendermint/v1beta1/validatorsets/{height}:
     get:
       summary: GetValidatorSetByHeight queries validator-set at a given height.
       operationId: CosmosBaseTendermintV1Beta1GetValidatorSetByHeight
@@ -10079,7 +10079,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards':
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards:
     get:
       summary: |-
         DelegationTotalRewards queries the total rewards accrued by a each
@@ -10168,7 +10168,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}':
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}:
     get:
       summary: DelegationRewards queries the total rewards accrued by a delegation.
       operationId: CosmosDistributionV1Beta1DelegationRewards
@@ -10231,7 +10231,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/delegators/{delegator_address}/validators':
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/validators:
     get:
       summary: DelegatorValidators queries the validators of a delegator.
       operationId: CosmosDistributionV1Beta1DelegatorValidators
@@ -10277,7 +10277,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/delegators/{delegator_address}/withdraw_address':
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/withdraw_address:
     get:
       summary: DelegatorWithdrawAddress queries withdraw address of a delegator.
       operationId: CosmosDistributionV1Beta1DelegatorWithdrawAddress
@@ -10366,7 +10366,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/validators/{validator_address}':
+  /cosmos/distribution/v1beta1/validators/{validator_address}:
     get:
       summary: >-
         ValidatorDistributionInfo queries validator commision and
@@ -10448,7 +10448,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/validators/{validator_address}/commission':
+  /cosmos/distribution/v1beta1/validators/{validator_address}/commission:
     get:
       summary: ValidatorCommission queries accumulated commission for a validator.
       operationId: CosmosDistributionV1Beta1ValidatorCommission
@@ -10509,7 +10509,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/validators/{validator_address}/outstanding_rewards':
+  /cosmos/distribution/v1beta1/validators/{validator_address}/outstanding_rewards:
     get:
       summary: ValidatorOutstandingRewards queries rewards of a validator address.
       operationId: CosmosDistributionV1Beta1ValidatorOutstandingRewards
@@ -10577,7 +10577,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/distribution/v1beta1/validators/{validator_address}/slashes':
+  /cosmos/distribution/v1beta1/validators/{validator_address}/slashes:
     get:
       summary: ValidatorSlashes queries slash events of a validator.
       operationId: CosmosDistributionV1Beta1ValidatorSlashes
@@ -11182,7 +11182,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/evidence/v1beta1/evidence/{evidence_hash}':
+  /cosmos/evidence/v1beta1/evidence/{evidence_hash}:
     get:
       summary: Evidence queries evidence based on evidence hash.
       operationId: CosmosEvidenceV1Beta1Evidence
@@ -11451,7 +11451,7 @@ paths:
           format: byte
       tags:
         - Query
-  '/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}':
+  /cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}:
     get:
       summary: Allowance returns fee granted to the grantee by the granter.
       operationId: CosmosFeegrantV1Beta1Allowance
@@ -11748,7 +11748,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/feegrant/v1beta1/allowances/{grantee}':
+  /cosmos/feegrant/v1beta1/allowances/{grantee}:
     get:
       summary: Allowances returns all the grants for address.
       operationId: CosmosFeegrantV1Beta1Allowances
@@ -12112,7 +12112,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/feegrant/v1beta1/issued/{granter}':
+  /cosmos/feegrant/v1beta1/issued/{granter}:
     get:
       summary: AllowancesByGranter returns all the grants given by an address
       description: 'Since: cosmos-sdk 0.46'
@@ -12480,7 +12480,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1/params/{params_type}':
+  /cosmos/gov/v1/params/{params_type}:
     get:
       summary: Params queries all parameters of the gov module.
       operationId: CosmosGovV1Params
@@ -13327,7 +13327,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}':
+  /cosmos/gov/v1/proposals/{proposal_id}:
     get:
       summary: Proposal queries proposal details based on ProposalID.
       operationId: CosmosGovV1Proposal
@@ -13798,7 +13798,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}/deposits':
+  /cosmos/gov/v1/proposals/{proposal_id}/deposits:
     get:
       summary: Deposits queries all deposits of a single proposal.
       operationId: CosmosGovV1Deposits
@@ -14113,7 +14113,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}':
+  /cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}:
     get:
       summary: >-
         Deposit queries single deposit information based proposalID,
@@ -14353,7 +14353,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}/tally':
+  /cosmos/gov/v1/proposals/{proposal_id}/tally:
     get:
       summary: TallyResult queries the tally of a proposal vote.
       operationId: CosmosGovV1TallyResult
@@ -14572,7 +14572,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}/votes':
+  /cosmos/gov/v1/proposals/{proposal_id}/votes:
     get:
       summary: Votes queries votes of a given proposal.
       operationId: CosmosGovV1Votes
@@ -14903,9 +14903,9 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}':
+  /cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}:
     get:
-      summary: 'Vote queries voted information based on proposalID, voterAddr.'
+      summary: Vote queries voted information based on proposalID, voterAddr.
       operationId: CosmosGovV1Vote
       responses:
         '200':
@@ -15157,7 +15157,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/gov/v1beta1/params/{params_type}':
+  /cosmos/gov/v1beta1/params/{params_type}:
     get:
       summary: Params queries all parameters of the gov module.
       operationId: CosmosGovV1Beta1Params
@@ -16000,7 +16000,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}:
     get:
       summary: Proposal queries proposal details based on ProposalID.
       operationId: CosmosGovV1Beta1Proposal
@@ -16462,7 +16462,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}/deposits:
     get:
       summary: Deposits queries all deposits of a single proposal.
       operationId: CosmosGovV1Beta1Deposits
@@ -16777,7 +16777,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits/{depositor}':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}/deposits/{depositor}:
     get:
       summary: >-
         Deposit queries single deposit information based proposalID,
@@ -17017,7 +17017,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}/tally':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}/tally:
     get:
       summary: TallyResult queries the tally of a proposal vote.
       operationId: CosmosGovV1Beta1TallyResult
@@ -17236,7 +17236,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}/votes':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}/votes:
     get:
       summary: Votes queries votes of a given proposal.
       operationId: CosmosGovV1Beta1Votes
@@ -17584,9 +17584,9 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}':
+  /cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}:
     get:
-      summary: 'Vote queries voted information based on proposalID, voterAddr.'
+      summary: Vote queries voted information based on proposalID, voterAddr.
       operationId: CosmosGovV1Beta1Vote
       responses:
         '200':
@@ -17918,7 +17918,263 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /cosmos/nfts:
+  /cosmos/nft/nft/{address}:
+    get:
+      operationId: CosmosNftGetNFTByAddress
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              nft:
+                type: object
+                properties:
+                  address:
+                    type: string
+                  owner:
+                    type: string
+                  uri:
+                    type: string
+                  vesting_period:
+                    type: string
+                    format: int64
+                  reward_per_period:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+                  vesting_periods_count:
+                    type: string
+                    format: int64
+                  available_to_withdraw:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+                  last_vesting_time:
+                    type: string
+                    format: int64
+                  vesting_counter:
+                    type: string
+                    format: int64
+                  denom:
+                    type: string
+                description: NFT defines the NFT.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                      description: >-
+                        A URL/resource name that uniquely identifies the type of
+                        the serialized
+
+                        protocol buffer message. This string must contain at
+                        least
+
+                        one "/" character. The last segment of the URL's path
+                        must represent
+
+                        the fully qualified name of the type (as in
+
+                        `path/google.protobuf.Duration`). The name should be in
+                        a canonical form
+
+                        (e.g., leading "." is not accepted).
+
+
+                        In practice, teams usually precompile into the binary
+                        all types that they
+
+                        expect it to use in the context of Any. However, for
+                        URLs which use the
+
+                        scheme `http`, `https`, or no scheme, one can optionally
+                        set up a type
+
+                        server that maps type URLs to message definitions as
+                        follows:
+
+
+                        * If no scheme is provided, `https` is assumed.
+
+                        * An HTTP GET on the URL must yield a
+                        [google.protobuf.Type][]
+                          value in binary format, or produce an error.
+                        * Applications are allowed to cache lookup results based
+                        on the
+                          URL, or have them precompiled into a binary to avoid any
+                          lookup. Therefore, binary compatibility needs to be preserved
+                          on changes to types. (Use versioned type names to manage
+                          breaking changes.)
+
+                        Note: this functionality is not currently available in
+                        the official
+
+                        protobuf release, and it is not used for type URLs
+                        beginning with
+
+                        type.googleapis.com.
+
+
+                        Schemes other than `http`, `https` (or the empty scheme)
+                        might be
+
+                        used with implementation specific semantics.
+                  additionalProperties: {}
+                  description: >-
+                    `Any` contains an arbitrary serialized protocol buffer
+                    message along with a
+
+                    URL that describes the type of the serialized message.
+
+
+                    Protobuf library provides support to pack/unpack Any values
+                    in the form
+
+                    of utility functions or additional generated methods of the
+                    Any type.
+
+
+                    Example 1: Pack and unpack a message in C++.
+
+                        Foo foo = ...;
+                        Any any;
+                        any.PackFrom(foo);
+                        ...
+                        if (any.UnpackTo(&foo)) {
+                          ...
+                        }
+
+                    Example 2: Pack and unpack a message in Java.
+
+                        Foo foo = ...;
+                        Any any = Any.pack(foo);
+                        ...
+                        if (any.is(Foo.class)) {
+                          foo = any.unpack(Foo.class);
+                        }
+
+                     Example 3: Pack and unpack a message in Python.
+
+                        foo = Foo(...)
+                        any = Any()
+                        any.Pack(foo)
+                        ...
+                        if any.Is(Foo.DESCRIPTOR):
+                          any.Unpack(foo)
+                          ...
+
+                     Example 4: Pack and unpack a message in Go
+
+                         foo := &pb.Foo{...}
+                         any, err := anypb.New(foo)
+                         if err != nil {
+                           ...
+                         }
+                         ...
+                         foo := &pb.Foo{}
+                         if err := any.UnmarshalTo(foo); err != nil {
+                           ...
+                         }
+
+                    The pack methods provided by protobuf library will by
+                    default use
+
+                    'type.googleapis.com/full.type.name' as the type URL and the
+                    unpack
+
+                    methods only use the fully qualified type name after the
+                    last '/'
+
+                    in the type URL, for example "foo.bar.com/x/y.z" will yield
+                    type
+
+                    name "y.z".
+
+
+
+                    JSON
+
+                    ====
+
+                    The JSON representation of an `Any` value uses the regular
+
+                    representation of the deserialized, embedded message, with
+                    an
+
+                    additional field `@type` which contains the type URL.
+                    Example:
+
+                        package google.profile;
+                        message Person {
+                          string first_name = 1;
+                          string last_name = 2;
+                        }
+
+                        {
+                          "@type": "type.googleapis.com/google.profile.Person",
+                          "firstName": <string>,
+                          "lastName": <string>
+                        }
+
+                    If the embedded message type is well-known and has a custom
+                    JSON
+
+                    representation, that representation will be embedded adding
+                    a field
+
+                    `value` which holds the custom JSON in addition to the
+                    `@type`
+
+                    field. Example (for message [google.protobuf.Duration][]):
+
+                        {
+                          "@type": "type.googleapis.com/google.protobuf.Duration",
+                          "value": "1.212s"
+                        }
+      parameters:
+        - name: address
+          description: address of nft
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /cosmos/nft/nfts:
     get:
       operationId: CosmosNftGetAllNFTs
       responses:
@@ -18255,465 +18511,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /cosmos/nfts/params:
-    get:
-      operationId: CosmosNftParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                      description: >-
-                        A URL/resource name that uniquely identifies the type of
-                        the serialized
-
-                        protocol buffer message. This string must contain at
-                        least
-
-                        one "/" character. The last segment of the URL's path
-                        must represent
-
-                        the fully qualified name of the type (as in
-
-                        `path/google.protobuf.Duration`). The name should be in
-                        a canonical form
-
-                        (e.g., leading "." is not accepted).
-
-
-                        In practice, teams usually precompile into the binary
-                        all types that they
-
-                        expect it to use in the context of Any. However, for
-                        URLs which use the
-
-                        scheme `http`, `https`, or no scheme, one can optionally
-                        set up a type
-
-                        server that maps type URLs to message definitions as
-                        follows:
-
-
-                        * If no scheme is provided, `https` is assumed.
-
-                        * An HTTP GET on the URL must yield a
-                        [google.protobuf.Type][]
-                          value in binary format, or produce an error.
-                        * Applications are allowed to cache lookup results based
-                        on the
-                          URL, or have them precompiled into a binary to avoid any
-                          lookup. Therefore, binary compatibility needs to be preserved
-                          on changes to types. (Use versioned type names to manage
-                          breaking changes.)
-
-                        Note: this functionality is not currently available in
-                        the official
-
-                        protobuf release, and it is not used for type URLs
-                        beginning with
-
-                        type.googleapis.com.
-
-
-                        Schemes other than `http`, `https` (or the empty scheme)
-                        might be
-
-                        used with implementation specific semantics.
-                  additionalProperties: {}
-                  description: >-
-                    `Any` contains an arbitrary serialized protocol buffer
-                    message along with a
-
-                    URL that describes the type of the serialized message.
-
-
-                    Protobuf library provides support to pack/unpack Any values
-                    in the form
-
-                    of utility functions or additional generated methods of the
-                    Any type.
-
-
-                    Example 1: Pack and unpack a message in C++.
-
-                        Foo foo = ...;
-                        Any any;
-                        any.PackFrom(foo);
-                        ...
-                        if (any.UnpackTo(&foo)) {
-                          ...
-                        }
-
-                    Example 2: Pack and unpack a message in Java.
-
-                        Foo foo = ...;
-                        Any any = Any.pack(foo);
-                        ...
-                        if (any.is(Foo.class)) {
-                          foo = any.unpack(Foo.class);
-                        }
-
-                     Example 3: Pack and unpack a message in Python.
-
-                        foo = Foo(...)
-                        any = Any()
-                        any.Pack(foo)
-                        ...
-                        if any.Is(Foo.DESCRIPTOR):
-                          any.Unpack(foo)
-                          ...
-
-                     Example 4: Pack and unpack a message in Go
-
-                         foo := &pb.Foo{...}
-                         any, err := anypb.New(foo)
-                         if err != nil {
-                           ...
-                         }
-                         ...
-                         foo := &pb.Foo{}
-                         if err := any.UnmarshalTo(foo); err != nil {
-                           ...
-                         }
-
-                    The pack methods provided by protobuf library will by
-                    default use
-
-                    'type.googleapis.com/full.type.name' as the type URL and the
-                    unpack
-
-                    methods only use the fully qualified type name after the
-                    last '/'
-
-                    in the type URL, for example "foo.bar.com/x/y.z" will yield
-                    type
-
-                    name "y.z".
-
-
-
-                    JSON
-
-                    ====
-
-                    The JSON representation of an `Any` value uses the regular
-
-                    representation of the deserialized, embedded message, with
-                    an
-
-                    additional field `@type` which contains the type URL.
-                    Example:
-
-                        package google.profile;
-                        message Person {
-                          string first_name = 1;
-                          string last_name = 2;
-                        }
-
-                        {
-                          "@type": "type.googleapis.com/google.profile.Person",
-                          "firstName": <string>,
-                          "lastName": <string>
-                        }
-
-                    If the embedded message type is well-known and has a custom
-                    JSON
-
-                    representation, that representation will be embedded adding
-                    a field
-
-                    `value` which holds the custom JSON in addition to the
-                    `@type`
-
-                    field. Example (for message [google.protobuf.Duration][]):
-
-                        {
-                          "@type": "type.googleapis.com/google.protobuf.Duration",
-                          "value": "1.212s"
-                        }
-      tags:
-        - Query
-  '/cosmos/nfts/{address}':
-    get:
-      operationId: CosmosNftGetNFTByAddress
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              nft:
-                type: object
-                properties:
-                  address:
-                    type: string
-                  owner:
-                    type: string
-                  uri:
-                    type: string
-                  vesting_period:
-                    type: string
-                    format: int64
-                  reward_per_period:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-                  vesting_periods_count:
-                    type: string
-                    format: int64
-                  available_to_withdraw:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-                  last_vesting_time:
-                    type: string
-                    format: int64
-                  vesting_counter:
-                    type: string
-                    format: int64
-                  denom:
-                    type: string
-                description: NFT defines the NFT.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                      description: >-
-                        A URL/resource name that uniquely identifies the type of
-                        the serialized
-
-                        protocol buffer message. This string must contain at
-                        least
-
-                        one "/" character. The last segment of the URL's path
-                        must represent
-
-                        the fully qualified name of the type (as in
-
-                        `path/google.protobuf.Duration`). The name should be in
-                        a canonical form
-
-                        (e.g., leading "." is not accepted).
-
-
-                        In practice, teams usually precompile into the binary
-                        all types that they
-
-                        expect it to use in the context of Any. However, for
-                        URLs which use the
-
-                        scheme `http`, `https`, or no scheme, one can optionally
-                        set up a type
-
-                        server that maps type URLs to message definitions as
-                        follows:
-
-
-                        * If no scheme is provided, `https` is assumed.
-
-                        * An HTTP GET on the URL must yield a
-                        [google.protobuf.Type][]
-                          value in binary format, or produce an error.
-                        * Applications are allowed to cache lookup results based
-                        on the
-                          URL, or have them precompiled into a binary to avoid any
-                          lookup. Therefore, binary compatibility needs to be preserved
-                          on changes to types. (Use versioned type names to manage
-                          breaking changes.)
-
-                        Note: this functionality is not currently available in
-                        the official
-
-                        protobuf release, and it is not used for type URLs
-                        beginning with
-
-                        type.googleapis.com.
-
-
-                        Schemes other than `http`, `https` (or the empty scheme)
-                        might be
-
-                        used with implementation specific semantics.
-                  additionalProperties: {}
-                  description: >-
-                    `Any` contains an arbitrary serialized protocol buffer
-                    message along with a
-
-                    URL that describes the type of the serialized message.
-
-
-                    Protobuf library provides support to pack/unpack Any values
-                    in the form
-
-                    of utility functions or additional generated methods of the
-                    Any type.
-
-
-                    Example 1: Pack and unpack a message in C++.
-
-                        Foo foo = ...;
-                        Any any;
-                        any.PackFrom(foo);
-                        ...
-                        if (any.UnpackTo(&foo)) {
-                          ...
-                        }
-
-                    Example 2: Pack and unpack a message in Java.
-
-                        Foo foo = ...;
-                        Any any = Any.pack(foo);
-                        ...
-                        if (any.is(Foo.class)) {
-                          foo = any.unpack(Foo.class);
-                        }
-
-                     Example 3: Pack and unpack a message in Python.
-
-                        foo = Foo(...)
-                        any = Any()
-                        any.Pack(foo)
-                        ...
-                        if any.Is(Foo.DESCRIPTOR):
-                          any.Unpack(foo)
-                          ...
-
-                     Example 4: Pack and unpack a message in Go
-
-                         foo := &pb.Foo{...}
-                         any, err := anypb.New(foo)
-                         if err != nil {
-                           ...
-                         }
-                         ...
-                         foo := &pb.Foo{}
-                         if err := any.UnmarshalTo(foo); err != nil {
-                           ...
-                         }
-
-                    The pack methods provided by protobuf library will by
-                    default use
-
-                    'type.googleapis.com/full.type.name' as the type URL and the
-                    unpack
-
-                    methods only use the fully qualified type name after the
-                    last '/'
-
-                    in the type URL, for example "foo.bar.com/x/y.z" will yield
-                    type
-
-                    name "y.z".
-
-
-
-                    JSON
-
-                    ====
-
-                    The JSON representation of an `Any` value uses the regular
-
-                    representation of the deserialized, embedded message, with
-                    an
-
-                    additional field `@type` which contains the type URL.
-                    Example:
-
-                        package google.profile;
-                        message Person {
-                          string first_name = 1;
-                          string last_name = 2;
-                        }
-
-                        {
-                          "@type": "type.googleapis.com/google.profile.Person",
-                          "firstName": <string>,
-                          "lastName": <string>
-                        }
-
-                    If the embedded message type is well-known and has a custom
-                    JSON
-
-                    representation, that representation will be embedded adding
-                    a field
-
-                    `value` which holds the custom JSON in addition to the
-                    `@type`
-
-                    field. Example (for message [google.protobuf.Duration][]):
-
-                        {
-                          "@type": "type.googleapis.com/google.protobuf.Duration",
-                          "value": "1.212s"
-                        }
-      parameters:
-        - name: address
-          description: address of nft
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /cosmos/owners:
+  /cosmos/nft/owners:
     get:
       operationId: CosmosNftGetAllOwners
       responses:
@@ -18998,7 +18796,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/owners/{owner}':
+  /cosmos/nft/owners/{owner}:
     get:
       operationId: CosmosNftGetAllNFTsByOwner
       responses:
@@ -19338,6 +19136,208 @@ paths:
           in: query
           required: false
           type: boolean
+      tags:
+        - Query
+  /cosmos/nft/params:
+    get:
+      operationId: CosmosNftParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                      description: >-
+                        A URL/resource name that uniquely identifies the type of
+                        the serialized
+
+                        protocol buffer message. This string must contain at
+                        least
+
+                        one "/" character. The last segment of the URL's path
+                        must represent
+
+                        the fully qualified name of the type (as in
+
+                        `path/google.protobuf.Duration`). The name should be in
+                        a canonical form
+
+                        (e.g., leading "." is not accepted).
+
+
+                        In practice, teams usually precompile into the binary
+                        all types that they
+
+                        expect it to use in the context of Any. However, for
+                        URLs which use the
+
+                        scheme `http`, `https`, or no scheme, one can optionally
+                        set up a type
+
+                        server that maps type URLs to message definitions as
+                        follows:
+
+
+                        * If no scheme is provided, `https` is assumed.
+
+                        * An HTTP GET on the URL must yield a
+                        [google.protobuf.Type][]
+                          value in binary format, or produce an error.
+                        * Applications are allowed to cache lookup results based
+                        on the
+                          URL, or have them precompiled into a binary to avoid any
+                          lookup. Therefore, binary compatibility needs to be preserved
+                          on changes to types. (Use versioned type names to manage
+                          breaking changes.)
+
+                        Note: this functionality is not currently available in
+                        the official
+
+                        protobuf release, and it is not used for type URLs
+                        beginning with
+
+                        type.googleapis.com.
+
+
+                        Schemes other than `http`, `https` (or the empty scheme)
+                        might be
+
+                        used with implementation specific semantics.
+                  additionalProperties: {}
+                  description: >-
+                    `Any` contains an arbitrary serialized protocol buffer
+                    message along with a
+
+                    URL that describes the type of the serialized message.
+
+
+                    Protobuf library provides support to pack/unpack Any values
+                    in the form
+
+                    of utility functions or additional generated methods of the
+                    Any type.
+
+
+                    Example 1: Pack and unpack a message in C++.
+
+                        Foo foo = ...;
+                        Any any;
+                        any.PackFrom(foo);
+                        ...
+                        if (any.UnpackTo(&foo)) {
+                          ...
+                        }
+
+                    Example 2: Pack and unpack a message in Java.
+
+                        Foo foo = ...;
+                        Any any = Any.pack(foo);
+                        ...
+                        if (any.is(Foo.class)) {
+                          foo = any.unpack(Foo.class);
+                        }
+
+                     Example 3: Pack and unpack a message in Python.
+
+                        foo = Foo(...)
+                        any = Any()
+                        any.Pack(foo)
+                        ...
+                        if any.Is(Foo.DESCRIPTOR):
+                          any.Unpack(foo)
+                          ...
+
+                     Example 4: Pack and unpack a message in Go
+
+                         foo := &pb.Foo{...}
+                         any, err := anypb.New(foo)
+                         if err != nil {
+                           ...
+                         }
+                         ...
+                         foo := &pb.Foo{}
+                         if err := any.UnmarshalTo(foo); err != nil {
+                           ...
+                         }
+
+                    The pack methods provided by protobuf library will by
+                    default use
+
+                    'type.googleapis.com/full.type.name' as the type URL and the
+                    unpack
+
+                    methods only use the fully qualified type name after the
+                    last '/'
+
+                    in the type URL, for example "foo.bar.com/x/y.z" will yield
+                    type
+
+                    name "y.z".
+
+
+
+                    JSON
+
+                    ====
+
+                    The JSON representation of an `Any` value uses the regular
+
+                    representation of the deserialized, embedded message, with
+                    an
+
+                    additional field `@type` which contains the type URL.
+                    Example:
+
+                        package google.profile;
+                        message Person {
+                          string first_name = 1;
+                          string last_name = 2;
+                        }
+
+                        {
+                          "@type": "type.googleapis.com/google.profile.Person",
+                          "firstName": <string>,
+                          "lastName": <string>
+                        }
+
+                    If the embedded message type is well-known and has a custom
+                    JSON
+
+                    representation, that representation will be embedded adding
+                    a field
+
+                    `value` which holds the custom JSON in addition to the
+                    `@type`
+
+                    field. Example (for message [google.protobuf.Duration][]):
+
+                        {
+                          "@type": "type.googleapis.com/google.protobuf.Duration",
+                          "value": "1.212s"
+                        }
       tags:
         - Query
   /cosmos/params/v1beta1/params:
@@ -19682,7 +19682,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/slashing/v1beta1/signing_infos/{cons_address}':
+  /cosmos/slashing/v1beta1/signing_infos/{cons_address}:
     get:
       summary: SigningInfo queries the signing info of given cons address
       operationId: CosmosSlashingV1Beta1SigningInfo
@@ -19776,7 +19776,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/staking/v1beta1/delegations/{delegator_addr}':
+  /cosmos/staking/v1beta1/delegations/{delegator_addr}:
     get:
       summary: >-
         DelegatorDelegations queries all delegations of a given delegator
@@ -20115,7 +20115,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations':
+  /cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations:
     get:
       summary: Redelegations queries redelegations of given address.
       operationId: CosmosStakingV1Beta1Redelegations
@@ -20524,7 +20524,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations':
+  /cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations:
     get:
       summary: >-
         DelegatorUnbondingDelegations queries all unbonding delegations of a
@@ -20865,7 +20865,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators':
+  /cosmos/staking/v1beta1/delegators/{delegator_addr}/validators:
     get:
       summary: |-
         DelegatorValidators queries all validators info for given delegator
@@ -21352,7 +21352,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}':
+  /cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}:
     get:
       summary: |-
         DelegatorValidator queries validator info for given delegator validator
@@ -21743,7 +21743,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/staking/v1beta1/historical_info/{height}':
+  /cosmos/staking/v1beta1/historical_info/{height}:
     get:
       summary: HistoricalInfo queries the historical info for given height.
       operationId: CosmosStakingV1Beta1HistoricalInfo
@@ -23170,7 +23170,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/validators/{validator_addr}':
+  /cosmos/staking/v1beta1/validators/{validator_addr}:
     get:
       summary: Validator queries validator info for given validator address.
       operationId: CosmosStakingV1Beta1Validator
@@ -23554,7 +23554,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/staking/v1beta1/validators/{validator_addr}/delegations':
+  /cosmos/staking/v1beta1/validators/{validator_addr}/delegations:
     get:
       summary: ValidatorDelegations queries delegate info for given validator.
       operationId: CosmosStakingV1Beta1ValidatorDelegations
@@ -23888,7 +23888,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}':
+  /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}:
     get:
       summary: Delegation queries delegate info for given validator delegator pair.
       operationId: CosmosStakingV1Beta1Delegation
@@ -24147,7 +24147,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation':
+  /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation:
     get:
       summary: |-
         UnbondingDelegation queries unbonding info for given validator delegator
@@ -24408,7 +24408,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations':
+  /cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations:
     get:
       summary: >-
         ValidatorUnbondingDelegations queries unbonding delegations of a
@@ -25534,7 +25534,7 @@ paths:
                     description: Response code.
                   data:
                     type: string
-                    description: 'Result bytes, if any.'
+                    description: Result bytes, if any.
                   raw_log:
                     type: string
                     description: >-
@@ -25951,7 +25951,7 @@ paths:
               RPC method.
       tags:
         - Service
-  '/cosmos/tx/v1beta1/txs/block/{height}':
+  /cosmos/tx/v1beta1/txs/block/{height}:
     get:
       summary: GetBlockWithTxs fetches a block with decoded txs.
       description: 'Since: cosmos-sdk 0.45.2'
@@ -26211,7 +26211,7 @@ paths:
           type: boolean
       tags:
         - Service
-  '/cosmos/tx/v1beta1/txs/{hash}':
+  /cosmos/tx/v1beta1/txs/{hash}:
     get:
       summary: GetTx fetches a tx by hash.
       operationId: CosmosTxV1Beta1GetTx
@@ -26407,13 +26407,13 @@ paths:
                         }
       parameters:
         - name: hash
-          description: 'hash is the tx hash to query, encoded as a hex string.'
+          description: hash is the tx hash to query, encoded as a hex string.
           in: path
           required: true
           type: string
       tags:
         - Service
-  '/cosmos/upgrade/v1beta1/applied_plan/{name}':
+  /cosmos/upgrade/v1beta1/applied_plan/{name}:
     get:
       summary: AppliedPlan queries a previously applied upgrade plan by its name.
       operationId: CosmosUpgradeV1Beta1AppliedPlan
@@ -27382,7 +27382,7 @@ paths:
           type: string
       tags:
         - Query
-  '/cosmos/upgrade/v1beta1/upgraded_consensus_state/{last_height}':
+  /cosmos/upgrade/v1beta1/upgraded_consensus_state/{last_height}:
     get:
       summary: >-
         UpgradedConsensusState queries the consensus state that will serve
@@ -27608,7 +27608,7 @@ paths:
           format: int64
       tags:
         - Query
-  '/evmos/evm/v1/account/{address}':
+  /evmos/evm/v1/account/{address}:
     get:
       summary: Account queries an Ethereum account.
       operationId: EthermintEvmV1Account
@@ -27824,7 +27824,7 @@ paths:
           type: string
       tags:
         - Query
-  '/evmos/evm/v1/balances/{address}':
+  /evmos/evm/v1/balances/{address}:
     get:
       summary: |-
         Balance queries the balance of a the EVM denomination for a single
@@ -28240,7 +28240,7 @@ paths:
                         }
       tags:
         - Query
-  '/evmos/evm/v1/codes/{address}':
+  /evmos/evm/v1/codes/{address}:
     get:
       summary: Code queries the balance of all coins for a single account.
       operationId: EthermintEvmV1Code
@@ -28450,7 +28450,7 @@ paths:
           type: string
       tags:
         - Query
-  '/evmos/evm/v1/cosmos_account/{address}':
+  /evmos/evm/v1/cosmos_account/{address}:
     get:
       summary: CosmosAccount queries an Ethereum account's Cosmos Address.
       operationId: EthermintEvmV1CosmosAccount
@@ -29937,7 +29937,7 @@ paths:
                         }
       tags:
         - Query
-  '/evmos/evm/v1/storage/{address}/{key}':
+  /evmos/evm/v1/storage/{address}/{key}:
     get:
       summary: Storage queries the balance of all coins for a single account.
       operationId: EthermintEvmV1Storage
@@ -30394,13 +30394,13 @@ paths:
           required: false
           type: boolean
         - name: trace_config.limit
-          description: 'limit defines the maximum length of output, but zero means unlimited'
+          description: limit defines the maximum length of output, but zero means unlimited
           in: query
           required: false
           type: integer
           format: int32
         - name: trace_config.overrides.homestead_block
-          description: 'homestead_block switch (nil no fork, 0 = already homestead)'
+          description: homestead_block switch (nil no fork, 0 = already homestead)
           in: query
           required: false
           type: string
@@ -30515,12 +30515,12 @@ paths:
           required: false
           type: string
         - name: trace_config.overrides.shanghai_block
-          description: 'shanghai_block switch block (nil = no fork, 0 = already on shanghai)'
+          description: shanghai_block switch block (nil = no fork, 0 = already on shanghai)
           in: query
           required: false
           type: string
         - name: trace_config.overrides.cancun_block
-          description: 'cancun_block switch block (nil = no fork, 0 = already on cancun)'
+          description: cancun_block switch block (nil = no fork, 0 = already on cancun)
           in: query
           required: false
           type: string
@@ -30891,13 +30891,13 @@ paths:
           required: false
           type: boolean
         - name: trace_config.limit
-          description: 'limit defines the maximum length of output, but zero means unlimited'
+          description: limit defines the maximum length of output, but zero means unlimited
           in: query
           required: false
           type: integer
           format: int32
         - name: trace_config.overrides.homestead_block
-          description: 'homestead_block switch (nil no fork, 0 = already homestead)'
+          description: homestead_block switch (nil no fork, 0 = already homestead)
           in: query
           required: false
           type: string
@@ -31012,12 +31012,12 @@ paths:
           required: false
           type: string
         - name: trace_config.overrides.shanghai_block
-          description: 'shanghai_block switch block (nil = no fork, 0 = already on shanghai)'
+          description: shanghai_block switch block (nil = no fork, 0 = already on shanghai)
           in: query
           required: false
           type: string
         - name: trace_config.overrides.cancun_block
-          description: 'cancun_block switch block (nil = no fork, 0 = already on cancun)'
+          description: cancun_block switch block (nil = no fork, 0 = already on cancun)
           in: query
           required: false
           type: string
@@ -31069,7 +31069,7 @@ paths:
           format: int64
       tags:
         - Query
-  '/evmos/evm/v1/validator_account/{cons_address}':
+  /evmos/evm/v1/validator_account/{cons_address}:
     get:
       summary: >-
         ValidatorAccount queries an Ethereum account's from a validator
@@ -31576,7 +31576,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/evmos/claims/v1/claims_records/{address}':
+  /evmos/claims/v1/claims_records/{address}:
     get:
       summary: ClaimsRecord returns the claims record for a given address
       operationId: EvmosClaimsV1ClaimsRecord
@@ -31985,7 +31985,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/evmos/erc20/v1/token_pairs/{token}':
+  /evmos/erc20/v1/token_pairs/{token}:
     get:
       summary: TokenPair retrieves a registered token pair
       operationId: EvmosErc20V1TokenPair
@@ -32417,7 +32417,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/evmos/revenue/v1/revenues/{contract_address}':
+  /evmos/revenue/v1/revenues/{contract_address}:
     get:
       summary: Revenue retrieves a registered revenue for a given contract address
       operationId: EvmosRevenueV1Revenue
@@ -32479,7 +32479,7 @@ paths:
           type: string
       tags:
         - Query
-  '/evmos/revenue/v1/revenues/{deployer_address}':
+  /evmos/revenue/v1/revenues/{deployer_address}:
     get:
       summary: |-
         DeployerRevenues retrieves all revenues that a given deployer has
@@ -32602,7 +32602,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/evmos/revenue/v1/revenues/{withdrawer_address}':
+  /evmos/revenue/v1/revenues/{withdrawer_address}:
     get:
       summary: |-
         WithdrawerRevenues retrieves all revenues with a given withdrawer
@@ -32897,7 +32897,7 @@ paths:
           type: string
       tags:
         - Msg
-  '/evmos/vesting/v1/balances/{address}':
+  /evmos/vesting/v1/balances/{address}:
     get:
       summary: >-
         Balances retrieves the unvested, vested and locked tokens for a vesting
@@ -34051,7 +34051,7 @@ paths:
           type: string
       tags:
         - Msg
-  '/ibc/apps/interchain_accounts/controller/v1/owners/{owner}/connections/{connection_id}':
+  /ibc/apps/interchain_accounts/controller/v1/owners/{owner}/connections/{connection_id}:
     get:
       summary: >-
         InterchainAccount returns the interchain account address for a given
@@ -34915,7 +34915,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}:
     get:
       summary: Channel queries an IBC Channel.
       operationId: IbcCoreChannelV1Channel
@@ -35238,7 +35238,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/client_state':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/client_state:
     get:
       summary: >-
         ChannelClientState queries for the client state for the channel
@@ -35672,7 +35672,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}:
     get:
       summary: |-
         ChannelConsensusState queries for the consensus state for the channel
@@ -36103,7 +36103,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/next_sequence':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/next_sequence:
     get:
       summary: >-
         NextSequenceReceive returns the next receive sequence for a given
@@ -36353,7 +36353,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements:
     get:
       summary: >-
         PacketAcknowledgements returns all the packet acknowledgements
@@ -36720,7 +36720,7 @@ paths:
           collectionFormat: multi
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}:
     get:
       summary: PacketAcknowledgement queries a stored packet acknowledgement hash.
       operationId: IbcCoreChannelV1PacketAcknowledgement
@@ -36978,7 +36978,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments:
     get:
       summary: |-
         PacketCommitments returns all the packet commitments hashes associated
@@ -37334,7 +37334,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks:
     get:
       summary: >-
         UnreceivedAcks returns all the unreceived IBC acknowledgements
@@ -37594,7 +37594,7 @@ paths:
           minItems: 1
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets:
     get:
       summary: >-
         UnreceivedPackets returns all the unreceived IBC packets associated with
@@ -37854,7 +37854,7 @@ paths:
           minItems: 1
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}:
     get:
       summary: PacketCommitment queries a stored packet commitment hash.
       operationId: IbcCoreChannelV1PacketCommitment
@@ -38113,7 +38113,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}':
+  /ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}:
     get:
       summary: >-
         PacketReceipt queries if a given packet sequence has been received on
@@ -38375,7 +38375,7 @@ paths:
           format: uint64
       tags:
         - Query
-  '/ibc/core/channel/v1/connections/{connection}/channels':
+  /ibc/core/channel/v1/connections/{connection}/channels:
     get:
       summary: |-
         ConnectionChannels queries all the channels associated with a connection
@@ -39255,7 +39255,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/client/v1/client_states/{client_id}':
+  /ibc/core/client/v1/client_states/{client_id}:
     get:
       summary: ClientState queries an IBC light client.
       operationId: IbcCoreClientV1ClientState
@@ -39669,7 +39669,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/client/v1/client_status/{client_id}':
+  /ibc/core/client/v1/client_status/{client_id}:
     get:
       summary: Status queries the status of an IBC client.
       operationId: IbcCoreClientV1ClientStatus
@@ -39879,7 +39879,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/client/v1/consensus_states/{client_id}':
+  /ibc/core/client/v1/consensus_states/{client_id}:
     get:
       summary: |-
         ConsensusStates queries all the consensus state associated with a given
@@ -40388,7 +40388,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/client/v1/consensus_states/{client_id}/heights':
+  /ibc/core/client/v1/consensus_states/{client_id}/heights:
     get:
       summary: >-
         ConsensusStateHeights queries the height of every consensus states
@@ -40719,7 +40719,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/client/v1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}':
+  /ibc/core/client/v1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}:
     get:
       summary: >-
         ConsensusState queries a consensus state associated with a client state
@@ -42110,7 +42110,7 @@ paths:
                         }
       tags:
         - Query
-  '/ibc/core/connection/v1/client_connections/{client_id}':
+  /ibc/core/connection/v1/client_connections/{client_id}:
     get:
       summary: |-
         ClientConnections queries the connection paths associated with a client
@@ -42760,7 +42760,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/ibc/core/connection/v1/connections/{connection_id}':
+  /ibc/core/connection/v1/connections/{connection_id}:
     get:
       summary: Connection queries an IBC connection end.
       operationId: IbcCoreConnectionV1Connection
@@ -43097,7 +43097,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/connection/v1/connections/{connection_id}/client_state':
+  /ibc/core/connection/v1/connections/{connection_id}/client_state:
     get:
       summary: |-
         ConnectionClientState queries the client state associated with the
@@ -43524,7 +43524,7 @@ paths:
           type: string
       tags:
         - Query
-  '/ibc/core/connection/v1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}':
+  /ibc/core/connection/v1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}:
     get:
       summary: |-
         ConnectionConsensusState queries the consensus state associated with the
@@ -53962,7 +53962,7 @@ definitions:
           grantee is the address of the user being granted an allowance of
           another user's funds.
       allowance:
-        description: 'allowance can be any of basic, periodic, allowed fee allowance.'
+        description: allowance can be any of basic, periodic, allowed fee allowance.
         type: object
         properties:
           '@type':
@@ -54047,7 +54047,7 @@ definitions:
               grantee is the address of the user being granted an allowance of
               another user's funds.
           allowance:
-            description: 'allowance can be any of basic, periodic, allowed fee allowance.'
+            description: allowance can be any of basic, periodic, allowed fee allowance.
             type: object
             properties:
               '@type':
@@ -54129,7 +54129,7 @@ definitions:
                 grantee is the address of the user being granted an allowance of
                 another user's funds.
             allowance:
-              description: 'allowance can be any of basic, periodic, allowed fee allowance.'
+              description: allowance can be any of basic, periodic, allowed fee allowance.
               type: object
               properties:
                 '@type':
@@ -54236,7 +54236,7 @@ definitions:
                 grantee is the address of the user being granted an allowance of
                 another user's funds.
             allowance:
-              description: 'allowance can be any of basic, periodic, allowed fee allowance.'
+              description: allowance can be any of basic, periodic, allowed fee allowance.
               type: object
               properties:
                 '@type':
@@ -57596,7 +57596,7 @@ definitions:
         properties:
           rate:
             type: string
-            description: 'rate is the commission rate charged to delegators, as a fraction.'
+            description: rate is the commission rate charged to delegators, as a fraction.
           max_rate:
             type: string
             description: >-
@@ -57617,7 +57617,7 @@ definitions:
     properties:
       rate:
         type: string
-        description: 'rate is the commission rate charged to delegators, as a fraction.'
+        description: rate is the commission rate charged to delegators, as a fraction.
       max_rate:
         type: string
         description: >-
@@ -60509,7 +60509,7 @@ definitions:
         description: Response code.
       data:
         type: string
-        description: 'Result bytes, if any.'
+        description: Result bytes, if any.
       raw_log:
         type: string
         description: |-
@@ -60938,7 +60938,7 @@ definitions:
             description: Response code.
           data:
             type: string
-            description: 'Result bytes, if any.'
+            description: Result bytes, if any.
           raw_log:
             type: string
             description: |-
@@ -61804,7 +61804,7 @@ definitions:
             description: Response code.
           data:
             type: string
-            description: 'Result bytes, if any.'
+            description: Result bytes, if any.
           raw_log:
             type: string
             description: |-
@@ -62015,7 +62015,7 @@ definitions:
               description: Response code.
             data:
               type: string
-              description: 'Result bytes, if any.'
+              description: Result bytes, if any.
             raw_log:
               type: string
               description: |-
@@ -63951,7 +63951,7 @@ definitions:
             index:
               type: boolean
               title: nondeterministic
-          description: 'EventAttribute is a single key-value pair, associated with an event.'
+          description: EventAttribute is a single key-value pair, associated with an event.
     description: >-
       Event allows application developers to attach additional information to
 
@@ -63971,7 +63971,7 @@ definitions:
       index:
         type: boolean
         title: nondeterministic
-    description: 'EventAttribute is a single key-value pair, associated with an event.'
+    description: EventAttribute is a single key-value pair, associated with an event.
   cosmos.upgrade.v1beta1.ModuleVersion:
     type: object
     properties:
@@ -64342,7 +64342,7 @@ definitions:
     properties:
       homestead_block:
         type: string
-        title: 'homestead_block switch (nil no fork, 0 = already homestead)'
+        title: homestead_block switch (nil no fork, 0 = already homestead)
       dao_fork_block:
         type: string
         title: >-
@@ -64421,10 +64421,10 @@ definitions:
           splitter
       shanghai_block:
         type: string
-        title: 'shanghai_block switch block (nil = no fork, 0 = already on shanghai)'
+        title: shanghai_block switch block (nil = no fork, 0 = already on shanghai)
       cancun_block:
         type: string
-        title: 'cancun_block switch block (nil = no fork, 0 = already on cancun)'
+        title: cancun_block switch block (nil = no fork, 0 = already on cancun)
     description: >-
       ChainConfig defines the Ethereum ChainConfig parameters using *sdk.Int
       values
@@ -64452,7 +64452,7 @@ definitions:
       data:
         type: string
         format: byte
-        title: 'data which is supplied by the contract, usually ABI-encoded'
+        title: data which is supplied by the contract, usually ABI-encoded
       block_number:
         type: string
         format: uint64
@@ -64699,7 +64699,7 @@ definitions:
             data:
               type: string
               format: byte
-              title: 'data which is supplied by the contract, usually ABI-encoded'
+              title: data which is supplied by the contract, usually ABI-encoded
             block_number:
               type: string
               format: uint64
@@ -64794,7 +64794,7 @@ definitions:
         properties:
           homestead_block:
             type: string
-            title: 'homestead_block switch (nil no fork, 0 = already homestead)'
+            title: homestead_block switch (nil no fork, 0 = already homestead)
           dao_fork_block:
             type: string
             title: >-
@@ -64880,7 +64880,7 @@ definitions:
               shanghai)
           cancun_block:
             type: string
-            title: 'cancun_block switch block (nil = no fork, 0 = already on cancun)'
+            title: cancun_block switch block (nil = no fork, 0 = already on cancun)
         description: >-
           ChainConfig defines the Ethereum ChainConfig parameters using *sdk.Int
           values
@@ -64989,7 +64989,7 @@ definitions:
             properties:
               homestead_block:
                 type: string
-                title: 'homestead_block switch (nil no fork, 0 = already homestead)'
+                title: homestead_block switch (nil no fork, 0 = already homestead)
               dao_fork_block:
                 type: string
                 title: >-
@@ -65165,14 +65165,14 @@ definitions:
       limit:
         type: integer
         format: int32
-        title: 'limit defines the maximum length of output, but zero means unlimited'
+        title: limit defines the maximum length of output, but zero means unlimited
       overrides:
         title: overrides can be used to execute a trace using future fork rules
         type: object
         properties:
           homestead_block:
             type: string
-            title: 'homestead_block switch (nil no fork, 0 = already homestead)'
+            title: homestead_block switch (nil no fork, 0 = already homestead)
           dao_fork_block:
             type: string
             title: >-
@@ -65258,7 +65258,7 @@ definitions:
               shanghai)
           cancun_block:
             type: string
-            title: 'cancun_block switch block (nil = no fork, 0 = already on cancun)'
+            title: cancun_block switch block (nil = no fork, 0 = already on cancun)
         description: >-
           ChainConfig defines the Ethereum ChainConfig parameters using *sdk.Int
           values
@@ -66358,7 +66358,7 @@ definitions:
           this channel will travel
       version:
         type: string
-        title: 'opaque channel version, which is agreed upon during the handshake'
+        title: opaque channel version, which is agreed upon during the handshake
     description: |-
       Channel defines pipeline for exactly-once packet delivery between specific
       modules on separate blockchains, which has at least one end capable of
@@ -66433,7 +66433,7 @@ definitions:
           this channel will travel
       version:
         type: string
-        title: 'opaque channel version, which is agreed upon during the handshake'
+        title: opaque channel version, which is agreed upon during the handshake
       port_id:
         type: string
         title: port identifier
@@ -67123,7 +67123,7 @@ definitions:
               this channel will travel
           version:
             type: string
-            title: 'opaque channel version, which is agreed upon during the handshake'
+            title: opaque channel version, which is agreed upon during the handshake
         description: >-
           Channel defines pipeline for exactly-once packet delivery between
           specific
