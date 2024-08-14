@@ -22,8 +22,8 @@ RUN go mod download
 COPY . .
 
 RUN go mod vendor
-
-RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@latest
+# TODO switch to latest cosmosvisor
+RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
 
 RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored
