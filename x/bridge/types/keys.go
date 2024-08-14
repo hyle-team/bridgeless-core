@@ -3,6 +3,7 @@ package types
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -38,7 +39,7 @@ func KeyToken(id uint64) []byte {
 }
 
 func TokenPairPrexif(srcChain, srcAddr string) []byte {
-	return []byte(fmt.Sprintf("%s-%s", srcChain, srcAddr))
+	return []byte(fmt.Sprintf("%s-%s", srcChain, strings.ToLower(srcAddr)))
 }
 
 func KeyTokenPair(dstChain string) []byte {

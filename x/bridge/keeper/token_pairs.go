@@ -21,7 +21,7 @@ func (k Keeper) GetDstToken(sdkCtx sdk.Context, srcAddr, srcChain, dscChain stri
 	return
 }
 
-func (k Keeper) setTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
+func (k Keeper) SetTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
 	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrexif(current.ChainId, current.Address))
 
@@ -34,7 +34,7 @@ func (k Keeper) setTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs
 	}
 }
 
-func (k Keeper) removeTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
+func (k Keeper) RemoveTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
 	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
 	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrexif(current.ChainId, current.Address))
 
