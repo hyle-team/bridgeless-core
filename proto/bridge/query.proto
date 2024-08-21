@@ -1,0 +1,135 @@
+syntax = "proto3";
+package core.bridge;
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "bridge/params.proto";
+import "bridge/models/transaction.proto";
+import "bridge/models/token.proto";
+import "bridge/models/chain.proto";
+
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/cosmos/bridge/params";
+  }
+
+  // Transactions queries all the transactions.
+  rpc Transactions(QueryTransactionsRequest) returns (QueryTransactionsResponse) {
+    option (google.api.http).get = "/cosmos/bridge/transactions";
+  }
+
+  // TransactionById queries a transaction by ID.
+  rpc TransactionById(QueryTransactionByIdRequest) returns (QueryTransactionByIdResponse) {
+    option (google.api.http).get = "/cosmos/bridge/transactions/{id}";
+  }
+
+  // Token by id queries a token by id.
+  rpc GetTokenById(QueryGetTokenById) returns (QueryGetTokenByIdResponse) {
+    option (google.api.http).get = "/cosmos/bridge/tokens/{id}";
+  }
+
+  // Tokens queries all the tokens.
+  rpc GetTokens(QueryGetTokens) returns (QueryGetTokensResponse) {
+    option (google.api.http).get = "/cosmos/bridge/tokens";
+  }
+
+  // TokenPair queries an according token pair by src_chain, src_address and dst_chain.
+  rpc GetTokenPair(QueryGetTokenPair) returns (QueryGetTokenPairResponse) {
+    option (google.api.http).get = "/cosmos/bridge/token-pair/{src_chain}/{src_address}/{dst_chain}";
+  }
+
+
+  rpc GetChainById(QueryGetChainById) returns (QueryGetChainByIdResponse) {
+    option (google.api.http).get = "/cosmos/bridge/chains/{id}";
+  }
+
+  rpc GetChains(QueryGetChains) returns (QueryGetChainsResponse) {
+    option (google.api.http).get = "/cosmos/bridge/chains";
+  }
+
+  // this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryTransactionByIdRequest is request type for the Query/TransactionById RPC method.
+message QueryTransactionByIdRequest {
+  // id defines the unique transaction identifier.
+  string id = 1;
+}
+
+// QueryTransactionByIdResponse is response type for the Query/TransactionById RPC method.
+message QueryTransactionByIdResponse {
+  core.bridge.Transaction transaction = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryTransactionsRequest is request type for the Query/Transactions RPC method.
+message QueryTransactionsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryTransactionsResponse is response type for the Query/Transactions RPC method.
+message QueryTransactionsResponse {
+  // Transactions is a list of transactions.
+  repeated core.bridge.Transaction transactions = 1 [(gogoproto.nullable) = false];
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetTokenById {
+  uint64 id = 1;
+}
+
+message QueryGetTokenByIdResponse {
+  Token token = 1 [(gogoproto.nullable) = false];;
+}
+
+message QueryGetTokens {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryGetTokensResponse {
+  repeated Token tokens = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetChains {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryGetChainsResponse {
+  repeated Chain chains = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetTokenPair {
+  string src_chain = 1;
+  string src_address = 2;
+  string dst_chain = 3;
+}
+
+message QueryGetTokenPairResponse {
+  TokenInfo info = 1 [(gogoproto.nullable) = false];;
+}
+
+message QueryGetChainById {
+  string id = 1;
+}
+
+message QueryGetChainByIdResponse {
+  Chain chain = 1 [(gogoproto.nullable) = false];;
+}
+
+// this line is used by starport scaffolding # 3

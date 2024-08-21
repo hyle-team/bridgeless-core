@@ -1,0 +1,25 @@
+syntax = "proto3";
+package core.bridge;
+
+import "google/protobuf/any.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+message Transaction {
+  string deposit_chain_id = 1;
+  string deposit_tx_hash = 2;
+  uint64 deposit_tx_index = 3;
+  uint64 deposit_block = 4;
+  string deposit_token = 5;
+  string amount = 6;
+  string depositor = 7;
+  string receiver = 8;
+  string withdrawal_chain_id = 9;
+  string withdrawal_tx_hash = 10;
+  string withdrawal_token = 11;
+
+  // TODO: add status field, withdrawal_block...
+}

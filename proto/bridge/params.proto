@@ -1,0 +1,12 @@
+syntax = "proto3";
+package core.bridge;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+// Params defines the parameters for the module.
+message Params {
+  string module_admin = 1;
+  string evm_admin = 2;
+}

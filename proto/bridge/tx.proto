@@ -1,0 +1,96 @@
+syntax = "proto3";
+package core.bridge;
+
+
+// this line is used by starport scaffolding # proto/tx/import
+import "cosmos/msg/v1/msg.proto";
+import "bridge/models/transaction.proto";
+import "bridge/models/token.proto";
+import "bridge/models/chain.proto";
+import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/bridge/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+    rpc SubmitTransactions(MsgSubmitTransactions) returns (MsgSubmitTransactionsResponse);
+
+    rpc InsertChain(MsgInsertChain) returns (MsgInsertChainResponse);
+    rpc DeleteChain(MsgDeleteChain) returns (MsgDeleteChainResponse);
+
+    rpc InsertToken(MsgInsertToken) returns (MsgInsertTokenResponse);
+    rpc UpdateToken(MsgUpdateToken) returns (MsgUpdateTokenResponse);
+    rpc DeleteToken(MsgDeleteToken) returns (MsgDeleteTokenResponse);
+
+    rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
+    rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
+}
+
+// this line is used by starport scaffolding # proto/tx/message
+message MsgSubmitTransactions {
+  option (cosmos.msg.v1.signer) = "submitter";
+
+  string submitter = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated core.bridge.Transaction transactions = 2 [(gogoproto.nullable) = false];
+}
+
+// Tokens
+
+message MsgSubmitTransactionsResponse {}
+
+message MsgInsertToken {
+  string creator = 1;
+  Token token  = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgInsertTokenResponse {}
+
+message MsgUpdateToken {
+  string creator = 1;
+  uint64 token_id = 2;
+  TokenMetadata metadata = 3 [(gogoproto.nullable) = false];
+}
+
+message MsgUpdateTokenResponse {}
+
+message MsgDeleteToken {
+  string creator = 1;
+  uint64 token_id = 2;
+}
+
+message MsgDeleteTokenResponse {}
+
+// Chains
+
+message MsgInsertChain {
+  string creator = 1;
+  Chain chain  = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgInsertChainResponse {}
+
+message MsgDeleteChain {
+  string creator = 1;
+  string chain_id = 2;
+}
+
+message MsgDeleteChainResponse {}
+
+// TokenInfo
+
+message MsgAddTokenInfo {
+  string creator = 1;
+  TokenInfo info = 3 [(gogoproto.nullable) = false];
+}
+
+message MsgAddTokenInfoResponse {}
+
+message MsgRemoveTokenInfo {
+  string creator = 1;
+  uint64 token_id = 2;
+  string chain_id = 3;
+}
+
+message MsgRemoveTokenInfoResponse {}

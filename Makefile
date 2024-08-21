@@ -121,6 +121,11 @@ endif
 BUILD_TARGETS := build install
 
 build: BUILD_ARGS=-o $(BUILDDIR)/
+
+build-lcl:
+	rm -f $(GOPATH)/bin/bridgeless-cored
+	go build -o $(GOPATH)/bin/bridgeless-cored ./cmd/bridgeless-cored
+
 build-linux:
 	GOOS=linux GOARCH=amd64 LEDGER_ENABLED=false $(MAKE) build
 
