@@ -844,8 +844,26 @@ func NewBridge(
 	app.setPostHandler()
 	app.SetEndBlocker(app.EndBlocker)
 
+	upgradeInfo, err := app.UpgradeKeeper.ReadUpgradeInfoFromDisk()
+	if err != nil {
+		panic(fmt.Errorf("failed to read upgrade info from disk: %w", err))
+	}
+
 	app.UpgradeKeeper.SetUpgradeHandler(
 		"v12.1.8-rc2",
+		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
+			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
+		},
+	)
+
+	if upgradeInfo.Name == "v12.1.9-rc1" && !app.UpgradeKeeper.IsSkipHeight(upgradeInfo.Height) {
+		app.SetStoreLoader(upgradetypes.UpgradeStoreLoader(upgradeInfo.Height, &storetypes.StoreUpgrades{
+			Added: []string{bridgetypes.ModuleName},
+		}))
+	}
+
+	app.UpgradeKeeper.SetUpgradeHandler(
+		"v12.1.9-rc1",
 		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
 			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
 		},
