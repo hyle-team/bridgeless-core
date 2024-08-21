@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) Transactions(goCtx context.Context, req *types.QueryTransactionsRequest) (*types.QueryTransactionsResponse, error) {
+func (k queryServer) Transactions(goCtx context.Context, req *types.QueryTransactionsRequest) (*types.QueryTransactionsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -22,7 +22,7 @@ func (k Keeper) Transactions(goCtx context.Context, req *types.QueryTransactions
 	return &types.QueryTransactionsResponse{Transactions: txs, Pagination: pages}, nil
 }
 
-func (k Keeper) TransactionById(goCtx context.Context, req *types.QueryTransactionByIdRequest) (*types.QueryTransactionByIdResponse, error) {
+func (k queryServer) TransactionById(goCtx context.Context, req *types.QueryTransactionByIdRequest) (*types.QueryTransactionByIdResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}

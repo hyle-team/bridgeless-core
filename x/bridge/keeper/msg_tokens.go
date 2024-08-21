@@ -21,7 +21,7 @@ func (m msgServer) InsertToken(goCtx context.Context, msg *types.MsgInsertToken)
 
 	m.SetToken(ctx, msg.Token)
 	for _, pair := range msg.Token.Info {
-		m.SetTokenPairs(ctx, pair, msg.Token.Info)
+		m.SetTokenPairs(ctx, pair, msg.Token.Info...)
 	}
 
 	return &types.MsgInsertTokenResponse{}, nil
@@ -39,9 +39,7 @@ func (m msgServer) UpdateToken(goCtx context.Context, msg *types.MsgUpdateToken)
 		return nil, sdkerrors.Wrap(sdkerrors.ErrNotFound, "token not found")
 	}
 
-	token.Name = msg.Name
-	token.Symbol = msg.Symbol
-
+	token.Metadata = msg.Metadata
 	m.SetToken(ctx, token)
 
 	return &types.MsgUpdateTokenResponse{}, nil
@@ -61,7 +59,7 @@ func (m msgServer) DeleteToken(goCtx context.Context, msg *types.MsgDeleteToken)
 
 	m.RemoveToken(ctx, msg.TokenId)
 	for _, pair := range token.Info {
-		m.RemoveTokenPairs(ctx, pair, token.Info)
+		m.RemoveTokenPairs(ctx, pair, token.Info...)
 	}
 
 	return &types.MsgDeleteTokenResponse{}, nil

@@ -49,9 +49,8 @@ message MsgInsertTokenResponse {}
 
 message MsgUpdateToken {
   string creator = 1;
-  string name = 2;
-  string symbol = 3;
-  uint64 token_id = 4;
+  uint64 token_id = 2;
+  TokenMetadata metadata = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateTokenResponse {}

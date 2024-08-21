@@ -7,8 +7,8 @@ import (
 )
 
 func (k Keeper) GetDstToken(sdkCtx sdk.Context, srcAddr, srcChain, dscChain string) (info types.TokenInfo, found bool) {
-	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
-	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrexif(srcChain, srcAddr))
+	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPairsPrefix))
+	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrefix(srcChain, srcAddr))
 
 	bz := srcBranchStore.Get(types.KeyTokenPair(dscChain))
 	if bz == nil {
@@ -21,9 +21,9 @@ func (k Keeper) GetDstToken(sdkCtx sdk.Context, srcAddr, srcChain, dscChain stri
 	return
 }
 
-func (k Keeper) SetTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
-	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
-	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrexif(current.ChainId, current.Address))
+func (k Keeper) SetTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs ...types.TokenInfo) {
+	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPairsPrefix))
+	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrefix(current.ChainId, current.Address))
 
 	for _, pair := range pairs {
 		if pair.ChainId == current.ChainId {
@@ -34,9 +34,9 @@ func (k Keeper) SetTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs
 	}
 }
 
-func (k Keeper) RemoveTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs []types.TokenInfo) {
-	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPairsPrefix))
-	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrexif(current.ChainId, current.Address))
+func (k Keeper) RemoveTokenPairs(sdkCtx sdk.Context, current types.TokenInfo, pairs ...types.TokenInfo) {
+	pStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPairsPrefix))
+	srcBranchStore := prefix.NewStore(pStore, types.TokenPairPrefix(current.ChainId, current.Address))
 
 	for _, pair := range pairs {
 		if pair.ChainId == current.ChainId {

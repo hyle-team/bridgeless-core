@@ -24,22 +24,22 @@ const (
 	ParamEvmAdminKey    = "EvmAdmin"
 
 	// ---- Store Prefixes ------
-	StoreTokenPrefix       = "token/"
-	StoreTokenPairsPrefix  = "token-pairs/"
-	StoreChainPrefix       = "chain/"
-	StoreTransactionPrefix = "transaction/"
+	StoreTokenPrefix       = "token"
+	StoreTokenPairsPrefix  = "token-pairs"
+	StoreChainPrefix       = "chain"
+	StoreTransactionPrefix = "transaction"
 )
 
-func KeyPrefix(p string) []byte {
-	return []byte(p)
+func Prefix(p string) []byte {
+	return []byte(p + "/")
+}
+
+func TokenPairPrefix(srcChain, srcAddr string) []byte {
+	return []byte(fmt.Sprintf("%s/%s/", srcChain, strings.ToLower(srcAddr)))
 }
 
 func KeyToken(id uint64) []byte {
 	return []byte(strconv.FormatInt(int64(id), 10))
-}
-
-func TokenPairPrexif(srcChain, srcAddr string) []byte {
-	return []byte(fmt.Sprintf("%s-%s", srcChain, strings.ToLower(srcAddr)))
 }
 
 func KeyTokenPair(dstChain string) []byte {

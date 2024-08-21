@@ -10,11 +10,22 @@ func validateToken(token *Token) error {
 		return fmt.Errorf("token is nil")
 	}
 
-	if token.Name == "" {
+	return validateTokenMetadata(&token.Metadata)
+}
+
+func validateTokenMetadata(metadata *TokenMetadata) error {
+	if metadata == nil {
+		return fmt.Errorf("metadata is nil")
+	}
+
+	if metadata.Name == "" {
 		return fmt.Errorf("name cannot be empty")
 	}
-	if token.Symbol == "" {
+	if metadata.Symbol == "" {
 		return fmt.Errorf("symbol cannot be empty")
+	}
+	if metadata.Uri == "" {
+		return fmt.Errorf("uri cannot be empty")
 	}
 
 	return nil

@@ -9,11 +9,11 @@ const TypeMsgUpdateToken = "update_token"
 
 var _ sdk.Msg = &MsgUpdateToken{}
 
-func NewMsgUpdateToken(creator string, name, symbol string) *MsgUpdateToken {
+func NewMsgUpdateToken(creator string, tokenId uint64, metadata TokenMetadata) *MsgUpdateToken {
 	return &MsgUpdateToken{
-		Creator: creator,
-		Name:    name,
-		Symbol:  symbol,
+		Creator:  creator,
+		TokenId:  tokenId,
+		Metadata: metadata,
 	}
 }
 
@@ -45,12 +45,8 @@ func (msg *MsgUpdateToken) ValidateBasic() error {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
 	}
 
-	if len(msg.Name) == 0 {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name cannot be empty")
-	}
-
-	if len(msg.Symbol) == 0 {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "symbol cannot be empty")
+	if err = validateTokenMetadata(&msg.Metadata); err != nil {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, err.Error())
 	}
 
 	return nil

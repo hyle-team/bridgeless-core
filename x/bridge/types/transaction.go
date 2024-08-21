@@ -6,7 +6,7 @@ import (
 )
 
 func TransactionId(tx *Transaction) string {
-	return fmt.Sprintf("%s-%v-%s", tx.DepositTxHash, tx.DepositTxIndex, tx.DepositChainId)
+	return fmt.Sprintf("%s/%v/%s", tx.DepositTxHash, tx.DepositTxIndex, tx.DepositChainId)
 }
 
 func validateTransaction(tx *Transaction) error {

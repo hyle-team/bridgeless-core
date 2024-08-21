@@ -93,9 +93,9 @@ func CmdRemoveToken() *cobra.Command {
 
 func CmdUpdateToken() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update [from_key_or_address] [name] [symbol]",
-		Short: "Update the token",
-		Args:  cobra.ExactArgs(3),
+		Use:   "update [from_key_or_address] [token-json]",
+		Short: "Update the token metadata",
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			cmd.Flags().Set(flags.FlagFrom, args[0])
@@ -104,9 +104,14 @@ func CmdUpdateToken() *cobra.Command {
 				return err
 			}
 
+			token := types.Token{}
+			if err = types.ModuleCdc.UnmarshalJSON([]byte(args[1]), &token); err != nil {
+				return err
+			}
+
 			msg := types.NewMsgUpdateToken(
 				clientCtx.GetFromAddress().String(),
-				args[1], args[2],
+				token.Id, token.Metadata,
 			)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)

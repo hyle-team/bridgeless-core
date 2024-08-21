@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) GetTokenPair(goctx context.Context, req *types.QueryGetTokenPair) (*types.QueryGetTokenPairResponse, error) {
+func (k queryServer) GetTokenPair(goctx context.Context, req *types.QueryGetTokenPair) (*types.QueryGetTokenPairResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}

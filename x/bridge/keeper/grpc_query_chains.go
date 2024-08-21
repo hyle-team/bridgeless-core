@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) GetChainById(goctx context.Context, req *types.QueryGetChainById) (*types.QueryGetChainByIdResponse, error) {
+func (k queryServer) GetChainById(goctx context.Context, req *types.QueryGetChainById) (*types.QueryGetChainByIdResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -23,7 +23,7 @@ func (k Keeper) GetChainById(goctx context.Context, req *types.QueryGetChainById
 	return &types.QueryGetChainByIdResponse{Chain: token}, nil
 }
 
-func (k Keeper) GetChains(goctx context.Context, req *types.QueryGetChains) (*types.QueryGetChainsResponse, error) {
+func (k queryServer) GetChains(goctx context.Context, req *types.QueryGetChains) (*types.QueryGetChainsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}

@@ -10,12 +10,12 @@ import (
 )
 
 func (k Keeper) SetToken(sdkCtx sdk.Context, token types.Token) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	tStore.Set(types.KeyToken(token.Id), k.cdc.MustMarshal(&token))
 }
 
 func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, found bool) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	bz := tStore.Get(types.KeyToken(id))
 	if bz == nil {
 		return
@@ -28,7 +28,7 @@ func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, foun
 }
 
 func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Token, *query.PageResponse, error) {
-	tStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	tStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	var chains []types.Token
 
 	pageRes, err := query.Paginate(tStore, pagination, func(key []byte, value []byte) error {
@@ -46,6 +46,6 @@ func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageR
 }
 
 func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTokenPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	tStore.Delete(types.KeyToken(id))
 }

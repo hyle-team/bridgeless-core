@@ -8,12 +8,12 @@ import (
 )
 
 func (k Keeper) SetTransaction(sdkCtx sdk.Context, transaction types.Transaction) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTransactionPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTransactionPrefix))
 	tStore.Set(types.KeyTransaction(types.TransactionId(&transaction)), k.cdc.MustMarshal(&transaction))
 }
 
 func (k Keeper) GetTransaction(sdkCtx sdk.Context, id string) (types.Transaction, bool) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTransactionPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTransactionPrefix))
 
 	var transaction types.Transaction
 	bz := tStore.Get(types.KeyTransaction(id))
@@ -30,7 +30,7 @@ func (k Keeper) GetPaginatedTransactions(
 ) (
 	[]types.Transaction, *query.PageResponse, error,
 ) {
-	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.KeyPrefix(types.StoreTransactionPrefix))
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTransactionPrefix))
 
 	var transactions []types.Transaction
 	pageRes, err := query.Paginate(tStore, pagination, func(key []byte, value []byte) error {
