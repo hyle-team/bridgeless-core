@@ -985,10 +985,15 @@ paths:
                     id:
                       type: string
                       format: uint64
-                    name:
-                      type: string
-                    symbol:
-                      type: string
+                    metadata:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        symbol:
+                          type: string
+                        uri:
+                          type: string
                     info:
                       type: array
                       items:
@@ -1293,10 +1298,15 @@ paths:
                   id:
                     type: string
                     format: uint64
-                  name:
-                    type: string
-                  symbol:
-                    type: string
+                  metadata:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      symbol:
+                        type: string
+                      uri:
+                        type: string
                   info:
                     type: array
                     items:
@@ -46349,10 +46359,15 @@ definitions:
           id:
             type: string
             format: uint64
-          name:
-            type: string
-          symbol:
-            type: string
+          metadata:
+            type: object
+            properties:
+              name:
+                type: string
+              symbol:
+                type: string
+              uri:
+                type: string
           info:
             type: array
             items:
@@ -46396,10 +46411,15 @@ definitions:
             id:
               type: string
               format: uint64
-            name:
-              type: string
-            symbol:
-              type: string
+            metadata:
+              type: object
+              properties:
+                name:
+                  type: string
+                symbol:
+                  type: string
+                uri:
+                  type: string
             info:
               type: array
               items:
@@ -46555,10 +46575,15 @@ definitions:
       id:
         type: string
         format: uint64
-      name:
-        type: string
-      symbol:
-        type: string
+      metadata:
+        type: object
+        properties:
+          name:
+            type: string
+          symbol:
+            type: string
+          uri:
+            type: string
       info:
         type: array
         items:
@@ -46588,6 +46613,15 @@ definitions:
       token_id:
         type: string
         format: uint64
+  core.bridge.TokenMetadata:
+    type: object
+    properties:
+      name:
+        type: string
+      symbol:
+        type: string
+      uri:
+        type: string
   core.bridge.Transaction:
     type: object
     properties:
