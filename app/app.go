@@ -30,6 +30,7 @@ import (
 	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
 	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
 	"github.com/hyle-team/bridgeless-core/docs"
+	"github.com/hyle-team/bridgeless-core/x/bridge"
 
 	"io"
 	"net/http"
@@ -139,6 +140,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
 	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
 	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	bridgetypes "github.com/hyle-team/bridgeless-core/x/bridge/types"
 	"github.com/hyle-team/bridgeless-core/x/evm"
 	evmkeeper "github.com/hyle-team/bridgeless-core/x/evm/keeper"
 	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
@@ -151,6 +153,7 @@ import (
 
 	"github.com/hyle-team/bridgeless-core/app/ante"
 
+	bridgekeeper "github.com/hyle-team/bridgeless-core/x/bridge/keeper"
 	"github.com/hyle-team/bridgeless-core/x/claims"
 	claimskeeper "github.com/hyle-team/bridgeless-core/x/claims/keeper"
 	claimstypes "github.com/hyle-team/bridgeless-core/x/claims/types"
@@ -240,6 +243,7 @@ var (
 		revenue.AppModuleBasic{},
 		mint.AppModuleBasic{},
 		nft.AppModuleBasic{},
+		bridge.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -257,6 +261,7 @@ var (
 		claimstypes.ModuleName:         nil,
 		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
 		nfttypes.ModuleName:            nil,
+		bridgetypes.ModuleName:         nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -322,8 +327,9 @@ type Bridge struct {
 	RecoveryKeeper *recoverykeeper.Keeper
 	RevenueKeeper  revenuekeeper.Keeper
 
-	MintKeeper mintkeeper.Keeper
-	NFTKeeper  *nftkeeper.Keeper
+	MintKeeper   mintkeeper.Keeper
+	NFTKeeper    *nftkeeper.Keeper
+	BridgeKeeper *bridgekeeper.Keeper
 
 	// the module manager
 	mm *module.Manager
@@ -385,6 +391,7 @@ func NewBridge(
 		accumulatortypes.StoreKey,
 		minttypes.StoreKey,
 		nfttypes.StoreKey,
+		bridgetypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -433,6 +440,9 @@ func NewBridge(
 	)
 	app.StakingKeeper = stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
+	)
+	app.BridgeKeeper = bridgekeeper.NewKeeper(
+		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName),
 	)
 
 	accumulatorKeeper := accumulatorkeeper.NewKeeper(
@@ -686,6 +696,7 @@ func NewBridge(
 			app.GetSubspace(revenuetypes.ModuleName)),
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
 		nft.NewAppModule(appCodec, *app.NFTKeeper, app.AccountKeeper, app.BankKeeper),
+		bridge.NewAppModule(appCodec, *app.BridgeKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -724,6 +735,7 @@ func NewBridge(
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
+		bridgetypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
@@ -760,6 +772,7 @@ func NewBridge(
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
+		bridgetypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -805,6 +818,7 @@ func NewBridge(
 		accumulatortypes.ModuleName,
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
+		bridgetypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -1151,5 +1165,6 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(revenuetypes.ModuleName)
 	paramsKeeper.Subspace(minttypes.ModuleName)
 	paramsKeeper.Subspace(nfttypes.ModuleName)
+	paramsKeeper.Subspace(bridgetypes.ModuleName)
 	return paramsKeeper
 }
