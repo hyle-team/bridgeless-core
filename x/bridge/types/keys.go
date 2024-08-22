@@ -21,7 +21,6 @@ const (
 
 	// ----- Param Keys -----
 	ParamModuleAdminKey = "ModuleAdmin"
-	ParamEvmAdminKey    = "EvmAdmin"
 
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token"
