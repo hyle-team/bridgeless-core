@@ -869,6 +869,9 @@ func NewBridge(
 				ModuleAdmin: "bridge1ykcl8yncutg8z8hr8fct043rx56j5a9ennk7dy",
 			})
 
+			// Disabling repeated call of InitGenesis for new bridge module
+			fromVM[bridgetypes.ModuleName] = bridge.AppModule{}.ConsensusVersion()
+
 			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
 		},
 	)
