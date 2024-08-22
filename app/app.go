@@ -856,14 +856,14 @@ func NewBridge(
 		},
 	)
 
-	if upgradeInfo.Name == "v12.1.9-rc2" && !app.UpgradeKeeper.IsSkipHeight(upgradeInfo.Height) {
+	if upgradeInfo.Name == "v12.1.9-rc3" && !app.UpgradeKeeper.IsSkipHeight(upgradeInfo.Height) {
 		app.SetStoreLoader(upgradetypes.UpgradeStoreLoader(upgradeInfo.Height, &storetypes.StoreUpgrades{
 			Added: []string{bridgetypes.ModuleName},
 		}))
 	}
 
 	app.UpgradeKeeper.SetUpgradeHandler(
-		"v12.1.9-rc2",
+		"v12.1.9-rc3",
 		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
 			app.BridgeKeeper.SetParams(ctx, bridgetypes.Params{
 				ModuleAdmin: "bridge1ykcl8yncutg8z8hr8fct043rx56j5a9ennk7dy",
