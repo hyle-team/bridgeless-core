@@ -867,7 +867,6 @@ func NewBridge(
 		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
 			app.BridgeKeeper.SetParams(ctx, bridgetypes.Params{
 				ModuleAdmin: "bridge1ykcl8yncutg8z8hr8fct043rx56j5a9ennk7dy",
-				EvmAdmin:    "0x7926ED700899C317a75E519B5D0bdb72fF35eAE2",
 			})
 
 			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
