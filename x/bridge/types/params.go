@@ -19,30 +19,24 @@ func ParamKeyTable() paramtypes.KeyTable {
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair([]byte(ParamEvmAdminKey), &p.EvmAdmin, validateModuleAdmin),
 		paramtypes.NewParamSetPair([]byte(ParamModuleAdminKey), &p.ModuleAdmin, validateModuleAdmin),
 	}
 }
 
 // NewParams creates a new Params instance
-func NewParams(moduleAdmin, evmAdmin string) Params {
+func NewParams(moduleAdmin string) Params {
 	return Params{
 		ModuleAdmin: moduleAdmin,
-		EvmAdmin:    evmAdmin,
 	}
 }
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return NewParams("", "")
+	return NewParams("")
 }
 
 // Validate validates the set of params
 func (p Params) Validate() error {
-	if err := validateModuleAdmin(p.EvmAdmin); err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid evm admin address (%s)", err)
-	}
-
 	if err := validateModuleAdmin(p.ModuleAdmin); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid module admin address (%s)", err)
 	}
