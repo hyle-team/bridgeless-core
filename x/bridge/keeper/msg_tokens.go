@@ -20,8 +20,9 @@ func (m msgServer) InsertToken(goCtx context.Context, msg *types.MsgInsertToken)
 	}
 
 	m.SetToken(ctx, msg.Token)
-	for _, pair := range msg.Token.Info {
-		m.SetTokenPairs(ctx, pair, msg.Token.Info...)
+	for _, info := range msg.Token.Info {
+		m.SetTokenInfo(ctx, info)
+		m.SetTokenPairs(ctx, info, msg.Token.Info...)
 	}
 
 	return &types.MsgInsertTokenResponse{}, nil
@@ -58,8 +59,9 @@ func (m msgServer) DeleteToken(goCtx context.Context, msg *types.MsgDeleteToken)
 	}
 
 	m.RemoveToken(ctx, msg.TokenId)
-	for _, pair := range token.Info {
-		m.RemoveTokenPairs(ctx, pair, token.Info...)
+	for _, info := range token.Info {
+		m.Keeper.RemoveTokenInfo(ctx, info.ChainId, info.Address)
+		m.RemoveTokenPairs(ctx, info, token.Info...)
 	}
 
 	return &types.MsgDeleteTokenResponse{}, nil

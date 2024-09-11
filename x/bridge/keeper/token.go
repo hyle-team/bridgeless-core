@@ -14,6 +14,11 @@ func (k Keeper) SetToken(sdkCtx sdk.Context, token types.Token) {
 	tStore.Set(types.KeyToken(token.Id), k.cdc.MustMarshal(&token))
 }
 
+func (k Keeper) SetTokenInfo(sdkCtx sdk.Context, tokenInfo types.TokenInfo) {
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenInfoPrefix))
+	tStore.Set(types.KeyTokenInfo(tokenInfo.ChainId, tokenInfo.Address), k.cdc.MustMarshal(&tokenInfo))
+}
+
 func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, found bool) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	bz := tStore.Get(types.KeyToken(id))
@@ -22,6 +27,19 @@ func (k Keeper) GetToken(sdkCtx sdk.Context, id uint64) (token types.Token, foun
 	}
 
 	k.cdc.MustUnmarshal(bz, &token)
+	found = true
+
+	return
+}
+
+func (k Keeper) GetTokenInfo(sdkCtx sdk.Context, chain, address string) (tokenInfo types.TokenInfo, found bool) {
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenInfoPrefix))
+	bz := tStore.Get(types.KeyTokenInfo(chain, address))
+	if bz == nil {
+		return
+	}
+
+	k.cdc.MustUnmarshal(bz, &tokenInfo)
 	found = true
 
 	return
@@ -48,4 +66,9 @@ func (k Keeper) GetTokensWithPagination(ctx sdk.Context, pagination *query.PageR
 func (k Keeper) RemoveToken(sdkCtx sdk.Context, id uint64) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenPrefix))
 	tStore.Delete(types.KeyToken(id))
+}
+
+func (k Keeper) RemoveTokenInfo(sdkCtx sdk.Context, chain, addr string) {
+	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTokenInfoPrefix))
+	tStore.Delete(types.KeyTokenInfo(chain, addr))
 }
