@@ -20,6 +20,4 @@ message Transaction {
   string withdrawal_chain_id = 9;
   string withdrawal_tx_hash = 10;
   string withdrawal_token = 11;
-
-  // TODO: add status field, withdrawal_block...
 }

@@ -24,6 +24,7 @@ const (
 
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token"
+	StoreTokenInfoPrefix   = "token-info"
 	StoreTokenPairsPrefix  = "token-pairs"
 	StoreChainPrefix       = "chain"
 	StoreTransactionPrefix = "transaction"
@@ -43,6 +44,10 @@ func KeyToken(id uint64) []byte {
 
 func KeyTokenPair(dstChain string) []byte {
 	return []byte(dstChain)
+}
+
+func KeyTokenInfo(chain, addr string) []byte {
+	return []byte(fmt.Sprintf("%s/%s", chain, strings.ToLower(addr)))
 }
 
 func KeyChain(chain string) []byte {

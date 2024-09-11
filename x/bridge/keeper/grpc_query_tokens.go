@@ -35,3 +35,17 @@ func (k queryServer) GetTokens(goctx context.Context, req *types.QueryGetTokens)
 
 	return &types.QueryGetTokensResponse{Tokens: tokens, Pagination: page}, nil
 }
+
+func (k queryServer) GetTokenInfo(goctx context.Context, req *types.QueryGetTokenInfo) (*types.QueryGetTokenInfoResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goctx)
+	tokenInfo, found := k.Keeper.GetTokenInfo(ctx, req.Chain, req.Address)
+	if !found {
+		return nil, types.ErrTokenInfoNotFound
+	}
+
+	return &types.QueryGetTokenInfoResponse{Info: tokenInfo}, nil
+}

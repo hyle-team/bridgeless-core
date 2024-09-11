@@ -103,3 +103,34 @@ func CmdQueryTokenPair() *cobra.Command {
 
 	return cmd
 }
+
+func CmdQueryTokenInfo() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "token-info [chain] [address]",
+		Short: "Query the token information",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientQueryContext(cmd)
+			if err != nil {
+				return err
+			}
+			queryClient := types.NewQueryClient(clientCtx)
+
+			req := &types.QueryGetTokenInfo{
+				Chain:   args[0],
+				Address: args[1],
+			}
+
+			res, err := queryClient.GetTokenInfo(context.Background(), req)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
