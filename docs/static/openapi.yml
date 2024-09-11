@@ -1780,8 +1780,6 @@ paths:
                       type: string
                     withdrawal_token:
                       type: string
-                    is_wrapped:
-                      type: boolean
                 description: Transactions is a list of transactions.
               pagination:
                 type: object
@@ -2095,8 +2093,6 @@ paths:
                     type: string
                   withdrawal_token:
                     type: string
-                  is_wrapped:
-                    type: boolean
             description: >-
               QueryTransactionByIdResponse is response type for the
               Query/TransactionById RPC method.
@@ -46753,8 +46749,6 @@ definitions:
             type: string
           withdrawal_token:
             type: string
-          is_wrapped:
-            type: boolean
     description: >-
       QueryTransactionByIdResponse is response type for the
       Query/TransactionById RPC method.
@@ -46790,8 +46784,6 @@ definitions:
               type: string
             withdrawal_token:
               type: string
-            is_wrapped:
-              type: boolean
         description: Transactions is a list of transactions.
       pagination:
         type: object
@@ -46906,8 +46898,6 @@ definitions:
         type: string
       withdrawal_token:
         type: string
-      is_wrapped:
-        type: boolean
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
