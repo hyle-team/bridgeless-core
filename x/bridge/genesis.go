@@ -17,8 +17,9 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 	for _, token := range genState.Tokens {
 		k.SetToken(ctx, token)
-		for _, pair := range token.Info {
-			k.SetTokenPairs(ctx, pair, token.Info...)
+		for _, info := range token.Info {
+			k.SetTokenInfo(ctx, info)
+			k.SetTokenPairs(ctx, info, token.Info...)
 		}
 	}
 	for _, tx := range genState.Transactions {
