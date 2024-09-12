@@ -45,8 +45,10 @@ func BridgeKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 
 	ctx := sdk.NewContext(stateStore, tmproto.Header{}, false, log.NewNopLogger())
 
+	params := types.DefaultParams()
+	params.ModuleAdmin = "bridge103n4cmjt2je8nqcxg9y9desyhy6m57u52kkuc4"
 	// Initialize params
-	k.SetParams(ctx, types.DefaultParams())
+	k.SetParams(ctx, params)
 
 	return k, ctx
 }
