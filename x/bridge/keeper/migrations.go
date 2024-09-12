@@ -16,7 +16,7 @@ func NewMigrator(keeper Keeper) Migrator {
 }
 
 func (m Migrator) Migrate1to2(ctx sdk.Context) error {
-	if err := v2.MigrateStore(ctx, m.keeper); err != nil {
+	if err := v2.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc); err != nil {
 		return err
 	}
 
