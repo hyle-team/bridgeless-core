@@ -194,6 +194,10 @@ func (h Hooks) BeforeValidatorSlashed(_ sdk.Context, _ sdk.ValAddress, _ sdk.Dec
 	return nil
 }
 
+func (h Hooks) BeforeDelegationUpdated(_ sdk.Context, _ sdk.AccAddress) error {
+	return nil
+}
+
 // IBC callbacks and transfer handlers
 
 // SendPacket implements the ICS4Wrapper interface from the transfer module. It

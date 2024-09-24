@@ -301,7 +301,7 @@ type Bridge struct {
 	StakingKeeper     *stakingkeeper.Keeper
 	SlashingKeeper    slashingkeeper.Keeper
 	DistrKeeper       distrkeeper.Keeper
-	GovKeeper         govkeeper.Keeper
+	GovKeeper         *govkeeper.Keeper
 	CrisisKeeper      crisiskeeper.Keeper
 	UpgradeKeeper     upgradekeeper.Keeper
 	ParamsKeeper      paramskeeper.Keeper
@@ -441,6 +441,8 @@ func NewBridge(
 	app.StakingKeeper = stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
+
+	//app.StakingKeeper = app.StakingKeeper.SetHooks()
 	app.BridgeKeeper = bridgekeeper.NewKeeper(
 		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName),
 	)
@@ -512,7 +514,6 @@ func NewBridge(
 		app.StakingKeeper, govRouter, app.MsgServiceRouter(), govConfig, app.NFTKeeper,
 	)
 
-	// Evmos Keeper
 	app.MintKeeper = mintkeeper.NewKeeper(
 		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), app.StakingKeeper,
 		app.AccountKeeper, app.BankKeeper, app.AccumulatorKeeper, authtypes.FeeCollectorName,
@@ -523,17 +524,25 @@ func NewBridge(
 		app.AccountKeeper, app.BankKeeper, app.StakingKeeper, app.DistrKeeper, app.IBCKeeper.ChannelKeeper,
 	)
 
+	app.GovKeeper = govKeeper.SetHooks(
+		govtypes.NewMultiGovHooks(
+			app.ClaimsKeeper.Hooks(),
+		),
+	)
+
 	// register the staking hooks
 	// NOTE: stakingKeeper above is passed by reference, so that it will contain these hooks
-	// NOTE: Distr, Slashing and Claim must be created before calling the Hooks method to avoid returning a Keeper without its table generated
+	// NOTE: Distr, Slashing, GovKeeper and Claim must be created before calling the Hooks method to avoid returning a Keeper without its table generated
 	app.StakingKeeper = app.StakingKeeper.SetHooks(
 		stakingtypes.NewMultiStakingHooks(
 			app.DistrKeeper.Hooks(),
 			app.SlashingKeeper.Hooks(),
 			app.ClaimsKeeper.Hooks(),
+			app.GovKeeper.Hooks(),
 		),
 	)
 
+	// Evmos Keeper
 	app.VestingKeeper = vestingkeeper.NewKeeper(
 		keys[vestingtypes.StoreKey], appCodec,
 		app.AccountKeeper, app.BankKeeper, app.StakingKeeper,
@@ -548,12 +557,6 @@ func NewBridge(
 		keys[revenuetypes.StoreKey], appCodec, authtypes.NewModuleAddress(govtypes.ModuleName),
 		app.BankKeeper, app.EvmKeeper,
 		authtypes.FeeCollectorName,
-	)
-
-	app.GovKeeper = *govKeeper.SetHooks(
-		govtypes.NewMultiGovHooks(
-			app.ClaimsKeeper.Hooks(),
-		),
 	)
 
 	app.EvmKeeper = app.EvmKeeper.SetHooks(
@@ -667,7 +670,7 @@ func NewBridge(
 		bank.NewAppModule(appCodec, app.BankKeeper, app.AccountKeeper),
 		capability.NewAppModule(appCodec, *app.CapabilityKeeper),
 		crisis.NewAppModule(&app.CrisisKeeper, skipGenesisInvariants),
-		gov.NewAppModule(appCodec, app.GovKeeper, app.AccountKeeper, app.BankKeeper),
+		gov.NewAppModule(appCodec, *app.GovKeeper, app.AccountKeeper, app.BankKeeper),
 		slashing.NewAppModule(appCodec, app.SlashingKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		distr.NewAppModule(appCodec, app.DistrKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		staking.NewAppModule(appCodec, *app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
