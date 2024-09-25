@@ -445,7 +445,7 @@ func NewBridge(
 		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName),
 	)
 
-	accumulatorKeeper := accumulatorkeeper.NewKeeper(
+	app.AccumulatorKeeper = accumulatorkeeper.NewKeeper(
 		appCodec, keys[accumulatortypes.StoreKey], keys[accumulatortypes.MemStoreKey], app.AccountKeeper, app.BankKeeper)
 
 	app.NFTKeeper = nftkeeper.NewKeeper(
@@ -509,13 +509,13 @@ func NewBridge(
 	*/
 	govKeeper := govkeeper.NewKeeper(
 		appCodec, keys[govtypes.StoreKey], app.GetSubspace(govtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
-		app.StakingKeeper, govRouter, app.MsgServiceRouter(), govConfig,
+		app.StakingKeeper, govRouter, app.MsgServiceRouter(), govConfig, app.NFTKeeper,
 	)
 
 	// Evmos Keeper
 	app.MintKeeper = mintkeeper.NewKeeper(
 		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), app.StakingKeeper,
-		app.AccountKeeper, app.BankKeeper, accumulatorKeeper, authtypes.FeeCollectorName,
+		app.AccountKeeper, app.BankKeeper, app.AccumulatorKeeper, authtypes.FeeCollectorName,
 	)
 
 	app.ClaimsKeeper = claimskeeper.NewKeeper(
@@ -656,7 +656,7 @@ func NewBridge(
 	// must be passed by reference here.
 	app.mm = module.NewManager(
 		// SDK app modules
-		accumulator.NewAppModule(appCodec, accumulatorKeeper, app.AccountKeeper, app.BankKeeper),
+		accumulator.NewAppModule(appCodec, app.AccumulatorKeeper, app.AccountKeeper, app.BankKeeper),
 
 		genutil.NewAppModule(
 			app.AccountKeeper, app.StakingKeeper, app.BaseApp.DeliverTx,
