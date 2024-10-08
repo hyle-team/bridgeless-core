@@ -22,5 +22,4 @@ message Transaction {
   string withdrawal_token = 11;
   string signature = 12;
   bool is_wrapped = 13;
-  int64 tx_nonce = 14;
 }
