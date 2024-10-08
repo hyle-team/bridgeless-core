@@ -38,9 +38,5 @@ func validateTransaction(tx *Transaction) error {
 		return fmt.Errorf("deposit tx hash cannot be empty")
 	}
 
-	if tx.WithdrawalTxHash == "" {
-		return fmt.Errorf("withdrawal tx hash cannot be empty")
-	}
-
 	return nil
 }
