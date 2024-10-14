@@ -31,6 +31,7 @@ import (
 	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
 	"github.com/hyle-team/bridgeless-core/docs"
 	"github.com/hyle-team/bridgeless-core/x/bridge"
+	"github.com/hyle-team/bridgeless-core/x/tracking"
 
 	"io"
 	"net/http"
@@ -147,6 +148,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/x/feemarket"
 	feemarketkeeper "github.com/hyle-team/bridgeless-core/x/feemarket/keeper"
 	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	trackingtypes "github.com/hyle-team/bridgeless-core/x/tracking/types"
 
 	// unnamed import of statik for swagger UI support
 	_ "github.com/hyle-team/bridgeless-core/client/docs/statik"
@@ -161,6 +163,7 @@ import (
 	erc20client "github.com/hyle-team/bridgeless-core/x/erc20/client"
 	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
 	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
+	trackingkeeper "github.com/hyle-team/bridgeless-core/x/tracking/keeper"
 
 	"github.com/hyle-team/bridgeless-core/x/recovery"
 	recoverykeeper "github.com/hyle-team/bridgeless-core/x/recovery/keeper"
@@ -244,6 +247,7 @@ var (
 		mint.AppModuleBasic{},
 		nft.AppModuleBasic{},
 		bridge.AppModuleBasic{},
+		tracking.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -262,6 +266,7 @@ var (
 		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
 		nfttypes.ModuleName:            nil,
 		bridgetypes.ModuleName:         nil,
+		trackingtypes.ModuleName:       nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -331,6 +336,8 @@ type Bridge struct {
 	NFTKeeper    *nftkeeper.Keeper
 	BridgeKeeper *bridgekeeper.Keeper
 
+	TrackingKeeper *trackingkeeper.Keeper
+
 	// the module manager
 	mm *module.Manager
 
@@ -392,6 +399,7 @@ func NewBridge(
 		minttypes.StoreKey,
 		nfttypes.StoreKey,
 		bridgetypes.StoreKey,
+		trackingtypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -455,6 +463,13 @@ func NewBridge(
 		app.GetSubspace(nfttypes.ModuleName),
 		app.BankKeeper,
 		app.StakingKeeper,
+	)
+
+	app.TrackingKeeper = trackingkeeper.NewKeeper(
+		appCodec,
+		keys[trackingtypes.StoreKey],
+		keys[trackingtypes.StoreKey],
+		app.GetSubspace(trackingtypes.ModuleName),
 	)
 
 	app.DistrKeeper = distrkeeper.NewKeeper(
@@ -697,6 +712,7 @@ func NewBridge(
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
 		nft.NewAppModule(appCodec, *app.NFTKeeper, app.AccountKeeper, app.BankKeeper),
 		bridge.NewAppModule(appCodec, *app.BridgeKeeper),
+		tracking.NewAppModule(appCodec, *app.TrackingKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -736,6 +752,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		trackingtypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
@@ -773,6 +790,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		trackingtypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -819,6 +837,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		trackingtypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -1159,5 +1178,6 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(minttypes.ModuleName)
 	paramsKeeper.Subspace(nfttypes.ModuleName)
 	paramsKeeper.Subspace(bridgetypes.ModuleName)
+	paramsKeeper.Subspace(trackingtypes.ModuleName)
 	return paramsKeeper
 }
