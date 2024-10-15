@@ -1,5 +1,5 @@
 syntax = "proto3";
-package hyleteam.bridgelesscore.tracking;
+package core.tracking;
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 

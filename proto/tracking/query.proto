@@ -1,10 +1,10 @@
 syntax = "proto3";
-package hyleteam.bridgelesscore.tracking;
+package core.tracking;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "bridgelesscore/tracking/params.proto";
+import "tracking/params.proto";
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 

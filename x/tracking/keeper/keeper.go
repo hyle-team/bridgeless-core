@@ -55,24 +55,30 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 
 func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
 	// Gas costs are handled within msg handler so costs should be ignored
+	params := k.GetParams(ctx)
+	fmt.Println("contrat address ", params.ContractAddress)
 
-	fmt.Println("contrat address ", contracts.LoanContractAddress)
+	for _, positionID := range params.GetPositions() {
+		id, ok := big.NewInt(0).SetString(positionID, 10)
+		if !ok {
+			ctx.Logger().Error(fmt.Sprintf("invalid position id: %s", positionID))
+		}
+		res, err := k.erc20.CallEVM(
+			ctx,
+			contracts.LoanContract.ABI,
+			common.HexToAddress(params.SenderAddress),
+			common.HexToAddress(params.ContractAddress),
+			true,
+			"updatePosition",
+			id,
+		)
+		if err != nil {
+			fmt.Println("contract call error", err)
+			continue
+		}
+		fmt.Println("contract call response ", res.Hash, res.Logs, res.GasUsed, res.String())
 
-	res, err := k.erc20.CallEVM(
-		ctx,
-		contracts.LoanContract.ABI,
-		common.HexToAddress("0x7C675c6e4b54b2798306414856e604B935bA7b94"),
-		contracts.LoanContractAddress,
-		true,
-		"createLoanPosition",
-		big.NewInt(34),
-	)
-	if err != nil {
-		fmt.Println("ERRRRRROOOOOOOOORRRRRR ABIIIIII")
-		fmt.Println(err)
-		return []abci.ValidatorUpdate{}
 	}
-	fmt.Println("abi RESSSSSSSSS: ", res.Hash, res.Logs, res.GasUsed, res.String())
 
 	return []abci.ValidatorUpdate{}
 }

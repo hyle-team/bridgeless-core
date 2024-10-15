@@ -1,8 +1,8 @@
 syntax = "proto3";
-package hyleteam.bridgelesscore.tracking;
+package core.tracking;
 
 import "gogoproto/gogo.proto";
-import "bridgelesscore/tracking/params.proto";
+import "tracking/params.proto";
 
 option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 

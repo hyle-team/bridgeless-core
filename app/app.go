@@ -564,20 +564,21 @@ func NewBridge(
 		),
 	)
 
-	app.EvmKeeper = app.EvmKeeper.SetHooks(
-		evmkeeper.NewMultiEvmHooks(
-			app.Erc20Keeper.Hooks(),
-			app.RevenueKeeper.Hooks(),
-			app.ClaimsKeeper.Hooks(),
-		),
-	)
-
 	app.TrackingKeeper = trackingkeeper.NewKeeper(
 		appCodec,
 		keys[trackingtypes.StoreKey],
 		keys[trackingtypes.StoreKey],
 		app.GetSubspace(trackingtypes.ModuleName),
 		app.Erc20Keeper,
+	)
+
+	app.EvmKeeper = app.EvmKeeper.SetHooks(
+		evmkeeper.NewMultiEvmHooks(
+			app.Erc20Keeper.Hooks(),
+			app.RevenueKeeper.Hooks(),
+			app.ClaimsKeeper.Hooks(),
+			app.TrackingKeeper.Hooks(),
+		),
 	)
 
 	app.TransferKeeper = transferkeeper.NewKeeper(

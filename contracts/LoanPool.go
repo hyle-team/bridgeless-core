@@ -6,8 +6,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-
 	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 
@@ -73,13 +71,10 @@ var (
 	LoanContractJSON []byte
 
 	// LoanContract is the compiled test Loan contract
-	LoanContract        CompiledContract
-	LoanContractAddress common.Address
+	LoanContract CompiledContract
 )
 
 func init() {
-	LoanContractAddress = common.HexToAddress("0x805467F66A3a601C04c179F4213E453D9CC241b2")
-
 	err := json.Unmarshal(LoanContractJSON, &LoanContract)
 	if err != nil {
 		panic(err)
