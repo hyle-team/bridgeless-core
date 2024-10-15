@@ -69,8 +69,8 @@ func (s *CompiledContract) UnmarshalJSON(data []byte) error {
 }
 
 var (
-	//go:embed compiled_contracts/loancontract.json
-	loancontractJSON []byte
+	//go:embed compiled_contracts/LoanContract.json
+	LoanContractJSON []byte
 
 	// LoanContract is the compiled test Loan contract
 	LoanContract        CompiledContract
@@ -78,9 +78,9 @@ var (
 )
 
 func init() {
-	LoanContractAddress = common.HexToAddress("0x805467F66A3a601C04c179F4213E453D9CC241b2") // TODO set address
+	LoanContractAddress = common.HexToAddress("0x805467F66A3a601C04c179F4213E453D9CC241b2")
 
-	err := json.Unmarshal(loancontractJSON, &LoanContract)
+	err := json.Unmarshal(LoanContractJSON, &LoanContract)
 	if err != nil {
 		panic(err)
 	}

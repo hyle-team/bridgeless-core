@@ -19,6 +19,8 @@ contract LoanPool is OwnableUpgradeable {
 
     mapping (uint256 => LoanPositionInfo) internal _loanPositionsInfo;
 
+    event PositionCreated(uint256 positionId);
+
     function initialize(
         uint64 capitalizationPeriod_,
         uint256 capitalizationRate_
@@ -50,11 +52,15 @@ contract LoanPool is OwnableUpgradeable {
     function createLoanPosition(uint256 loanTokensAmount_) public {
         uint256 normalizedLoanAmount_ = loanTokensAmount_ * PERCENTAGE_100 / rateKeeper.getCompoundRate();
 
-        _loanPositionsInfo[nextPositionID++] = LoanPositionInfo(
+        uint256 newPositionId = nextPositionID++;
+
+        _loanPositionsInfo[newPositionId] = LoanPositionInfo(
             loanTokensAmount_,
             normalizedLoanAmount_,
             block.timestamp
         );
+
+        emit PositionCreated(newPositionId);
     }
 
     function updatePosition(uint256 positionId_) public {
