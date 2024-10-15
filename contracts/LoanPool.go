@@ -78,7 +78,7 @@ var (
 )
 
 func init() {
-	LoanContractAddress = common.HexToAddress("0x7DFE532267a049fB3C5e27E8E2E13B06397f8dD8") // TODO set address
+	LoanContractAddress = common.HexToAddress("0x805467F66A3a601C04c179F4213E453D9CC241b2") // TODO set address
 
 	err := json.Unmarshal(loancontractJSON, &LoanContract)
 	if err != nil {

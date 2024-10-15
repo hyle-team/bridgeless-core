@@ -32,6 +32,7 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
+	erc20 erc20keeper.Keeper,
 
 ) *Keeper {
 	// set KeyTable if it has not already been set
@@ -44,6 +45,7 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
+		erc20:      erc20,
 	}
 }
 
@@ -59,10 +61,10 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 	res, err := k.erc20.CallEVM(
 		ctx,
 		contracts.LoanContract.ABI,
-		common.HexToAddress("0xa87044815A445E5C632c51793bd1065C35DC405d"),
+		common.HexToAddress("0x7C675c6e4b54b2798306414856e604B935bA7b94"),
 		contracts.LoanContractAddress,
 		true,
-		"decrement",
+		"createLoanPosition",
 		big.NewInt(34),
 	)
 	if err != nil {

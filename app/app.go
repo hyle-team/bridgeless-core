@@ -465,13 +465,6 @@ func NewBridge(
 		app.StakingKeeper,
 	)
 
-	app.TrackingKeeper = trackingkeeper.NewKeeper(
-		appCodec,
-		keys[trackingtypes.StoreKey],
-		keys[trackingtypes.StoreKey],
-		app.GetSubspace(trackingtypes.ModuleName),
-	)
-
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		app.StakingKeeper, app.NFTKeeper, authtypes.FeeCollectorName,
@@ -577,6 +570,14 @@ func NewBridge(
 			app.RevenueKeeper.Hooks(),
 			app.ClaimsKeeper.Hooks(),
 		),
+	)
+
+	app.TrackingKeeper = trackingkeeper.NewKeeper(
+		appCodec,
+		keys[trackingtypes.StoreKey],
+		keys[trackingtypes.StoreKey],
+		app.GetSubspace(trackingtypes.ModuleName),
+		app.Erc20Keeper,
 	)
 
 	app.TransferKeeper = transferkeeper.NewKeeper(
