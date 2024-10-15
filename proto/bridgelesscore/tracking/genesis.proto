@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hyleteam.bridgelesscore.tracking;
+
+import "gogoproto/gogo.proto";
+import "bridgelesscore/tracking/params.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
+
+// GenesisState defines the tracking module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

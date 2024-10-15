@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hyleteam.bridgelesscore.tracking;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
