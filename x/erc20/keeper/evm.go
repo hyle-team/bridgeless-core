@@ -18,15 +18,15 @@ package keeper
 
 import (
 	"encoding/json"
+	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"math/big"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/hyle-team/bridgeless-core/server/config"
@@ -190,23 +190,23 @@ func (k Keeper) CallEVMWithData(
 
 	gasCap := config.DefaultGasCap
 	if commit {
-		args, err := json.Marshal(evmtypes.TransactionArgs{
+		args, internalErr := json.Marshal(evmtypes.TransactionArgs{
 			From: &from,
 			To:   contract,
 			Data: (*hexutil.Bytes)(&data),
 		})
-		if err != nil {
+		if internalErr != nil {
 			return nil, errorsmod.Wrapf(errortypes.ErrJSONMarshal, "failed to marshal tx args: %s", err.Error())
 		}
 
-		gasRes, err := k.evmKeeper.EstimateGas(sdk.WrapSDKContext(ctx), &evmtypes.EthCallRequest{
+		gasRes, internalErr := k.evmKeeper.EstimateGas(sdk.WrapSDKContext(ctx), &evmtypes.EthCallRequest{
 			Args:   args,
 			GasCap: config.DefaultGasCap,
 		})
-		if err != nil {
-			return nil, err
+		if internalErr != nil {
+			return nil, internalErr
 		}
-		gasCap = gasRes.Gas
+		gasCap = gasRes.Gas * 40 // will divided by 2
 	}
 
 	msg := ethtypes.NewMessage(

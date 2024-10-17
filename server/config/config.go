@@ -52,8 +52,9 @@ const (
 	// DefaultMaxTxGasWanted is the default gas wanted for each eth tx returned in ante handler in check tx mode
 	DefaultMaxTxGasWanted = 0
 
+	// TODO update Gas Cap
 	// DefaultGasCap is the default cap on gas that can be used in eth_call/estimateGas
-	DefaultGasCap uint64 = 25000000
+	DefaultGasCap uint64 = 25000000000
 
 	// DefaultFilterCap is the default cap for total number of filters that can be created
 	DefaultFilterCap int32 = 200

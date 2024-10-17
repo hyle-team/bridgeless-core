@@ -22,7 +22,7 @@ contract LoanPool is OwnableUpgradeable {
     event PositionCreated(uint256 positionId);
 
     function initialize(
-        uint64 capitalizationPeriod_,
+        uint64 capitalizationPeriod_,n
         uint256 capitalizationRate_
     ) external initializer {
         __Ownable_init();

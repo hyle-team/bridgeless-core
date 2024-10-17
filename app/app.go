@@ -568,7 +568,7 @@ func NewBridge(
 		appCodec,
 		keys[trackingtypes.StoreKey],
 		keys[trackingtypes.StoreKey],
-		app.GetSubspace(trackingtypes.ModuleName),
+		//app.GetSubspace(trackingtypes.ModuleName),
 		app.Erc20Keeper,
 	)
 

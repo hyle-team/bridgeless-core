@@ -11,7 +11,7 @@ option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) { // TODO update path
     option (google.api.http).get = "/hyle-team/bridgeless-core/tracking/params";
   }
 }

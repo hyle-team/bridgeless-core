@@ -7,6 +7,7 @@ import (
 	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"math/big"
+	"time"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
@@ -31,21 +32,19 @@ func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
-	ps paramtypes.Subspace,
 	erc20 erc20keeper.Keeper,
 
 ) *Keeper {
 	// set KeyTable if it has not already been set
-	if !ps.HasKeyTable() {
-		ps = ps.WithKeyTable(types.ParamKeyTable())
-	}
+	//if !ps.HasKeyTable() {
+	//	ps = ps.WithKeyTable(types.ParamKeyTable())
+	//}
 
 	return &Keeper{
-		cdc:        cdc,
-		storeKey:   storeKey,
-		memKey:     memKey,
-		paramstore: ps,
-		erc20:      erc20,
+		cdc:      cdc,
+		storeKey: storeKey,
+		memKey:   memKey,
+		erc20:    erc20,
 	}
 }
 
@@ -58,27 +57,53 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 	params := k.GetParams(ctx)
 	fmt.Println("contrat address ", params.ContractAddress)
 
+	//i := 0
+	start := time.Now()
+
+	amounts := make([]*big.Int, 0)
+	for j := 0; j < 10000; j++ {
+		amounts = append(amounts, big.NewInt(10000))
+	}
+
+	//_, err := k.erc20.CallEVM(
+	//	ctx,
+	//	contracts.LoanContract.ABI,
+	//	common.HexToAddress(params.SenderAddress),
+	//	common.HexToAddress(params.ContractAddress),
+	//	true,
+	//	"createLoanPositions",
+	//	amounts,
+	//)
+	//if err != nil {
+	//	fmt.Println("contract call error", err)
+	//	return []abci.ValidatorUpdate{}
+	//}
+	//
+	arg := make([]*big.Int, 0)
 	for _, positionID := range params.GetPositions() {
 		id, ok := big.NewInt(0).SetString(positionID, 10)
 		if !ok {
 			ctx.Logger().Error(fmt.Sprintf("invalid position id: %s", positionID))
 		}
-		res, err := k.erc20.CallEVM(
-			ctx,
-			contracts.LoanContract.ABI,
-			common.HexToAddress(params.SenderAddress),
-			common.HexToAddress(params.ContractAddress),
-			true,
-			"updatePosition",
-			id,
-		)
-		if err != nil {
-			fmt.Println("contract call error", err)
-			continue
-		}
-		fmt.Println("contract call response ", res.Hash, res.Logs, res.GasUsed, res.String())
-
+		arg = append(arg, id)
 	}
+
+	_, err := k.erc20.CallEVM(
+		ctx,
+		contracts.LoanContract.ABI,
+		common.HexToAddress(params.SenderAddress),
+		common.HexToAddress(params.ContractAddress),
+		true,
+		"updatePositions",
+		arg,
+	)
+	if err != nil {
+		fmt.Println("contract call error", err)
+		return []abci.ValidatorUpdate{}
+	}
+
+	fmt.Println("updated positions: ", len(arg))
+	fmt.Println("executed in ", time.Since(start))
 
 	return []abci.ValidatorUpdate{}
 }

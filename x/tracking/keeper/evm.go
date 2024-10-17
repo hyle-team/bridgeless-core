@@ -50,9 +50,9 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 	for _, log := range receipt.Logs {
 
 		eventId := log.Topics[0]
-
-		event, err := contracts.LoanContract.ABI.EventByID(eventId)
-		if err != nil {
+		fmt.Println(string(eventId.String()))
+		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
+		if internalErr != nil {
 			k.Logger(ctx).Error("failed to get event by ID")
 			continue
 		}
@@ -63,7 +63,7 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 		}
 
 		eventBody := contractypes.LoanPoolPositionCreated{}
-		if err = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); err != nil {
+		if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
 			k.Logger(ctx).Error("failed to unpack event body")
 			continue
 		}
