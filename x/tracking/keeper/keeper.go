@@ -2,20 +2,22 @@ package keeper
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/hyle-team/bridgeless-core/contracts"
-	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
-	abci "github.com/tendermint/tendermint/abci/types"
-	"math/big"
-	"time"
-
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/hyle-team/bridgeless-core/contracts"
+	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
+	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
+	"math/big"
 
 	"github.com/hyle-team/bridgeless-core/x/tracking/types"
+)
+
+const (
+	contactCallMethod = "getLoanPositionInfo"
 )
 
 type (
@@ -35,11 +37,6 @@ func NewKeeper(
 	erc20 erc20keeper.Keeper,
 
 ) *Keeper {
-	// set KeyTable if it has not already been set
-	//if !ps.HasKeyTable() {
-	//	ps = ps.WithKeyTable(types.ParamKeyTable())
-	//}
-
 	return &Keeper{
 		cdc:      cdc,
 		storeKey: storeKey,
@@ -53,57 +50,30 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 }
 
 func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	// Gas costs are handled within msg handler so costs should be ignored
 	params := k.GetParams(ctx)
-	fmt.Println("contrat address ", params.ContractAddress)
+	k.Logger(ctx).Info("contact address ", params.ContractAddress)
 
-	//i := 0
-	start := time.Now()
-
-	amounts := make([]*big.Int, 0)
-	for j := 0; j < 10000; j++ {
-		amounts = append(amounts, big.NewInt(10000))
-	}
-
-	//_, err := k.erc20.CallEVM(
-	//	ctx,
-	//	contracts.LoanContract.ABI,
-	//	common.HexToAddress(params.SenderAddress),
-	//	common.HexToAddress(params.ContractAddress),
-	//	true,
-	//	"createLoanPositions",
-	//	amounts,
-	//)
-	//if err != nil {
-	//	fmt.Println("contract call error", err)
-	//	return []abci.ValidatorUpdate{}
-	//}
-	//
-	arg := make([]*big.Int, 0)
 	for _, positionID := range params.GetPositions() {
 		id, ok := big.NewInt(0).SetString(positionID, 10)
 		if !ok {
-			ctx.Logger().Error(fmt.Sprintf("invalid position id: %s", positionID))
+			k.Logger(ctx).Error(fmt.Sprintf("invalid position id: %s", positionID))
 		}
-		arg = append(arg, id)
-	}
 
-	_, err := k.erc20.CallEVM(
-		ctx,
-		contracts.LoanContract.ABI,
-		common.HexToAddress(params.SenderAddress),
-		common.HexToAddress(params.ContractAddress),
-		true,
-		"updatePositions",
-		arg,
-	)
-	if err != nil {
-		fmt.Println("contract call error", err)
-		return []abci.ValidatorUpdate{}
-	}
+		_, err := k.erc20.CallEVM(
+			ctx,
+			contracts.LoanContract.ABI,
+			common.HexToAddress(params.SenderAddress),
+			common.HexToAddress(params.ContractAddress),
+			false,
+			contactCallMethod,
+			id,
+		)
+		if err != nil {
 
-	fmt.Println("updated positions: ", len(arg))
-	fmt.Println("executed in ", time.Since(start))
+			k.Logger(ctx).Error("contract call error", err)
+			return []abci.ValidatorUpdate{}
+		}
+	}
 
 	return []abci.ValidatorUpdate{}
 }

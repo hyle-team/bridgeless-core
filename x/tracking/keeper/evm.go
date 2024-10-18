@@ -14,7 +14,7 @@ import (
 )
 
 // PostTxProcessing is used to listen EVM smart contract events,
-// filter and process `RootUpdated` events emitted by configured in module params contract address.
+// filter and process `PositionCreated` events emitted by configured in module params contract address.
 // Will be called by EVM module as hook.
 func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *ethtypes.Receipt) error {
 	params := k.GetParams(ctx)
@@ -48,9 +48,7 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 	}
 
 	for _, log := range receipt.Logs {
-
 		eventId := log.Topics[0]
-		fmt.Println(string(eventId.String()))
 		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
 		if internalErr != nil {
 			k.Logger(ctx).Error("failed to get event by ID")
