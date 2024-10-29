@@ -1,4 +1,4 @@
-module github.com/hyle-team/bridgeless-core
+module github.com/hyle-team/bridgeless-core/v12
 
 go 1.20
 
@@ -228,7 +228,9 @@ replace (
 	// use cosmos fork of keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
-	github.com/cosmos/cosmos-sdk v0.46.13 => github.com/hyle-team/cosmos-sdk v0.46.26-0.20240925140651-3b150e981436
+	// TODO remove this once cosmos-sdk is updated
+	github.com/cosmos/cosmos-sdk v0.46.13 => github.com/hyle-team/cosmos-sdk v0.46.26-0.20241029102118-fbd93a7ce366
+
 	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.1.6
 
 	// use Evmos geth fork

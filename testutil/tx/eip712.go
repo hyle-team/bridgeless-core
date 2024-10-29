@@ -29,10 +29,10 @@ import (
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
-	"github.com/hyle-team/bridgeless-core/app"
-	cryptocodec "github.com/hyle-team/bridgeless-core/crypto/codec"
-	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
-	"github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	cryptocodec "github.com/hyle-team/bridgeless-core/v12/crypto/codec"
+	"github.com/hyle-team/bridgeless-core/v12/ethereum/eip712"
+	"github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 type EIP712TxArgs struct {

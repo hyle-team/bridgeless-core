@@ -23,8 +23,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/hyle-team/bridgeless-core/x/claims/keeper"
-	"github.com/hyle-team/bridgeless-core/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/claims/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/claims/types"
 )
 
 // InitGenesis initializes the claim module's state from a provided genesis

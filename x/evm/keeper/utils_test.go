@@ -11,10 +11,10 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/hyle-team/bridgeless-core/server/config"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/server/config"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/statedb"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 	"github.com/stretchr/testify/require"
 )
 

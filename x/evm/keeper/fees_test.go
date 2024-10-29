@@ -8,8 +8,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	ethparams "github.com/ethereum/go-ethereum/params"
-	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/keeper"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestCheckSenderBalance() {

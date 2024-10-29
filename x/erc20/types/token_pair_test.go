@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/x/erc20/types"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 )

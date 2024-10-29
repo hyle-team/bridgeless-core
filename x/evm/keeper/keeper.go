@@ -31,9 +31,9 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/tendermint/tendermint/libs/log"
 
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
-	"github.com/hyle-team/bridgeless-core/x/evm/statedb"
-	"github.com/hyle-team/bridgeless-core/x/evm/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/statedb"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 // Keeper grants access to the EVM module state and implements the go-ethereum StateDB interface.

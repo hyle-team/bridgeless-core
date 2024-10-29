@@ -9,8 +9,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	bridgesimulation "github.com/hyle-team/bridgeless-core/x/bridge/simulation"
-	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	bridgesimulation "github.com/hyle-team/bridgeless-core/v12/x/bridge/simulation"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
 // avoid unused import issue

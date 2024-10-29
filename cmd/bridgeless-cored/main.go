@@ -23,8 +23,8 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	cmdcfg "github.com/hyle-team/bridgeless-core/cmd/config"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	cmdcfg "github.com/hyle-team/bridgeless-core/v12/cmd/config"
 )
 
 func main() {

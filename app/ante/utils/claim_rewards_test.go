@@ -4,10 +4,10 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	anteutils "github.com/hyle-team/bridgeless-core/app/ante/utils"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	"github.com/hyle-team/bridgeless-core/utils"
+	anteutils "github.com/hyle-team/bridgeless-core/v12/app/ante/utils"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 )
 
 // TestClaimStakingRewardsIfNecessary tests the ClaimStakingRewardsIfNecessary function
