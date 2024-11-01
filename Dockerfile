@@ -4,7 +4,7 @@ RUN apk add build-base git
 
 
 
-WORKDIR /go/src/github.com/hyle-team/bridgeless-core
+WORKDIR /go/src/github.com/hyle-team/bridgeless-core/v12
 
 ENV GO111MODULE="on"
 ENV CGO_ENABLED=1
@@ -26,7 +26,7 @@ RUN go mod vendor
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
 
-RUN go build -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/cmd/bridgeless-cored
+RUN go build  -mod=mod  -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/v12/cmd/bridgeless-cored
 
 
 
