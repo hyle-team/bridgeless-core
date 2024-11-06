@@ -60,13 +60,17 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 			continue
 		}
 
-		eventBody := contractypes.LoanPoolPositionCreated{}
+		eventBody := contractypes.ILoanPoolDeposited{}
 		if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
 			k.Logger(ctx).Error("failed to unpack event body")
 			continue
 		}
 
-		params.Positions = append(params.Positions, eventBody.PositionId.String())
+		k.SetPosition(ctx, eventBody.User.Hex(), types.Position{
+			Address:        eventBody.User.Hex(),
+			Amount:         eventBody.Amount.Int64(), // TODO maybe need to convert to string or update the store to save big.Int
+			LastTimeUpdate: ctx.BlockTime().Unix(),
+		})
 
 		k.Logger(ctx).Info(fmt.Sprintf("Received PostTxProcessing event in %s module: %v", types.ModuleName, eventBody))
 		k.SetParams(ctx, params)

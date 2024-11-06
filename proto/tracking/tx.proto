@@ -4,4 +4,5 @@ package core.tracking;
 option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+}
