@@ -14,13 +14,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/cmd/config"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	"github.com/hyle-team/bridgeless-core/types"
-	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/cmd/config"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/ethereum/eip712"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/types"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 	"github.com/stretchr/testify/require"
 )
 

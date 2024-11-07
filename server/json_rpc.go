@@ -27,10 +27,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/types"
 	ethlog "github.com/ethereum/go-ethereum/log"
 	ethrpc "github.com/ethereum/go-ethereum/rpc"
-	"github.com/hyle-team/bridgeless-core/rpc"
+	"github.com/hyle-team/bridgeless-core/v12/rpc"
 
-	"github.com/hyle-team/bridgeless-core/server/config"
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	"github.com/hyle-team/bridgeless-core/v12/server/config"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 // StartJSONRPC starts the JSON-RPC server

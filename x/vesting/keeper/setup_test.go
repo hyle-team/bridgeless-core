@@ -15,10 +15,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	evm "github.com/hyle-team/bridgeless-core/x/evm/types"
+	evm "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/x/vesting/types"
 )
 
 var (

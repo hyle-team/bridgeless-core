@@ -26,8 +26,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 )
 
 var (

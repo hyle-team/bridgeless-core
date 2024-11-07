@@ -20,14 +20,14 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	v4 "github.com/hyle-team/bridgeless-core/x/evm/migrations/v4"
-	v4types "github.com/hyle-team/bridgeless-core/x/evm/migrations/v4/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	v4 "github.com/hyle-team/bridgeless-core/v12/x/evm/migrations/v4"
+	v4types "github.com/hyle-team/bridgeless-core/v12/x/evm/migrations/v4/types"
 )
 
 type mockSubspace struct {

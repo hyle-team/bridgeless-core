@@ -24,9 +24,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
-	anteutils "github.com/hyle-team/bridgeless-core/app/ante/utils"
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
-	"github.com/hyle-team/bridgeless-core/x/evm/types"
+	anteutils "github.com/hyle-team/bridgeless-core/v12/app/ante/utils"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 // NewDynamicFeeChecker returns a `TxFeeChecker` that applies a dynamic fee to

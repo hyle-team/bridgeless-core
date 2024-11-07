@@ -30,7 +30,7 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 
-	"github.com/hyle-team/bridgeless-core/x/recovery/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/recovery/types"
 )
 
 var _ porttypes.ICS4Wrapper = Keeper{}

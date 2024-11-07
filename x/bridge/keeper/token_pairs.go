@@ -3,7 +3,7 @@ package keeper
 import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
 func (k Keeper) GetDstToken(sdkCtx sdk.Context, srcAddr, srcChain, dscChain string) (info types.TokenInfo, found bool) {

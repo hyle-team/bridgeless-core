@@ -37,11 +37,11 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/hyle-team/bridgeless-core/encoding"
-	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 
-	"github.com/hyle-team/bridgeless-core/cmd/config"
-	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/v12/cmd/config"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 )
 
 func init() {
@@ -165,7 +165,7 @@ func GenesisStateWithValSet(app *Bridge, genesisState simapp.GenesisState,
 			MinSelfDelegation: sdk.ZeroInt(),
 		}
 		validators = append(validators, validator)
-		delegations = append(delegations, stakingtypes.NewDelegation(genAccs[0].GetAddress(), val.Address.Bytes(), sdk.OneDec(), sdk.OneDec()))
+		delegations = append(delegations, stakingtypes.NewDelegation(genAccs[0].GetAddress(), val.Address.Bytes(), sdk.OneDec(), sdk.OneDec(), time.Time{}))
 
 	}
 	// set validators and delegations
