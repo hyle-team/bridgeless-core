@@ -5,15 +5,15 @@ import (
 
 	sdkmath "cosmossdk.io/math"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	testutiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	"github.com/hyle-team/bridgeless-core/utils"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 )
 
 var _ = Describe("when sending a Cosmos transaction", func() {

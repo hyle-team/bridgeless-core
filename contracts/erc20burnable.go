@@ -4,7 +4,7 @@ import (
 	_ "embed" // embed compiled smart contract
 	"encoding/json"
 
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 var (

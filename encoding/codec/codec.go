@@ -21,8 +21,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/std"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cryptocodec "github.com/hyle-team/bridgeless-core/crypto/codec"
-	"github.com/hyle-team/bridgeless-core/types"
+	cryptocodec "github.com/hyle-team/bridgeless-core/v12/crypto/codec"
+	"github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 // RegisterLegacyAminoCodec registers Interfaces from types, crypto, and SDK std.

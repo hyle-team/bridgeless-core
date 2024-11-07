@@ -15,13 +15,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/hyle-team/bridgeless-core/app"
-	ante "github.com/hyle-team/bridgeless-core/app/ante"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
-	"github.com/hyle-team/bridgeless-core/utils"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
-	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	ante "github.com/hyle-team/bridgeless-core/v12/app/ante"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/ethereum/eip712"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 )
 
 type AnteTestSuite struct {

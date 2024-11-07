@@ -18,7 +18,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"

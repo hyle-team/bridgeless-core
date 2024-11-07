@@ -8,11 +8,11 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	v3 "github.com/hyle-team/bridgeless-core/x/claims/migrations/v3"
-	v3types "github.com/hyle-team/bridgeless-core/x/claims/migrations/v3/types"
-	"github.com/hyle-team/bridgeless-core/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	v3 "github.com/hyle-team/bridgeless-core/v12/x/claims/migrations/v3"
+	v3types "github.com/hyle-team/bridgeless-core/v12/x/claims/migrations/v3/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/claims/types"
 	"github.com/stretchr/testify/require"
 )
 

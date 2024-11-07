@@ -19,7 +19,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 )
 
 // NewHandler returns a handler for Ethermint type messages.

@@ -21,7 +21,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/hyle-team/bridgeless-core/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/claims/types"
 )
 
 // RegisterInvariants registers the claims module invariants

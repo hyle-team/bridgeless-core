@@ -11,11 +11,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
-	"github.com/hyle-team/bridgeless-core/x/revenue/v1/types"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 )

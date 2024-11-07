@@ -25,9 +25,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
-	"github.com/hyle-team/bridgeless-core/x/evm/keeper"
-	"github.com/hyle-team/bridgeless-core/x/evm/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 // InitGenesis initializes genesis state based on exported genesis

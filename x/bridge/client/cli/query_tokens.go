@@ -6,7 +6,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 	"github.com/spf13/cobra"
 )
 

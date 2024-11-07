@@ -51,17 +51,17 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/crisis"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 
-	evmosclient "github.com/hyle-team/bridgeless-core/client"
-	"github.com/hyle-team/bridgeless-core/client/debug"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
-	evmosserver "github.com/hyle-team/bridgeless-core/server"
-	servercfg "github.com/hyle-team/bridgeless-core/server/config"
-	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
+	evmosclient "github.com/hyle-team/bridgeless-core/v12/client"
+	"github.com/hyle-team/bridgeless-core/v12/client/debug"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/ethereum/eip712"
+	evmosserver "github.com/hyle-team/bridgeless-core/v12/server"
+	servercfg "github.com/hyle-team/bridgeless-core/v12/server/config"
+	srvflags "github.com/hyle-team/bridgeless-core/v12/server/flags"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	cmdcfg "github.com/hyle-team/bridgeless-core/cmd/config"
-	evmoskr "github.com/hyle-team/bridgeless-core/crypto/keyring"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	cmdcfg "github.com/hyle-team/bridgeless-core/v12/cmd/config"
+	evmoskr "github.com/hyle-team/bridgeless-core/v12/crypto/keyring"
 )
 
 const (

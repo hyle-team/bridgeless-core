@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	testkeeper "github.com/hyle-team/bridgeless-core/testutil/keeper"
-	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	testkeeper "github.com/hyle-team/bridgeless-core/v12/testutil/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 	"github.com/stretchr/testify/require"
 )
 

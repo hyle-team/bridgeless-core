@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	"github.com/hyle-team/bridgeless-core/types"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/types"
 	"github.com/stretchr/testify/require"
 )
 

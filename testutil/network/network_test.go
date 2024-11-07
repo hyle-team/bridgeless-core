@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/hyle-team/bridgeless-core/server/config"
-	"github.com/hyle-team/bridgeless-core/testutil/network"
+	"github.com/hyle-team/bridgeless-core/v12/server/config"
+	"github.com/hyle-team/bridgeless-core/v12/testutil/network"
 
-	evmosnetwork "github.com/hyle-team/bridgeless-core/testutil/network"
+	evmosnetwork "github.com/hyle-team/bridgeless-core/v12/testutil/network"
 )
 
 type IntegrationTestSuite struct {
