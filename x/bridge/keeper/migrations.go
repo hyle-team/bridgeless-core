@@ -2,8 +2,8 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	v2 "github.com/hyle-team/bridgeless-core/x/bridge/migrations/v2"
-	v3 "github.com/hyle-team/bridgeless-core/x/bridge/migrations/v3"
+	v2 "github.com/hyle-team/bridgeless-core/v12/x/bridge/migrations/v2"
+	v3 "github.com/hyle-team/bridgeless-core/v12/x/bridge/migrations/v3"
 )
 
 type Migrator struct {
