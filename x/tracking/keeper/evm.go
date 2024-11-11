@@ -60,7 +60,7 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 			continue
 		}
 
-		eventBody := contractypes.ILoanPoolDeposited{}
+		eventBody := contractypes.LoanPoolDeposited{}
 		if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
 			k.Logger(ctx).Error("failed to unpack event body")
 			continue

@@ -1,6 +1,11 @@
 package types
 
 const (
+	// TrakingPrefix is the prefix to retrieve
+	PositionKeyPrefix = "position/value/"
+)
+
+const (
 	// ModuleName defines the module name
 	ModuleName = "tracking"
 

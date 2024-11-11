@@ -29,7 +29,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 
 	for _, position := range positions {
 		if position.LastTimeUpdate-ctx.BlockHeight() >= int64(params.Threshold) {
-			_, err = k.erc20.CallEVM(
+			txResponse, err := k.erc20.CallEVM(
 				ctx,
 				contracts.LoanContract.ABI,
 				common.HexToAddress(params.SenderAddress),
@@ -43,6 +43,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 				continue
 			}
 
+			fmt.Println(txResponse)
 			// TODO parse tx response and replace true with the result
 			if true {
 				_, err = k.erc20.CallEVM(

@@ -1,19 +1,22 @@
 package keeper
 
 import (
+	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/x/tracking/types"
-	"github.com/pkg/errors"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (k Keeper) SetPosition(ctx sdk.Context, positionAddress string, position types.Position) {
-	store := ctx.KVStore(k.storeKey)
-	store.Set(types.KeyPosition(positionAddress), k.cdc.MustMarshal(&position))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PositionKeyPrefix))
+	b := k.cdc.MustMarshal(&position)
+	store.Set(types.KeyPosition(positionAddress), b)
 }
 
 func (k Keeper) GetPosition(ctx sdk.Context, positionAddress string) (position types.Position, found bool) {
-	store := ctx.KVStore(k.storeKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PositionKeyPrefix))
 	bz := store.Get(types.KeyPosition(positionAddress))
 	if bz == nil {
 		return
@@ -26,25 +29,26 @@ func (k Keeper) GetPosition(ctx sdk.Context, positionAddress string) (position t
 }
 
 func (k Keeper) GetPositionsWithPagination(ctx sdk.Context, pagination *query.PageRequest) ([]types.Position, *query.PageResponse, error) {
-	store := ctx.KVStore(k.storeKey)
-	iterator := sdk.KVStorePrefixIterator(store, types.KeyPosition(""))
 	positions := make([]types.Position, 0)
-	pageRes, err := query.Paginate(store, pagination, func(key []byte, value []byte) error {
+	store := ctx.KVStore(k.storeKey)
+	pStore := prefix.NewStore(store, types.KeyPrefix(types.PositionKeyPrefix))
+
+	pageRes, err := query.Paginate(pStore, pagination, func(key []byte, value []byte) error {
 		var position types.Position
-		k.cdc.MustUnmarshal(iterator.Value(), &position)
+		k.cdc.MustUnmarshal(value, &position)
 
 		positions = append(positions, position)
 		return nil
 	})
 
 	if err != nil {
-		return nil, nil, errors.Wrap(err, "failed to paginate positions")
+		return nil, nil, status.Error(codes.Internal, err.Error())
 	}
 
 	return positions, pageRes, err
 }
 
 func (k Keeper) DeletePosition(ctx sdk.Context, positionAddress string) {
-	store := ctx.KVStore(k.storeKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PositionKeyPrefix))
 	store.Delete(types.KeyPosition(positionAddress))
 }

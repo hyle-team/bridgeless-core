@@ -10,5 +10,6 @@ message Position {
   string address = 1;
   int64 last_time_update = 2;
   // TODO replace with the coin type
+
   int64 amount = 3;
 }

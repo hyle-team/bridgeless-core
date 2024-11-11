@@ -27,8 +27,7 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 type Position struct {
 	Address        string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 	LastTimeUpdate int64  `protobuf:"varint,2,opt,name=last_time_update,json=lastTimeUpdate,proto3" json:"last_time_update,omitempty"`
-	// TODO replace with the coin type
-	Amount int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount         int64  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
 func (m *Position) Reset()         { *m = Position{} }
