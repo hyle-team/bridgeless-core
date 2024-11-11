@@ -29,9 +29,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/nft"
 	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
 	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
-	"github.com/hyle-team/bridgeless-core/docs"
-	"github.com/hyle-team/bridgeless-core/x/bridge"
-	"github.com/hyle-team/bridgeless-core/x/tracking"
+	"github.com/hyle-team/bridgeless-core/v12/docs"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking"
 
 	"io"
 	"net/http"
@@ -136,48 +136,48 @@ import (
 	icahosttypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/host/types"
 	icatypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/types"
 
-	ethante "github.com/hyle-team/bridgeless-core/app/ante/evm"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/ethereum/eip712"
-	srvflags "github.com/hyle-team/bridgeless-core/server/flags"
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
-	bridgetypes "github.com/hyle-team/bridgeless-core/x/bridge/types"
-	"github.com/hyle-team/bridgeless-core/x/evm"
-	evmkeeper "github.com/hyle-team/bridgeless-core/x/evm/keeper"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
-	"github.com/hyle-team/bridgeless-core/x/feemarket"
-	feemarketkeeper "github.com/hyle-team/bridgeless-core/x/feemarket/keeper"
-	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
-	trackingtypes "github.com/hyle-team/bridgeless-core/x/tracking/types"
+	ethante "github.com/hyle-team/bridgeless-core/v12/app/ante/evm"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/ethereum/eip712"
+	srvflags "github.com/hyle-team/bridgeless-core/v12/server/flags"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
+	bridgetypes "github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm"
+	evmkeeper "github.com/hyle-team/bridgeless-core/v12/x/evm/keeper"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/feemarket"
+	feemarketkeeper "github.com/hyle-team/bridgeless-core/v12/x/feemarket/keeper"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
+	trackingtypes "github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 
 	// unnamed import of statik for swagger UI support
-	_ "github.com/hyle-team/bridgeless-core/client/docs/statik"
+	_ "github.com/hyle-team/bridgeless-core/v12/client/docs/statik"
 
-	"github.com/hyle-team/bridgeless-core/app/ante"
+	"github.com/hyle-team/bridgeless-core/v12/app/ante"
 
-	bridgekeeper "github.com/hyle-team/bridgeless-core/x/bridge/keeper"
-	"github.com/hyle-team/bridgeless-core/x/claims"
-	claimskeeper "github.com/hyle-team/bridgeless-core/x/claims/keeper"
-	claimstypes "github.com/hyle-team/bridgeless-core/x/claims/types"
-	"github.com/hyle-team/bridgeless-core/x/erc20"
-	erc20client "github.com/hyle-team/bridgeless-core/x/erc20/client"
-	erc20keeper "github.com/hyle-team/bridgeless-core/x/erc20/keeper"
-	erc20types "github.com/hyle-team/bridgeless-core/x/erc20/types"
-	trackingkeeper "github.com/hyle-team/bridgeless-core/x/tracking/keeper"
+	bridgekeeper "github.com/hyle-team/bridgeless-core/v12/x/bridge/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/claims"
+	claimskeeper "github.com/hyle-team/bridgeless-core/v12/x/claims/keeper"
+	claimstypes "github.com/hyle-team/bridgeless-core/v12/x/claims/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/erc20"
+	erc20client "github.com/hyle-team/bridgeless-core/v12/x/erc20/client"
+	erc20keeper "github.com/hyle-team/bridgeless-core/v12/x/erc20/keeper"
+	erc20types "github.com/hyle-team/bridgeless-core/v12/x/erc20/types"
+	trackingkeeper "github.com/hyle-team/bridgeless-core/v12/x/tracking/keeper"
 
-	"github.com/hyle-team/bridgeless-core/x/recovery"
-	recoverykeeper "github.com/hyle-team/bridgeless-core/x/recovery/keeper"
-	recoverytypes "github.com/hyle-team/bridgeless-core/x/recovery/types"
-	revenue "github.com/hyle-team/bridgeless-core/x/revenue/v1"
-	revenuekeeper "github.com/hyle-team/bridgeless-core/x/revenue/v1/keeper"
-	revenuetypes "github.com/hyle-team/bridgeless-core/x/revenue/v1/types"
-	"github.com/hyle-team/bridgeless-core/x/vesting"
-	vestingkeeper "github.com/hyle-team/bridgeless-core/x/vesting/keeper"
-	vestingtypes "github.com/hyle-team/bridgeless-core/x/vesting/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/recovery"
+	recoverykeeper "github.com/hyle-team/bridgeless-core/v12/x/recovery/keeper"
+	recoverytypes "github.com/hyle-team/bridgeless-core/v12/x/recovery/types"
+	revenue "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1"
+	revenuekeeper "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/keeper"
+	revenuetypes "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/vesting"
+	vestingkeeper "github.com/hyle-team/bridgeless-core/v12/x/vesting/keeper"
+	vestingtypes "github.com/hyle-team/bridgeless-core/v12/x/vesting/types"
 
 	// NOTE: override ICS20 keeper to support IBC transfers of ERC20 tokens
-	"github.com/hyle-team/bridgeless-core/x/ibc/transfer"
-	transferkeeper "github.com/hyle-team/bridgeless-core/x/ibc/transfer/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/ibc/transfer"
+	transferkeeper "github.com/hyle-team/bridgeless-core/v12/x/ibc/transfer/keeper"
 
 	// Force-load the tracer engines to trigger registration due to Go-Ethereum v1.10.15 changes
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
@@ -463,6 +463,10 @@ func NewBridge(
 		app.GetSubspace(nfttypes.ModuleName),
 		app.BankKeeper,
 		app.StakingKeeper,
+	)
+
+	app.BankKeeper = app.BankKeeper.SetHooks(
+		banktypes.NewMultiBankHooks(app.NFTKeeper.Hooks()),
 	)
 
 	app.DistrKeeper = distrkeeper.NewKeeper(

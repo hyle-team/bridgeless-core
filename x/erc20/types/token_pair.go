@@ -19,7 +19,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 )
 

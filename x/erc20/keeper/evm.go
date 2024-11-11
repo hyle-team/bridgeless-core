@@ -29,11 +29,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/hyle-team/bridgeless-core/server/config"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/server/config"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 
-	"github.com/hyle-team/bridgeless-core/contracts"
-	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	"github.com/hyle-team/bridgeless-core/v12/contracts"
+	"github.com/hyle-team/bridgeless-core/v12/x/erc20/types"
 )
 
 // DeployERC20Contract creates and deploys an ERC20 contract on the EVM with the

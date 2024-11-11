@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"github.com/hyle-team/bridgeless-core/x/erc20/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/erc20/types"
 )
 
 var _ types.LegacyParams = &V3Params{}

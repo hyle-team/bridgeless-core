@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	testkeeper "github.com/hyle-team/bridgeless-core/v12/testutil/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 	"github.com/stretchr/testify/require"
-	testkeeper 	"github.com/hyle-team/bridgeless-core/testutil/keeper"
-	"github.com/hyle-team/bridgeless-core/x/tracking/types"
 )
 
 func TestParamsQuery(t *testing.T) {

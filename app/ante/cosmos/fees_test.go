@@ -8,10 +8,10 @@ import (
 	sdktestutil "github.com/cosmos/cosmos-sdk/testutil/testdata"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/feegrant"
-	cosmosante "github.com/hyle-team/bridgeless-core/app/ante/cosmos"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	testutiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	"github.com/hyle-team/bridgeless-core/utils"
+	cosmosante "github.com/hyle-team/bridgeless-core/v12/app/ante/cosmos"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	testutiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
 )
 
 func (suite *AnteTestSuite) TestDeductFeeDecorator() {

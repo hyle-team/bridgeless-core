@@ -9,12 +9,12 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	"github.com/hyle-team/bridgeless-core/utils"
-	feemarkettypes "github.com/hyle-team/bridgeless-core/x/feemarket/types"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
+	feemarkettypes "github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )

@@ -16,9 +16,9 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/hyle-team/bridgeless-core/x/tracking/client/cli"
-	"github.com/hyle-team/bridgeless-core/x/tracking/keeper"
-	"github.com/hyle-team/bridgeless-core/x/tracking/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/client/cli"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 )
 
 var (

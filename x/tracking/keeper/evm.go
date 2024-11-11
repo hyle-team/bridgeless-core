@@ -7,10 +7,10 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/hyle-team/bridgeless-core/contracts"
-	contractypes "github.com/hyle-team/bridgeless-core/contracts/types"
-	"github.com/hyle-team/bridgeless-core/utils"
-	"github.com/hyle-team/bridgeless-core/x/tracking/types"
+	"github.com/hyle-team/bridgeless-core/v12/contracts"
+	contractypes "github.com/hyle-team/bridgeless-core/v12/contracts/types"
+	"github.com/hyle-team/bridgeless-core/v12/utils"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 )
 
 // PostTxProcessing is used to listen EVM smart contract events,

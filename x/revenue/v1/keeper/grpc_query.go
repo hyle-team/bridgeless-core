@@ -27,9 +27,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/ethereum/go-ethereum/common"
-	evmostypes "github.com/hyle-team/bridgeless-core/types"
+	evmostypes "github.com/hyle-team/bridgeless-core/v12/types"
 
-	"github.com/hyle-team/bridgeless-core/x/revenue/v1/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
 )
 
 var _ types.QueryServer = Keeper{}

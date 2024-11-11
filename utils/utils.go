@@ -24,7 +24,7 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"strings"
 
-	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/ethsecp256k1"
 
 	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"

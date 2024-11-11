@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hyle-team/bridgeless-core/x/recovery/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/recovery/types"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )

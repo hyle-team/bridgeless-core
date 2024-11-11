@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/hyle-team/bridgeless-core/x/tracking/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 )
 
 // GetParams get all parameters as types.Params

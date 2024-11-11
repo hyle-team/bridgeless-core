@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/hyle-team/bridgeless-core/x/tracking/types"
-    "github.com/hyle-team/bridgeless-core/x/tracking/keeper"
-    keepertest "github.com/hyle-team/bridgeless-core/testutil/keeper"
+	keepertest "github.com/hyle-team/bridgeless-core/v12/testutil/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

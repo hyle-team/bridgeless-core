@@ -4,7 +4,7 @@ import (
 	"context"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/hyle-team/bridgeless-core/x/bridge/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
 func (m msgServer) InsertChain(goCtx context.Context, msg *types.MsgInsertChain) (*types.MsgInsertChainResponse, error) {

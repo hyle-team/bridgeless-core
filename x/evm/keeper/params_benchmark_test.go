@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 func BenchmarkSetParams(b *testing.B) {

@@ -9,12 +9,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/hyle-team/bridgeless-core/app"
-	"github.com/hyle-team/bridgeless-core/crypto/hd"
-	"github.com/hyle-team/bridgeless-core/encoding"
-	"github.com/hyle-team/bridgeless-core/tests/integration/ledger/mocks"
-	"github.com/hyle-team/bridgeless-core/testutil"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
+	"github.com/hyle-team/bridgeless-core/v12/app"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/hd"
+	"github.com/hyle-team/bridgeless-core/v12/encoding"
+	"github.com/hyle-team/bridgeless-core/v12/tests/integration/ledger/mocks"
+	"github.com/hyle-team/bridgeless-core/v12/testutil"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
 
 	"github.com/spf13/cobra"
 

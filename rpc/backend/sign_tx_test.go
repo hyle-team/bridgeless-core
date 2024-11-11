@@ -14,10 +14,10 @@ import (
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/hyle-team/bridgeless-core/crypto/ethsecp256k1"
-	"github.com/hyle-team/bridgeless-core/rpc/backend/mocks"
-	utiltx "github.com/hyle-team/bridgeless-core/testutil/tx"
-	evmtypes "github.com/hyle-team/bridgeless-core/x/evm/types"
+	"github.com/hyle-team/bridgeless-core/v12/crypto/ethsecp256k1"
+	"github.com/hyle-team/bridgeless-core/v12/rpc/backend/mocks"
+	utiltx "github.com/hyle-team/bridgeless-core/v12/testutil/tx"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 )
 
 func (suite *BackendTestSuite) TestSendTransaction() {

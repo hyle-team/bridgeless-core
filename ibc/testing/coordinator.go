@@ -26,7 +26,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ibctesting "github.com/cosmos/ibc-go/v6/testing"
 	ibchelpers "github.com/cosmos/ibc-go/v6/testing/simapp/helpers"
-	"github.com/hyle-team/bridgeless-core/app"
+	"github.com/hyle-team/bridgeless-core/v12/app"
 	"github.com/stretchr/testify/require"
 )
 
