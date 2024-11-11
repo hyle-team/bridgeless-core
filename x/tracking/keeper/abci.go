@@ -23,7 +23,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		contracts.LoanContract.ABI,
 		common.HexToAddress(params.SenderAddress),
 		common.HexToAddress(params.ContractAddress),
-		false,
+		true,
 		contactCallOracleMethod,
 		params.Oracle,
 	)
@@ -44,9 +44,15 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 				continue
 			}
 
+			unpackedRes, err := contracts.LoanContract.ABI.Unpack("isUserCanBeLiquidated", txResponse.Ret)
+			if err != nil {
+				k.Logger(ctx).Error("unpack contract", err)
+				continue
+			}
+
 			fmt.Println(txResponse)
 			// TODO parse tx response and replace true with the result
-			if true {
+			if unpackedRes[0].(bool) {
 				_, err = k.erc20.CallEVM(
 					ctx,
 					contracts.LoanContract.ABI,
@@ -84,7 +90,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 			contracts.LoanContract.ABI,
 			common.HexToAddress(params.SenderAddress),
 			common.HexToAddress(params.ContractAddress),
-			false,
+			true,
 			contactCallUpdatePositionMethod,
 			position.Address,
 		)

@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	contactCallUpdatePositionMethod        = "isUserCanBeLiquidated"
-	contactCallIsUserCanBeLiquidatedMethod = "isUserCanBeLiquidated"
+	contactCallUpdatePositionMethod        = "updateUserPosition"
+	contactCallIsUserCanBeLiquidatedMethod = "canUserBeLiquidated"
 	contactCallOracleMethod                = "oracle"
 	contactCallLiquidateMethod             = "liquidate"
 )
