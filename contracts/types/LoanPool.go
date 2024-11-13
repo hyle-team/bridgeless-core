@@ -29,14 +29,35 @@ var (
 	_ = abi.ConvertType
 )
 
+// ILoanPoolLoanPoolInitData is an auto generated low-level Go binding around an user-defined struct.
+type ILoanPoolLoanPoolInitData struct {
+	PoolData             ILoanPoolPoolData
+	SupplyToken          common.Address
+	BorrowToken          common.Address
+	Oracle               common.Address
+	Treasury             common.Address
+	Liquidator           common.Address
+	CapitalizationRate   *big.Int
+	CapitalizationPeriod uint64
+}
+
 // ILoanPoolPoolData is an auto generated low-level Go binding around an user-defined struct.
 type ILoanPoolPoolData struct {
 	CollateralRatio *big.Int
 }
 
+// ILoanPoolUserData is an auto generated low-level Go binding around an user-defined struct.
+type ILoanPoolUserData struct {
+	Deposited             *big.Int
+	Borrowed              *big.Int
+	DebtNormalized        *big.Int
+	BorrowInterestFeePaid *big.Int
+	LastUpdate            *big.Int
+}
+
 // LoanPoolMetaData contains all meta data concerning the LoanPool contract.
 var LoanPoolMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recepient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Borrowed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newCapitalizationPeriod\",\"type\":\"uint256\"}],\"name\":\"CapitalizationPeriodChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newCapitalizationRate\",\"type\":\"uint256\"}],\"name\":\"CapitalizationRateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Deposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"FeePaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recepient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Liquidated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"liquidator\",\"type\":\"address\"}],\"name\":\"LiquidatorSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oracle\",\"type\":\"address\"}],\"name\":\"OracleSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"indexed\":false,\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData\",\"type\":\"tuple\"}],\"name\":\"PoolDataSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Repaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"treasury\",\"type\":\"address\"}],\"name\":\"TreasurySet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Withdrawn\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"ETHEREUM_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData_\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"supplyToken_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"borrowToken_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"oracle_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"treasury_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"liquidator_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"capitalizationRate_\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod_\",\"type\":\"uint64\"}],\"name\":\"__LoanPool_init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"recepient_\",\"type\":\"address\"}],\"name\":\"borrow\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"borrowToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"canUserBeLiquidated\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyUpdateCompoundRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCapitalizationPeriod\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod_\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCapitalizationRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"capitalizationRate_\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCompoundRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"currentRate_\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"timestamp_\",\"type\":\"uint64\"}],\"name\":\"getFutureCompoundRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsMaxRateReached\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isMaxRateReached_\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastUpdate\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"lastUpdate_\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getPossibleBorrowAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getPossibleWithdrawAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getUserDebt\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recepient_\",\"type\":\"address\"}],\"name\":\"liquidate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"liquidator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"oracle\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolData\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"repay\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod_\",\"type\":\"uint64\"}],\"name\":\"setCapitalizationPeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"capitalizationRate_\",\"type\":\"uint256\"}],\"name\":\"setCapitalizationRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"liquidator_\",\"type\":\"address\"}],\"name\":\"setLiquidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"oracle_\",\"type\":\"address\"}],\"name\":\"setOracle\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData_\",\"type\":\"tuple\"}],\"name\":\"setPoolData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"treasury_\",\"type\":\"address\"}],\"name\":\"setTreasury\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"supplyToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"treasury\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"updateUserPosition\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"users\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"deposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"debt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"debtNormalized\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"feePaid\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Borrowed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newCapitalizationPeriod\",\"type\":\"uint256\"}],\"name\":\"CapitalizationPeriodChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newCapitalizationRate\",\"type\":\"uint256\"}],\"name\":\"CapitalizationRateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Deposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"FeePaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Liquidated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"liquidator\",\"type\":\"address\"}],\"name\":\"LiquidatorSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oracle\",\"type\":\"address\"}],\"name\":\"OracleSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"indexed\":false,\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData\",\"type\":\"tuple\"}],\"name\":\"PoolDataSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Repaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"treasury\",\"type\":\"address\"}],\"name\":\"TreasurySet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Withdrawn\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"ETHEREUM_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"supplyToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"borrowToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"oracle\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"treasury\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"liquidator\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"capitalizationRate\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod\",\"type\":\"uint64\"}],\"internalType\":\"structILoanPool.LoanPoolInitData\",\"name\":\"initData_\",\"type\":\"tuple\"}],\"name\":\"__LoanPool_init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"recipient_\",\"type\":\"address\"}],\"name\":\"borrow\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"borrowToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"canUserBeLiquidated\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyUpdateCompoundRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCapitalizationPeriod\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod_\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCapitalizationRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"capitalizationRate_\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCompoundRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"currentRate_\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"timestamp_\",\"type\":\"uint64\"}],\"name\":\"getFutureCompoundRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIsMaxRateReached\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isMaxRateReached_\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastUpdate\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"lastUpdate_\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getMaxPossibleBorrowAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getMaxPossibleWithdrawAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"getUserDebt\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient_\",\"type\":\"address\"}],\"name\":\"liquidate\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"liquidator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"oracle\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolData\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"repay\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"capitalizationPeriod_\",\"type\":\"uint64\"}],\"name\":\"setCapitalizationPeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"capitalizationRate_\",\"type\":\"uint256\"}],\"name\":\"setCapitalizationRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"liquidator_\",\"type\":\"address\"}],\"name\":\"setLiquidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"oracle_\",\"type\":\"address\"}],\"name\":\"setOracle\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"collateralRatio\",\"type\":\"uint256\"}],\"internalType\":\"structILoanPool.PoolData\",\"name\":\"poolData_\",\"type\":\"tuple\"}],\"name\":\"setPoolData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"treasury_\",\"type\":\"address\"}],\"name\":\"setTreasury\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"supplyToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"treasury\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"updateUserPosition\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user_\",\"type\":\"address\"}],\"name\":\"users\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"deposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"borrowed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"debtNormalized\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"borrowInterestFeePaid\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastUpdate\",\"type\":\"uint256\"}],\"internalType\":\"structILoanPool.UserData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount_\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
 // LoanPoolABI is the input ABI used to generate the binding from.
@@ -495,12 +516,12 @@ func (_LoanPool *LoanPoolCallerSession) GetLastUpdate() (uint64, error) {
 	return _LoanPool.Contract.GetLastUpdate(&_LoanPool.CallOpts)
 }
 
-// GetPossibleBorrowAmount is a free data retrieval call binding the contract method 0xa80e9252.
+// GetMaxPossibleBorrowAmount is a free data retrieval call binding the contract method 0x987b7605.
 //
-// Solidity: function getPossibleBorrowAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolCaller) GetPossibleBorrowAmount(opts *bind.CallOpts, user_ common.Address) (*big.Int, error) {
+// Solidity: function getMaxPossibleBorrowAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolCaller) GetMaxPossibleBorrowAmount(opts *bind.CallOpts, user_ common.Address) (*big.Int, error) {
 	var out []interface{}
-	err := _LoanPool.contract.Call(opts, &out, "getPossibleBorrowAmount", user_)
+	err := _LoanPool.contract.Call(opts, &out, "getMaxPossibleBorrowAmount", user_)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -512,26 +533,26 @@ func (_LoanPool *LoanPoolCaller) GetPossibleBorrowAmount(opts *bind.CallOpts, us
 
 }
 
-// GetPossibleBorrowAmount is a free data retrieval call binding the contract method 0xa80e9252.
+// GetMaxPossibleBorrowAmount is a free data retrieval call binding the contract method 0x987b7605.
 //
-// Solidity: function getPossibleBorrowAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolSession) GetPossibleBorrowAmount(user_ common.Address) (*big.Int, error) {
-	return _LoanPool.Contract.GetPossibleBorrowAmount(&_LoanPool.CallOpts, user_)
+// Solidity: function getMaxPossibleBorrowAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolSession) GetMaxPossibleBorrowAmount(user_ common.Address) (*big.Int, error) {
+	return _LoanPool.Contract.GetMaxPossibleBorrowAmount(&_LoanPool.CallOpts, user_)
 }
 
-// GetPossibleBorrowAmount is a free data retrieval call binding the contract method 0xa80e9252.
+// GetMaxPossibleBorrowAmount is a free data retrieval call binding the contract method 0x987b7605.
 //
-// Solidity: function getPossibleBorrowAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolCallerSession) GetPossibleBorrowAmount(user_ common.Address) (*big.Int, error) {
-	return _LoanPool.Contract.GetPossibleBorrowAmount(&_LoanPool.CallOpts, user_)
+// Solidity: function getMaxPossibleBorrowAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolCallerSession) GetMaxPossibleBorrowAmount(user_ common.Address) (*big.Int, error) {
+	return _LoanPool.Contract.GetMaxPossibleBorrowAmount(&_LoanPool.CallOpts, user_)
 }
 
-// GetPossibleWithdrawAmount is a free data retrieval call binding the contract method 0xc9c67933.
+// GetMaxPossibleWithdrawAmount is a free data retrieval call binding the contract method 0x3d1b3d69.
 //
-// Solidity: function getPossibleWithdrawAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolCaller) GetPossibleWithdrawAmount(opts *bind.CallOpts, user_ common.Address) (*big.Int, error) {
+// Solidity: function getMaxPossibleWithdrawAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolCaller) GetMaxPossibleWithdrawAmount(opts *bind.CallOpts, user_ common.Address) (*big.Int, error) {
 	var out []interface{}
-	err := _LoanPool.contract.Call(opts, &out, "getPossibleWithdrawAmount", user_)
+	err := _LoanPool.contract.Call(opts, &out, "getMaxPossibleWithdrawAmount", user_)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -543,18 +564,18 @@ func (_LoanPool *LoanPoolCaller) GetPossibleWithdrawAmount(opts *bind.CallOpts, 
 
 }
 
-// GetPossibleWithdrawAmount is a free data retrieval call binding the contract method 0xc9c67933.
+// GetMaxPossibleWithdrawAmount is a free data retrieval call binding the contract method 0x3d1b3d69.
 //
-// Solidity: function getPossibleWithdrawAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolSession) GetPossibleWithdrawAmount(user_ common.Address) (*big.Int, error) {
-	return _LoanPool.Contract.GetPossibleWithdrawAmount(&_LoanPool.CallOpts, user_)
+// Solidity: function getMaxPossibleWithdrawAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolSession) GetMaxPossibleWithdrawAmount(user_ common.Address) (*big.Int, error) {
+	return _LoanPool.Contract.GetMaxPossibleWithdrawAmount(&_LoanPool.CallOpts, user_)
 }
 
-// GetPossibleWithdrawAmount is a free data retrieval call binding the contract method 0xc9c67933.
+// GetMaxPossibleWithdrawAmount is a free data retrieval call binding the contract method 0x3d1b3d69.
 //
-// Solidity: function getPossibleWithdrawAmount(address user_) view returns(uint256)
-func (_LoanPool *LoanPoolCallerSession) GetPossibleWithdrawAmount(user_ common.Address) (*big.Int, error) {
-	return _LoanPool.Contract.GetPossibleWithdrawAmount(&_LoanPool.CallOpts, user_)
+// Solidity: function getMaxPossibleWithdrawAmount(address user_) view returns(uint256)
+func (_LoanPool *LoanPoolCallerSession) GetMaxPossibleWithdrawAmount(user_ common.Address) (*big.Int, error) {
+	return _LoanPool.Contract.GetMaxPossibleWithdrawAmount(&_LoanPool.CallOpts, user_)
 }
 
 // GetUserDebt is a free data retrieval call binding the contract method 0xe65896c9.
@@ -838,99 +859,75 @@ func (_LoanPool *LoanPoolCallerSession) Treasury() (common.Address, error) {
 
 // Users is a free data retrieval call binding the contract method 0xa87430ba.
 //
-// Solidity: function users(address user) view returns(uint256 deposited, uint256 debt, uint256 debtNormalized, uint256 feePaid)
-func (_LoanPool *LoanPoolCaller) Users(opts *bind.CallOpts, user common.Address) (struct {
-	Deposited      *big.Int
-	Debt           *big.Int
-	DebtNormalized *big.Int
-	FeePaid        *big.Int
-}, error) {
+// Solidity: function users(address user_) view returns((uint256,uint256,uint256,uint256,uint256))
+func (_LoanPool *LoanPoolCaller) Users(opts *bind.CallOpts, user_ common.Address) (ILoanPoolUserData, error) {
 	var out []interface{}
-	err := _LoanPool.contract.Call(opts, &out, "users", user)
+	err := _LoanPool.contract.Call(opts, &out, "users", user_)
 
-	outstruct := new(struct {
-		Deposited      *big.Int
-		Debt           *big.Int
-		DebtNormalized *big.Int
-		FeePaid        *big.Int
-	})
 	if err != nil {
-		return *outstruct, err
+		return *new(ILoanPoolUserData), err
 	}
 
-	outstruct.Deposited = *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-	outstruct.Debt = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
-	outstruct.DebtNormalized = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
-	outstruct.FeePaid = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
+	out0 := *abi.ConvertType(out[0], new(ILoanPoolUserData)).(*ILoanPoolUserData)
 
-	return *outstruct, err
+	return out0, err
 
 }
 
 // Users is a free data retrieval call binding the contract method 0xa87430ba.
 //
-// Solidity: function users(address user) view returns(uint256 deposited, uint256 debt, uint256 debtNormalized, uint256 feePaid)
-func (_LoanPool *LoanPoolSession) Users(user common.Address) (struct {
-	Deposited      *big.Int
-	Debt           *big.Int
-	DebtNormalized *big.Int
-	FeePaid        *big.Int
-}, error) {
-	return _LoanPool.Contract.Users(&_LoanPool.CallOpts, user)
+// Solidity: function users(address user_) view returns((uint256,uint256,uint256,uint256,uint256))
+func (_LoanPool *LoanPoolSession) Users(user_ common.Address) (ILoanPoolUserData, error) {
+	return _LoanPool.Contract.Users(&_LoanPool.CallOpts, user_)
 }
 
 // Users is a free data retrieval call binding the contract method 0xa87430ba.
 //
-// Solidity: function users(address user) view returns(uint256 deposited, uint256 debt, uint256 debtNormalized, uint256 feePaid)
-func (_LoanPool *LoanPoolCallerSession) Users(user common.Address) (struct {
-	Deposited      *big.Int
-	Debt           *big.Int
-	DebtNormalized *big.Int
-	FeePaid        *big.Int
-}, error) {
-	return _LoanPool.Contract.Users(&_LoanPool.CallOpts, user)
+// Solidity: function users(address user_) view returns((uint256,uint256,uint256,uint256,uint256))
+func (_LoanPool *LoanPoolCallerSession) Users(user_ common.Address) (ILoanPoolUserData, error) {
+	return _LoanPool.Contract.Users(&_LoanPool.CallOpts, user_)
 }
 
-// LoanPoolInit is a paid mutator transaction binding the contract method 0x8aab156f.
+// LoanPoolInit is a paid mutator transaction binding the contract method 0x85a37317.
 //
-// Solidity: function __LoanPool_init((uint256) poolData_, address supplyToken_, address borrowToken_, address oracle_, address treasury_, address liquidator_, uint256 capitalizationRate_, uint64 capitalizationPeriod_) returns()
-func (_LoanPool *LoanPoolTransactor) LoanPoolInit(opts *bind.TransactOpts, poolData_ ILoanPoolPoolData, supplyToken_ common.Address, borrowToken_ common.Address, oracle_ common.Address, treasury_ common.Address, liquidator_ common.Address, capitalizationRate_ *big.Int, capitalizationPeriod_ uint64) (*types.Transaction, error) {
-	return _LoanPool.contract.Transact(opts, "__LoanPool_init", poolData_, supplyToken_, borrowToken_, oracle_, treasury_, liquidator_, capitalizationRate_, capitalizationPeriod_)
+// Solidity: function __LoanPool_init(((uint256),address,address,address,address,address,uint256,uint64) initData_) returns()
+func (_LoanPool *LoanPoolTransactor) LoanPoolInit(opts *bind.TransactOpts, initData_ ILoanPoolLoanPoolInitData) (*types.Transaction, error) {
+	return _LoanPool.contract.Transact(opts, "__LoanPool_init", initData_)
 }
 
-// LoanPoolInit is a paid mutator transaction binding the contract method 0x8aab156f.
+// LoanPoolInit is a paid mutator transaction binding the contract method 0x85a37317.
 //
-// Solidity: function __LoanPool_init((uint256) poolData_, address supplyToken_, address borrowToken_, address oracle_, address treasury_, address liquidator_, uint256 capitalizationRate_, uint64 capitalizationPeriod_) returns()
-func (_LoanPool *LoanPoolSession) LoanPoolInit(poolData_ ILoanPoolPoolData, supplyToken_ common.Address, borrowToken_ common.Address, oracle_ common.Address, treasury_ common.Address, liquidator_ common.Address, capitalizationRate_ *big.Int, capitalizationPeriod_ uint64) (*types.Transaction, error) {
-	return _LoanPool.Contract.LoanPoolInit(&_LoanPool.TransactOpts, poolData_, supplyToken_, borrowToken_, oracle_, treasury_, liquidator_, capitalizationRate_, capitalizationPeriod_)
+// Solidity: function __LoanPool_init(((uint256),address,address,address,address,address,uint256,uint64) initData_) returns()
+func (_LoanPool *LoanPoolSession) LoanPoolInit(initData_ ILoanPoolLoanPoolInitData) (*types.Transaction, error) {
+	return _LoanPool.Contract.LoanPoolInit(&_LoanPool.TransactOpts, initData_)
 }
 
-// LoanPoolInit is a paid mutator transaction binding the contract method 0x8aab156f.
+// LoanPoolInit is a paid mutator transaction binding the contract method 0x85a37317.
 //
-// Solidity: function __LoanPool_init((uint256) poolData_, address supplyToken_, address borrowToken_, address oracle_, address treasury_, address liquidator_, uint256 capitalizationRate_, uint64 capitalizationPeriod_) returns()
-func (_LoanPool *LoanPoolTransactorSession) LoanPoolInit(poolData_ ILoanPoolPoolData, supplyToken_ common.Address, borrowToken_ common.Address, oracle_ common.Address, treasury_ common.Address, liquidator_ common.Address, capitalizationRate_ *big.Int, capitalizationPeriod_ uint64) (*types.Transaction, error) {
-	return _LoanPool.Contract.LoanPoolInit(&_LoanPool.TransactOpts, poolData_, supplyToken_, borrowToken_, oracle_, treasury_, liquidator_, capitalizationRate_, capitalizationPeriod_)
+// Solidity: function __LoanPool_init(((uint256),address,address,address,address,address,uint256,uint64) initData_) returns()
+func (_LoanPool *LoanPoolTransactorSession) LoanPoolInit(initData_ ILoanPoolLoanPoolInitData) (*types.Transaction, error) {
+	return _LoanPool.Contract.LoanPoolInit(&_LoanPool.TransactOpts, initData_)
 }
 
 // Borrow is a paid mutator transaction binding the contract method 0x4b3fd148.
 //
-// Solidity: function borrow(uint256 amount_, address recepient_) payable returns()
-func (_LoanPool *LoanPoolTransactor) Borrow(opts *bind.TransactOpts, amount_ *big.Int, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.contract.Transact(opts, "borrow", amount_, recepient_)
+// Solidity: function borrow(uint256 amount_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolTransactor) Borrow(opts *bind.TransactOpts, amount_ *big.Int, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.contract.Transact(opts, "borrow", amount_, recipient_)
 }
 
 // Borrow is a paid mutator transaction binding the contract method 0x4b3fd148.
 //
-// Solidity: function borrow(uint256 amount_, address recepient_) payable returns()
-func (_LoanPool *LoanPoolSession) Borrow(amount_ *big.Int, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.Contract.Borrow(&_LoanPool.TransactOpts, amount_, recepient_)
+// Solidity: function borrow(uint256 amount_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolSession) Borrow(amount_ *big.Int, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.Contract.Borrow(&_LoanPool.TransactOpts, amount_, recipient_)
 }
 
 // Borrow is a paid mutator transaction binding the contract method 0x4b3fd148.
 //
-// Solidity: function borrow(uint256 amount_, address recepient_) payable returns()
-func (_LoanPool *LoanPoolTransactorSession) Borrow(amount_ *big.Int, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.Contract.Borrow(&_LoanPool.TransactOpts, amount_, recepient_)
+// Solidity: function borrow(uint256 amount_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolTransactorSession) Borrow(amount_ *big.Int, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.Contract.Borrow(&_LoanPool.TransactOpts, amount_, recipient_)
 }
 
 // Deposit is a paid mutator transaction binding the contract method 0xb6b55f25.
@@ -977,23 +974,23 @@ func (_LoanPool *LoanPoolTransactorSession) EmergencyUpdateCompoundRate() (*type
 
 // Liquidate is a paid mutator transaction binding the contract method 0x86b9d81f.
 //
-// Solidity: function liquidate(address user_, address recepient_) returns()
-func (_LoanPool *LoanPoolTransactor) Liquidate(opts *bind.TransactOpts, user_ common.Address, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.contract.Transact(opts, "liquidate", user_, recepient_)
+// Solidity: function liquidate(address user_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolTransactor) Liquidate(opts *bind.TransactOpts, user_ common.Address, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.contract.Transact(opts, "liquidate", user_, recipient_)
 }
 
 // Liquidate is a paid mutator transaction binding the contract method 0x86b9d81f.
 //
-// Solidity: function liquidate(address user_, address recepient_) returns()
-func (_LoanPool *LoanPoolSession) Liquidate(user_ common.Address, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.Contract.Liquidate(&_LoanPool.TransactOpts, user_, recepient_)
+// Solidity: function liquidate(address user_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolSession) Liquidate(user_ common.Address, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.Contract.Liquidate(&_LoanPool.TransactOpts, user_, recipient_)
 }
 
 // Liquidate is a paid mutator transaction binding the contract method 0x86b9d81f.
 //
-// Solidity: function liquidate(address user_, address recepient_) returns()
-func (_LoanPool *LoanPoolTransactorSession) Liquidate(user_ common.Address, recepient_ common.Address) (*types.Transaction, error) {
-	return _LoanPool.Contract.Liquidate(&_LoanPool.TransactOpts, user_, recepient_)
+// Solidity: function liquidate(address user_, address recipient_) payable returns()
+func (_LoanPool *LoanPoolTransactorSession) Liquidate(user_ common.Address, recipient_ common.Address) (*types.Transaction, error) {
+	return _LoanPool.Contract.Liquidate(&_LoanPool.TransactOpts, user_, recipient_)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -1250,23 +1247,44 @@ func (_LoanPool *LoanPoolTransactorSession) UpgradeToAndCall(newImplementation c
 
 // Withdraw is a paid mutator transaction binding the contract method 0x2e1a7d4d.
 //
-// Solidity: function withdraw(uint256 amount_) payable returns()
+// Solidity: function withdraw(uint256 amount_) returns()
 func (_LoanPool *LoanPoolTransactor) Withdraw(opts *bind.TransactOpts, amount_ *big.Int) (*types.Transaction, error) {
 	return _LoanPool.contract.Transact(opts, "withdraw", amount_)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x2e1a7d4d.
 //
-// Solidity: function withdraw(uint256 amount_) payable returns()
+// Solidity: function withdraw(uint256 amount_) returns()
 func (_LoanPool *LoanPoolSession) Withdraw(amount_ *big.Int) (*types.Transaction, error) {
 	return _LoanPool.Contract.Withdraw(&_LoanPool.TransactOpts, amount_)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x2e1a7d4d.
 //
-// Solidity: function withdraw(uint256 amount_) payable returns()
+// Solidity: function withdraw(uint256 amount_) returns()
 func (_LoanPool *LoanPoolTransactorSession) Withdraw(amount_ *big.Int) (*types.Transaction, error) {
 	return _LoanPool.Contract.Withdraw(&_LoanPool.TransactOpts, amount_)
+}
+
+// Receive is a paid mutator transaction binding the contract receive function.
+//
+// Solidity: receive() payable returns()
+func (_LoanPool *LoanPoolTransactor) Receive(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _LoanPool.contract.RawTransact(opts, nil) // calldata is disallowed for receive function
+}
+
+// Receive is a paid mutator transaction binding the contract receive function.
+//
+// Solidity: receive() payable returns()
+func (_LoanPool *LoanPoolSession) Receive() (*types.Transaction, error) {
+	return _LoanPool.Contract.Receive(&_LoanPool.TransactOpts)
+}
+
+// Receive is a paid mutator transaction binding the contract receive function.
+//
+// Solidity: receive() payable returns()
+func (_LoanPool *LoanPoolTransactorSession) Receive() (*types.Transaction, error) {
+	return _LoanPool.Contract.Receive(&_LoanPool.TransactOpts)
 }
 
 // LoanPoolAdminChangedIterator is returned from FilterAdminChanged and is used to iterate over the raw logs and unpacked data for AdminChanged events raised by the LoanPool contract.
@@ -1618,14 +1636,14 @@ func (it *LoanPoolBorrowedIterator) Close() error {
 // LoanPoolBorrowed represents a Borrowed event raised by the LoanPool contract.
 type LoanPoolBorrowed struct {
 	User      common.Address
-	Recepient common.Address
+	Recipient common.Address
 	Amount    *big.Int
 	Raw       types.Log // Blockchain specific contextual infos
 }
 
 // FilterBorrowed is a free log retrieval operation binding the contract event 0x3fc499aeb0bb1cb58b6de8b02b3f86f4e7394e9690bef0110e32ced8a5631045.
 //
-// Solidity: event Borrowed(address indexed user, address recepient, uint256 amount)
+// Solidity: event Borrowed(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) FilterBorrowed(opts *bind.FilterOpts, user []common.Address) (*LoanPoolBorrowedIterator, error) {
 
 	var userRule []interface{}
@@ -1642,7 +1660,7 @@ func (_LoanPool *LoanPoolFilterer) FilterBorrowed(opts *bind.FilterOpts, user []
 
 // WatchBorrowed is a free log subscription operation binding the contract event 0x3fc499aeb0bb1cb58b6de8b02b3f86f4e7394e9690bef0110e32ced8a5631045.
 //
-// Solidity: event Borrowed(address indexed user, address recepient, uint256 amount)
+// Solidity: event Borrowed(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) WatchBorrowed(opts *bind.WatchOpts, sink chan<- *LoanPoolBorrowed, user []common.Address) (event.Subscription, error) {
 
 	var userRule []interface{}
@@ -1684,7 +1702,7 @@ func (_LoanPool *LoanPoolFilterer) WatchBorrowed(opts *bind.WatchOpts, sink chan
 
 // ParseBorrowed is a log parse operation binding the contract event 0x3fc499aeb0bb1cb58b6de8b02b3f86f4e7394e9690bef0110e32ced8a5631045.
 //
-// Solidity: event Borrowed(address indexed user, address recepient, uint256 amount)
+// Solidity: event Borrowed(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) ParseBorrowed(log types.Log) (*LoanPoolBorrowed, error) {
 	event := new(LoanPoolBorrowed)
 	if err := _LoanPool.contract.UnpackLog(event, "Borrowed", log); err != nil {
@@ -2456,14 +2474,14 @@ func (it *LoanPoolLiquidatedIterator) Close() error {
 // LoanPoolLiquidated represents a Liquidated event raised by the LoanPool contract.
 type LoanPoolLiquidated struct {
 	User      common.Address
-	Recepient common.Address
+	Recipient common.Address
 	Amount    *big.Int
 	Raw       types.Log // Blockchain specific contextual infos
 }
 
 // FilterLiquidated is a free log retrieval operation binding the contract event 0xde0aa27286f5cb3a4ed853dc4823ead62d63e92cdf13de09d6aece56970721a4.
 //
-// Solidity: event Liquidated(address indexed user, address recepient, uint256 amount)
+// Solidity: event Liquidated(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) FilterLiquidated(opts *bind.FilterOpts, user []common.Address) (*LoanPoolLiquidatedIterator, error) {
 
 	var userRule []interface{}
@@ -2480,7 +2498,7 @@ func (_LoanPool *LoanPoolFilterer) FilterLiquidated(opts *bind.FilterOpts, user 
 
 // WatchLiquidated is a free log subscription operation binding the contract event 0xde0aa27286f5cb3a4ed853dc4823ead62d63e92cdf13de09d6aece56970721a4.
 //
-// Solidity: event Liquidated(address indexed user, address recepient, uint256 amount)
+// Solidity: event Liquidated(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) WatchLiquidated(opts *bind.WatchOpts, sink chan<- *LoanPoolLiquidated, user []common.Address) (event.Subscription, error) {
 
 	var userRule []interface{}
@@ -2522,7 +2540,7 @@ func (_LoanPool *LoanPoolFilterer) WatchLiquidated(opts *bind.WatchOpts, sink ch
 
 // ParseLiquidated is a log parse operation binding the contract event 0xde0aa27286f5cb3a4ed853dc4823ead62d63e92cdf13de09d6aece56970721a4.
 //
-// Solidity: event Liquidated(address indexed user, address recepient, uint256 amount)
+// Solidity: event Liquidated(address indexed user, address recipient, uint256 amount)
 func (_LoanPool *LoanPoolFilterer) ParseLiquidated(log types.Log) (*LoanPoolLiquidated, error) {
 	event := new(LoanPoolLiquidated)
 	if err := _LoanPool.contract.UnpackLog(event, "Liquidated", log); err != nil {
