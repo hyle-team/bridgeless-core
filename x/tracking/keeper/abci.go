@@ -25,8 +25,11 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		common.HexToAddress(params.ContractAddress),
 		true,
 		contactCallOracleMethod,
-		params.Oracle,
 	)
+	if err != nil {
+		k.Logger(ctx).Error("contract call error: Oracle", err)
+		return []abci.ValidatorUpdate{}
+	}
 
 	for _, position := range positions {
 		if position.LastTimeUpdate-ctx.BlockHeight() >= int64(params.Threshold) {
@@ -37,14 +40,14 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 				common.HexToAddress(params.ContractAddress),
 				false,
 				contactCallIsUserCanBeLiquidatedMethod,
-				position.Address,
+				common.HexToAddress(position.Address),
 			)
 			if err != nil {
 				k.Logger(ctx).Error("contract call error", err)
 				continue
 			}
 
-			unpackedRes, err := contracts.LoanContract.ABI.Unpack("isUserCanBeLiquidated", txResponse.Ret)
+			unpackedRes, err := contracts.LoanContract.ABI.Unpack("canUserBeLiquidated", txResponse.Ret)
 			if err != nil {
 				k.Logger(ctx).Error("unpack contract", err)
 				continue
@@ -92,7 +95,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 			common.HexToAddress(params.ContractAddress),
 			true,
 			contactCallUpdatePositionMethod,
-			position.Address,
+			common.HexToAddress(position.Address),
 		)
 		if err != nil {
 			k.Logger(ctx).Error("contract call error", err)
