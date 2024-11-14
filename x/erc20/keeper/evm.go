@@ -206,7 +206,7 @@ func (k Keeper) CallEVMWithData(
 		if internalErr != nil {
 			return nil, internalErr
 		}
-		gasCap = gasRes.Gas * 40 // will divided by 2
+		gasCap = gasRes.Gas
 	}
 
 	msg := ethtypes.NewMessage(
