@@ -31,6 +31,10 @@ import (
 	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
 	"github.com/hyle-team/bridgeless-core/v12/docs"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge"
+	multisigkeeper "github.com/hyle-team/bridgeless-core/v12/x/multisig/keeper"
+
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig"
+	multisigtypes "github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 
 	"io"
 	"net/http"
@@ -244,6 +248,7 @@ var (
 		mint.AppModuleBasic{},
 		nft.AppModuleBasic{},
 		bridge.AppModuleBasic{},
+		multisig.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -262,6 +267,7 @@ var (
 		minttypes.ModuleName:           {authtypes.Minter, authtypes.Staking, authtypes.Burner},
 		nfttypes.ModuleName:            nil,
 		bridgetypes.ModuleName:         nil,
+		multisigtypes.ModuleName:       nil,
 	}
 
 	// module accounts that are allowed to receive tokens
@@ -331,6 +337,8 @@ type Bridge struct {
 	NFTKeeper    *nftkeeper.Keeper
 	BridgeKeeper *bridgekeeper.Keeper
 
+	MultisigKeeper multisigkeeper.Keeper
+
 	// the module manager
 	mm *module.Manager
 
@@ -392,6 +400,7 @@ func NewBridge(
 		minttypes.StoreKey,
 		nfttypes.StoreKey,
 		bridgetypes.StoreKey,
+		multisigtypes.StoreKey,
 	)
 
 	// Add the EVM transient store key
@@ -465,6 +474,7 @@ func NewBridge(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		app.StakingKeeper, app.NFTKeeper, authtypes.FeeCollectorName,
 	)
+
 	app.SlashingKeeper = slashingkeeper.NewKeeper(
 		appCodec, keys[slashingtypes.StoreKey], app.StakingKeeper, app.GetSubspace(slashingtypes.ModuleName),
 	)
@@ -477,6 +487,14 @@ func NewBridge(
 	app.AuthzKeeper = authzkeeper.NewKeeper(keys[authzkeeper.StoreKey], appCodec, app.MsgServiceRouter(), app.AccountKeeper)
 
 	tracer := cast.ToString(appOpts.Get(srvflags.EVMTracer))
+
+	app.MultisigKeeper = *multisigkeeper.NewKeeper(
+		appCodec,
+		keys[multisigtypes.StoreKey],
+		keys[multisigtypes.MemStoreKey],
+		app.MsgServiceRouter(),
+		app.AccountKeeper,
+	)
 
 	// Create Ethermint keepers
 	app.FeeMarketKeeper = feemarketkeeper.NewKeeper(
@@ -701,6 +719,7 @@ func NewBridge(
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
 		nft.NewAppModule(appCodec, *app.NFTKeeper, app.AccountKeeper, app.BankKeeper),
 		bridge.NewAppModule(appCodec, *app.BridgeKeeper),
+		multisig.NewAppModule(appCodec, app.MultisigKeeper, app.AccountKeeper),
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -740,6 +759,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		multisigtypes.ModuleName,
 	)
 
 	// NOTE: fee market module must go last in order to retrieve the block gas used.
@@ -777,6 +797,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		multisigtypes.ModuleName,
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -823,6 +844,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		multisigtypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
