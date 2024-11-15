@@ -19,32 +19,32 @@ service Query {
   }
 
   rpc GroupAll(QueryAllGroupRequest) returns (QueryAllGroupResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/group";
+    option (google.api.http).get = "/cosmos/multisig/group";
   }
 
   rpc Group(QueryGetGroupRequest) returns (QueryGetGroupResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/group/{account}";
+    option (google.api.http).get = "/cosmos/multisig/group/{account}";
   }
 
   rpc Proposal(QueryGetProposalRequest) returns (QueryGetProposalResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/proposal/{proposalId}";
+    option (google.api.http).get = "/cosmos/multisig/proposal/{proposalId}";
   };
 
   rpc ProposalAll(QueryAllProposalRequest) returns (QueryAllProposalResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/proposal";
+    option (google.api.http).get = "/cosmos/multisig/proposal";
   };
 
   rpc Vote(QueryGetVoteRequest) returns (QueryGetVoteResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/vote/{proposalId}/{voter}";
+    option (google.api.http).get = "/cosmos/multisig/vote/{proposalId}/{voter}";
   };
 
   rpc VoteAll(QueryAllVoteRequest) returns (QueryAllVoteResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/vote";
+    option (google.api.http).get = "/cosmos/multisig/vote";
   };
 
   // VotesByProposal queries a vote by proposal.
   rpc VotesByProposal(QueryVotesByProposalRequest) returns (QueryVotesByProposalResponse) {
-    option (google.api.http).get = "/cosmos/multisig/multisig/vote/{proposalId}";
+    option (google.api.http).get = "/cosmos/multisig/vote/{proposalId}";
   };
 
   // this line is used by starport scaffolding # 2
