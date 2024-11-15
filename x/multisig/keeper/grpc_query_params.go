@@ -4,7 +4,7 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

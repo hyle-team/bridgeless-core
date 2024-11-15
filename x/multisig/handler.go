@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/rarimo/rarimo-core/x/multisig/keeper"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 // NewHandler ...

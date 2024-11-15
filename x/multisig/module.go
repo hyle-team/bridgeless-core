@@ -17,9 +17,9 @@ import (
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/rarimo/rarimo-core/x/multisig/client/cli"
-	"github.com/rarimo/rarimo-core/x/multisig/keeper"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/client/cli"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 var (

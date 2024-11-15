@@ -6,8 +6,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 	"github.com/pkg/errors"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
 )
 
 // SetProposal set a specific proposal in the store from its id

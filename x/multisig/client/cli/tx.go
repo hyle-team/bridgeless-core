@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 var (

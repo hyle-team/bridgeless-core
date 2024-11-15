@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 // GetParams get all parameters as types.Params

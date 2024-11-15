@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 var _ types.QueryServer = Keeper{}

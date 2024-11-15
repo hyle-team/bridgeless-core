@@ -3,7 +3,7 @@ package types
 import (
 	"github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/rarimo/rarimo-core/x/multisig/tx"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/tx"
 )
 
 var _ types.UnpackInterfacesMessage = &Proposal{}

@@ -9,9 +9,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"github.com/rarimo/rarimo-core/testutil/sample"
-	multisigsimulation "github.com/rarimo/rarimo-core/x/multisig/simulation"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/testutil/sample"
+	multisigsimulation "github.com/hyle-team/bridgeless-core/v12/x/multisig/simulation"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 // avoid unused import issue

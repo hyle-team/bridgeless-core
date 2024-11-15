@@ -2,8 +2,8 @@ package multisig
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/rarimo/rarimo-core/x/multisig/keeper"
-	"github.com/rarimo/rarimo-core/x/multisig/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/keeper"
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis
