@@ -1,10 +1,12 @@
 package cli
 
 import (
+	"fmt"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 	"github.com/spf13/cobra"
 	"strconv"
@@ -31,9 +33,12 @@ func TxGroupsCmd() *cobra.Command {
 
 func CmdCreateGroup() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create [from_creator_address] [members_addresses] [threshold]",
+		Use:   "create [creator_address] [members_addresses] [threshold]",
 		Short: "Create a group",
-		Args:  cobra.ExactArgs(3),
+		Long: strings.TrimSpace(fmt.Sprintf(`Create a group with the given creator address and threshold members
+Example: 
+$ %s tx multisig groups create bridge1... bridge1...,bridge1... 2 `, version.AppName)),
+		Args: cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -70,7 +75,12 @@ func CmdUpdateGroup() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update [creator_address] [group_address] [members_addresses] [threshold]",
 		Short: "Update a group",
-		Args:  cobra.ExactArgs(4),
+		Long: strings.TrimSpace(fmt.Sprintf(`Update a group.
+Example:
+$ %s tx multisig groups update bridge1... bridge1...,bridge1... 1
+
+NOTE: group update tx can be issued only from group address`, version.AppName)),
+		Args: cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)

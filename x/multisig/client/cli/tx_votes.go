@@ -5,14 +5,16 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
+	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 	"github.com/spf13/cobra"
 	"strconv"
+	"strings"
 )
 
 func TxVoteCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:                        "vote",
+		Use:                        "votes",
 		Short:                      "proposals subcommands",
 		DisableFlagParsing:         true,
 		SuggestionsMinimumDistance: 2,
@@ -27,7 +29,12 @@ func CmdNewVote() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "vote [creator_address] [proposal_id] [option]",
 		Short: "Create a new vote",
-		Args:  cobra.ExactArgs(3),
+		Long: strings.TrimSpace(fmt.Sprintf(`Create a vote for proposal
+Example:
+$ %s tx multisig votes vote bridge1... 1 0
+0 - YES
+1 - NO`, version.AppName)),
+		Args: cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 
