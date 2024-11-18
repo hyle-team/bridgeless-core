@@ -16,7 +16,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		return []abci.ValidatorUpdate{}
 	}
 
-	// Update oracle price price by calling the oracle contract
+	//Update oracle price by calling the oracle contract
 	_, err = k.erc20.CallEVM(
 		ctx,
 		contracts.OracleContract.ABI,

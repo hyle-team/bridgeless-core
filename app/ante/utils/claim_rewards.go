@@ -36,13 +36,9 @@ func ClaimStakingRewardsIfNecessary(
 	stakingDenom := stakingKeeper.BondDenom(ctx)
 	found, amountInStakingDenom := amount.Find(stakingDenom)
 	if !found {
-
-		// TODO uncomment
-		//return errortypes.ErrInsufficientFee.Wrapf(
-		//	"wrong fee denomination; got: %s; required: %s", amount, stakingDenom,
-		//)
-
-		return nil
+		return errortypes.ErrInsufficientFee.Wrapf(
+			"wrong fee denomination; got: %s; required: %s", amount, stakingDenom,
+		)
 	}
 
 	balance := bankKeeper.GetBalance(ctx, addr, stakingDenom)

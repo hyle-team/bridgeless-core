@@ -2297,7 +2297,7 @@ paths:
           type: string
       tags:
         - Query
-  /hyle-team/bridgeless-core/tracking/params:
+  /cosmos/tracking/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: CoreTrackingParams
