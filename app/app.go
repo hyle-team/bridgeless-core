@@ -578,10 +578,10 @@ func NewBridge(
 
 	app.EvmKeeper = app.EvmKeeper.SetHooks(
 		evmkeeper.NewMultiEvmHooks(
+			app.TrackingKeeper.Hooks(),
 			app.Erc20Keeper.Hooks(),
 			app.RevenueKeeper.Hooks(),
 			app.ClaimsKeeper.Hooks(),
-			app.TrackingKeeper.Hooks(),
 		),
 	)
 

@@ -3,13 +3,11 @@ package core.tracking;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/hyle-team/bridgeless-core/v12/x/tracking/types";
+option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 
 // Position defines the position instance
 message Position {
   string address = 1;
-  int64 last_time_update = 2;
-  // TODO replace with the coin type
-
+  string recipient =2;
   int64 amount = 3;
 }

@@ -14,7 +14,7 @@ import (
 )
 
 // PostTxProcessing is used to listen EVM smart contract events,
-// filter and process `PositionCreated` events emitted by configured in module params contract address.
+// filter and process `Borrowed` events emitted by configured in module params contract address.
 // Will be called by EVM module as hook.
 func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *ethtypes.Receipt) error {
 	params := k.GetParams(ctx)
@@ -32,6 +32,7 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 
 	if len(receipt.Logs) == 0 {
 		k.Logger(ctx).Error("logs is empty")
+		return nil
 	}
 
 	// This approach is used because the contract address we use for validation and the event we
@@ -47,11 +48,12 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 		return nil
 	}
 
+	// Go through all the logs and check if the event is the one we are looking for, then create a new position with the data from that event
 	for _, log := range receipt.Logs {
 		eventId := log.Topics[0]
 		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
 		if internalErr != nil {
-			k.Logger(ctx).Error("failed to get event by ID")
+			k.Logger(ctx).Info("failed to get event by ID")
 			continue
 		}
 
@@ -59,21 +61,24 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 			k.Logger(ctx).Info(fmt.Sprintf("unmatched event: got %s, expected %s", event.Name, params.EventName))
 			continue
 		}
-
-		eventBody := contractypes.LoanPoolDeposited{}
+		eventBody := contractypes.LoanPoolBorrowed{}
 		if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
-			k.Logger(ctx).Error("failed to unpack event body")
+			k.Logger(ctx).Info("failed to unpack event body")
 			continue
 		}
 
-		k.SetPosition(ctx, eventBody.User.Hex(), types.Position{
-			Address:        eventBody.User.Hex(),
-			Amount:         eventBody.Amount.Int64(), // TODO maybe need to convert to string or update the store to save big.Int
-			LastTimeUpdate: ctx.BlockTime().Unix(),
-		})
+		// Set position in the store with the data from the event
+		k.SetPosition(
+			ctx,
+			eventBody.User.Hex(),
+			types.Position{
+				Address:   eventBody.User.Hex(),
+				Amount:    eventBody.Amount.Int64(),
+				Recipient: eventBody.Recipient.Hex(),
+			},
+		)
 
 		k.Logger(ctx).Info(fmt.Sprintf("Received PostTxProcessing event in %s module: %v", types.ModuleName, eventBody))
-		k.SetParams(ctx, params)
 	}
 
 	return nil

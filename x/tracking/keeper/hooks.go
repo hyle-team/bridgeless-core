@@ -47,6 +47,7 @@ func (h Hooks) AfterDelegationModified(ctx sdk.Context, delAddr sdk.AccAddress, 
 	return nil
 }
 
+// hooks for evm module to listen for EVM events and create a new position with the data from that event
 func (h Hooks) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *ethtypes.Receipt) error {
 	return h.k.PostTxProcessing(ctx, msg, receipt)
 }

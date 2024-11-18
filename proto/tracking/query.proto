@@ -5,22 +5,55 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "tracking/params.proto";
+import "tracking/models/position.proto";
 
-option go_package = "github.com/hyle-team/bridgeless-core/v12/x/tracking/types";
+option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) { // TODO update path
-    option (google.api.http).get = "/hyle-team/bridgeless-core/tracking/params";
+  rpc Params(QueryParams) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/cosmos/tracking/params";
+  }
+
+  rpc GetAllPositions(QueryPositions) returns (QueryPositionsResponse) {
+    option (google.api.http).get = "/cosmos/tracking/positions";
+  }
+
+  rpc GetPositionByAddress(QueryPositionByAddress) returns (QueryPositionByAddressResponse) {
+    option (google.api.http).get = "/cosmos/tracking/positions/{address}";
   }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
-message QueryParamsRequest {}
+message QueryParams {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryPosition is request type for the Query/Position RPC method.
+message QueryPositions {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryPositionResponse is response type for the Query/Position RPC method.
+message QueryPositionsResponse {
+  // params holds all the parameters of this module.
+  repeated Position positions = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+
+// QueryPosition is request type for the Query/Position RPC method.
+message QueryPositionByAddress {
+  string address = 1;
+}
+
+// QueryPositionResponse is response type for the Query/Position RPC method.
+message QueryPositionByAddressResponse {
+  // params holds the parameters of this module.
+   Position position = 1 [(gogoproto.nullable) = false];
 }
