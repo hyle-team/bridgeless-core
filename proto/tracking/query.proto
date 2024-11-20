@@ -7,7 +7,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "tracking/params.proto";
 import "tracking/models/position.proto";
 
-option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
+option go_package = "github.com/hyle-team/bridgeless-core/v12/x/tracking/types";
 
 // Query defines the gRPC querier service.
 service Query {

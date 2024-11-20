@@ -3,7 +3,7 @@ package core.tracking;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/hyle-team/bridgeless-core/x/tracking/types";
+option go_package = "github.com/hyle-team/bridgeless-core/v12/x/tracking/types";
 
 // Params defines the parameters for the module.
 message Params {
