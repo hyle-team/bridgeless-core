@@ -810,21 +810,21 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "params"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_GroupAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "group"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GroupAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "group"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Group_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "group", "account"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Group_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "group", "account"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Proposal_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "proposal", "proposalId"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Proposal_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "proposal", "proposalId"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ProposalAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "proposal"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ProposalAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "proposal"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Vote_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"cosmos", "multisig", "vote", "proposalId", "voter"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Vote_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"cosmos", "multisig", "vote", "proposalId", "voter"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_VoteAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "vote"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_VoteAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "multisig", "vote"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_VotesByProposal_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "vote", "proposalId"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_VotesByProposal_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "multisig", "vote", "proposalId"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
