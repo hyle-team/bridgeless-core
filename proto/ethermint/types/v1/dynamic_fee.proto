@@ -3,7 +3,7 @@ package ethermint.types.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/hyle-team/bridgeless-core/xtypes";
+option go_package = "github.com/hyle-team/bridgeless-core/v12/xtypes";
 
 // ExtensionOptionDynamicFeeTx is an extension option that specifies the maxPrioPrice for cosmos tx
 message ExtensionOptionDynamicFeeTx {
