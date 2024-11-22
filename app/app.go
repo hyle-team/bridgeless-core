@@ -941,12 +941,10 @@ func NewBridge(
 			MaxValidators:           app.StakingKeeper.MaxValidators(ctx),
 			MaxEntries:              app.StakingKeeper.MaxEntries(ctx),
 			HistoricalEntries:       app.StakingKeeper.HistoricalEntries(ctx),
-			BondDenom:               app.StakingKeeper.BondDenom(ctx),
+			BondDenom:               "abridge",
 			MinCommissionRate:       app.StakingKeeper.MinCommissionRate(ctx),
-			MinimalDelegationAmount: "",
+			MinimalDelegationAmount: sdk.DefaultMinDelegationAmount,
 		}
-
-		stakingParams.MinimalDelegationAmount = "100000000000000000000000000"
 		app.StakingKeeper.SetParams(ctx, stakingParams)
 
 		multisigParams := multisigtypes.Params{
@@ -957,6 +955,7 @@ func NewBridge(
 		}
 		app.MultisigKeeper.SetParams(ctx, multisigParams)
 
+		// Disabling repeated call of InitGenesis for new multisig module
 		fromVM[multisigtypes.ModuleName] = multisig.AppModule{}.ConsensusVersion()
 
 		return app.mm.RunMigrations(ctx, app.configurator, fromVM)
