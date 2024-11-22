@@ -929,6 +929,37 @@ func NewBridge(
 			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
 		},
 	)
+	if upgradeInfo.Name == "v12.1.14-rc1" && !app.UpgradeKeeper.IsSkipHeight(upgradeInfo.Height) {
+		app.SetStoreLoader(upgradetypes.UpgradeStoreLoader(upgradeInfo.Height, &storetypes.StoreUpgrades{
+			Added: []string{multisigtypes.ModuleName},
+		}))
+	}
+
+	app.UpgradeKeeper.SetUpgradeHandler("v12.1.14-rc1", func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
+		stakingParams := stakingtypes.Params{
+			UnbondingTime:           app.StakingKeeper.UnbondingTime(ctx),
+			MaxValidators:           app.StakingKeeper.MaxValidators(ctx),
+			MaxEntries:              app.StakingKeeper.MaxEntries(ctx),
+			HistoricalEntries:       app.StakingKeeper.HistoricalEntries(ctx),
+			BondDenom:               "abridge",
+			MinCommissionRate:       app.StakingKeeper.MinCommissionRate(ctx),
+			MinimalDelegationAmount: sdk.DefaultMinDelegationAmount,
+		}
+		app.StakingKeeper.SetParams(ctx, stakingParams)
+
+		multisigParams := multisigtypes.Params{
+			GroupSequence:    0,
+			ProposalSequence: 0,
+			PrunePeriod:      240,
+			VotingPeriod:     120,
+		}
+		app.MultisigKeeper.SetParams(ctx, multisigParams)
+
+		// Disabling repeated call of InitGenesis for new multisig module
+		fromVM[multisigtypes.ModuleName] = multisig.AppModule{}.ConsensusVersion()
+
+		return app.mm.RunMigrations(ctx, app.configurator, fromVM)
+	})
 
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
