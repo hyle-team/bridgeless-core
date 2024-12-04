@@ -5,6 +5,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
+	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	erc20keeper "github.com/hyle-team/bridgeless-core/v12/x/erc20/keeper"
 	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
@@ -24,6 +26,8 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 		erc20      erc20keeper.Keeper
+		authKeeper authkeeper.AccountKeeper
+		bankKeeper bankkeeper.Keeper
 	}
 )
 
@@ -32,13 +36,17 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	erc20 erc20keeper.Keeper,
+	authKeeper authkeeper.AccountKeeper,
+	bankKeeper bankkeeper.Keeper,
 
 ) *Keeper {
 	return &Keeper{
-		cdc:      cdc,
-		storeKey: storeKey,
-		memKey:   memKey,
-		erc20:    erc20,
+		cdc:        cdc,
+		storeKey:   storeKey,
+		memKey:     memKey,
+		erc20:      erc20,
+		authKeeper: authKeeper,
+		bankKeeper: bankKeeper,
 	}
 }
 

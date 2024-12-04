@@ -574,6 +574,8 @@ func NewBridge(
 		keys[trackingtypes.StoreKey],
 		//app.GetSubspace(trackingtypes.ModuleName),
 		app.Erc20Keeper,
+		app.AccountKeeper,
+		app.BankKeeper,
 	)
 
 	app.EvmKeeper = app.EvmKeeper.SetHooks(
