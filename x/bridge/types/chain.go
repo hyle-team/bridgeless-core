@@ -25,6 +25,7 @@ func validateChain(chain *Chain) error {
 	case ChainType_BITCOIN:
 	case ChainType_COSMOS:
 	case ChainType_OTHER:
+	case ChainType_ZANO:
 	default:
 		return fmt.Errorf("invalid chain type: %s", chain.Type)
 	}
