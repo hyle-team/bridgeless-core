@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"cosmossdk.io/math"
 	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/bech32"
@@ -11,6 +10,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/contracts"
 	contractypes "github.com/hyle-team/bridgeless-core/v12/contracts/types"
 	"github.com/hyle-team/bridgeless-core/v12/utils"
+	evmtypes "github.com/hyle-team/bridgeless-core/v12/x/evm/types"
 	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 )
@@ -37,20 +37,19 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		return []abci.ValidatorUpdate{}
 	}
 
-	var liquidatedAmount int64
+	liquidatedAmount := sdk.NewInt(0) //sdk.NewInt
 
 	//Get HEX liquidator address
-	liquidatorAddress := "bridge103n4cmjt2je8nqcxg9y9desyhy6m57u52kkuc4"
-	_, bytes, err := bech32.DecodeAndConvert(liquidatorAddress)
+	_, bytes, err := bech32.DecodeAndConvert(params.LiquidatorAddress)
 	if err != nil {
-		k.Logger(ctx).With("error", err).Error("can`t get liquidator evmos address bytes")
+		k.Logger(ctx).With("error", err).Error("failed to get liquidator evmos address bytes")
 	}
-	liquidatorAddressHEX := common.Bytes2Hex(bytes)
+	liquidatorAddressHex := common.Bytes2Hex(bytes)
 
 	//Initialize liquidator account
-	liquidatorAccount := sdk.MustAccAddressFromBech32(liquidatorAddress)
+	liquidatorAccount := sdk.MustAccAddressFromBech32(params.LiquidatorAddress)
 	if err != nil {
-		k.Logger(ctx).With("error", err).Error("can`t parse liquidator account")
+		k.Logger(ctx).With("error", err).Error("failed to parse liquidator account")
 	}
 
 	// Iterate over all positions and check if the user can be liquidated
@@ -87,7 +86,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 				true,
 				contactCallLiquidateMethod,
 				common.HexToAddress(position.Address),
-				common.HexToAddress(liquidatorAddressHEX),
+				common.HexToAddress(liquidatorAddressHex),
 			)
 			if err != nil {
 				k.Logger(ctx).With("error", err).Info("contract call error: Liquidate")
@@ -97,44 +96,51 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 			k.DeletePosition(ctx, position.Address)
 
 			//Parsing liquidation events from logs
-			for _, log := range receipt.Logs {
-				log := log.ToEthereum()
-				eventId := log.Topics[0]
-				event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
-				if internalErr != nil {
-					k.Logger(ctx).Info("failed to get event by ID")
-					continue
-				}
-				if event.Name == "Liquidated" {
-					k.Logger(ctx).Info(fmt.Sprintf("Received Liquidated event in %s module", types.ModuleName))
-					eventBody := contractypes.LoanPoolLiquidated{}
-					if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
-						k.Logger(ctx).Info("failed to unpack event body")
-						continue
-					}
-					//Sum amount of liquidated positions
-					liquidatedAmount += eventBody.Deposited.Int64()
-				}
-			}
+			liquidatedAmount = k.parseLiquidatedEvents(ctx, receipt.Logs)
 		}
 	}
 
 	//Check an amount of liquidated positions
-	if liquidatedAmount == 0 {
-		k.Logger(ctx).With("info", "inf").Info(fmt.Sprintf("No liquidations collected, amount: %d", liquidatedAmount))
+	if liquidatedAmount.IsZero() {
+		k.Logger(ctx).Info(fmt.Sprintf("No liquidations collected, amount: %s", liquidatedAmount.String()))
 		return []abci.ValidatorUpdate{}
 	}
 
 	//Send accumulated liquidations to distribution
 	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, liquidatorAccount, authtypes.FeeCollectorName, sdk.NewCoins(sdk.Coin{
-		Amount: math.NewInt(liquidatedAmount),
+		Amount: liquidatedAmount,
 		Denom:  "abridge",
 	}))
 	if err != nil {
-		k.Logger(ctx).With("error", "err").Info(fmt.Sprintf("failed to distribute liquidations, error: %s", err.Error()))
-
+		k.Logger(ctx).With("error", err).Info("failed to distribute liquidations")
+		return []abci.ValidatorUpdate{}
 	}
 
-	k.Logger(ctx).With("info", "inf").Info(fmt.Sprintf("liquidations were sent to distribution, amount: %d", liquidatedAmount))
+	k.Logger(ctx).Info(fmt.Sprintf("liquidations were sent to distribution, amount: %s", liquidatedAmount.String()))
 	return []abci.ValidatorUpdate{}
+}
+
+func (k *Keeper) parseLiquidatedEvents(ctx sdk.Context, logs []*evmtypes.Log) sdk.Int {
+	liquidatedAmount := sdk.NewInt(0)
+	params := k.GetParams(ctx)
+	for _, log := range logs {
+		log := log.ToEthereum()
+		eventId := log.Topics[0]
+		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
+		if internalErr != nil {
+			k.Logger(ctx).Info("failed to get event by ID")
+			continue
+		}
+		if event.Name == params.LiquidationEventName {
+			k.Logger(ctx).Info(fmt.Sprintf("Received Liquidated event in %s module", types.ModuleName))
+			eventBody := contractypes.LoanPoolLiquidated{}
+			if internalErr = utils.UnpackLog(contracts.LoanContract.ABI, &eventBody, event.Name, log); internalErr != nil {
+				k.Logger(ctx).Info("failed to unpack event body")
+				continue
+			}
+			//Sum amount of liquidated positions
+			liquidatedAmount = liquidatedAmount.Add(sdk.NewInt(eventBody.Deposited.Int64()))
+		}
+	}
+	return liquidatedAmount
 }
