@@ -1,0 +1,14 @@
+syntax = "proto3";
+package core.multisig;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hyle-team/bridgeless-core/v12/x/multisig/types";
+
+// Params defines the parameters for the module.
+message Params {
+  uint64 groupSequence = 1;
+  uint64 proposalSequence = 2;
+  uint64 prunePeriod = 3;
+  uint64 votingPeriod = 4;
+}

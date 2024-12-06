@@ -13,6 +13,7 @@ enum ChainType {
   BITCOIN = 1;
   COSMOS = 2;
   OTHER = 3;
+  ZANO = 4;
 }
 
 message Chain {

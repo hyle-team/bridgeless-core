@@ -31,7 +31,11 @@ import (
 	nfttypes "github.com/cosmos/cosmos-sdk/x/nft/types"
 	"github.com/hyle-team/bridgeless-core/v12/docs"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge"
+	multisigkeeper "github.com/hyle-team/bridgeless-core/v12/x/multisig/keeper"
 	"github.com/hyle-team/bridgeless-core/v12/x/tracking"
+
+	"github.com/hyle-team/bridgeless-core/v12/x/multisig"
+	multisigtypes "github.com/hyle-team/bridgeless-core/v12/x/multisig/types"
 
 	"io"
 	"net/http"
@@ -248,6 +252,7 @@ var (
 		nft.AppModuleBasic{},
 		bridge.AppModuleBasic{},
 		tracking.AppModuleBasic{},
+		multisig.AppModuleBasic{},
 	)
 
 	// module account permissions
@@ -336,6 +341,7 @@ type Bridge struct {
 	NFTKeeper    *nftkeeper.Keeper
 	BridgeKeeper *bridgekeeper.Keeper
 
+	MultisigKeeper *multisigkeeper.Keeper
 	TrackingKeeper *trackingkeeper.Keeper
 
 	// the module manager
@@ -399,6 +405,7 @@ func NewBridge(
 		minttypes.StoreKey,
 		nfttypes.StoreKey,
 		bridgetypes.StoreKey,
+		multisigtypes.StoreKey,
 		trackingtypes.StoreKey,
 	)
 
@@ -473,6 +480,7 @@ func NewBridge(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		app.StakingKeeper, app.NFTKeeper, authtypes.FeeCollectorName,
 	)
+
 	app.SlashingKeeper = slashingkeeper.NewKeeper(
 		appCodec, keys[slashingtypes.StoreKey], app.StakingKeeper, app.GetSubspace(slashingtypes.ModuleName),
 	)
@@ -485,6 +493,14 @@ func NewBridge(
 	app.AuthzKeeper = authzkeeper.NewKeeper(keys[authzkeeper.StoreKey], appCodec, app.MsgServiceRouter(), app.AccountKeeper)
 
 	tracer := cast.ToString(appOpts.Get(srvflags.EVMTracer))
+
+	app.MultisigKeeper = multisigkeeper.NewKeeper(
+		appCodec,
+		keys[multisigtypes.StoreKey],
+		keys[multisigtypes.MemStoreKey],
+		app.MsgServiceRouter(),
+		app.AccountKeeper,
+	)
 
 	// Create Ethermint keepers
 	app.FeeMarketKeeper = feemarketkeeper.NewKeeper(
@@ -574,6 +590,9 @@ func NewBridge(
 		keys[trackingtypes.StoreKey],
 		//app.GetSubspace(trackingtypes.ModuleName),
 		app.Erc20Keeper,
+		app.AccountKeeper,
+		app.BankKeeper,
+		app.StakingKeeper,
 	)
 
 	app.EvmKeeper = app.EvmKeeper.SetHooks(
@@ -718,6 +737,7 @@ func NewBridge(
 		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
 		nft.NewAppModule(appCodec, *app.NFTKeeper, app.AccountKeeper, app.BankKeeper),
 		bridge.NewAppModule(appCodec, *app.BridgeKeeper),
+		multisig.NewAppModule(appCodec, *app.MultisigKeeper, app.AccountKeeper),
 		tracking.NewAppModule(appCodec, *app.TrackingKeeper),
 	)
 
@@ -758,6 +778,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		multisigtypes.ModuleName,
 		trackingtypes.ModuleName,
 	)
 
@@ -796,6 +817,7 @@ func NewBridge(
 		minttypes.ModuleName,
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
+		multisigtypes.ModuleName,
 		trackingtypes.ModuleName,
 	)
 
@@ -844,6 +866,7 @@ func NewBridge(
 		nfttypes.ModuleName,
 		bridgetypes.ModuleName,
 		trackingtypes.ModuleName,
+		multisigtypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
