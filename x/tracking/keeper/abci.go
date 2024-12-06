@@ -37,7 +37,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		return []abci.ValidatorUpdate{}
 	}
 
-	liquidatedAmount := sdk.NewInt(0) //sdk.NewInt
+	liquidatedAmount := sdk.NewInt(0)
 
 	//Get HEX liquidator address
 	_, bytes, err := bech32.DecodeAndConvert(params.LiquidatorAddress)
@@ -102,21 +102,21 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 
 	//Check an amount of liquidated positions
 	if liquidatedAmount.IsZero() {
-		k.Logger(ctx).Info(fmt.Sprintf("No liquidations collected, amount: %s", liquidatedAmount.String()))
+		k.Logger(ctx).Info(fmt.Sprintf("No liquidations collected, amount: %s%s", liquidatedAmount.String(), k.stakingKeeper.BondDenom(ctx)))
 		return []abci.ValidatorUpdate{}
 	}
 
 	//Send accumulated liquidations to distribution
 	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, liquidatorAccount, authtypes.FeeCollectorName, sdk.NewCoins(sdk.Coin{
 		Amount: liquidatedAmount,
-		Denom:  "abridge",
+		Denom:  k.stakingKeeper.BondDenom(ctx),
 	}))
 	if err != nil {
 		k.Logger(ctx).With("error", err).Info("failed to distribute liquidations")
 		return []abci.ValidatorUpdate{}
 	}
 
-	k.Logger(ctx).Info(fmt.Sprintf("liquidations were sent to distribution, amount: %s", liquidatedAmount.String()))
+	k.Logger(ctx).Info(fmt.Sprintf("liquidations were sent to distribution, amount: %s%s", liquidatedAmount.String(), k.stakingKeeper.BondDenom(ctx)))
 	return []abci.ValidatorUpdate{}
 }
 
@@ -125,8 +125,7 @@ func (k *Keeper) parseLiquidatedEvents(ctx sdk.Context, logs []*evmtypes.Log) sd
 	params := k.GetParams(ctx)
 	for _, log := range logs {
 		log := log.ToEthereum()
-		eventId := log.Topics[0]
-		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
+		event, internalErr := contracts.LoanContract.ABI.EventByID(log.Topics[0])
 		if internalErr != nil {
 			k.Logger(ctx).Info("failed to get event by ID")
 			continue

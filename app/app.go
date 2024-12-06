@@ -592,6 +592,7 @@ func NewBridge(
 		app.Erc20Keeper,
 		app.AccountKeeper,
 		app.BankKeeper,
+		app.StakingKeeper,
 	)
 
 	app.EvmKeeper = app.EvmKeeper.SetHooks(
