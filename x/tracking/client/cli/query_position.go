@@ -45,7 +45,7 @@ func CmdQueryPositions() *cobra.Command {
 
 func CmdQueryPositionByAddress() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "positions [address]",
+		Use:   "position [address]",
 		Short: "shows the active position by address",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
