@@ -272,6 +272,7 @@ var (
 		nfttypes.ModuleName:            nil,
 		bridgetypes.ModuleName:         nil,
 		trackingtypes.ModuleName:       nil,
+		multisigtypes.ModuleName:       nil,
 	}
 
 	// module accounts that are allowed to receive tokens
