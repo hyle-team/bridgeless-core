@@ -50,15 +50,14 @@ func (k Keeper) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *eth
 
 	// Go through all the logs and check if the event is the one we are looking for, then create a new position with the data from that event
 	for _, log := range receipt.Logs {
-		eventId := log.Topics[0]
-		event, internalErr := contracts.LoanContract.ABI.EventByID(eventId)
+		event, internalErr := contracts.LoanContract.ABI.EventByID(log.Topics[0])
 		if internalErr != nil {
 			k.Logger(ctx).Info("failed to get event by ID")
 			continue
 		}
 
-		if event.Name != params.EventName {
-			k.Logger(ctx).Info(fmt.Sprintf("unmatched event: got %s, expected %s", event.Name, params.EventName))
+		if event.Name != params.BorrowEventName {
+			k.Logger(ctx).Info(fmt.Sprintf("unmatched event: got %s, expected %s", event.Name, params.BorrowEventName))
 			continue
 		}
 		eventBody := contractypes.LoanPoolBorrowed{}

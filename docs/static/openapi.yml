@@ -4846,7 +4846,7 @@ paths:
                 description: params holds all the parameters of this module.
                 type: object
                 properties:
-                  event_name:
+                  borrow_event_name:
                     type: string
                   contract_address:
                     type: string
@@ -51370,7 +51370,7 @@ definitions:
   core.tracking.Params:
     type: object
     properties:
-      event_name:
+      borrow_event_name:
         type: string
       contract_address:
         type: string
@@ -51401,7 +51401,7 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
         properties:
-          event_name:
+          borrow_event_name:
             type: string
           contract_address:
             type: string
