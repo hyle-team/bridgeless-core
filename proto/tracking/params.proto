@@ -12,5 +12,5 @@ message Params {
     string sender_address = 3;
     string liquidator_address = 4;
     string liquidation_event_name = 5;
-    string oracle = 6; //TODO: rename to oracle address
+    string oracle_address = 6;
 }

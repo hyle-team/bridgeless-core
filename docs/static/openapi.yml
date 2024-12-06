@@ -4856,7 +4856,7 @@ paths:
                     type: string
                   liquidation_event_name:
                     type: string
-                  oracle:
+                  oracle_address:
                     type: string
             description: >-
               QueryParamsResponse is response type for the Query/Params RPC
@@ -51380,7 +51380,7 @@ definitions:
         type: string
       liquidation_event_name:
         type: string
-      oracle:
+      oracle_address:
         type: string
     description: Params defines the parameters for the module.
   core.tracking.Position:
@@ -51411,7 +51411,7 @@ definitions:
             type: string
           liquidation_event_name:
             type: string
-          oracle:
+          oracle_address:
             type: string
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   core.tracking.QueryPositionByAddressResponse:
