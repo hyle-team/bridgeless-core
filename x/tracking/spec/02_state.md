@@ -2,7 +2,7 @@
 
 ## Position
 
-Each position is represented in blockchain with unique address. This address used to operate position.
+Each position is represented in blockchain with unique address.
 The Position object contains specific information to describe a position:
 ``` protobuf
 message Position {

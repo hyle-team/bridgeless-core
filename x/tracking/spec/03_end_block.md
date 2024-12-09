@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `EndBlocker` function is responsible to checking the ability to liquidate position, liquidation and passing liquidation to distribution.
+The `EndBlocker` function is responsible for checking the ability to liquidate position, liquidation and passing liquidation to distribution.
 
 Position Liquidation Information:
 - **From** address of liquidator which emmit a  `contactCallLiquidated`
