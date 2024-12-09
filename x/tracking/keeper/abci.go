@@ -28,7 +28,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		ctx,
 		contracts.OracleContract.ABI,
 		common.HexToAddress(params.SenderAddress),
-		common.HexToAddress(params.Oracle),
+		common.HexToAddress(params.OracleAddress),
 		true,
 		contactCallOracleMethod,
 	)
