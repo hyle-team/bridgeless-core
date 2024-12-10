@@ -106,3 +106,5 @@ func (h Hooks) BeforeDelegationRemoved(_ sdk.Context, _ sdk.AccAddress, _ sdk.Va
 func (h Hooks) BeforeValidatorSlashed(_ sdk.Context, _ sdk.ValAddress, _ sdk.Dec) error {
 	return nil
 }
+
+func (h Hooks) FundCommunityPoolFromModule(_ sdk.Context, _ sdk.Coins, _ string) error { return nil }
