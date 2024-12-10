@@ -23,7 +23,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		return []abci.ValidatorUpdate{}
 	}
 
-	//Update oracle price by calling the oracle contract
+	// Update oracle price by calling the oracle contract
 	_, err = k.erc20.CallEVM(
 		ctx,
 		contracts.OracleContract.ABI,
@@ -39,18 +39,15 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 
 	liquidatedAmount := sdk.NewInt(0)
 
-	//Get HEX liquidator address
+	// Get HEX liquidator address
 	_, bytes, err := bech32.DecodeAndConvert(params.LiquidatorAddress)
 	if err != nil {
 		k.Logger(ctx).With("error", err).Error("failed to get liquidator evmos address bytes")
 	}
 	liquidatorAddressHex := common.Bytes2Hex(bytes)
 
-	//Initialize liquidator account
+	// Initialize liquidator account
 	liquidatorAccount := sdk.MustAccAddressFromBech32(params.LiquidatorAddress)
-	if err != nil {
-		k.Logger(ctx).With("error", err).Error("failed to parse liquidator account")
-	}
 
 	// Iterate over all positions and check if the user can be liquidated
 	for _, position := range positions {
@@ -69,7 +66,7 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 		}
 
 		// Decode response from the contract call
-		unpackedRes, err := contracts.LoanContract.ABI.Unpack("canUserBeLiquidated", txResponse.Ret)
+		unpackedRes, err := contracts.LoanContract.ABI.Unpack(contactCallIsUserCanBeLiquidatedMethod, txResponse.Ret)
 		if err != nil {
 			k.Logger(ctx).With("error", err).Error("unpack call response")
 			continue
@@ -95,18 +92,18 @@ func (k *Keeper) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Valida
 
 			k.DeletePosition(ctx, position.Address)
 
-			//Parsing liquidation events from logs
+			// Parsing liquidation events from logs
 			liquidatedAmount = k.parseLiquidatedEvents(ctx, receipt.Logs)
 		}
 	}
 
-	//Check an amount of liquidated positions
+	// Check an amount of liquidated positions
 	if liquidatedAmount.IsZero() {
 		k.Logger(ctx).Info(fmt.Sprintf("No liquidations collected, amount: %s%s", liquidatedAmount.String(), k.stakingKeeper.BondDenom(ctx)))
 		return []abci.ValidatorUpdate{}
 	}
 
-	//Send accumulated liquidations to distribution
+	// Send accumulated liquidations to distribution
 	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, liquidatorAccount, authtypes.FeeCollectorName, sdk.NewCoins(sdk.Coin{
 		Amount: liquidatedAmount,
 		Denom:  k.stakingKeeper.BondDenom(ctx),
@@ -137,7 +134,7 @@ func (k *Keeper) parseLiquidatedEvents(ctx sdk.Context, logs []*evmtypes.Log) sd
 				k.Logger(ctx).Info("failed to unpack event body")
 				continue
 			}
-			//Sum amount of liquidated positions
+			// Sum amount of liquidated positions
 			liquidatedAmount = liquidatedAmount.Add(sdk.NewInt(eventBody.Deposited.Int64()))
 		}
 	}

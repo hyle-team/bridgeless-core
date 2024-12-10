@@ -5,11 +5,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
-	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
-	erc20keeper "github.com/hyle-team/bridgeless-core/v12/x/erc20/keeper"
 	"github.com/hyle-team/bridgeless-core/v12/x/tracking/types"
 	"github.com/tendermint/tendermint/libs/log"
 )
@@ -26,10 +22,10 @@ type (
 		storeKey      storetypes.StoreKey
 		memKey        storetypes.StoreKey
 		paramstore    paramtypes.Subspace
-		erc20         erc20keeper.Keeper
-		authKeeper    authkeeper.AccountKeeper
-		bankKeeper    bankkeeper.Keeper
-		stakingKeeper *stakingkeeper.Keeper
+		erc20         types.ERC20
+		authKeeper    types.AccountKeeper
+		bankKeeper    types.BankKeeper
+		stakingKeeper types.StakingKeeper
 	}
 )
 
@@ -37,10 +33,10 @@ func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
-	erc20 erc20keeper.Keeper,
-	authKeeper authkeeper.AccountKeeper,
-	bankKeeper bankkeeper.Keeper,
-	stakingKeeper *stakingkeeper.Keeper,
+	erc20 types.ERC20,
+	authKeeper types.AccountKeeper,
+	bankKeeper types.BankKeeper,
+	stakingKeeper types.StakingKeeper,
 
 ) *Keeper {
 	return &Keeper{
