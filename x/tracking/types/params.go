@@ -23,10 +23,16 @@ func DefaultParams() Params {
 
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{}
+	return paramtypes.ParamSetPairs{
+		paramtypes.NewParamSetPair([]byte(BorrowedEventNameKey), &p.BorrowEventName, validateBorrowedEventName),
+	}
 }
 
 // Validate validates the set of params
 func (p Params) Validate() error {
+	return nil
+}
+
+func validateBorrowedEventName(i interface{}) error {
 	return nil
 }

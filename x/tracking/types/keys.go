@@ -19,6 +19,14 @@ const (
 	MemStoreKey = "mem_tracking"
 
 	ParamsKey = "params"
+
+	// ----- Param Keys -----
+	BorrowedEventNameKey = "BorrowEventName"
+	ContractAddress      = "ContractAddress"
+	SenderAddress        = "SenderAddress"
+	LiquidatorAddress    = "LiquidatorAddress"
+	LiquidationEventName = "LiquidationEventName"
+	OracleAddress        = "OracleAddress"
 )
 
 func KeyPrefix(p string) []byte {
