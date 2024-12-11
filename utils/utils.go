@@ -36,7 +36,7 @@ import (
 
 const (
 	// MainnetChainID defines the Evmos EIP155 chain ID for mainnet
-	MainnetChainID = "bridge_4696"
+	MainnetChainID = "undefi_4696"
 	// TestnetChainID defines the Evmos EIP155 chain ID for testnet
 	TestnetChainID = "undefi_4697"
 	// TestingChainID defines the Evmos EIP155 chain ID for integration test
