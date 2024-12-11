@@ -4,7 +4,7 @@ RUN apk add build-base git
 
 
 
-WORKDIR /go/src/github.com/hyle-team/bridgeless-core/v12
+WORKDIR /go/src/github.com/hyle-team/undefined-core/v12
 
 ENV GO111MODULE="on"
 ENV CGO_ENABLED=1
@@ -26,7 +26,7 @@ RUN go mod vendor
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
 
-RUN go build  -mod=mod  -o /usr/local/bin/bridgeless-core github.com/hyle-team/bridgeless-core/v12/cmd/bridgeless-cored
+RUN go build  -mod=mod  -o /usr/local/bin/undefined-core github.com/hyle-team/undefined-core/v12/cmd/undefined-cored
 
 
 
@@ -36,6 +36,6 @@ FROM alpine:3.9
 
 RUN apk add --no-cache ca-certificates
 COPY ./config/genesis.json /config/genesis.json
-COPY --from=buildbase /usr/local/bin/bridgeless-core /usr/local/bin/bridgeless-core
+COPY --from=buildbase /usr/local/bin/undefined-core /usr/local/bin/undefined-core
 COPY --from=buildbase /usr/local/bin/cosmovisor /usr/local/bin/cosmovisor
-ENTRYPOINT ["bridgeless-core"]
+ENTRYPOINT ["undefined-core"]
