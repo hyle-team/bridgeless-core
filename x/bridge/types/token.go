@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ethereum/go-ethereum/common"
 )
 
@@ -39,6 +40,9 @@ func validateTokenInfo(info *TokenInfo, chainType *ChainType) error {
 		return fmt.Errorf("chain id cannot be empty")
 
 	}
+	if info.Address == "" {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "token address is empty")
+	}
 	if chainType == nil {
 		return nil
 	}
@@ -53,6 +57,7 @@ func validateTokenInfo(info *TokenInfo, chainType *ChainType) error {
 		}
 	case ChainType_BITCOIN:
 	case ChainType_COSMOS:
+	case ChainType_ZANO:
 	case ChainType_OTHER:
 	default:
 		return fmt.Errorf("invalid chain type: %v", *chainType)

@@ -18,11 +18,18 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 		if _, found := m.GetTransaction(ctx, types.TransactionId(&tx)); found {
 			return nil, types.ErrTranscationAlreadySubmitted
 		}
-		if _, found := m.GetChain(ctx, tx.DepositChainId); !found {
+		chain, found := m.GetChain(ctx, tx.DepositChainId)
+		if !found {
 			return nil, types.ErrSourceChainNotSupported
 		}
-		if _, found := m.GetChain(ctx, tx.WithdrawalChainId); !found {
+		if _, found = m.GetChain(ctx, tx.WithdrawalChainId); !found {
 			return nil, types.ErrDestinationChainNotSupported
+		}
+
+		// Custom validation of transaction for certain chain type
+		err := types.ValidateChainTransaction(&tx, chain.Type)
+		if err != nil {
+			return nil, sdkerrors.Wrap(types.InvalidTransaction, err.Error())
 		}
 
 		m.SetTransaction(ctx, tx)
