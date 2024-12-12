@@ -194,6 +194,8 @@ func (h Hooks) BeforeValidatorSlashed(_ sdk.Context, _ sdk.ValAddress, _ sdk.Dec
 	return nil
 }
 
+func (h Hooks) FundCommunityPoolFromModule(_ sdk.Context, _ sdk.Coins, _ string) error { return nil }
+
 // IBC callbacks and transfer handlers
 
 // SendPacket implements the ICS4Wrapper interface from the transfer module. It
