@@ -1,8 +1,6 @@
 package cli
 
 import (
-	"cosmossdk.io/errors"
-	"encoding/json"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -28,7 +26,7 @@ func TxTransactionsCmd() *cobra.Command {
 
 func CmdSubmitTx() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "submit [from_key_or_address] [json-tx]",
+		Use:   "submit [from_key_or_address] [path-to-json-tx]",
 		Short: "Submit a transaction to the bridge module",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -38,8 +36,9 @@ func CmdSubmitTx() *cobra.Command {
 			}
 
 			var tr []types.Transaction
-			if err = json.Unmarshal([]byte(args[1]), &tr); err != nil {
-				return errors.Wrap(err, "failed to unmarshal transaction")
+			tr, err = parseSubmitTx(args[1])
+			if err != nil {
+				return err
 			}
 
 			msg := types.NewMsgSubmitTransactions(clientCtx.GetFromAddress().String(), tr...)

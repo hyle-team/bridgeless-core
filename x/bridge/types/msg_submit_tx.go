@@ -50,6 +50,12 @@ func (msg *MsgSubmitTransactions) ValidateBasic() error {
 	}
 
 	for _, tx := range msg.Transactions {
+		if len(tx.DepositChainId) == 0 || len(tx.WithdrawalChainId) == 0 {
+			return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "deposit chain id and withdrawal id cannot be empty")
+		}
+		if tx.WithdrawalChainId == tx.DepositChainId {
+			return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "withdrawal chain id cannot be the same as deposit chain id ")
+		}
 		if err = validateTransaction(&tx); err != nil {
 			return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest,
 				fmt.Sprintf("invalid transaction %s: %s", TransactionId(&tx), err),

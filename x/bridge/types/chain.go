@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
@@ -9,6 +10,9 @@ import (
 func validateChain(chain *Chain) error {
 	if chain == nil {
 		return fmt.Errorf("chain is nil")
+	}
+	if len(chain.BridgeAddress) == 0 {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "empty bridge address")
 	}
 
 	switch chain.Type {
