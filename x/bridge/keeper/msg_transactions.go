@@ -27,7 +27,7 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 		}
 
 		// Custom validation of transaction for certain chain type
-		err := types.ValidateChainTransaction(&tx, &chain.Type)
+		err := types.ValidateChainTransaction(&tx, chain.Type)
 		if err != nil {
 			return nil, sdkerrors.Wrap(types.InvalidTransaction, err.Error())
 		}
