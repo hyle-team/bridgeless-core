@@ -27,6 +27,7 @@ paths:
                         - BITCOIN
                         - COSMOS
                         - OTHER
+                        - ZANO
                       default: EVM
                     bridge_address:
                       type: string
@@ -331,6 +332,7 @@ paths:
                       - BITCOIN
                       - COSMOS
                       - OTHER
+                      - ZANO
                     default: EVM
                   bridge_address:
                     type: string
@@ -49257,6 +49259,7 @@ definitions:
           - BITCOIN
           - COSMOS
           - OTHER
+          - ZANO
         default: EVM
       bridge_address:
         type: string
@@ -49271,6 +49274,7 @@ definitions:
       - BITCOIN
       - COSMOS
       - OTHER
+      - ZANO
     default: EVM
   core.bridge.MsgAddTokenInfoResponse:
     type: object
@@ -49309,6 +49313,7 @@ definitions:
               - BITCOIN
               - COSMOS
               - OTHER
+              - ZANO
             default: EVM
           bridge_address:
             type: string
@@ -49333,6 +49338,7 @@ definitions:
                 - BITCOIN
                 - COSMOS
                 - OTHER
+                - ZANO
               default: EVM
             bridge_address:
               type: string
