@@ -27,7 +27,7 @@ func TxVoteCmd() *cobra.Command {
 
 func CmdNewVote() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "vote [creator_address] [proposal_id] [option]",
+		Use:   "vote [voter_address] [proposal_id] [option]",
 		Short: "Create a new vote",
 		Long: strings.TrimSpace(fmt.Sprintf(`Create a vote for proposal
 Example:
