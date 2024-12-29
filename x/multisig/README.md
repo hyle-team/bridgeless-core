@@ -226,7 +226,7 @@ message MsgChangeGroup {
 
 ## CLI
 
-## Query
+## Queries
 ### Params
 
 The params command allow users to query `multisig` module params.
@@ -418,3 +418,55 @@ vote:
   voter: bridge1...
 ```
 ----
+## Transactions
+
+### Create
+
+The create command creates a multisig group with provided members and threshold.
+
+```
+simd tx tx multisig groups create bridge1... bridge1...,bridge1... 2 
+```
+
+### Update
+
+The update command allows to update group changing the list of it`s members and threshold. (_NOTE: this command is executed only from the group account. You have to create proposal to update group_)
+
+```
+simd tx multisig groups update bridge1... bridge1...,bridge1... 1
+```
+
+### SubmitProposal
+
+The submit proposal command allows to create multisig proposals.
+
+```
+simd tx multisig proposals submit-proposal /path/to/proposal.json --from mykey
+```
+Proposal to change group example:
+
+```
+{
+  "creator": "bridge1...",
+  "group": "bridge1...",
+  "messages": [{
+    "@type": "/core.multisig.MsgChangeGroup",
+    "creator": "bridge1...", //creator and group must be equal
+    "group": "bridge1...",
+    "members": ["bridge1...",
+      "bridge1...",
+      "bridge1..."],
+    "threshold": 3
+  }]
+}
+```
+
+### Vote
+
+The vote command submits the vote to proposal with given id.
+
+```
+simd tx multisig votes vote bridge1... 1 0
+```
+
+_NOTE: 0 - Yes, 1 - No_
