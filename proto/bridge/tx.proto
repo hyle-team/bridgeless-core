@@ -7,6 +7,8 @@ import "cosmos/msg/v1/msg.proto";
 import "bridge/models/transaction.proto";
 import "bridge/models/token.proto";
 import "bridge/models/chain.proto";
+import "bridge/models/party.proto";
+
 import "gogoproto/gogo.proto";
 import "cosmos_proto/cosmos.proto";
 
@@ -26,6 +28,8 @@ service Msg {
 
     rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
+
+    rpc SubmitParties(MsgSubmitParties) returns (MsgSubmitPartiesResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -94,3 +98,12 @@ message MsgRemoveTokenInfo {
 }
 
 message MsgRemoveTokenInfoResponse {}
+
+// Signers list
+
+message MsgSubmitParties {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSubmitPartiesResponse {}

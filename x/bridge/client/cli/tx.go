@@ -34,6 +34,7 @@ func GetTxCmd() *cobra.Command {
 		TxChainsCmd(),
 		TxTokensCmd(),
 		TxTransactionsCmd(),
+		TxPartiesCmd(),
 	)
 	// this line is used by starport scaffolding # 1
 

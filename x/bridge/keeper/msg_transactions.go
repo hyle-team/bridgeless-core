@@ -10,8 +10,8 @@ import (
 func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmitTransactions) (*types.MsgSubmitTransactionsResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	if msg.Submitter != m.GetParams(ctx).ModuleAdmin {
-		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+	if !isParty(msg.Submitter, m.GetParams(ctx).Parties) {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "submitter isn`t an authorized party")
 	}
 
 	for _, tx := range msg.Transactions {
@@ -36,4 +36,13 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 	}
 
 	return &types.MsgSubmitTransactionsResponse{}, nil
+}
+
+func isParty(sender string, parties []*types.Party) bool {
+	for _, party := range parties {
+		if party.Address == sender {
+			return true
+		}
+	}
+	return false
 }

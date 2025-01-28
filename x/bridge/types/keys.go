@@ -20,7 +20,8 @@ const (
 	MemStoreKey = "mem_bridge"
 
 	// ----- Param Keys -----
-	ParamModuleAdminKey = "ModuleAdmin"
+	ParamModuleAdminKey   = "ModuleAdmin"
+	ParamModulePartiesKey = "Parties"
 
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token"
