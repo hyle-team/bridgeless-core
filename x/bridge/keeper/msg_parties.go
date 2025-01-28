@@ -7,7 +7,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
-func (m msgServer) SubmitParties(goCtx context.Context, msg *types.MsgSubmitParties) (*types.MsgSubmitPartiesResponse, error) {
+func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetParties) (*types.MsgSetPartiesResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	params := m.Keeper.GetParams(ctx)
 
@@ -18,5 +18,5 @@ func (m msgServer) SubmitParties(goCtx context.Context, msg *types.MsgSubmitPart
 	params.Parties = msg.Parties
 	m.SetParams(ctx, params)
 
-	return &types.MsgSubmitPartiesResponse{}, nil
+	return &types.MsgSetPartiesResponse{}, nil
 }

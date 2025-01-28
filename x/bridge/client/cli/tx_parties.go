@@ -28,14 +28,14 @@ func TxPartiesCmd() *cobra.Command {
 
 func CmdSubmitParties() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "insert [from_key_or_address] [parties-list]",
+		Use:   "set [from_key_or_address] [parties-list]",
 		Short: "Set a new parties list",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
-				return err
+				return errors.Wrap(err, "cannot get client tx context")
 			}
 
 			arg2 := args[1]
@@ -54,7 +54,7 @@ func CmdSubmitParties() *cobra.Command {
 					Address: party,
 				})
 			}
-			msg := types.NewMsgSubmitParties(clientCtx.GetFromAddress().String(), partiesList)
+			msg := types.NewMsgSetParties(clientCtx.GetFromAddress().String(), partiesList)
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

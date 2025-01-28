@@ -29,7 +29,7 @@ service Msg {
     rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 
-    rpc SubmitParties(MsgSubmitParties) returns (MsgSubmitPartiesResponse);
+    rpc SetParties(MsgSetParties) returns (MsgSetPartiesResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -101,9 +101,9 @@ message MsgRemoveTokenInfoResponse {}
 
 // Signers list
 
-message MsgSubmitParties {
+message MsgSetParties {
   string creator =1;
   repeated Party parties = 2;
 }
 
-message MsgSubmitPartiesResponse {}
+message MsgSetPartiesResponse {}

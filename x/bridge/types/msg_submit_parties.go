@@ -5,26 +5,26 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgSubmitParties = "submit_parties"
+const TypeMsgSetParties = "submit_parties"
 
-var _ sdk.Msg = &MsgSubmitParties{}
+var _ sdk.Msg = &MsgSetParties{}
 
-func NewMsgSubmitParties(creator string, partiesList []*Party) *MsgSubmitParties {
-	return &MsgSubmitParties{
+func NewMsgSetParties(creator string, partiesList []*Party) *MsgSetParties {
+	return &MsgSetParties{
 		Creator: creator,
 		Parties: partiesList,
 	}
 }
 
-func (msg *MsgSubmitParties) Route() string {
+func (msg *MsgSetParties) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgSubmitParties) Type() string {
-	return TypeMsgSubmitParties
+func (msg *MsgSetParties) Type() string {
+	return TypeMsgSetParties
 }
 
-func (msg *MsgSubmitParties) GetSigners() []sdk.AccAddress {
+func (msg *MsgSetParties) GetSigners() []sdk.AccAddress {
 	accAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -33,12 +33,12 @@ func (msg *MsgSubmitParties) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{accAddress}
 }
 
-func (msg *MsgSubmitParties) GetSignBytes() []byte {
+func (msg *MsgSetParties) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgSubmitParties) ValidateBasic() error {
+func (msg *MsgSetParties) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

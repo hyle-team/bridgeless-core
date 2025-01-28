@@ -10,7 +10,7 @@ import (
 func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmitTransactions) (*types.MsgSubmitTransactionsResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	if !isParty(msg.Submitter, m.GetParams(ctx).Parties) {
+	if !m.IsParty(msg.Submitter, ctx) {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "submitter isn`t an authorized party")
 	}
 
@@ -36,13 +36,4 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 	}
 
 	return &types.MsgSubmitTransactionsResponse{}, nil
-}
-
-func isParty(sender string, parties []*types.Party) bool {
-	for _, party := range parties {
-		if party.Address == sender {
-			return true
-		}
-	}
-	return false
 }
