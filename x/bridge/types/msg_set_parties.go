@@ -25,12 +25,7 @@ func (msg *MsgSetParties) Type() string {
 }
 
 func (msg *MsgSetParties) GetSigners() []sdk.AccAddress {
-	accAddress, err := sdk.AccAddressFromBech32(msg.Creator)
-	if err != nil {
-		panic(err)
-	}
-
-	return []sdk.AccAddress{accAddress}
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(msg.Creator)}
 }
 
 func (msg *MsgSetParties) GetSignBytes() []byte {
