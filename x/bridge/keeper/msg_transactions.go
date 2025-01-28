@@ -33,6 +33,7 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 		}
 
 		m.SetTransaction(ctx, tx)
+
 	}
 
 	return &types.MsgSubmitTransactionsResponse{}, nil
