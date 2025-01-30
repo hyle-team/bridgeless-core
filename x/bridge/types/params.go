@@ -20,25 +20,31 @@ func ParamKeyTable() paramtypes.KeyTable {
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
 		paramtypes.NewParamSetPair([]byte(ParamModuleAdminKey), &p.ModuleAdmin, validateModuleAdmin),
+		paramtypes.NewParamSetPair([]byte(ParamModulePartiesKey), &p.Parties, validateModuleParties),
 	}
 }
 
 // NewParams creates a new Params instance
-func NewParams(moduleAdmin string) Params {
+func NewParams(moduleAdmin string, parties []*Party) Params {
 	return Params{
 		ModuleAdmin: moduleAdmin,
+		Parties:     parties,
 	}
 }
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return NewParams("")
+	return NewParams("", []*Party{})
 }
 
 // Validate validates the set of params
 func (p Params) Validate() error {
 	if err := validateModuleAdmin(p.ModuleAdmin); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid module admin address (%s)", err)
+	}
+
+	if err := validateModuleParties(p.Parties); err != nil {
+		return sdkerrors.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
 	}
 
 	return nil
@@ -53,6 +59,21 @@ func validateModuleAdmin(i interface{}) error {
 	_, err := sdk.AccAddressFromBech32(adm)
 	if err != nil {
 		return fmt.Errorf("failed to parse address: %w", err)
+	}
+
+	return nil
+}
+func validateModuleParties(i interface{}) error {
+	parties, ok := i.([]*Party)
+	if !ok {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
+	}
+
+	for _, party := range parties {
+		_, err := sdk.AccAddressFromBech32(party.Address)
+		if err != nil {
+			return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid party address (%s)", err)
+		}
 	}
 
 	return nil

@@ -16,3 +16,13 @@ func (k Keeper) GetParams(ctx sdk.Context) types.Params {
 func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 	k.paramstore.SetParamSet(ctx, &params)
 }
+
+func (k Keeper) IsParty(sender string, ctx sdk.Context) bool {
+	parties := k.GetParams(ctx).Parties
+	for _, party := range parties {
+		if party.Address == sender {
+			return true
+		}
+	}
+	return false
+}

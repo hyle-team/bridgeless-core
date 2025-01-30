@@ -15,8 +15,12 @@ func validateTransaction(tx *Transaction) error {
 		return fmt.Errorf("transaction is nil")
 	}
 
-	if _, set := big.NewInt(0).SetString(tx.Amount, 10); !set {
-		return fmt.Errorf("invalid amount: %s", tx.Amount)
+	if _, set := big.NewInt(0).SetString(tx.DepositAmount, 10); !set {
+		return fmt.Errorf("invalid deposit amount: %s", tx.DepositAmount)
+	}
+
+	if _, set := big.NewInt(0).SetString(tx.WithdrawalAmount, 10); !set {
+		return fmt.Errorf("invalid withdrawal amount: %s", tx.WithdrawalAmount)
 	}
 
 	if len(tx.DepositChainId) == 0 || len(tx.WithdrawalChainId) == 0 {

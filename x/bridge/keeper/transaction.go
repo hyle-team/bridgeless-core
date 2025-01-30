@@ -10,6 +10,7 @@ import (
 func (k Keeper) SetTransaction(sdkCtx sdk.Context, transaction types.Transaction) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTransactionPrefix))
 	tStore.Set(types.KeyTransaction(types.TransactionId(&transaction)), k.cdc.MustMarshal(&transaction))
+
 }
 
 func (k Keeper) GetTransaction(sdkCtx sdk.Context, id string) (types.Transaction, bool) {
