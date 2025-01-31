@@ -21,7 +21,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
-const consensusVersion = 3
+const consensusVersion = 4
 
 var (
 	_ module.AppModule      = AppModule{}
@@ -130,6 +130,9 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 	}
 
 	if err := cfg.RegisterMigration(types.ModuleName, 2, am.migrator.Migrate2to3); err != nil {
+		panic(err)
+	}
+	if err := cfg.RegisterMigration(types.ModuleName, 3, am.migrator.Migrate3to4); err != nil {
 		panic(err)
 	}
 }
