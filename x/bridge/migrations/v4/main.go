@@ -28,7 +28,6 @@ func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.Binar
 			DepositBlock:      oldTx.DepositBlock,
 			DepositToken:      oldTx.DepositToken,
 			DepositAmount:     oldTx.Amount,
-			WithdrawalAmount:  oldTx.Amount,
 			Depositor:         oldTx.Depositor,
 			Receiver:          oldTx.Receiver,
 			WithdrawalChainId: oldTx.WithdrawalChainId,
@@ -36,6 +35,7 @@ func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.Binar
 			WithdrawalToken:   oldTx.WithdrawalToken,
 			Signature:         oldTx.Signature,
 			IsWrapped:         oldTx.IsWrapped,
+			WithdrawalAmount:  oldTx.Amount,
 		}
 
 		txStore.Set(

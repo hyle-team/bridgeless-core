@@ -34,8 +34,5 @@ func (m Migrator) Migrate2to3(ctx sdk.Context) error {
 }
 
 func (m Migrator) Migrate3to4(ctx sdk.Context) error {
-	if err := v4.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc); err != nil {
-		return err
-	}
-	return nil
+	return v4.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc)
 }
