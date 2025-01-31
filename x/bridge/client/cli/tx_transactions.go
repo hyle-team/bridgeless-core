@@ -30,6 +30,7 @@ func CmdSubmitTx() *cobra.Command {
 		Short: "Submit a transaction to the bridge module",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err

@@ -223,3 +223,250 @@ message MsgChangeGroup {
 ```
 
 ----
+
+## CLI
+
+## Queries
+### Params
+
+The params command allow users to query `multisig` module params.
+```
+ simd query multisig params
+```
+Example output:
+```
+params:
+  groupSequence: "0"
+  proposalSequence: "0"
+  prunePeriod: "240"
+  votingPeriod: "120"
+
+```
+----
+### GroupAll
+
+The list-all command lists all existing groups.
+
+```
+simd query multisig groups list-all 
+```
+Example output:
+```
+group:
+- account: bridge17fcahfu87uy6ejaapgx5xfsq3snrct6lq88km79zw9zckum70r4sdsx6vy
+  members:
+  - bridge1...
+  - bridge1...
+  threshold: "1"
+- account: bridge1n77flmf2dhxzv7wh2ekxzn4wuz7rna06yqyw6sqp0pqte0fjue3snl5rvc
+  members:
+  - bridge1...
+  - bridge1...
+  threshold: "1"
+pagination:
+  next_key: null
+  total: "2"
+
+
+```
+
+### Group
+
+The group command lists info about certain group.
+
+```
+simd query multisig groups group bridge1...
+```
+Example output:
+```
+group:
+  account: bridge1n77flmf2dhxzv7wh2ekxzn4wuz7rna06yqyw6sqp0pqte0fjue3snl5rvc
+  members:
+  - bridge1...
+  - bridge1...
+  threshold: "1"
+```
+
+----
+### ProposalAll
+
+The list-all lists all existing proposals in multisig module.
+
+```
+simd query multisig proposals list-all
+```
+Example output:
+
+```
+pagination:
+  next_key: null
+  total: "2"
+proposal:
+- finalTallyResult: null
+  group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+  id: "1"
+  messages:
+  - '@type': /core.multisig.MsgChangeGroup
+    creator: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    members:
+    - bridge1...
+    - bridge1...
+    threshold: "1"
+  proposer: bridge1...
+  status: SUBMITTED
+  submitBlock: "1356"
+  votingEndBlock: "1476"
+- finalTallyResult: null
+  group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+  id: "2"
+  messages:
+  - '@type': /core.multisig.MsgChangeGroup
+    creator: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    members:
+    - bridge1...
+    - bridge1...
+    threshold: "1"
+  proposer: bridge1...
+  status: SUBMITTED
+  submitBlock: "1357"
+  votingEndBlock: "1477"
+```
+
+### Proposal
+The proposal command lists info about proposal with given id.
+
+```
+simd query multisig proposals proposal 1
+```
+Example output:
+```
+proposal:
+  finalTallyResult: null
+  group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+  id: "1"
+  messages:
+  - '@type': /core.multisig.MsgChangeGroup
+    creator: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    group: bridge15wm6yd4ktqsmr5gzccytsu3wdzamzl4gtst6r3d3jv5g53yk8m8qtl6mts
+    members:
+    - bridge1...
+    - bridge1...
+    threshold: "1"
+  proposer: bridge1...
+  status: SUBMITTED
+  submitBlock: "1356"
+  votingEndBlock: "1476"
+
+```
+----
+
+### VotesAll
+The  list-all command list all votes made by users to proposals in multisig module.
+
+```
+simd query multisig votes list-all
+```
+Example output:
+```
+pagination:
+  next_key: null
+  total: "2"
+vote:
+- option: "YES"
+  proposalId: "1"
+  submitBlock: "1467"
+  voter: bridge1...
+- option: "YES"
+  proposalId: "3"
+  submitBlock: "1511"
+  voter: bridge1...
+
+```
+### Vote
+The vote command list info about votes to given proposal id.
+
+```
+simd query multisig votes vote 3  
+```
+Example output:
+```
+pagination:
+  next_key: null
+  total: "1"
+vote:
+- option: "YES"
+  proposalId: "3"
+  submitBlock: "1511"
+  voter: bridge1...
+```
+### VoteDetailed
+The vote-detailed command gives info about vote with given proposal id and voter address.
+
+```
+simd query multisig votes vote-detailed 3 bridge1...
+```
+
+Example output:
+
+```
+vote:
+  option: "YES"
+  proposalId: "3"
+  submitBlock: "1511"
+  voter: bridge1...
+```
+----
+## Transactions
+
+### Create
+
+The create command creates a multisig group with provided members and threshold.
+
+```
+simd tx tx multisig groups create bridge1... bridge1...,bridge1... 2 
+```
+
+### Update
+
+The update command allows to update group changing the list of it`s members and threshold. (_NOTE: this command is executed only from the group account. You have to create proposal to update group_)
+
+```
+simd tx multisig groups update bridge1... bridge1...,bridge1... 1
+```
+
+### SubmitProposal
+
+The submit proposal command allows to create multisig proposals.
+
+```
+simd tx multisig proposals submit-proposal /path/to/proposal.json --from mykey
+```
+Proposal to change group example:
+
+```
+{
+  "creator": "bridge1...",
+  "group": "bridge1...",
+  "messages": [{
+    "@type": "/core.multisig.MsgChangeGroup",
+    "creator": "bridge1...", //creator and group must be equal
+    "group": "bridge1...",
+    "members": ["bridge1...",
+      "bridge1...",
+      "bridge1..."],
+    "threshold": 3
+  }]
+}
+```
+
+### Vote
+
+The vote command submits the vote to proposal with given id.
+
+```
+simd tx multisig votes vote bridge1... 1 0
+```
+
+_NOTE: 0 - Yes, 1 - No_

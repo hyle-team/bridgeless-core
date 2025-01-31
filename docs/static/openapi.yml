@@ -552,6 +552,13 @@ paths:
                 properties:
                   module_admin:
                     type: string
+                  parties:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
             description: >-
               QueryParamsResponse is response type for the Query/Params RPC
               method.
@@ -1770,7 +1777,9 @@ paths:
                       format: uint64
                     deposit_token:
                       type: string
-                    amount:
+                    deposit_amount:
+                      type: string
+                    withdrawal_amount:
                       type: string
                     depositor:
                       type: string
@@ -2087,7 +2096,9 @@ paths:
                     format: uint64
                   deposit_token:
                     type: string
-                  amount:
+                  deposit_amount:
+                    type: string
+                  withdrawal_amount:
                     type: string
                   depositor:
                     type: string
@@ -49288,6 +49299,8 @@ definitions:
     type: object
   core.bridge.MsgRemoveTokenInfoResponse:
     type: object
+  core.bridge.MsgSetPartiesResponse:
+    type: object
   core.bridge.MsgSubmitTransactionsResponse:
     type: object
   core.bridge.MsgUpdateTokenResponse:
@@ -49297,7 +49310,19 @@ definitions:
     properties:
       module_admin:
         type: string
+      parties:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
     description: Params defines the parameters for the module.
+  core.bridge.Party:
+    type: object
+    properties:
+      address:
+        type: string
   core.bridge.QueryGetChainByIdResponse:
     type: object
     properties:
@@ -49519,6 +49544,13 @@ definitions:
         properties:
           module_admin:
             type: string
+          parties:
+            type: array
+            items:
+              type: object
+              properties:
+                address:
+                  type: string
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   core.bridge.QueryTransactionByIdResponse:
     type: object
@@ -49538,7 +49570,9 @@ definitions:
             format: uint64
           deposit_token:
             type: string
-          amount:
+          deposit_amount:
+            type: string
+          withdrawal_amount:
             type: string
           depositor:
             type: string
@@ -49577,7 +49611,9 @@ definitions:
               format: uint64
             deposit_token:
               type: string
-            amount:
+            deposit_amount:
+              type: string
+            withdrawal_amount:
               type: string
             depositor:
               type: string
@@ -49695,7 +49731,9 @@ definitions:
         format: uint64
       deposit_token:
         type: string
-      amount:
+      deposit_amount:
+        type: string
+      withdrawal_amount:
         type: string
       depositor:
         type: string

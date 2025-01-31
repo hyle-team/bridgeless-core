@@ -28,7 +28,7 @@ func TxProposalsCmd() *cobra.Command {
 func CmdSubmitProposal() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "submit-proposal [path/to/proposal.json]",
-		Short: "Submit a proposal along with some messages, metadata and deposit",
+		Short: "Submit a proposal along with some messages and metadata",
 		Long: strings.TrimSpace(fmt.Sprintf(`Submit a proposal to group.
 Example:
 $ %s tx multisig proposals submit-proposal /path/to/proposal.json --from mykey

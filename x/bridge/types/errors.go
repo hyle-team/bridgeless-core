@@ -19,4 +19,5 @@ var (
 	ErrChainNotFound                = sdkerrors.Register(ModuleName, 1107, "chain not found")
 	ErrPermissionDenied             = sdkerrors.Register(ModuleName, 1108, "permission denied")
 	InvalidTransaction              = sdkerrors.Register(ModuleName, 1110, "invalid transaction")
+	ErrInvalidPartiesList           = sdkerrors.Register(ModuleName, 1111, "invalid parties list")
 )
