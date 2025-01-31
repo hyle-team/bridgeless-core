@@ -15,12 +15,12 @@ message Transaction {
   uint64 deposit_block = 4;
   string deposit_token = 5;
   string deposit_amount = 6;
-  string depositor = 7;
-  string receiver = 8;
-  string withdrawal_chain_id = 9;
-  string withdrawal_tx_hash = 10;
-  string withdrawal_token = 11;
-  string signature = 12;
-  bool is_wrapped = 13;
-  string withdrawal_amount = 14;
+  string withdrawal_amount = 7;
+  string depositor = 8;
+  string receiver = 9;
+  string withdrawal_chain_id = 10;
+  string withdrawal_tx_hash = 11;
+  string withdrawal_token = 12;
+  string signature = 13;
+  bool is_wrapped = 14;
 }
