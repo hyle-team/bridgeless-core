@@ -1779,8 +1779,6 @@ paths:
                       type: string
                     deposit_amount:
                       type: string
-                    withdrawal_amount:
-                      type: string
                     depositor:
                       type: string
                     receiver:
@@ -1795,6 +1793,8 @@ paths:
                       type: string
                     is_wrapped:
                       type: boolean
+                    withdrawal_amount:
+                      type: string
                 description: Transactions is a list of transactions.
               pagination:
                 type: object
@@ -2098,8 +2098,6 @@ paths:
                     type: string
                   deposit_amount:
                     type: string
-                  withdrawal_amount:
-                    type: string
                   depositor:
                     type: string
                   receiver:
@@ -2114,6 +2112,8 @@ paths:
                     type: string
                   is_wrapped:
                     type: boolean
+                  withdrawal_amount:
+                    type: string
             description: >-
               QueryTransactionByIdResponse is response type for the
               Query/TransactionById RPC method.
@@ -49572,8 +49572,6 @@ definitions:
             type: string
           deposit_amount:
             type: string
-          withdrawal_amount:
-            type: string
           depositor:
             type: string
           receiver:
@@ -49588,6 +49586,8 @@ definitions:
             type: string
           is_wrapped:
             type: boolean
+          withdrawal_amount:
+            type: string
     description: >-
       QueryTransactionByIdResponse is response type for the
       Query/TransactionById RPC method.
@@ -49613,8 +49613,6 @@ definitions:
               type: string
             deposit_amount:
               type: string
-            withdrawal_amount:
-              type: string
             depositor:
               type: string
             receiver:
@@ -49629,6 +49627,8 @@ definitions:
               type: string
             is_wrapped:
               type: boolean
+            withdrawal_amount:
+              type: string
         description: Transactions is a list of transactions.
       pagination:
         type: object
@@ -49733,8 +49733,6 @@ definitions:
         type: string
       deposit_amount:
         type: string
-      withdrawal_amount:
-        type: string
       depositor:
         type: string
       receiver:
@@ -49749,6 +49747,8 @@ definitions:
         type: string
       is_wrapped:
         type: boolean
+      withdrawal_amount:
+        type: string
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
