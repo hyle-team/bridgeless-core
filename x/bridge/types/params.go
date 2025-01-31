@@ -19,8 +19,8 @@ func ParamKeyTable() paramtypes.KeyTable {
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair([]byte(ParamModuleAdminKey), &p.ModuleAdmin, validateModuleAdmin),
-		paramtypes.NewParamSetPair([]byte(ParamModulePartiesKey), &p.Parties, validateModuleParties),
+		paramtypes.NewParamSetPair(ParamModuleAdminKey, &p.ModuleAdmin, validateModuleAdmin),
+		paramtypes.NewParamSetPair(ParamModulePartiesKey, &p.Parties, validateModuleParties),
 	}
 }
 

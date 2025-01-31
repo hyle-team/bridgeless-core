@@ -26,3 +26,13 @@ func (k Keeper) IsParty(sender string, ctx sdk.Context) bool {
 	}
 	return false
 }
+
+func (k Keeper) ModuleAdmin(ctx sdk.Context) (res string) {
+	k.paramstore.Get(ctx, types.ParamModuleAdminKey, &res)
+	return
+}
+
+func (k Keeper) PartiesList(ctx sdk.Context) (res []*types.Party) {
+	k.paramstore.Get(ctx, types.ParamModulePartiesKey, &res)
+	return
+}
