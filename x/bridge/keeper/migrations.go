@@ -4,6 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	v2 "github.com/hyle-team/bridgeless-core/v12/x/bridge/migrations/v2"
 	v3 "github.com/hyle-team/bridgeless-core/v12/x/bridge/migrations/v3"
+	v4 "github.com/hyle-team/bridgeless-core/v12/x/bridge/migrations/v4"
 )
 
 type Migrator struct {
@@ -30,4 +31,8 @@ func (m Migrator) Migrate2to3(ctx sdk.Context) error {
 	}
 
 	return nil
+}
+
+func (m Migrator) Migrate3to4(ctx sdk.Context) error {
+	return v4.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc)
 }
