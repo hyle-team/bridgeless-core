@@ -18,9 +18,12 @@ func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.Binar
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
+
+		// get oldTx data without deposit and withdrawal amount fields
 		var oldTx transaction
 		cdc.MustUnmarshal(iterator.Value(), &oldTx)
 
+		// set the values of new fields
 		newTx := types.Transaction{
 			DepositChainId:    oldTx.DepositChainId,
 			DepositTxHash:     oldTx.DepositTxHash,
@@ -38,6 +41,7 @@ func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.Binar
 			WithdrawalAmount:  oldTx.Amount,
 		}
 
+		// set new transaction instead of old one
 		txStore.Set(
 			types.KeyTransaction(types.TransactionId(&newTx)),
 			cdc.MustMarshal(&newTx),
