@@ -35,6 +35,15 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 # Changelog
 
+## [v12.1.16-rc1] - 2023-02-03
+
+### Improvement
+
+- (deps) [#64](https://github.com/hyle-team/bridgeless-core/pull/64) Added new param `parties` to `x/bridge` module params
+- (deps) [#64](https://github.com/hyle-team/bridgeless-core/pull/64) Improved message handling in `x/bridge` module
+- (deps) [#65](https://github.com/hyle-team/bridgeless-core/pull/65) Changed Transaction structure in `x/bridge` module
+
+
 ## [v12.1.6] - 2023-07-04
 
 ### Improvement
