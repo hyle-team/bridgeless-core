@@ -35,7 +35,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 # Changelog
 
-## [v12.1.16-rc1] - 2023-02-03
+## [v12.1.16-rc1] - 2025-02-03
 
 ### Improvement
 
