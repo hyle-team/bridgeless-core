@@ -17,7 +17,7 @@
 package types
 
 import (
-	"fmt"
+	"errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
 
@@ -107,10 +107,10 @@ func ValidateChannels(i interface{}) error {
 
 func (p Params) Validate() error {
 	if p.DurationOfDecay <= 0 {
-		return fmt.Errorf("duration of decay must be positive: %d", p.DurationOfDecay)
+		return errorsmod.Wrapf(errors.New("invalid duration"), "duration of decay must be positive: %d", p.DurationOfDecay)
 	}
 	if p.DurationUntilDecay <= 0 {
-		return fmt.Errorf("duration until decay must be positive: %d", p.DurationOfDecay)
+		return errorsmod.Wrapf(errors.New("invalid duration"), "duration until decay must be positive: %d", p.DurationOfDecay)
 	}
 	if err := sdk.ValidateDenom(p.ClaimsDenom); err != nil {
 		return err

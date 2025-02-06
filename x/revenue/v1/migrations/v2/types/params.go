@@ -17,7 +17,9 @@
 package types
 
 import (
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
+	"errors"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
 
@@ -81,7 +83,7 @@ func (p *V2Params) ParamSetPairs() paramtypes.ParamSetPairs {
 func validateUint64(i interface{}) error {
 	_, ok := i.(uint64)
 	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	return nil
@@ -90,7 +92,7 @@ func validateUint64(i interface{}) error {
 func validateBool(i interface{}) error {
 	_, ok := i.(bool)
 	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	return nil
@@ -100,19 +102,19 @@ func validateShares(i interface{}) error {
 	v, ok := i.(sdk.Dec)
 
 	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	if v.IsNil() {
-		return fmt.Errorf("invalid parameter: nil")
+		return errorsmod.Wrap(errors.New("invalid shares"), "invalid parameter: nil")
 	}
 
 	if v.IsNegative() {
-		return fmt.Errorf("value cannot be negative: %T", i)
+		return errorsmod.Wrapf(errors.New("invalid shares"), "value cannot be negative: %T", i)
 	}
 
 	if v.GT(sdk.OneDec()) {
-		return fmt.Errorf("value cannot be greater than 1: %T", i)
+		return errorsmod.Wrapf(errors.New("invalid shares"), "value cannot be greater than 1: %T", i)
 	}
 
 	return nil

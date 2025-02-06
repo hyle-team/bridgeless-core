@@ -17,8 +17,8 @@
 package types
 
 import (
+	errorsmod "cosmossdk.io/errors"
 	"errors"
-	"fmt"
 	gomath "math"
 
 	"cosmossdk.io/math"
@@ -46,10 +46,10 @@ func (cr ClaimsRecord) Validate() error {
 		return errors.New("initial claimable amount is nil")
 	}
 	if !cr.InitialClaimableAmount.IsPositive() {
-		return fmt.Errorf("initial claimable amount is not positive, %s", cr.InitialClaimableAmount)
+		return errorsmod.Wrapf(errors.New("invalid initial claimable amount"), "initial claimable amount is not positive, %s", cr.InitialClaimableAmount)
 	}
 	if len(cr.ActionsCompleted) == 0 || len(Action_value)-1 != len(cr.ActionsCompleted) {
-		return fmt.Errorf("action length mismatch, expected %d, got %d", len(Action_value)-1, len(cr.ActionsCompleted))
+		return errorsmod.Wrapf(errors.New("invalid action length"), "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cr.ActionsCompleted))
 	}
 
 	return nil
@@ -127,11 +127,11 @@ func (cra ClaimsRecordAddress) Validate() error {
 	}
 
 	if !cra.InitialClaimableAmount.IsPositive() {
-		return fmt.Errorf("initial claimable amount is not positive, %s", cra.InitialClaimableAmount)
+		return errorsmod.Wrapf(errors.New("invalid initial claimable amount"), "initial claimable amount is not positive, %s", cra.InitialClaimableAmount)
 	}
 
 	if len(Action_value)-1 != len(cra.ActionsCompleted) {
-		return fmt.Errorf("action length mismatch, expected %d, got %d", len(Action_value)-1, len(cra.ActionsCompleted))
+		return errorsmod.Wrapf(errors.New("invalid action length"), "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cra.ActionsCompleted))
 	}
 
 	return nil

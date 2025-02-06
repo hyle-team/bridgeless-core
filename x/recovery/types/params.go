@@ -19,7 +19,6 @@ package types
 import (
 	errorsmod "cosmossdk.io/errors"
 	"errors"
-	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
 )

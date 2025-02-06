@@ -73,11 +73,11 @@ func (msg *MsgSubmitProposal) UnpackInterfaces(unpacker types.AnyUnpacker) error
 
 func (msg *MsgSubmitProposal) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(msg.Creator); err != nil {
-		return ferrorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
 	if _, err := sdk.AccAddressFromBech32(msg.Group); err != nil {
-		return ferrorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid group address (%s)", err)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid group address (%s)", err)
 	}
 
 	msgs, err := msg.GetMsgs()
@@ -86,12 +86,12 @@ func (msg *MsgSubmitProposal) ValidateBasic() error {
 	}
 
 	if len(msgs) == 0 {
-		return ferrorsmod.Wrap(sdkerrors.ErrInvalidRequest, "no messages to submit")
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "no messages to submit")
 	}
 
 	for i, msg := range msgs {
 		if err := msg.ValidateBasic(); err != nil {
-			return ferrorsmod.Wrap(err, "msg %d", i)
+			return errorsmod.Wrapf(err, "msg %d", i)
 		}
 	}
 	return nil

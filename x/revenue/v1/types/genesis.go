@@ -16,7 +16,10 @@
 
 package types
 
-import "fmt"
+import (
+	errorsmod "cosmossdk.io/errors"
+	"errors"
+)
 
 // NewGenesisState creates a new genesis state.
 func NewGenesisState(params Params, revenues []Revenue) GenesisState {
@@ -41,7 +44,7 @@ func (gs GenesisState) Validate() error {
 	for _, fs := range gs.Revenues {
 		// only one fee per contract
 		if seenContract[fs.ContractAddress] {
-			return fmt.Errorf("contract duplicated on genesis '%s'", fs.ContractAddress)
+			return errorsmod.Wrapf(errors.New("duplicated contract"), "contract duplicated on genesis '%s'", fs.ContractAddress)
 		}
 
 		if err := fs.Validate(); err != nil {

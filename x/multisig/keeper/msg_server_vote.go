@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	errorsmod "cosmossdk.io/errors"
 	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -14,7 +15,7 @@ func (k msgServer) Vote(goCtx context.Context, msg *types.MsgVote) (*types.MsgVo
 
 	proposal, found := k.GetProposal(ctx, msg.ProposalId)
 	if !found {
-		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "proposal (%d) not found", msg.ProposalId)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "proposal (%d) not found", msg.ProposalId)
 	}
 
 	// Ensure that we can still accept votes for this proposal.
@@ -25,10 +26,10 @@ func (k msgServer) Vote(goCtx context.Context, msg *types.MsgVote) (*types.MsgVo
 	// Ensure that the voter is a member of the group.
 	group, found := k.GetGroup(ctx, proposal.Group)
 	if !found {
-		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "group (%s) not found", proposal.Group)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "group (%s) not found", proposal.Group)
 	}
 	if !group.HasMember(msg.Creator) {
-		return nil, ferrorsmod.Wrap(sdkerrors.ErrUnauthorized, "voter (%s) not a member of group (%s)", msg.Creator, proposal.Group)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrUnauthorized, "voter (%s) not a member of group (%s)", msg.Creator, proposal.Group)
 	}
 
 	vote := types.Vote{

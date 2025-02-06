@@ -42,7 +42,7 @@ func (msg *MsgDeleteToken) GetSignBytes() []byte {
 func (msg *MsgDeleteToken) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		return ferrorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
 	}
 
 	return nil

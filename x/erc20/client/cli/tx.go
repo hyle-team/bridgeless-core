@@ -18,6 +18,7 @@ package cli
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -77,7 +78,7 @@ func NewConvertCoinCmd() *cobra.Command {
 			if len(args) == 2 {
 				receiver = args[1]
 				if err := evmostypes.ValidateAddress(receiver); err != nil {
-					return fmt.Errorf("invalid receiver hex address %w", err)
+					return errorsmod.Wrap(err, "invalid receiver hex address")
 				}
 			} else {
 				receiver = common.BytesToAddress(sender).Hex()
@@ -115,12 +116,12 @@ func NewConvertERC20Cmd() *cobra.Command {
 
 			contract := args[0]
 			if err := evmostypes.ValidateAddress(contract); err != nil {
-				return fmt.Errorf("invalid ERC20 contract address %w", err)
+				return errorsmod.Wrap(err, "invalid ERC20 contract address")
 			}
 
 			amount, ok := sdk.NewIntFromString(args[1])
 			if !ok {
-				return fmt.Errorf("invalid amount %s", args[1])
+				return errorsmod.Wrapf(errors.New("invalid mount"), "invalid amount %s", args[1])
 			}
 
 			from := common.BytesToAddress(cliCtx.GetFromAddress().Bytes())

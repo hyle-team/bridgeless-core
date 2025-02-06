@@ -18,7 +18,6 @@ package claims
 
 import (
 	"errors"
-	"fmt"
 
 	errorsmod "cosmossdk.io/errors"
 

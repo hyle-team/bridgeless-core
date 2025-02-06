@@ -42,7 +42,7 @@ func (msg *MsgInsertChain) GetSignBytes() []byte {
 func (msg *MsgInsertChain) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		return ferrorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
 	}
 
 	if err = validateChain(&msg.Chain); err != nil {

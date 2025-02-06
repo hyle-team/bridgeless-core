@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	errorsmod "cosmossdk.io/errors"
 	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -14,7 +15,7 @@ func (k msgServer) SubmitProposal(goCtx context.Context, msg *types.MsgSubmitPro
 
 	group, found := k.GetGroup(ctx, msg.Group)
 	if !found {
-		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "group (%s) not found", msg.Group)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrNotFound, "group (%s) not found", msg.Group)
 	}
 
 	msgs, err := msg.GetMsgs()
@@ -23,7 +24,7 @@ func (k msgServer) SubmitProposal(goCtx context.Context, msg *types.MsgSubmitPro
 	}
 
 	if !group.HasMember(msg.Creator) {
-		return nil, ferrorsmod.Wrap(sdkerrors.ErrUnauthorized, "not a member of group (%s)", msg.Group)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrUnauthorized, "not a member of group (%s)", msg.Group)
 	}
 
 	// Check that if the messages require signers, they are all equal to the given account address of group.
