@@ -114,7 +114,7 @@ func (k Keeper) doExecuteMsgs(ctx sdk.Context, proposal types.Proposal) error {
 	for i, msg := range msgs {
 		handler := k.router.Handler(msg)
 		if handler == nil {
-			return sdkerrors.Wrapf(sdkerrors.ErrLogic, "no message handler found for %q", sdk.MsgTypeURL(msg))
+			return ferrorsmod.Wrap(sdkerrors.ErrLogic, "no message handler found for %q", sdk.MsgTypeURL(msg))
 		}
 		r, err := handler(ctx, msg)
 		if err != nil {

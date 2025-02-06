@@ -14,21 +14,21 @@ func (k msgServer) Vote(goCtx context.Context, msg *types.MsgVote) (*types.MsgVo
 
 	proposal, found := k.GetProposal(ctx, msg.ProposalId)
 	if !found {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrNotFound, "proposal (%d) not found", msg.ProposalId)
+		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "proposal (%d) not found", msg.ProposalId)
 	}
 
 	// Ensure that we can still accept votes for this proposal.
 	if proposal.Status != types.ProposalStatus_SUBMITTED {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "proposal not open for voting")
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "proposal not open for voting")
 	}
 
 	// Ensure that the voter is a member of the group.
 	group, found := k.GetGroup(ctx, proposal.Group)
 	if !found {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrNotFound, "group (%s) not found", proposal.Group)
+		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "group (%s) not found", proposal.Group)
 	}
 	if !group.HasMember(msg.Creator) {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "voter (%s) not a member of group (%s)", msg.Creator, proposal.Group)
+		return nil, ferrorsmod.Wrap(sdkerrors.ErrUnauthorized, "voter (%s) not a member of group (%s)", msg.Creator, proposal.Group)
 	}
 
 	vote := types.Vote{

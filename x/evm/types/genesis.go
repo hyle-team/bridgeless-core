@@ -16,8 +16,8 @@
 package types
 
 import (
-	"fmt"
-
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"github.com/hyle-team/bridgeless-core/v12/types"
 )
 
@@ -52,10 +52,10 @@ func (gs GenesisState) Validate() error {
 	seenAccounts := make(map[string]bool)
 	for _, acc := range gs.Accounts {
 		if seenAccounts[acc.Address] {
-			return fmt.Errorf("duplicated genesis account %s", acc.Address)
+			return errorsmod.Wrapf(errors.New("failed validate genesis"), "duplicated genesis account %s", acc.Address)
 		}
 		if err := acc.Validate(); err != nil {
-			return fmt.Errorf("invalid genesis account %s: %w", acc.Address, err)
+			return errorsmod.Wrapf(err, "invalid genesis account %s", acc.Address)
 		}
 		seenAccounts[acc.Address] = true
 	}

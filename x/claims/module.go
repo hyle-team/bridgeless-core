@@ -18,6 +18,7 @@ package claims
 
 import (
 	"context"
+	errorsmod "cosmossdk.io/errors"
 	"encoding/json"
 	"fmt"
 
@@ -91,7 +92,7 @@ func (AppModuleBasic) RegisterRESTRoutes(_ client.Context, _ *mux.Router) {
 func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *runtime.ServeMux) {
 	err := types.RegisterQueryHandlerClient(context.Background(), mux, types.NewQueryClient(clientCtx))
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to register GRPC gateway"))
 	}
 }
 
@@ -149,7 +150,7 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 	m := keeper.NewMigrator(am.keeper, am.legacySubspace)
 	err := cfg.RegisterMigration(types.ModuleName, 2, m.Migrate2to3)
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to register services"))
 	}
 }
 

@@ -1,7 +1,8 @@
 package types
 
 import (
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 )
 
 // DefaultIndex is the default global index
@@ -23,43 +24,43 @@ func DefaultGenesis() *GenesisState {
 func (gs GenesisState) Validate() error {
 	// this line is used by starport scaffolding # genesis/types/validate
 	if err := gs.Params.Validate(); err != nil {
-		return fmt.Errorf("invalid params: %w", err)
+		return errorsmod.Wrap(err, "invalid params")
 	}
 
 	for _, tx := range gs.Transactions {
 		if err := validateTransaction(&tx); err != nil {
-			return fmt.Errorf("invalid transaction %s: %w", TransactionId(&tx), err)
+			return errorsmod.Wrapf(err, "invalid transaction %s", TransactionId(&tx))
 		}
 	}
 
 	chains := make(map[string]struct{})
 	for _, chain := range gs.Chains {
 		if _, ok := chains[chain.Id]; ok {
-			return fmt.Errorf("duplicate chain id: %s", chain.Id)
+			return errorsmod.Wrapf(errors.New("duplicate id"), "duplicate chain id: %s", chain.Id)
 		} else {
 			chains[chain.Id] = struct{}{}
 		}
 
 		if err := validateChain(&chain); err != nil {
-			return fmt.Errorf("invalid chain %s: %w", chain.Id, err)
+			return errorsmod.Wrapf(err, "invalid chain %s", chain.Id)
 		}
 	}
 
 	uniqueTokens := make(map[uint64]struct{})
 	for _, token := range gs.Tokens {
 		if _, ok := uniqueTokens[token.Id]; ok {
-			return fmt.Errorf("duplicate token id: %v", token.Id)
+			return errorsmod.Wrapf(errors.New("duplicate id"), "duplicate token id: %v", token.Id)
 		} else {
 			uniqueTokens[token.Id] = struct{}{}
 		}
 
 		if err := validateToken(&token); err != nil {
-			return fmt.Errorf("invalid token %v: %w", token.Id, err)
+			return errorsmod.Wrapf(err, "invalid token %v", token.Id)
 		}
 
 		for _, info := range token.Info {
 			if err := validateTokenInfo(&info, nil); err != nil {
-				return fmt.Errorf("invalid token info for token %v: %w", token.Id, err)
+				return errorsmod.Wrapf(err, "invalid token info for token %v", token.Id)
 			}
 		}
 	}

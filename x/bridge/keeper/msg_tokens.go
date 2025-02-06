@@ -11,12 +11,12 @@ func (m msgServer) InsertToken(goCtx context.Context, msg *types.MsgInsertToken)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	if msg.Creator != m.GetParams(ctx).ModuleAdmin {
-		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+		return nil, errorsmod.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
 	}
 
 	_, found := m.GetToken(ctx, msg.Token.Id)
 	if found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrConflict, "token already exists")
+		return nil, errorsmod.Wrap(sdkerrors.ErrConflict, "token already exists")
 	}
 
 	m.SetToken(ctx, msg.Token)
@@ -32,12 +32,12 @@ func (m msgServer) UpdateToken(goCtx context.Context, msg *types.MsgUpdateToken)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	if msg.Creator != m.GetParams(ctx).ModuleAdmin {
-		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+		return nil, errorsmod.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
 	}
 
 	token, found := m.GetToken(ctx, msg.TokenId)
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrNotFound, "token not found")
+		return nil, errorsmod.Wrap(sdkerrors.ErrNotFound, "token not found")
 	}
 
 	token.Metadata = msg.Metadata
@@ -50,12 +50,12 @@ func (m msgServer) DeleteToken(goCtx context.Context, msg *types.MsgDeleteToken)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	if msg.Creator != m.GetParams(ctx).ModuleAdmin {
-		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+		return nil, errorsmod.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
 	}
 
 	token, found := m.GetToken(ctx, msg.TokenId)
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrNotFound, "token not found")
+		return nil, errorsmod.Wrap(sdkerrors.ErrNotFound, "token not found")
 	}
 
 	m.RemoveToken(ctx, msg.TokenId)

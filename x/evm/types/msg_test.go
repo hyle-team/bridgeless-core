@@ -1,7 +1,8 @@
 package types_test
 
 import (
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"math"
 	"math/big"
 	"reflect"
@@ -898,11 +899,11 @@ func (suite *MsgsTestSuite) TestTransactionCoding() {
 func encodeDecodeBinary(tx *ethtypes.Transaction) (*types.MsgEthereumTx, error) {
 	data, err := tx.MarshalBinary()
 	if err != nil {
-		return nil, fmt.Errorf("rlp encoding failed: %v", err)
+		return nil, errorsmod.Wrapf(err, "rlp encoding failed")
 	}
 	parsedTx := &types.MsgEthereumTx{}
 	if err := parsedTx.UnmarshalBinary(data); err != nil {
-		return nil, fmt.Errorf("rlp decoding failed: %v", err)
+		return nil, errorsmod.Wrap(err, "rlp decoding failed")
 	}
 	return parsedTx, nil
 }
@@ -910,14 +911,14 @@ func encodeDecodeBinary(tx *ethtypes.Transaction) (*types.MsgEthereumTx, error) 
 func assertEqual(orig *ethtypes.Transaction, cpy *ethtypes.Transaction) error {
 	// compare nonce, price, gaslimit, recipient, amount, payload, V, R, S
 	if want, got := orig.Hash(), cpy.Hash(); want != got {
-		return fmt.Errorf("parsed tx differs from original tx, want %v, got %v", want, got)
+		return errorsmod.Wrapf(errors.New("invalid tx"), "parsed tx differs from original tx, want %v, got %v", want, got)
 	}
 	if want, got := orig.ChainId(), cpy.ChainId(); want.Cmp(got) != 0 {
-		return fmt.Errorf("invalid chain id, want %d, got %d", want, got)
+		return errorsmod.Wrapf(errors.New("invalid tx"), "invalid chain id, want %d, got %d", want, got)
 	}
 	if orig.AccessList() != nil {
 		if !reflect.DeepEqual(orig.AccessList(), cpy.AccessList()) {
-			return fmt.Errorf("access list wrong")
+			return errorsmod.Wrap(errors.New("wrong list"), "access list wrong")
 		}
 	}
 	return nil

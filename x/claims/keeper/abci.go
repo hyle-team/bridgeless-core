@@ -44,7 +44,7 @@ func (k Keeper) EndBlocker(ctx sdk.Context) {
 	}
 
 	if err := k.EndAirdrop(ctx, params); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to end air drop"))
 	}
 }
 

@@ -16,7 +16,7 @@ func (k msgServer) ChangeGroup(goCtx context.Context, msg *types.MsgChangeGroup)
 
 	group, found := k.GetGroup(ctx, msg.Group)
 	if !found {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrNotFound, "group (%s) not found", msg.Group)
+		return nil, ferrorsmod.Wrap(sdkerrors.ErrNotFound, "group (%s) not found", msg.Group)
 	}
 
 	group.Members = msg.Members

@@ -17,6 +17,7 @@ package feemarket
 
 import (
 	"context"
+	errorsmod "cosmossdk.io/errors"
 	"encoding/json"
 	"fmt"
 	"math/rand"
@@ -85,7 +86,7 @@ func (AppModuleBasic) RegisterRESTRoutes(_ client.Context, _ *mux.Router) {
 
 func (b AppModuleBasic) RegisterGRPCGatewayRoutes(c client.Context, serveMux *runtime.ServeMux) {
 	if err := types.RegisterQueryHandlerClient(context.Background(), serveMux, types.NewQueryClient(c)); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to register GRPC gateway"))
 	}
 }
 
@@ -140,7 +141,7 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 
 	m := keeper.NewMigrator(am.keeper, am.legacySubspace)
 	if err := cfg.RegisterMigration(types.ModuleName, 3, m.Migrate3to4); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to register migration"))
 	}
 }
 

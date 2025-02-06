@@ -17,6 +17,7 @@
 package claims
 
 import (
+	"errors"
 	"fmt"
 
 	errorsmod "cosmossdk.io/errors"
@@ -62,7 +63,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, data types.GenesisState) {
 		}
 
 		if len(cr.ActionsCompleted) != len(types.Action_name)-1 {
-			panic(fmt.Errorf("invalid actions completed length for address %s", claimsRecord.Address))
+			panic(errorsmod.Wrapf(errors.New("invalid actions length"), "invalid actions completed length for address %s", claimsRecord.Address))
 		}
 
 		initialClaimablePerAction := claimsRecord.InitialClaimableAmount.Quo(numActions)
@@ -80,7 +81,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, data types.GenesisState) {
 	// check for equal only for unclaimed actions
 	if !sumUnclaimed.Equal(totalEscrowed) {
 		panic(
-			fmt.Errorf(
+			errorsmod.Wrapf(errors.New("not equal sum"),
 				"sum of unclaimed amount ≠ escrowed module account amount (%s ≠ %s)",
 				sumUnclaimed, totalEscrowed,
 			),

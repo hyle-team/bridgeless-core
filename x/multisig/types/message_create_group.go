@@ -1,6 +1,7 @@
 package types
 
 import (
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -33,7 +34,7 @@ func (msg *MsgCreateGroup) Type() string {
 func (msg *MsgCreateGroup) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "fa"))
 	}
 	return []sdk.AccAddress{creator}
 }

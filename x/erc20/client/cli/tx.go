@@ -17,6 +17,7 @@
 package cli
 
 import (
+	errorsmod "cosmossdk.io/errors"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -239,13 +240,13 @@ Where metadata.json contains (example):
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	return cmd
 }
@@ -307,13 +308,13 @@ func NewRegisterERC20ProposalCmd() *cobra.Command {
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	return cmd
 }
@@ -375,13 +376,13 @@ func NewToggleTokenConversionProposalCmd() *cobra.Command {
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to mark flag"))
 	}
 	return cmd
 }

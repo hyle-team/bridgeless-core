@@ -12,7 +12,7 @@ func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetParties) (
 	params := m.Keeper.GetParams(ctx)
 
 	if msg.Creator != params.ModuleAdmin {
-		return nil, sdkerrors.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
+		return nil, errorsmod.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
 	}
 
 	params.Parties = msg.Parties

@@ -17,7 +17,10 @@
 package types
 
 import (
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"fmt"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
 )
 
@@ -52,7 +55,7 @@ func DefaultParams() Params {
 func validateBool(i interface{}) error {
 	_, ok := i.(bool)
 	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	return nil
@@ -61,11 +64,11 @@ func validateBool(i interface{}) error {
 func validateDuration(i interface{}) error {
 	duration, ok := i.(time.Duration)
 	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	if duration < 0 {
-		return fmt.Errorf("packet timout duration cannot be negative")
+		return errorsmod.Wrap(errors.New("invalid packet timeout"), "packet timout duration cannot be negative")
 	}
 
 	return nil
