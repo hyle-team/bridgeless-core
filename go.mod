@@ -228,7 +228,7 @@ replace (
 	// use cosmos fork of keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 
-	github.com/cosmos/cosmos-sdk => /Users/em_dl/Work/cosmos-sdk
+	github.com/cosmos/cosmos-sdk => github.com/hyle-team/cosmos-sdk v0.46.29
 	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.0.0-20241031152903-f38c2bf016e9
 
 	// use Evmos geth fork
