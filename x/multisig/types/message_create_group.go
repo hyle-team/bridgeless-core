@@ -34,7 +34,7 @@ func (msg *MsgCreateGroup) Type() string {
 func (msg *MsgCreateGroup) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		panic(errorsmod.Wrap(err, "failed to get signers"))
+		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Creator))
 	}
 	return []sdk.AccAddress{creator}
 }

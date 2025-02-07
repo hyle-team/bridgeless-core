@@ -45,7 +45,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, data types.GenesisState) {
 
 	err := k.SetParams(ctx, data.Params)
 	if err != nil {
-		panic(errorsmod.Wrapf(err, "error setting params"))
+		panic(errorsmod.Wrapf(err, "failed to set params"))
 	}
 
 	escrowedCoins := k.GetModuleAccountBalances(ctx)

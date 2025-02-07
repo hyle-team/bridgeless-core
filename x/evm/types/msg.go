@@ -216,7 +216,7 @@ func (msg *MsgEthereumTx) GetMsgs() []sdk.Msg {
 func (msg *MsgEthereumTx) GetSigners() []sdk.AccAddress {
 	data, err := UnpackTxData(msg.Data)
 	if err != nil {
-		panic(errorsmod.Wrap(err, "failed to get signers"))
+		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Creator))
 	}
 
 	sender, err := msg.GetSender(data.GetChainID())

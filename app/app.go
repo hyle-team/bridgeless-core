@@ -913,7 +913,7 @@ func (app *Bridge) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64)
 	}
 
 	if err := options.Validate(); err != nil {
-		panic(errorsmod.Wrap(err, "invalid options"))
+		panic(errorsmod.Wrap(err, "failed setting ante handler"))
 	}
 
 	app.SetAnteHandler(ante.NewAnteHandler(options))

@@ -18,6 +18,7 @@ package types
 
 import (
 	"fmt"
+	bridgetypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"strings"
 
 	errorsmod "cosmossdk.io/errors"
@@ -117,7 +118,7 @@ func validateIBCVoucherMetadata(metadata banktypes.Metadata) error {
 
 	if len(denomSplit) != 2 || denomSplit[0] != ibctransfertypes.DenomPrefix {
 		// NOTE: should be unaccessible (covered on ValidateIBCDenom)
-		return errorsmod.Wrapf(ErrEVMDenom, "%s denomination should be prefixed with the format 'ibc/", metadata.Base)
+		return errorsmod.Wrapf(bridgetypes.ErrInvalidDenom, "%s denomination should be prefixed with the format 'ibc/", metadata.Base)
 	}
 
 	return nil
@@ -129,7 +130,7 @@ func ValidateErc20Denom(denom string) error {
 	denomSplit := strings.SplitN(denom, "/", 2)
 
 	if len(denomSplit) != 2 || denomSplit[0] != ModuleName {
-		return errorsmod.Wrapf(ErrEVMDenom, "%s denomination should be prefixed with the format 'erc20/", denom)
+		return errorsmod.Wrapf(bridgetypes.ErrInvalidDenom, "%s denomination should be prefixed with the format 'erc20/", denom)
 	}
 
 	return evmostypes.ValidateAddress(denomSplit[1])

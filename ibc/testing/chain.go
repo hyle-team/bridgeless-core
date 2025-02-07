@@ -71,7 +71,7 @@ func NewTestChain(t *testing.T, coord *ibcgotesting.Coordinator, chainID string)
 	// generate genesis account
 	senderPrivKey, err := ethsecp256k1.GenerateKey()
 	if err != nil {
-		panic(errorsmod.Wrap(err, "failed to gen genesis account"))
+		panic(errorsmod.Wrap(err, "failed to generate"))
 	}
 
 	baseAcc := authtypes.NewBaseAccount(senderPrivKey.PubKey().Address().Bytes(), senderPrivKey.PubKey(), 0, 0)

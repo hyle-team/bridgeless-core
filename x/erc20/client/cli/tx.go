@@ -242,13 +242,13 @@ Where metadata.json contains (example):
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark title flag as required"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark description flag as required"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark deposit flag as required"))
 	}
 	return cmd
 }
@@ -310,13 +310,14 @@ func NewRegisterERC20ProposalCmd() *cobra.Command {
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark title flag as required"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark description flag as required"))
 	}
+
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark deposit flag as required"))
 	}
 	return cmd
 }
@@ -378,13 +379,13 @@ func NewToggleTokenConversionProposalCmd() *cobra.Command {
 	cmd.Flags().String(cli.FlagDescription, "", "description of proposal")
 	cmd.Flags().String(cli.FlagDeposit, "1abridge", "deposit of proposal")
 	if err := cmd.MarkFlagRequired(cli.FlagTitle); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark title flag as required"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDescription); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark description flag as required"))
 	}
 	if err := cmd.MarkFlagRequired(cli.FlagDeposit); err != nil {
-		panic(errorsmod.Wrap(err, "failed to mark flag"))
+		panic(errorsmod.Wrap(err, "failed to mark deposit flag as required"))
 	}
 	return cmd
 }

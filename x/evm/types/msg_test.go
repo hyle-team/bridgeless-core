@@ -3,6 +3,7 @@ package types_test
 import (
 	errorsmod "cosmossdk.io/errors"
 	"errors"
+	"fmt"
 	"math"
 	"math/big"
 	"reflect"
@@ -911,14 +912,14 @@ func encodeDecodeBinary(tx *ethtypes.Transaction) (*types.MsgEthereumTx, error) 
 func assertEqual(orig *ethtypes.Transaction, cpy *ethtypes.Transaction) error {
 	// compare nonce, price, gaslimit, recipient, amount, payload, V, R, S
 	if want, got := orig.Hash(), cpy.Hash(); want != got {
-		return errorsmod.Wrapf(errors.New("invalid tx"), "parsed tx differs from original tx, want %v, got %v", want, got)
+		return errors.New(fmt.Sprintf("parsed tx differs from original tx, want %v, got %v", want, got))
 	}
 	if want, got := orig.ChainId(), cpy.ChainId(); want.Cmp(got) != 0 {
-		return errorsmod.Wrapf(errors.New("invalid tx"), "invalid chain id, want %d, got %d", want, got)
+		return errors.New(fmt.Sprintf("invalid chain id, want %d, got %d", want, got))
 	}
 	if orig.AccessList() != nil {
 		if !reflect.DeepEqual(orig.AccessList(), cpy.AccessList()) {
-			return errorsmod.Wrap(errors.New("wrong list"), "access list wrong")
+			return errors.New("access list wrong")
 		}
 	}
 	return nil

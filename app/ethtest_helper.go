@@ -83,7 +83,7 @@ func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Bridge, simapp.GenesisSta
 
 		stateBytes, err := json.MarshalIndent(genesisState, "", " ")
 		if err != nil {
-			panic(errorsmod.Wrap(err, "json marshal genesis state"))
+			panic(errorsmod.Wrap(err, "failed to marshal genesis state"))
 		}
 
 		// Initialize the chain

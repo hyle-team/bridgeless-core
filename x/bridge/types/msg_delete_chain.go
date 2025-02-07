@@ -28,7 +28,7 @@ func (msg *MsgDeleteChain) Type() string {
 func (msg *MsgDeleteChain) GetSigners() []sdk.AccAddress {
 	accAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		panic(errorsmod.Wrap(err, "failed to get signers"))
+		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Creator))
 	}
 
 	return []sdk.AccAddress{accAddress}

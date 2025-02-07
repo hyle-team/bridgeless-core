@@ -34,7 +34,7 @@ func InitGenesis(
 ) {
 	err := k.SetParams(ctx, data.Params)
 	if err != nil {
-		panic(errorsmod.Wrap(err, "error setting params"))
+		panic(errorsmod.Wrap(err, "failed to set params"))
 	}
 
 	// ensure erc20 module account is set on genesis
