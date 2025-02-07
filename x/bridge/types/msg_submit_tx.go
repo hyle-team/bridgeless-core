@@ -29,7 +29,7 @@ func (msg *MsgSubmitTransactions) Type() string {
 func (msg *MsgSubmitTransactions) GetSigners() []sdk.AccAddress {
 	accAddress, err := sdk.AccAddressFromBech32(msg.Submitter)
 	if err != nil {
-		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Creator))
+		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Submitter))
 	}
 
 	return []sdk.AccAddress{accAddress}
