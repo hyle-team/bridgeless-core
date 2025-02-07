@@ -18,8 +18,8 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"time"
 
 	"github.com/hyle-team/bridgeless-core/v12/x/recovery/types"
@@ -92,7 +92,7 @@ func validateDuration(i interface{}) error {
 	}
 
 	if duration < 0 {
-		return errorsmod.Wrap(errors.New("invalid packet timeout"), "packet timout duration cannot be negative")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidTimeout, "packet timout duration cannot be negative")
 	}
 
 	return nil

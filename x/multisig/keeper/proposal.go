@@ -2,7 +2,7 @@ package keeper
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -121,7 +121,7 @@ func (k Keeper) doExecuteMsgs(ctx sdk.Context, proposal types.Proposal) error {
 		}
 		// Handler should always return non-nil sdk.Result.
 		if r == nil {
-			return errorsmod.Wrapf(errors.New("nil result"), "got nil sdk.Result for message %q at position %d", msg, i)
+			return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "got nil sdk.Result for message %q at position %d", msg, i)
 		}
 		events = append(events, r.GetEvents()...)
 	}

@@ -18,9 +18,7 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-
 	"github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -106,15 +104,15 @@ func validateShares(i interface{}) error {
 	}
 
 	if v.IsNil() {
-		return errorsmod.Wrap(errors.New("invalid shares"), "invalid parameter: nil")
+		return errorsmod.Wrap(types.ErrInvalidShares, "invalid parameter: nil")
 	}
 
 	if v.IsNegative() {
-		return errorsmod.Wrapf(errors.New("invalid shares"), "value cannot be negative: %T", i)
+		return errorsmod.Wrapf(types.ErrInvalidShares, "value cannot be negative: %T", i)
 	}
 
 	if v.GT(sdk.OneDec()) {
-		return errorsmod.Wrapf(errors.New("invalid shares"), "value cannot be greater than 1: %T", i)
+		return errorsmod.Wrapf(types.ErrInvalidShares, "value cannot be greater than 1: %T", i)
 	}
 
 	return nil

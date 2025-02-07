@@ -26,7 +26,7 @@ import (
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/cosmos/cosmos-sdk/x/auth/signing"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
@@ -171,7 +171,7 @@ func (msg MsgEthereumTx) ValidateBasic() error {
 
 	// Validate Size_ field, should be kept empty
 	if msg.Size_ != 0 {
-		return errorsmod.Wrapf(errortypes.ErrInvalidRequest, "tx size is deprecated")
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "tx size is deprecated")
 	}
 
 	txData, err := UnpackTxData(msg.Data)
@@ -198,7 +198,7 @@ func (msg MsgEthereumTx) ValidateBasic() error {
 	// Validate Hash field after validated txData to avoid panic
 	txHash := msg.AsTransaction().Hash().Hex()
 	if msg.Hash != txHash {
-		return errorsmod.Wrapf(errortypes.ErrInvalidRequest, "invalid tx hash %s, expected: %s", msg.Hash, txHash)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "invalid tx hash %s, expected: %s", msg.Hash, txHash)
 	}
 
 	return nil
@@ -247,7 +247,7 @@ func (msg MsgEthereumTx) GetSignBytes() []byte {
 func (msg *MsgEthereumTx) Sign(ethSigner ethtypes.Signer, keyringSigner keyring.Signer) error {
 	from := msg.GetFrom()
 	if from.Empty() {
-		return errorsmod.Wrap(errors.New("empty address"), "sender address not defined for message")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "sender address not defined for message")
 	}
 
 	tx := msg.AsTransaction()

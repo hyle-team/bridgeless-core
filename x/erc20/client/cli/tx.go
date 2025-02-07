@@ -18,8 +18,9 @@ package cli
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+
 	"fmt"
+	bridgetypes "github.com/hyle-team/bridgeless-core/v12/types"
 
 	"github.com/spf13/cobra"
 
@@ -121,7 +122,7 @@ func NewConvertERC20Cmd() *cobra.Command {
 
 			amount, ok := sdk.NewIntFromString(args[1])
 			if !ok {
-				return errorsmod.Wrapf(errors.New("invalid mount"), "invalid amount %s", args[1])
+				return errorsmod.Wrapf(bridgetypes.ErrInvalidAmount, "invalid amount %s", args[1])
 			}
 
 			from := common.BytesToAddress(cliCtx.GetFromAddress().Bytes())

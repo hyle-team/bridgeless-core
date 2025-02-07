@@ -4,6 +4,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 type groupMsg interface {
@@ -25,7 +26,7 @@ func validateGroupMessage(msg groupMsg) error {
 			return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid member address (%s)", err)
 		}
 		if _, exists := index[member]; exists {
-			return errorsmod.Wrapf(sdkerrors.ErrInvalidRequest, "duplicate member address: %s", member)
+			return errorsmod.Wrapf(bridgeTypes.ErrDuplicatedValue, "duplicate member address: %s", member)
 		}
 		index[member] = struct{}{}
 	}

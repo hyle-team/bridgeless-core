@@ -18,7 +18,7 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 // NewGenesisState creates a new genesis state.
@@ -44,7 +44,7 @@ func (gs GenesisState) Validate() error {
 	for _, fs := range gs.Revenues {
 		// only one fee per contract
 		if seenContract[fs.ContractAddress] {
-			return errorsmod.Wrapf(errors.New("duplicated contract"), "contract duplicated on genesis '%s'", fs.ContractAddress)
+			return errorsmod.Wrapf(bridgeTypes.ErrDuplicatedValue, "contract duplicated on genesis '%s'", fs.ContractAddress)
 		}
 
 		if err := fs.Validate(); err != nil {

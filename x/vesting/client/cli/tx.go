@@ -19,6 +19,7 @@ package cli
 import (
 	errorsmod "cosmossdk.io/errors"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -113,7 +114,7 @@ with a start time and an array of coins strings and durations relative to the st
 			lockupFile, _ := cmd.Flags().GetString(FlagLockup)
 			vestingFile, _ := cmd.Flags().GetString(FlagVesting)
 			if lockupFile == "" && vestingFile == "" {
-				return errorsmod.Wrapf(errors.New("flag not specified"), "must specify at least one of %s or %s", FlagLockup, FlagVesting)
+				return errors.New(fmt.Sprintf("must specify at least one of %s or %s", FlagLockup, FlagVesting))
 			}
 			if lockupFile != "" {
 				lockupStart, lockupPeriods, err = ReadScheduleFile(lockupFile)

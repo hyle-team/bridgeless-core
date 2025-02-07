@@ -18,7 +18,8 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 	gomath "math"
 
 	"cosmossdk.io/math"
@@ -43,13 +44,13 @@ func NewClaimsRecord(initialClaimableAmt math.Int) ClaimsRecord {
 // Validate performs a stateless validation of the fields
 func (cr ClaimsRecord) Validate() error {
 	if cr.InitialClaimableAmount.IsNil() {
-		return errors.New("initial claimable amount is nil")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidAmount, "initial claimable amount is nil")
 	}
 	if !cr.InitialClaimableAmount.IsPositive() {
-		return errorsmod.Wrapf(errors.New("invalid initial claimable amount"), "initial claimable amount is not positive, %s", cr.InitialClaimableAmount)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidAmount, "initial claimable amount is not positive, %s", cr.InitialClaimableAmount)
 	}
 	if len(cr.ActionsCompleted) == 0 || len(Action_value)-1 != len(cr.ActionsCompleted) {
-		return errorsmod.Wrapf(errors.New("invalid action length"), "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cr.ActionsCompleted))
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidActionLength, "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cr.ActionsCompleted))
 	}
 
 	return nil
@@ -123,15 +124,15 @@ func (cra ClaimsRecordAddress) Validate() error {
 	}
 
 	if cra.InitialClaimableAmount.IsNil() {
-		return errors.New("initial claimable amount is nil")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidAmount, "initial claimable amount is nil")
 	}
 
 	if !cra.InitialClaimableAmount.IsPositive() {
-		return errorsmod.Wrapf(errors.New("invalid initial claimable amount"), "initial claimable amount is not positive, %s", cra.InitialClaimableAmount)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidAmount, "initial claimable amount is not positive, %s", cra.InitialClaimableAmount)
 	}
 
 	if len(Action_value)-1 != len(cra.ActionsCompleted) {
-		return errorsmod.Wrapf(errors.New("invalid action length"), "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cra.ActionsCompleted))
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidActionLength, "action length mismatch, expected %d, got %d", len(Action_value)-1, len(cra.ActionsCompleted))
 	}
 
 	return nil

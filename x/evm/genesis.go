@@ -18,7 +18,7 @@ package evm
 import (
 	"bytes"
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -48,7 +48,7 @@ func InitGenesis(
 
 	// ensure evm module account is set
 	if addr := accountKeeper.GetModuleAddress(types.ModuleName); addr == nil {
-		panic(errorsmod.Wrap(errors.New("failed to set module account"), "module account has not been set"))
+		panic(errorsmod.Wrap(types.ErrInvalidAccount, "module account has not been set"))
 	}
 
 	for _, account := range data.Accounts {
@@ -57,13 +57,13 @@ func InitGenesis(
 		// check that the EVM balance the matches the account balance
 		acc := accountKeeper.GetAccount(ctx, accAddress)
 		if acc == nil {
-			panic(errorsmod.Wrapf(errors.New("nil account"), "account not found for address %s", account.Address))
+			panic(errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "account not found for address %s", account.Address))
 		}
 
 		ethAcct, ok := acc.(evmostypes.EthAccountI)
 		if !ok {
 			panic(
-				errorsmod.Wrapf(sdkerrors.ErrInvalidType, "account %s must be an EthAccount interface, got %T",
+				errorsmod.Wrapf(types.ErrInvalidAccount, "account %s must be an EthAccount interface, got %T",
 					account.Address, acc,
 				),
 			)
@@ -74,7 +74,7 @@ func InitGenesis(
 		// we ignore the empty Code hash checking, see ethermint PR#1234
 		if len(account.Code) != 0 && !bytes.Equal(ethAcct.GetCodeHash().Bytes(), codeHash.Bytes()) {
 			s := "the evm state code doesn't match with the codehash\n"
-			panic(errorsmod.Wrapf(errors.New("invalid evm state code"), "%s account: %s , evm state codehash: %v, ethAccount codehash: %v, evm state code: %s\n",
+			panic(errorsmod.Wrapf(types.ErrInvalidAccount, "%s account: %s , evm state codehash: %v, ethAccount codehash: %v, evm state code: %s\n",
 				s, account.Address, codeHash, ethAcct.GetCodeHash(), account.Code))
 		}
 

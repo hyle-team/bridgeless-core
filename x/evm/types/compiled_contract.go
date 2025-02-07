@@ -113,7 +113,7 @@ func init() {
 	}
 
 	if len(ERC20Contract.Bin) == 0 {
-		panic(errorsmod.Wrap(errors.New("ERC20 bin must not be empty"), "load contract failed"))
+		panic(errorsmod.Wrap(errors.New("failed loading contract"), "load contract failed"))
 	}
 
 	err = json.Unmarshal(testMessageCallJSON, &TestMessageCall)
@@ -122,7 +122,7 @@ func init() {
 	}
 
 	if len(TestMessageCall.Bin) == 0 {
-		panic(errorsmod.Wrap(errors.New("TestMessageCall bin must not be empty"), "load contract failed"))
+		panic(errorsmod.Wrap(ErrCallDisabled, "TestMessageCall bin must not be empty"))
 	}
 
 	err = json.Unmarshal(simpleStorageJSON, &SimpleStorageContract)
@@ -131,6 +131,6 @@ func init() {
 	}
 
 	if len(TestMessageCall.Bin) == 0 {
-		panic(errorsmod.Wrap(errors.New("TestMessageCall bin must not be empty"), "load contract failed"))
+		panic(errorsmod.Wrap(ErrCallDisabled, "TestMessageCall bin must not be empty"))
 	}
 }

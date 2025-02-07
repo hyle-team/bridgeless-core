@@ -2,9 +2,9 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"math/big"
 )
 
@@ -33,11 +33,11 @@ func validateTransaction(tx *Transaction) error {
 	}
 
 	if tx.Receiver == "" {
-		return errorsmod.Wrap(errors.New("invalid receiver"), "receiver cannot be empty")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "receiver cannot be empty")
 	}
 
 	if tx.DepositTxHash == "" {
-		return errorsmod.Wrap(errors.New("invalid tx hash"), "deposit tx hash cannot be empty")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidTxHash, "deposit tx hash cannot be empty")
 	}
 
 	return nil

@@ -2,7 +2,7 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 )
 
 // DefaultIndex is the default global index
@@ -36,7 +36,7 @@ func (gs GenesisState) Validate() error {
 	chains := make(map[string]struct{})
 	for _, chain := range gs.Chains {
 		if _, ok := chains[chain.Id]; ok {
-			return errorsmod.Wrapf(errors.New("duplicate id"), "duplicate chain id: %s", chain.Id)
+			return errorsmod.Wrapf(bridgeTypes.ErrDuplicatedValue, "duplicate chain id: %s", chain.Id)
 		} else {
 			chains[chain.Id] = struct{}{}
 		}
@@ -49,7 +49,7 @@ func (gs GenesisState) Validate() error {
 	uniqueTokens := make(map[uint64]struct{})
 	for _, token := range gs.Tokens {
 		if _, ok := uniqueTokens[token.Id]; ok {
-			return errorsmod.Wrapf(errors.New("duplicate id"), "duplicate token id: %v", token.Id)
+			return errorsmod.Wrapf(bridgeTypes.ErrDuplicatedValue, "duplicate token id: %v", token.Id)
 		} else {
 			uniqueTokens[token.Id] = struct{}{}
 		}

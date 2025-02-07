@@ -19,7 +19,7 @@ package types
 import (
 	errorsmod "cosmossdk.io/errors"
 	"encoding/json"
-	"errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 )
@@ -51,7 +51,7 @@ func (gs GenesisState) Validate() error {
 
 	for _, claimsRecord := range gs.ClaimsRecords {
 		if seenClaims[claimsRecord.Address] {
-			return errorsmod.Wrapf(errors.New("duplicated claims"), "duplicated claims record entry %s", claimsRecord.Address)
+			return errorsmod.Wrapf(bridgeTypes.ErrDuplicatedValue, "duplicated claims record entry %s", claimsRecord.Address)
 		}
 		if err := claimsRecord.Validate(); err != nil {
 			return err

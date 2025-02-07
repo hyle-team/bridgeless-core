@@ -17,9 +17,8 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"github.com/hyle-team/bridgeless-core/v12/x/feemarket/types"
 
 	sdkmath "cosmossdk.io/math"
@@ -106,15 +105,15 @@ func DefaultParams() Params {
 // Validate performs basic validation on fee market parameters.
 func (p Params) Validate() error {
 	if p.BaseFeeChangeDenominator == 0 {
-		return errorsmod.Wrap(errors.New("invalid denominator"), "base fee change denominator cannot be 0")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidDenom, "base fee change denominator cannot be 0")
 	}
 
 	if p.BaseFee.IsNegative() {
-		return errorsmod.Wrapf(errors.New("invalid initial base fee"), "initial base fee cannot be negative: %s", p.BaseFee)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidBaseFee, "initial base fee cannot be negative: %s", p.BaseFee)
 	}
 
 	if p.EnableHeight < 0 {
-		return errorsmod.Wrapf(errors.New("invalid enable height"), "enable height cannot be negative: %d", p.EnableHeight)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidHeight, "enable height cannot be negative: %d", p.EnableHeight)
 	}
 
 	if err := validateMinGasMultiplier(p.MinGasMultiplier); err != nil {
@@ -139,7 +138,7 @@ func validateBaseFeeChangeDenominator(i interface{}) error {
 	}
 
 	if value == 0 {
-		return errorsmod.Wrap(errors.New("invalid denominator"), "base fee change denominator cannot be 0")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidBaseFee, "base fee change denominator cannot be 0")
 	}
 
 	return nil
@@ -160,7 +159,7 @@ func validateBaseFee(i interface{}) error {
 	}
 
 	if value.IsNegative() {
-		return errorsmod.Wrap(errors.New("invalid base fee"), "base fee cannot be negative")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidBaseFee, "base fee cannot be negative")
 	}
 
 	return nil
@@ -173,7 +172,7 @@ func validateEnableHeight(i interface{}) error {
 	}
 
 	if value < 0 {
-		return errorsmod.Wrapf(errors.New("invalid enable height"), "enable height cannot be negative: %d", value)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidHeight, "enable height cannot be negative: %d", value)
 	}
 
 	return nil
@@ -187,11 +186,11 @@ func validateMinGasPrice(i interface{}) error {
 	}
 
 	if v.IsNil() {
-		return errorsmod.Wrap(errors.New("invalid min gas price"), "invalid parameter: nil")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidGasPrice, "invalid parameter: nil")
 	}
 
 	if v.IsNegative() {
-		return errorsmod.Wrapf(errors.New("invalid min gas price"), "value cannot be negative: %s", i)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidGasPrice, "value cannot be negative: %s", i)
 	}
 
 	return nil
@@ -205,15 +204,15 @@ func validateMinGasMultiplier(i interface{}) error {
 	}
 
 	if v.IsNil() {
-		return errorsmod.Wrap(errors.New("invalid min gas multiplier"), "invalid parameter: nil")
+		return errorsmod.Wrap(bridgeTypes.ErrInvalidGasMultiplier, "invalid parameter: nil")
 	}
 
 	if v.IsNegative() {
-		return errorsmod.Wrapf(errors.New("invalid min gas multiplier"), "value cannot be negative: %s", v)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidGasMultiplier, "value cannot be negative: %s", v)
 	}
 
 	if v.GT(sdk.OneDec()) {
-		return errorsmod.Wrapf(errors.New("invalid min gas multiplier"), "value cannot be greater than 1: %s", v)
+		return errorsmod.Wrapf(bridgeTypes.ErrInvalidGasMultiplier, "value cannot be greater than 1: %s", v)
 	}
 	return nil
 }

@@ -17,6 +17,7 @@ package statedb
 
 import (
 	"errors"
+	bridgeTypes "github.com/hyle-team/bridgeless-core/v12/types"
 	"math/big"
 	"sort"
 
@@ -117,7 +118,7 @@ func (s *StateDB) AddRefund(gas uint64) {
 func (s *StateDB) SubRefund(gas uint64) {
 	s.journal.append(refundChange{prev: s.refund})
 	if gas > s.refund {
-		panic(errorsmod.Wrapf(errors.New("failed to remove gas"), "Refund counter below zero (gas: %d > refund: %d)", gas, s.refund))
+		panic(errorsmod.Wrapf(bridgeTypes.ErrInvalidAmount, "Refund counter below zero (gas: %d > refund: %d)", gas, s.refund))
 	}
 	s.refund -= gas
 }

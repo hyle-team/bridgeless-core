@@ -19,7 +19,6 @@ package keeper
 import (
 	"context"
 	errorsmod "cosmossdk.io/errors"
-	"errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
@@ -70,14 +69,14 @@ func (k *Keeper) UpdateParams(goCtx context.Context, req *types.MsgUpdateParams)
 func checkIfChannelOpen(ctx sdk.Context, ck types.ChannelKeeper, channelID string) error {
 	channel, found := ck.GetChannel(ctx, transfertypes.PortID, channelID)
 	if !found {
-		return errorsmod.Wrapf(errors.New("channel not found"),
+		return errorsmod.Wrapf(channeltypes.ErrInvalidChannel,
 			"trying to add a channel to the claims module's available channels parameters, when it is not found in the app's IBCKeeper.ChannelKeeper: %s",
 			channelID,
 		)
 	}
 
 	if channel.State != channeltypes.OPEN {
-		return errorsmod.Wrapf(errors.New("channel is not opened"),
+		return errorsmod.Wrapf(channeltypes.ErrInvalidChannel,
 			"trying to add a channel to the claims module's available channels parameters, when it is not in the OPEN state: %s",
 			channelID,
 		)
