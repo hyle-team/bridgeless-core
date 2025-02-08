@@ -119,7 +119,7 @@ func Setup(
 
 		stateBytes, err := json.MarshalIndent(genesisState, "", " ")
 		if err != nil {
-			panic(errorsmod.Wrap(err, "failed to marshal"))
+			panic(errorsmod.Wrap(err, "failed to marshal genesis state"))
 		}
 
 		// Initialize the chain

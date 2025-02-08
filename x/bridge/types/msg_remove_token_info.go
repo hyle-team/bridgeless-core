@@ -47,11 +47,11 @@ func (msg *MsgRemoveTokenInfo) ValidateBasic() error {
 	}
 
 	if msg.TokenId == 0 {
-		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "token id cannot be zero")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidType, "token id cannot be zero")
 	}
 
 	if len(msg.ChainId) == 0 {
-		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "chain id cannot be empty")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidChainID, "chain id cannot be empty")
 	}
 
 	return nil
