@@ -30,6 +30,10 @@ service Msg {
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 
     rpc SetParties(MsgSetParties) returns (MsgSetPartiesResponse);
+    rpc SetNewbieParties(MsgSetParties) returns (MsgSetPartiesResponse);
+    rpc SetGoodbyeParties(MsgSetParties) returns (MsgSetPartiesResponse);
+    rpc SetBlacklistParties(MsgSetParties) returns (MsgSetPartiesResponse);
+
 }
 
 // this line is used by starport scaffolding # proto/tx/message

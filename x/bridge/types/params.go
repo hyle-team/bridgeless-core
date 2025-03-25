@@ -1,6 +1,8 @@
 package types
 
 import (
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -19,8 +21,13 @@ func ParamKeyTable() paramtypes.KeyTable {
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair([]byte(ParamModuleAdminKey), &p.ModuleAdmin, validateModuleAdmin),
-		paramtypes.NewParamSetPair([]byte(ParamModulePartiesKey), &p.Parties, validateModuleParties),
+		paramtypes.NewParamSetPair(ParamModuleAdminKey, &p.ModuleAdmin, validateModuleAdmin),
+		paramtypes.NewParamSetPair(ParamModulePartiesKey, &p.Parties, validateModuleParties),
+		paramtypes.NewParamSetPair(ParamModuleNewbiesKey, &p.Newbies, validateNewbieParties),
+		paramtypes.NewParamSetPair(ParamModuleGoodbyeKey, &p.GoodbyeList, validateGoodbyeParties),
+		paramtypes.NewParamSetPair(ParamModuleBlacklistKey, &p.Blacklist, validateBlacklistParties),
+		paramtypes.NewParamSetPair(ParamModuleStakingThresholdKey, &p.StakeThreshold, validateStakeThreshold),
+		paramtypes.NewParamSetPair(ParamModuleTssThresholdKey, &p.TssThreshold, validateTssThreshold),
 	}
 }
 
@@ -40,11 +47,31 @@ func DefaultParams() Params {
 // Validate validates the set of params
 func (p Params) Validate() error {
 	if err := validateModuleAdmin(p.ModuleAdmin); err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid module admin address (%s)", err)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid module admin address (%s)", err)
 	}
 
 	if err := validateModuleParties(p.Parties); err != nil {
-		return sdkerrors.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
+		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
+	}
+
+	if err := validateBlacklistParties(p.Parties); err != nil {
+		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
+	}
+
+	if err := validateGoodbyeParties(p.Parties); err != nil {
+		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
+	}
+
+	if err := validateNewbieParties(p.Parties); err != nil {
+		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
+	}
+
+	if err := validateStakeThreshold(p.StakeThreshold); err != nil {
+		return errorsmod.Wrap(err, "invalid stake threshold")
+	}
+
+	if err := validateTssThreshold(p.TssThreshold); err != nil {
+		return errorsmod.Wrap(err, "invalid tss threshold")
 	}
 
 	return nil
@@ -66,15 +93,48 @@ func validateModuleAdmin(i interface{}) error {
 func validateModuleParties(i interface{}) error {
 	parties, ok := i.([]*Party)
 	if !ok {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid parameter type: %T", i)
 	}
 
 	for _, party := range parties {
 		_, err := sdk.AccAddressFromBech32(party.Address)
 		if err != nil {
-			return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid party address (%s)", err)
+			return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid party address (%s)", err)
 		}
 	}
 
 	return nil
+}
+
+func validateNewbieParties(i interface{}) error {
+	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid newbies parties(%s)", validateModuleParties(i))
+}
+
+func validateGoodbyeParties(i interface{}) error {
+	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid goodbye parties(%s)", validateModuleParties(i))
+}
+
+func validateBlacklistParties(i interface{}) error {
+	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid blacklist parties(%s)", validateModuleParties(i))
+}
+
+func validateThreshold(i interface{}) error {
+	n, ok := i.(int64)
+	if !ok {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid threshold type: %T", i)
+	}
+
+	if n <= 0 {
+		return errors.New("stake must be positive")
+	}
+
+	return nil
+}
+
+func validateStakeThreshold(i interface{}) error {
+	return errorsmod.Wrap(validateThreshold(i), "invalid stake threshold")
+}
+
+func validateTssThreshold(i interface{}) error {
+	return errorsmod.Wrap(validateThreshold(i), "invalid Tss threshold")
 }
