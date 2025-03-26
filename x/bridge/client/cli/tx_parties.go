@@ -1,12 +1,13 @@
 package cli
 
 import (
-	"cosmossdk.io/errors"
+	"fmt"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"strings"
 )
@@ -28,17 +29,17 @@ func TxPartiesCmd() *cobra.Command {
 
 func CmdSubmitParties() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "set [from_key_or_address] [parties-list]",
+		Use:   "set [list-type (default,goodbye,newbies,blacklist)] [from_key_or_address] [parties-list]",
 		Short: "Set a new parties list",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			cmd.Flags().Set(flags.FlagFrom, args[0])
+			cmd.Flags().Set(flags.FlagFrom, args[1])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return errors.Wrap(err, "cannot get client tx context")
 			}
 
-			arg2 := args[1]
+			arg2 := args[2]
 			parties := strings.Split(arg2, ",")
 			for _, party := range parties {
 				_, err = sdk.AccAddressFromBech32(party)
@@ -54,9 +55,22 @@ func CmdSubmitParties() *cobra.Command {
 					Address: party,
 				})
 			}
-			msg := types.NewMsgSetParties(clientCtx.GetFromAddress().String(), partiesList)
-			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
-		},
-	}
+			switch args[0] {
+			case "default":
+				msg := types.NewMsgSetParties(clientCtx.GetFromAddress().String(), partiesList)
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			case "newbies":
+				msg := types.NewMsgSetNewbies(clientCtx.GetFromAddress().String(), partiesList)
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			case "goodbye":
+				msg := types.NewMsgSetGoodbye(clientCtx.GetFromAddress().String(), partiesList)
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			case "blacklist":
+				msg := types.NewMsgSetBlacklistParties(clientCtx.GetFromAddress().String(), partiesList)
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			default:
+				return errors.New(fmt.Sprintf("invalid parties list type: %s", args[0]))
+			}
+		}}
 	return cmd
 }

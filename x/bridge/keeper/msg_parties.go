@@ -22,7 +22,7 @@ func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetParties) (
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetParties) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetNewbies) (*types.MsgSetPartiesResponse, error) {
 	if err := msg.ValidateBasic(); err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetPart
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetParties) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetGoodbye) (*types.MsgSetPartiesResponse, error) {
 	if err := msg.ValidateBasic(); err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetPar
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetBlacklistParties(goCtx context.Context, msg *types.MsgSetParties) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetBlacklistParties(goCtx context.Context, msg *types.MsgSetBlacklistParties) (*types.MsgSetPartiesResponse, error) {
 	if err := msg.ValidateBasic(); err != nil {
 		return nil, err
 	}

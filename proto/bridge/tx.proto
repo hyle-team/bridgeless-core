@@ -30,9 +30,9 @@ service Msg {
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 
     rpc SetParties(MsgSetParties) returns (MsgSetPartiesResponse);
-    rpc SetNewbieParties(MsgSetParties) returns (MsgSetPartiesResponse);
-    rpc SetGoodbyeParties(MsgSetParties) returns (MsgSetPartiesResponse);
-    rpc SetBlacklistParties(MsgSetParties) returns (MsgSetPartiesResponse);
+    rpc SetNewbieParties(MsgSetNewbies) returns (MsgSetPartiesResponse);
+    rpc SetGoodbyeParties(MsgSetGoodbye) returns (MsgSetPartiesResponse);
+    rpc SetBlacklistParties(MsgSetBlacklistParties) returns (MsgSetPartiesResponse);
 
 }
 
@@ -106,6 +106,21 @@ message MsgRemoveTokenInfoResponse {}
 // Signers list
 
 message MsgSetParties {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetNewbies {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetGoodbye {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetBlacklistParties {
   string creator =1;
   repeated Party parties = 2;
 }

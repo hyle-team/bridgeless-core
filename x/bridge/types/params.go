@@ -107,15 +107,15 @@ func validateModuleParties(i interface{}) error {
 }
 
 func validateNewbieParties(i interface{}) error {
-	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid newbies parties(%s)", validateModuleParties(i))
+	return errorsmod.Wrapf(validateModuleParties(i), "invalid newbies parties")
 }
 
 func validateGoodbyeParties(i interface{}) error {
-	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid goodbye parties(%s)", validateModuleParties(i))
+	return errorsmod.Wrapf(validateModuleParties(i), "invalid goodbye parties")
 }
 
 func validateBlacklistParties(i interface{}) error {
-	return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid blacklist parties(%s)", validateModuleParties(i))
+	return errorsmod.Wrapf(validateModuleParties(i), "invalid blacklist parties")
 }
 
 func validateThreshold(i interface{}) error {
