@@ -7,7 +7,7 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	stakingTypes "github.com/hyle-team/bridgeless-core/v12/x/staking/types"
+	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 	"github.com/tendermint/tendermint/libs/log"
 )
 
@@ -26,6 +26,7 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
+	stakingKeeper types.StakingKeeper,
 
 ) *Keeper {
 	// set KeyTable if it has not already been set
@@ -35,10 +36,11 @@ func NewKeeper(
 
 	return &Keeper{
 
-		cdc:        cdc,
-		storeKey:   storeKey,
-		memKey:     memKey,
-		paramstore: ps,
+		cdc:           cdc,
+		storeKey:      storeKey,
+		memKey:        memKey,
+		paramstore:    ps,
+		stakingKeeper: stakingKeeper,
 	}
 }
 

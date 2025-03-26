@@ -6,6 +6,6 @@ import (
 )
 
 type StakingKeeper interface {
-	MaxValidators(ctx sdk.Context) (res uint32)
-	GetValidators(ctx sdk.Context, maxRetrieve uint32) (validators []types.Validator)
+	GetAllValidators(ctx sdk.Context) (validators []types.Validator)
+	GetValidatorDelegations(ctx sdk.Context, valAddr sdk.ValAddress) (delegations []types.Delegation)
 }

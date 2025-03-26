@@ -451,7 +451,7 @@ func NewBridge(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
 	app.BridgeKeeper = bridgekeeper.NewKeeper(
-		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName),
+		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName), app.StakingKeeper,
 	)
 
 	app.AccumulatorKeeper = accumulatorkeeper.NewKeeper(
@@ -484,7 +484,6 @@ func NewBridge(
 	app.FeeGrantKeeper = feegrantkeeper.NewKeeper(appCodec, keys[feegrant.StoreKey], app.AccountKeeper)
 	app.UpgradeKeeper = upgradekeeper.NewKeeper(skipUpgradeHeights, keys[upgradetypes.StoreKey], appCodec, homePath, app.BaseApp, authtypes.NewModuleAddress(govtypes.ModuleName).String())
 
-	app.StakingKeeper.BondDenom()
 	app.AuthzKeeper = authzkeeper.NewKeeper(keys[authzkeeper.StoreKey], appCodec, app.MsgServiceRouter(), app.AccountKeeper)
 
 	tracer := cast.ToString(appOpts.Get(srvflags.EVMTracer))
