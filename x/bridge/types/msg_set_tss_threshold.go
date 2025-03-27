@@ -6,39 +6,39 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgSetParties = "submit_parties"
+const TypeMsgSetTssThreshold = "set_tss_threshold"
 
-var _ sdk.Msg = &MsgSetParties{}
+var _ sdk.Msg = &MsgSetTssThreshold{}
 
-func NewMsgSetParties(creator string, partiesList []*Party) *MsgSetParties {
-	return &MsgSetParties{
+func NewMsgSetTssThreshold(creator string, amount uint32) *MsgSetTssThreshold {
+	return &MsgSetTssThreshold{
 		Creator: creator,
-		Parties: partiesList,
+		Amount:  amount,
 	}
 }
 
-func (msg *MsgSetParties) Route() string {
+func (msg *MsgSetTssThreshold) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgSetParties) Type() string {
+func (msg *MsgSetTssThreshold) Type() string {
 	return TypeMsgSetParties
 }
 
-func (msg *MsgSetParties) GetSigners() []sdk.AccAddress {
+func (msg *MsgSetTssThreshold) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(msg.Creator)}
 }
 
-func (msg *MsgSetParties) GetSignBytes() []byte {
+func (msg *MsgSetTssThreshold) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgSetParties) ValidateBasic() error {
+func (msg *MsgSetTssThreshold) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	return validateModuleParties(msg.Parties)
+	return validateTssThreshold(msg.Amount)
 }
