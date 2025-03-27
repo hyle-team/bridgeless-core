@@ -11,34 +11,34 @@ import (
 
 func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 	params := k.GetParams(ctx)
+	logger := k.Logger(ctx)
 	validators := k.stakingKeeper.GetAllValidators(ctx)
-	fmt.Println("Bridge end blocker")
 	if len(validators) == 0 {
-		fmt.Println("No validators were found")
+		logger.Info("No validators found")
+		return []abci.ValidatorUpdate{}
 	}
-	fmt.Println(validators)
 	for _, validator := range validators {
 		// Validator`s operator address is a wrapper over creator address bytes
 		decodedAddr, err := sdk.Bech32ifyAddressBytes(config.Bech32Prefix, validator.GetOperator().Bytes())
 		if err != nil {
-			k.Logger(ctx).Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
+			logger.Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
 			continue
 		}
 		owner, err := sdk.AccAddressFromBech32(decodedAddr)
 		if err != nil {
-			k.Logger(ctx).Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
+			logger.Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
 			continue
 		}
 
-		if isPartyInList(owner.String(), params.Parties) {
-			if !isEnoughDelegation(owner.String(), k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()),
-				params.StakeThreshold) {
+		if isPartyInList(owner.String(), params.Parties) && !isEnoughDelegation(owner.String(),
+			k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()), params.StakeThreshold) {
 
-				if !isPartyInList(owner.String(), params.GoodbyeList) {
-					// If party is an active Tss party but his delegation is not enough it is moved to goodbye list
-					params.GoodbyeList = append(params.GoodbyeList, &types.Party{Address: owner.String()})
-					continue
-				}
+			if !isPartyInList(owner.String(), params.GoodbyeList) {
+				// If party is an active Tss party but his delegation is not enough it is moved to goodbye list
+				params.GoodbyeList = append(params.GoodbyeList, &types.Party{Address: owner.String()})
+
+				logger.Info(fmt.Sprintf("Party %s added to goodbye list", owner.String()))
+				continue
 			}
 		}
 
@@ -50,6 +50,9 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 				// If party was a newbie but his delegation became too small remove him from newbies
 				params.Newbies = append(params.Newbies[:partyIndex(owner.String(), params.Newbies)],
 					params.Newbies[partyIndex(owner.String(), params.Newbies)+1:]...)
+
+				logger.Info(fmt.Sprintf("Party %s removed from newbies list due to insufficient stake",
+					owner.String()))
 				continue
 			}
 
@@ -59,6 +62,8 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 
 				params.GoodbyeList = append(params.GoodbyeList[:partyIndex(owner.String(), params.GoodbyeList)],
 					params.GoodbyeList[partyIndex(owner.String(), params.GoodbyeList)+1:]...)
+
+				logger.Info(fmt.Sprintf("Party %s removed from goodbye list", owner.String()))
 				continue
 			}
 
@@ -68,6 +73,7 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 				!isPartyInList(owner.String(), params.Newbies) {
 
 				params.Newbies = append(params.Newbies, &types.Party{Address: owner.String()})
+				logger.Info(fmt.Sprintf("Party %s added to newbies list", owner.String()))
 			}
 		}
 
@@ -96,10 +102,11 @@ func partyIndex(party string, partyList []*types.Party) int {
 	return -1
 }
 
-func isEnoughDelegation(partyAddr string, delegations stakingTypes.Delegations, stakingThreshold int64) bool {
+func isEnoughDelegation(partyAddr string, delegations stakingTypes.Delegations, stakingThreshold string) bool {
 	for _, d := range delegations {
 		if partyAddr == d.DelegatorAddress {
-			if !d.Amount.LT(sdk.NewDec(stakingThreshold)) {
+			n, _ := sdk.NewDecFromStr(stakingThreshold)
+			if !d.Amount.LT(n) {
 				return true
 			} else {
 				return false
