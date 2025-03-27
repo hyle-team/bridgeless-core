@@ -7,33 +7,27 @@ import (
 )
 
 func (m msgServer) SetStakeThreshold(goCtx context.Context, msg *types.MsgSetStakeThreshold) (*types.MsgSetThresholdResponse, error) {
-	if err := msg.ValidateBasic(); err != nil {
-		return nil, err
-	}
-
-	if ok := m.Keeper.IsAdmin(msg.Creator, sdk.UnwrapSDKContext(goCtx)); !ok {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	if ok := m.Keeper.IsAdmin(msg.Creator, ctx); !ok {
 		return nil, types.ErrPermissionDenied
 	}
 
-	params := m.Keeper.GetParams(sdk.UnwrapSDKContext(goCtx))
+	params := m.Keeper.GetParams(ctx)
 	params.StakeThreshold = msg.Amount
-	m.Keeper.SetParams(sdk.UnwrapSDKContext(goCtx), params)
+	m.Keeper.SetParams(ctx, params)
 
 	return &types.MsgSetThresholdResponse{}, nil
 }
 
 func (m msgServer) SetTssThreshold(goCtx context.Context, msg *types.MsgSetTssThreshold) (*types.MsgSetThresholdResponse, error) {
-	if err := msg.ValidateBasic(); err != nil {
-		return nil, err
-	}
-
-	if ok := m.Keeper.IsAdmin(msg.Creator, sdk.UnwrapSDKContext(goCtx)); !ok {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	if ok := m.Keeper.IsAdmin(msg.Creator, ctx); !ok {
 		return nil, types.ErrPermissionDenied
 	}
 
-	params := m.Keeper.GetParams(sdk.UnwrapSDKContext(goCtx))
+	params := m.Keeper.GetParams(ctx)
 	params.TssThreshold = msg.Amount
-	m.Keeper.SetParams(sdk.UnwrapSDKContext(goCtx), params)
+	m.Keeper.SetParams(ctx, params)
 
 	return &types.MsgSetThresholdResponse{}, nil
 }

@@ -23,10 +23,10 @@ func ParamKeyTable() paramtypes.KeyTable {
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
 		paramtypes.NewParamSetPair(ParamModuleAdminKey, &p.ModuleAdmin, validateModuleAdmin),
-		paramtypes.NewParamSetPair(ParamModulePartiesKey, &p.Parties, validateModuleParties),
-		paramtypes.NewParamSetPair(ParamModuleNewbiesKey, &p.Newbies, validateNewbieParties),
-		paramtypes.NewParamSetPair(ParamModuleGoodbyeKey, &p.GoodbyeList, validateGoodbyeParties),
-		paramtypes.NewParamSetPair(ParamModuleBlacklistKey, &p.Blacklist, validateBlacklistParties),
+		paramtypes.NewParamSetPair(ParamModulePartiesListKey, &p.Parties, validateModuleParties),
+		paramtypes.NewParamSetPair(ParamModuleNewbiesListKey, &p.Newbies, validateNewbiePartiesList),
+		paramtypes.NewParamSetPair(ParamModuleGoodbyeListKey, &p.GoodbyeList, validateGoodbyePartiesList),
+		paramtypes.NewParamSetPair(ParamModuleBlacklistListKey, &p.Blacklist, validateBlacklistPartiesList),
 		paramtypes.NewParamSetPair(ParamModuleStakingThresholdKey, &p.StakeThreshold, validateStakeThreshold),
 		paramtypes.NewParamSetPair(ParamModuleTssThresholdKey, &p.TssThreshold, validateTssThreshold),
 	}
@@ -55,15 +55,15 @@ func (p Params) Validate() error {
 		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
 	}
 
-	if err := validateBlacklistParties(p.Parties); err != nil {
+	if err := validateBlacklistPartiesList(p.Parties); err != nil {
 		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
 	}
 
-	if err := validateGoodbyeParties(p.Parties); err != nil {
+	if err := validateGoodbyePartiesList(p.Parties); err != nil {
 		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
 	}
 
-	if err := validateNewbieParties(p.Parties); err != nil {
+	if err := validateNewbiePartiesList(p.Parties); err != nil {
 		return errorsmod.Wrapf(ErrInvalidPartiesList, "invalid parties list (%s)", err)
 	}
 
@@ -107,40 +107,45 @@ func validateModuleParties(i interface{}) error {
 	return nil
 }
 
-func validateNewbieParties(i interface{}) error {
+func validateNewbiePartiesList(i interface{}) error {
 	return errorsmod.Wrapf(validateModuleParties(i), "invalid newbies parties")
 }
 
-func validateGoodbyeParties(i interface{}) error {
+func validateGoodbyePartiesList(i interface{}) error {
 	return errorsmod.Wrapf(validateModuleParties(i), "invalid goodbye parties")
 }
 
-func validateBlacklistParties(i interface{}) error {
+func validateBlacklistPartiesList(i interface{}) error {
 	return errorsmod.Wrapf(validateModuleParties(i), "invalid blacklist parties")
 }
 
-func validateThreshold(i interface{}) error {
+func validateStakeThreshold(i interface{}) error {
 	n, ok := i.(string)
 	if !ok {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid threshold type: %T", i)
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid stake threshold type: %T", i)
 	}
 
 	amount, ok := sdk.NewIntFromString(n)
 	if !ok {
-		return errors.New("invalid threshold amount")
+		return errors.New("invalid stake threshold amount")
 	}
 
 	if !amount.GT(math.ZeroInt()) {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "threshold amount must be greater than zero")
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "stake threshold amount must be greater than zero")
 	}
 
 	return nil
 }
 
-func validateStakeThreshold(i interface{}) error {
-	return errorsmod.Wrap(validateThreshold(i), "invalid stake threshold")
-}
-
 func validateTssThreshold(i interface{}) error {
-	return errorsmod.Wrap(validateThreshold(i), "invalid Tss threshold")
+	n, ok := i.(uint32)
+	if !ok {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid tss threshold type: %T", i)
+	}
+
+	if n == 0 {
+		return errors.New("tss threshold must be positive")
+	}
+
+	return nil
 }

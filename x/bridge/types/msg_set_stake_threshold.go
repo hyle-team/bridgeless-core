@@ -2,7 +2,6 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
@@ -41,14 +40,5 @@ func (msg *MsgSetStakeThreshold) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	amount, ok := sdk.NewIntFromString(msg.Amount)
-	if !ok {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "invalid amount (%s)", err)
-	}
-
-	if !amount.GT(math.ZeroInt()) {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "threshold amount must be greater than zero")
-	}
-
-	return nil
+	return validateStakeThreshold(msg.Amount)
 }

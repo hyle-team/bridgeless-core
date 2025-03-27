@@ -14,5 +14,5 @@ message Params {
   repeated Party goodbye_list = 4;
   repeated Party blacklist = 5;
   string stakeThreshold = 6;
-  string tssThreshold = 7;
+  uint32 tssThreshold = 7;
 }

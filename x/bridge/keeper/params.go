@@ -34,7 +34,7 @@ func (k Keeper) ModuleAdmin(ctx sdk.Context) (adminAddress string) {
 }
 
 func (k Keeper) PartiesList(ctx sdk.Context) (parties []*types.Party) {
-	k.paramstore.Get(ctx, types.ParamModulePartiesKey, &parties)
+	k.paramstore.Get(ctx, types.ParamModulePartiesListKey, &parties)
 
 	return
 }

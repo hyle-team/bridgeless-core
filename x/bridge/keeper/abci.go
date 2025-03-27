@@ -11,89 +11,74 @@ import (
 
 func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 	params := k.GetParams(ctx)
-	logger := k.Logger(ctx)
 	validators := k.stakingKeeper.GetAllValidators(ctx)
 	if len(validators) == 0 {
-		logger.Info("No validators found")
 		return []abci.ValidatorUpdate{}
 	}
+	var paramsUpdated bool
 	for _, validator := range validators {
 		// Validator`s operator address is a wrapper over creator address bytes
 		decodedAddr, err := sdk.Bech32ifyAddressBytes(config.Bech32Prefix, validator.GetOperator().Bytes())
 		if err != nil {
-			logger.Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
 			continue
 		}
 		owner, err := sdk.AccAddressFromBech32(decodedAddr)
 		if err != nil {
-			logger.Error(fmt.Sprintf("Error decoding validator operator address : %s", err.Error()))
 			continue
 		}
 
-		if isPartyInList(owner.String(), params.Parties) && !isEnoughDelegation(owner.String(),
-			k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()), params.StakeThreshold) {
+		partyIndex := isPartyInList(owner.String(), params.Parties)
+		newbieIndex := isPartyInList(owner.String(), params.Newbies)
+		goodbyeIndex := isPartyInList(owner.String(), params.GoodbyeList)
 
-			if !isPartyInList(owner.String(), params.GoodbyeList) {
-				// If party is an active Tss party but his delegation is not enough it is moved to goodbye list
-				params.GoodbyeList = append(params.GoodbyeList, &types.Party{Address: owner.String()})
-
-				logger.Info(fmt.Sprintf("Party %s added to goodbye list", owner.String()))
-				continue
+		delegationIsEnough := isEnoughDelegation(owner.String(), k.stakingKeeper.GetValidatorDelegations(ctx,
+			validator.GetOperator()), params.StakeThreshold)
+		fmt.Println(owner.String(), " index: ", partyIndex)
+		if partyIndex != -1 {
+			fmt.Println(delegationIsEnough)
+			if !delegationIsEnough {
+				if goodbyeIndex == -1 {
+					// If party is an active Tss party but his delegation is not enough it is moved to goodbye list
+					params.GoodbyeList = append(params.GoodbyeList, &types.Party{Address: owner.String()})
+					paramsUpdated = true
+					continue
+				}
 			}
+			continue
 		}
 
-		if !isPartyInList(owner.String(), params.Parties) {
-			// If party already in newbies list than check whether he has enough delegation
-			if isPartyInList(owner.String(), params.Newbies) && !isEnoughDelegation(owner.String(),
-				k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()), params.StakeThreshold) {
+		// If party already in newbies list then check whether he has enough delegation
+		if newbieIndex != -1 && !delegationIsEnough {
+			// If party was a newbie but his delegation became too small remove him from newbies
+			params.Newbies = append(params.Newbies[:newbieIndex], params.Newbies[newbieIndex+1:]...)
+			paramsUpdated = true
+			continue
+		}
 
-				// If party was a newbie but his delegation became too small remove him from newbies
-				params.Newbies = append(params.Newbies[:partyIndex(owner.String(), params.Newbies)],
-					params.Newbies[partyIndex(owner.String(), params.Newbies)+1:]...)
+		// If party is now in goodbye list but his delegation became eligible it is removed from list
+		if goodbyeIndex != -1 && delegationIsEnough {
+			params.GoodbyeList = append(params.GoodbyeList[:partyIndex], params.GoodbyeList[partyIndex+1:]...)
+			paramsUpdated = true
+			continue
+		}
 
-				logger.Info(fmt.Sprintf("Party %s removed from newbies list due to insufficient stake",
-					owner.String()))
-				continue
-			}
-
-			// If party is now in goodbye list but his delegation became eligible it is removed from list
-			if isPartyInList(owner.String(), params.GoodbyeList) && isEnoughDelegation(owner.String(),
-				k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()), params.StakeThreshold) {
-
-				params.GoodbyeList = append(params.GoodbyeList[:partyIndex(owner.String(), params.GoodbyeList)],
-					params.GoodbyeList[partyIndex(owner.String(), params.GoodbyeList)+1:]...)
-
-				logger.Info(fmt.Sprintf("Party %s removed from goodbye list", owner.String()))
-				continue
-			}
-
-			// If party was not processed yet and not in blacklist add it to newbies if it has enough delegation
-			if !isPartyInList(owner.String(), params.Blacklist) && isEnoughDelegation(owner.String(),
-				k.stakingKeeper.GetValidatorDelegations(ctx, validator.GetOperator()), params.StakeThreshold) &&
-				!isPartyInList(owner.String(), params.Newbies) {
-
+		// If party was not processed yet and not in blacklist add it to newbies if it has enough delegation
+		if isPartyInList(owner.String(), params.Blacklist) == -1 && delegationIsEnough {
+			if newbieIndex == -1 {
 				params.Newbies = append(params.Newbies, &types.Party{Address: owner.String()})
-				logger.Info(fmt.Sprintf("Party %s added to newbies list", owner.String()))
+				paramsUpdated = true
 			}
 		}
-
 	}
 
-	k.SetParams(ctx, params)
+	if paramsUpdated {
+		k.SetParams(ctx, params)
+	}
 
 	return []abci.ValidatorUpdate{}
 }
 
-func isPartyInList(party string, partyList []*types.Party) bool {
-	for _, p := range partyList {
-		if party == p.Address {
-			return true
-		}
-	}
-	return false
-}
-
-func partyIndex(party string, partyList []*types.Party) int {
+func isPartyInList(party string, partyList []*types.Party) int {
 	for i, p := range partyList {
 		if party == p.Address {
 			return i
@@ -106,11 +91,7 @@ func isEnoughDelegation(partyAddr string, delegations stakingTypes.Delegations, 
 	for _, d := range delegations {
 		if partyAddr == d.DelegatorAddress {
 			n, _ := sdk.NewDecFromStr(stakingThreshold)
-			if !d.Amount.LT(n) {
-				return true
-			} else {
-				return false
-			}
+			return !d.Amount.LT(n)
 		}
 	}
 	return false

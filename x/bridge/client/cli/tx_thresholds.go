@@ -8,6 +8,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"strconv"
 )
 
 func TxThresholdsCmd() *cobra.Command {
@@ -64,15 +65,12 @@ func CmdSubmitTssThreshold() *cobra.Command {
 				return errors.Wrap(err, "cannot get client tx context")
 			}
 
-			amount, err := sdk.NewDecFromStr(args[1])
+			amount, err := strconv.ParseUint(args[1], 10, 32)
 			if err != nil {
-				return errors.New("invalid amount")
-			}
-			if amount.IsNegative() || amount.IsZero() {
-				return errors.New("amount must be non-zero positive")
+				return errors.Wrap(err, "invalid tss threshold")
 			}
 
-			msg := types.NewMsgSetTssThreshold(clientCtx.GetFromAddress().String(), args[1])
+			msg := types.NewMsgSetTssThreshold(clientCtx.GetFromAddress().String(), uint32(amount))
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		}}
 	return cmd

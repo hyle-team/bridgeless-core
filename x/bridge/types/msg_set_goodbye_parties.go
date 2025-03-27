@@ -39,9 +39,6 @@ func (msg *MsgSetGoodbye) ValidateBasic() error {
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	if len(msg.Parties) == 0 {
-		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "no parties specified")
-	}
 
-	return nil
+	return validateGoodbyePartiesList(msg.Parties)
 }
