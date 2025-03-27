@@ -2,6 +2,7 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	"cosmossdk.io/math"
 	"errors"
 	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -119,13 +120,18 @@ func validateBlacklistParties(i interface{}) error {
 }
 
 func validateThreshold(i interface{}) error {
-	n, ok := i.(int64)
+	n, ok := i.(string)
 	if !ok {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidType, "invalid threshold type: %T", i)
 	}
 
-	if n <= 0 {
-		return errors.New("stake must be positive")
+	amount, ok := sdk.NewIntFromString(n)
+	if !ok {
+		return errors.New("invalid threshold amount")
+	}
+
+	if !amount.GT(math.ZeroInt()) {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "threshold amount must be greater than zero")
 	}
 
 	return nil

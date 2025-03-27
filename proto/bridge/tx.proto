@@ -34,6 +34,10 @@ service Msg {
     rpc SetGoodbyeParties(MsgSetGoodbye) returns (MsgSetPartiesResponse);
     rpc SetBlacklistParties(MsgSetBlacklistParties) returns (MsgSetPartiesResponse);
 
+    rpc SetStakeThreshold(MsgSetStakeThreshold) returns (MsgSetThresholdResponse);
+    rpc SetTssThreshold(MsgSetTssThreshold) returns (MsgSetThresholdResponse);
+
+
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -125,4 +129,15 @@ message MsgSetBlacklistParties {
   repeated Party parties = 2;
 }
 
+message MsgSetStakeThreshold {
+  string creator =1;
+  string amount = 2;
+}
+
+message MsgSetTssThreshold {
+  string creator =1;
+  string  amount = 2;
+}
+
+message MsgSetThresholdResponse {}
 message MsgSetPartiesResponse {}
