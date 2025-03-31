@@ -29,7 +29,15 @@ service Msg {
     rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 
-    rpc SetParties(MsgSetParties) returns (MsgSetPartiesResponse);
+    rpc SetParties(MsgSetPartiesList) returns (MsgSetPartiesResponse);
+    rpc SetNewbieParties(MsgSetNewbiesList) returns (MsgSetPartiesResponse);
+    rpc SetGoodbyeParties(MsgSetGoodbyePartiesList) returns (MsgSetPartiesResponse);
+    rpc SetBlacklistParties(MsgSetBlacklistPartiesList) returns (MsgSetPartiesResponse);
+
+    rpc SetStakeThreshold(MsgSetStakeThreshold) returns (MsgSetThresholdResponse);
+    rpc SetTssThreshold(MsgSetTssThreshold) returns (MsgSetThresholdResponse);
+
+
 }
 
 // this line is used by starport scaffolding # proto/tx/message
@@ -101,9 +109,35 @@ message MsgRemoveTokenInfoResponse {}
 
 // Signers list
 
-message MsgSetParties {
+message MsgSetPartiesList {
   string creator =1;
   repeated Party parties = 2;
 }
 
+message MsgSetNewbiesList {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetGoodbyePartiesList {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetBlacklistPartiesList {
+  string creator =1;
+  repeated Party parties = 2;
+}
+
+message MsgSetStakeThreshold {
+  string creator =1;
+  string amount = 2;
+}
+
+message MsgSetTssThreshold {
+  string creator =1;
+  uint32  amount = 2;
+}
+
+message MsgSetThresholdResponse {}
 message MsgSetPartiesResponse {}

@@ -6,39 +6,39 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgSetPartiesList = "submit_parties"
+const TypeMsgSetNewbiesList = "submit_newbies_list"
 
 var _ sdk.Msg = &MsgSetPartiesList{}
 
-func NewMsgSetPartiesList(creator string, partiesList []*Party) *MsgSetPartiesList {
+func NewMsgSetNewbiesList(creator string, partiesList []*Party) *MsgSetPartiesList {
 	return &MsgSetPartiesList{
 		Creator: creator,
 		Parties: partiesList,
 	}
 }
 
-func (msg *MsgSetPartiesList) Route() string {
+func (msg *MsgSetNewbiesList) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgSetPartiesList) Type() string {
-	return TypeMsgSetPartiesList
+func (msg *MsgSetNewbiesList) Type() string {
+	return TypeMsgSetNewbiesList
 }
 
-func (msg *MsgSetPartiesList) GetSigners() []sdk.AccAddress {
+func (msg *MsgSetNewbiesList) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(msg.Creator)}
 }
 
-func (msg *MsgSetPartiesList) GetSignBytes() []byte {
+func (msg *MsgSetNewbiesList) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgSetPartiesList) ValidateBasic() error {
+func (msg *MsgSetNewbiesList) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	return validateModuleParties(msg.Parties)
+	return validateNewbiePartiesList(msg.Parties)
 }
