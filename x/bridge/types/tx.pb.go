@@ -751,23 +751,23 @@ func (m *MsgRemoveTokenInfoResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgRemoveTokenInfoResponse proto.InternalMessageInfo
 
-type MsgSetParties struct {
+type MsgSetPartiesList struct {
 	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
 }
 
-func (m *MsgSetParties) Reset()         { *m = MsgSetParties{} }
-func (m *MsgSetParties) String() string { return proto.CompactTextString(m) }
-func (*MsgSetParties) ProtoMessage()    {}
-func (*MsgSetParties) Descriptor() ([]byte, []int) {
+func (m *MsgSetPartiesList) Reset()         { *m = MsgSetPartiesList{} }
+func (m *MsgSetPartiesList) String() string { return proto.CompactTextString(m) }
+func (*MsgSetPartiesList) ProtoMessage()    {}
+func (*MsgSetPartiesList) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{16}
 }
-func (m *MsgSetParties) XXX_Unmarshal(b []byte) error {
+func (m *MsgSetPartiesList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetParties) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSetPartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetParties.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSetPartiesList.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -777,49 +777,49 @@ func (m *MsgSetParties) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *MsgSetParties) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetParties.Merge(m, src)
+func (m *MsgSetPartiesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSetPartiesList.Merge(m, src)
 }
-func (m *MsgSetParties) XXX_Size() int {
+func (m *MsgSetPartiesList) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetParties) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetParties.DiscardUnknown(m)
+func (m *MsgSetPartiesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSetPartiesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetParties proto.InternalMessageInfo
+var xxx_messageInfo_MsgSetPartiesList proto.InternalMessageInfo
 
-func (m *MsgSetParties) GetCreator() string {
+func (m *MsgSetPartiesList) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetParties) GetParties() []*Party {
+func (m *MsgSetPartiesList) GetParties() []*Party {
 	if m != nil {
 		return m.Parties
 	}
 	return nil
 }
 
-type MsgSetNewbies struct {
+type MsgSetNewbiesList struct {
 	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
 }
 
-func (m *MsgSetNewbies) Reset()         { *m = MsgSetNewbies{} }
-func (m *MsgSetNewbies) String() string { return proto.CompactTextString(m) }
-func (*MsgSetNewbies) ProtoMessage()    {}
-func (*MsgSetNewbies) Descriptor() ([]byte, []int) {
+func (m *MsgSetNewbiesList) Reset()         { *m = MsgSetNewbiesList{} }
+func (m *MsgSetNewbiesList) String() string { return proto.CompactTextString(m) }
+func (*MsgSetNewbiesList) ProtoMessage()    {}
+func (*MsgSetNewbiesList) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{17}
 }
-func (m *MsgSetNewbies) XXX_Unmarshal(b []byte) error {
+func (m *MsgSetNewbiesList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetNewbies) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSetNewbiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetNewbies.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSetNewbiesList.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -829,49 +829,49 @@ func (m *MsgSetNewbies) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *MsgSetNewbies) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetNewbies.Merge(m, src)
+func (m *MsgSetNewbiesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSetNewbiesList.Merge(m, src)
 }
-func (m *MsgSetNewbies) XXX_Size() int {
+func (m *MsgSetNewbiesList) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetNewbies) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetNewbies.DiscardUnknown(m)
+func (m *MsgSetNewbiesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSetNewbiesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetNewbies proto.InternalMessageInfo
+var xxx_messageInfo_MsgSetNewbiesList proto.InternalMessageInfo
 
-func (m *MsgSetNewbies) GetCreator() string {
+func (m *MsgSetNewbiesList) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetNewbies) GetParties() []*Party {
+func (m *MsgSetNewbiesList) GetParties() []*Party {
 	if m != nil {
 		return m.Parties
 	}
 	return nil
 }
 
-type MsgSetGoodbye struct {
+type MsgSetGoodbyePartiesList struct {
 	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
 }
 
-func (m *MsgSetGoodbye) Reset()         { *m = MsgSetGoodbye{} }
-func (m *MsgSetGoodbye) String() string { return proto.CompactTextString(m) }
-func (*MsgSetGoodbye) ProtoMessage()    {}
-func (*MsgSetGoodbye) Descriptor() ([]byte, []int) {
+func (m *MsgSetGoodbyePartiesList) Reset()         { *m = MsgSetGoodbyePartiesList{} }
+func (m *MsgSetGoodbyePartiesList) String() string { return proto.CompactTextString(m) }
+func (*MsgSetGoodbyePartiesList) ProtoMessage()    {}
+func (*MsgSetGoodbyePartiesList) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{18}
 }
-func (m *MsgSetGoodbye) XXX_Unmarshal(b []byte) error {
+func (m *MsgSetGoodbyePartiesList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetGoodbye) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSetGoodbyePartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetGoodbye.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSetGoodbyePartiesList.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -881,49 +881,49 @@ func (m *MsgSetGoodbye) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *MsgSetGoodbye) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetGoodbye.Merge(m, src)
+func (m *MsgSetGoodbyePartiesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSetGoodbyePartiesList.Merge(m, src)
 }
-func (m *MsgSetGoodbye) XXX_Size() int {
+func (m *MsgSetGoodbyePartiesList) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetGoodbye) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetGoodbye.DiscardUnknown(m)
+func (m *MsgSetGoodbyePartiesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSetGoodbyePartiesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetGoodbye proto.InternalMessageInfo
+var xxx_messageInfo_MsgSetGoodbyePartiesList proto.InternalMessageInfo
 
-func (m *MsgSetGoodbye) GetCreator() string {
+func (m *MsgSetGoodbyePartiesList) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetGoodbye) GetParties() []*Party {
+func (m *MsgSetGoodbyePartiesList) GetParties() []*Party {
 	if m != nil {
 		return m.Parties
 	}
 	return nil
 }
 
-type MsgSetBlacklistParties struct {
+type MsgSetBlacklistPartiesList struct {
 	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
 }
 
-func (m *MsgSetBlacklistParties) Reset()         { *m = MsgSetBlacklistParties{} }
-func (m *MsgSetBlacklistParties) String() string { return proto.CompactTextString(m) }
-func (*MsgSetBlacklistParties) ProtoMessage()    {}
-func (*MsgSetBlacklistParties) Descriptor() ([]byte, []int) {
+func (m *MsgSetBlacklistPartiesList) Reset()         { *m = MsgSetBlacklistPartiesList{} }
+func (m *MsgSetBlacklistPartiesList) String() string { return proto.CompactTextString(m) }
+func (*MsgSetBlacklistPartiesList) ProtoMessage()    {}
+func (*MsgSetBlacklistPartiesList) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{19}
 }
-func (m *MsgSetBlacklistParties) XXX_Unmarshal(b []byte) error {
+func (m *MsgSetBlacklistPartiesList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetBlacklistParties) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSetBlacklistPartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetBlacklistParties.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSetBlacklistPartiesList.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -933,26 +933,26 @@ func (m *MsgSetBlacklistParties) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgSetBlacklistParties) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetBlacklistParties.Merge(m, src)
+func (m *MsgSetBlacklistPartiesList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSetBlacklistPartiesList.Merge(m, src)
 }
-func (m *MsgSetBlacklistParties) XXX_Size() int {
+func (m *MsgSetBlacklistPartiesList) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetBlacklistParties) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetBlacklistParties.DiscardUnknown(m)
+func (m *MsgSetBlacklistPartiesList) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSetBlacklistPartiesList.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetBlacklistParties proto.InternalMessageInfo
+var xxx_messageInfo_MsgSetBlacklistPartiesList proto.InternalMessageInfo
 
-func (m *MsgSetBlacklistParties) GetCreator() string {
+func (m *MsgSetBlacklistPartiesList) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetBlacklistParties) GetParties() []*Party {
+func (m *MsgSetBlacklistPartiesList) GetParties() []*Party {
 	if m != nil {
 		return m.Parties
 	}
@@ -1152,10 +1152,10 @@ func init() {
 	proto.RegisterType((*MsgAddTokenInfoResponse)(nil), "core.bridge.MsgAddTokenInfoResponse")
 	proto.RegisterType((*MsgRemoveTokenInfo)(nil), "core.bridge.MsgRemoveTokenInfo")
 	proto.RegisterType((*MsgRemoveTokenInfoResponse)(nil), "core.bridge.MsgRemoveTokenInfoResponse")
-	proto.RegisterType((*MsgSetParties)(nil), "core.bridge.MsgSetParties")
-	proto.RegisterType((*MsgSetNewbies)(nil), "core.bridge.MsgSetNewbies")
-	proto.RegisterType((*MsgSetGoodbye)(nil), "core.bridge.MsgSetGoodbye")
-	proto.RegisterType((*MsgSetBlacklistParties)(nil), "core.bridge.MsgSetBlacklistParties")
+	proto.RegisterType((*MsgSetPartiesList)(nil), "core.bridge.MsgSetPartiesList")
+	proto.RegisterType((*MsgSetNewbiesList)(nil), "core.bridge.MsgSetNewbiesList")
+	proto.RegisterType((*MsgSetGoodbyePartiesList)(nil), "core.bridge.MsgSetGoodbyePartiesList")
+	proto.RegisterType((*MsgSetBlacklistPartiesList)(nil), "core.bridge.MsgSetBlacklistPartiesList")
 	proto.RegisterType((*MsgSetStakeThreshold)(nil), "core.bridge.MsgSetStakeThreshold")
 	proto.RegisterType((*MsgSetTssThreshold)(nil), "core.bridge.MsgSetTssThreshold")
 	proto.RegisterType((*MsgSetThresholdResponse)(nil), "core.bridge.MsgSetThresholdResponse")
@@ -1165,63 +1165,64 @@ func init() {
 func init() { proto.RegisterFile("bridge/tx.proto", fileDescriptor_41dc2e30e6049cae) }
 
 var fileDescriptor_41dc2e30e6049cae = []byte{
-	// 893 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x57, 0xcb, 0x6e, 0xdb, 0x46,
-	0x14, 0x15, 0x2d, 0xd7, 0x8f, 0x91, 0x6d, 0xb5, 0xac, 0x6b, 0x53, 0xac, 0x2b, 0xb9, 0x74, 0x81,
-	0x1a, 0x46, 0x2d, 0xd6, 0x2a, 0xd0, 0x02, 0x45, 0x37, 0x56, 0x5f, 0x31, 0x10, 0xe5, 0x41, 0x29,
-	0x48, 0xe0, 0x3c, 0x1c, 0x4a, 0x1c, 0x53, 0x84, 0x45, 0x8e, 0xc0, 0x19, 0x3b, 0xd6, 0x36, 0xf9,
-	0x81, 0xfc, 0x43, 0x7e, 0x20, 0x8b, 0x7c, 0x40, 0x96, 0x5e, 0x1a, 0x59, 0x65, 0x15, 0x04, 0xf6,
-	0x22, 0xbf, 0x11, 0x70, 0x38, 0xa4, 0x86, 0x0f, 0x51, 0x0a, 0xe2, 0xac, 0xac, 0xd1, 0x39, 0xf7,
-	0xdc, 0x73, 0x2f, 0x2f, 0xef, 0x58, 0xa0, 0xd8, 0x76, 0x2d, 0xc3, 0x84, 0x2a, 0x39, 0xad, 0xf6,
-	0x5d, 0x44, 0x90, 0x58, 0xe8, 0x20, 0x17, 0x56, 0xfd, 0x6f, 0xe5, 0xd5, 0x0e, 0xc2, 0x36, 0xc2,
-	0xaa, 0x8d, 0x4d, 0xf5, 0x64, 0xc7, 0xfb, 0xe3, 0xb3, 0xe4, 0x0a, 0x0b, 0xb3, 0x91, 0x01, 0x7b,
-	0x58, 0x25, 0xae, 0xee, 0x60, 0xbd, 0x43, 0x2c, 0xe4, 0x30, 0x42, 0x29, 0x46, 0x40, 0x47, 0x70,
-	0x04, 0xd4, 0xe9, 0xea, 0xd6, 0x08, 0xa8, 0xaf, 0xbb, 0x64, 0xc0, 0xa0, 0x65, 0x13, 0x99, 0x88,
-	0x7e, 0x54, 0xbd, 0x4f, 0x41, 0x80, 0x6f, 0xf0, 0xc0, 0x07, 0xfc, 0x83, 0x0f, 0x29, 0x2f, 0x04,
-	0xf0, 0x5d, 0x03, 0x9b, 0xcd, 0xe3, 0xb6, 0x6d, 0x91, 0xd6, 0xd0, 0x20, 0x16, 0x7f, 0x07, 0xf3,
-	0x98, 0x7e, 0x4b, 0xa0, 0x2b, 0x09, 0xeb, 0xc2, 0xe6, 0x7c, 0x5d, 0x7a, 0xf3, 0x6a, 0x7b, 0x99,
-	0x85, 0xef, 0x1a, 0x86, 0x0b, 0x31, 0x6e, 0x12, 0xd7, 0x72, 0x4c, 0x6d, 0x48, 0x15, 0xeb, 0x60,
-	0x81, 0x2b, 0x14, 0x4b, 0x53, 0xeb, 0xf9, 0xcd, 0x42, 0x4d, 0xaa, 0x72, 0x1d, 0xab, 0x72, 0x89,
-	0xea, 0xd3, 0x67, 0xef, 0x2a, 0x39, 0x2d, 0x12, 0xf3, 0xe7, 0xd2, 0xd3, 0x0f, 0x2f, 0xb7, 0x86,
-	0x9a, 0x4a, 0x05, 0xfc, 0x90, 0x6a, 0x52, 0x83, 0xb8, 0x8f, 0x1c, 0x0c, 0x95, 0x7d, 0xb0, 0xd4,
-	0xc0, 0xe6, 0x9e, 0x83, 0xa1, 0x4b, 0x5a, 0x5e, 0x17, 0x45, 0x09, 0xcc, 0x76, 0x5c, 0xa8, 0x13,
-	0xc4, 0xcc, 0x6b, 0xc1, 0x51, 0xac, 0x82, 0xaf, 0x68, 0xa3, 0xa5, 0xa9, 0x75, 0x61, 0xb3, 0x50,
-	0x13, 0xa3, 0xce, 0x3c, 0x84, 0x79, 0xf2, 0x69, 0x8a, 0x04, 0x56, 0xa2, 0xda, 0x61, 0xd6, 0x67,
-	0x02, 0x4d, 0x7b, 0xa7, 0x6f, 0xe8, 0x04, 0x8e, 0x4b, 0x5b, 0x02, 0x73, 0x54, 0xef, 0xc0, 0x32,
-	0x68, 0xe6, 0x69, 0x6d, 0x96, 0x9e, 0xf7, 0x0c, 0xf1, 0x2f, 0x30, 0x67, 0x43, 0xa2, 0x1b, 0x3a,
-	0xd1, 0xa5, 0x3c, 0x35, 0x25, 0x27, 0x4d, 0x35, 0x18, 0x83, 0x99, 0x0b, 0x23, 0x98, 0x3f, 0xce,
-	0x44, 0xe8, 0xef, 0x5f, 0x6a, 0xef, 0x1f, 0xd8, 0x83, 0x9f, 0x63, 0x8f, 0x25, 0xe0, 0x64, 0x52,
-	0xdb, 0xfe, 0xb7, 0x37, 0xa1, 0xd9, 0x6d, 0xa7, 0x43, 0x9c, 0xda, 0x76, 0x1a, 0x1c, 0xb4, 0x9d,
-	0xd2, 0x22, 0x6d, 0xa7, 0x70, 0x6a, 0x59, 0xe3, 0xb2, 0x96, 0xc0, 0x1c, 0x95, 0x0b, 0xca, 0xf2,
-	0x20, 0xef, 0x1c, 0x2b, 0x2b, 0x9a, 0xe0, 0x21, 0x28, 0x36, 0xb0, 0xb9, 0x6b, 0x18, 0xb4, 0xda,
-	0x3d, 0xe7, 0x10, 0x65, 0x64, 0xf8, 0x15, 0x4c, 0x5b, 0xce, 0x21, 0x62, 0x0f, 0x6e, 0x25, 0xf9,
-	0xe0, 0xbc, 0x78, 0x56, 0x1a, 0x65, 0x2a, 0x25, 0xb0, 0x1a, 0x93, 0x0f, 0x33, 0x1b, 0x40, 0x6c,
-	0x60, 0x53, 0x83, 0x36, 0x3a, 0x81, 0x93, 0x24, 0xcf, 0x18, 0x2a, 0xbe, 0xf2, 0x7c, 0xb4, 0xf2,
-	0x35, 0x20, 0x27, 0xb3, 0x84, 0x1e, 0xee, 0x82, 0x45, 0xef, 0x65, 0x83, 0xe4, 0x96, 0xee, 0x12,
-	0x0b, 0xe2, 0x8c, 0xf4, 0xbf, 0x80, 0xd9, 0xbe, 0x4f, 0x62, 0xaf, 0x79, 0xf4, 0xa9, 0x7a, 0x02,
-	0x03, 0x2d, 0xa0, 0x0c, 0x85, 0x6f, 0xc0, 0x27, 0xed, 0x2f, 0x22, 0xfc, 0x3f, 0x42, 0x46, 0x7b,
-	0x00, 0xaf, 0x4c, 0xf8, 0x31, 0x1d, 0x91, 0x26, 0x24, 0xf5, 0x9e, 0xde, 0x39, 0xea, 0x59, 0xf8,
-	0xca, 0x7b, 0x72, 0x0d, 0x2c, 0xfb, 0x19, 0x9a, 0x44, 0x3f, 0x82, 0xad, 0xae, 0x0b, 0x71, 0x17,
-	0xf5, 0x8c, 0x0c, 0xfd, 0x15, 0x30, 0xa3, 0xdb, 0xe8, 0xd8, 0x21, 0x6c, 0x9e, 0xd9, 0x49, 0xf9,
-	0x8f, 0x8e, 0x4e, 0x13, 0x92, 0x16, 0xc6, 0x9f, 0xae, 0xb3, 0x18, 0xea, 0xf8, 0xd3, 0xe9, 0xe9,
-	0x04, 0x22, 0xe1, 0x64, 0xac, 0xfa, 0x77, 0x45, 0x38, 0x19, 0x01, 0x50, 0x7b, 0x3d, 0x0f, 0xf2,
-	0x0d, 0x6c, 0x8a, 0x06, 0x10, 0x53, 0x6e, 0x12, 0x25, 0xd2, 0x80, 0xd4, 0x45, 0x2e, 0x6f, 0x8d,
-	0xe7, 0x04, 0xd9, 0xc4, 0x9b, 0xa0, 0xc0, 0xaf, 0x9c, 0xef, 0xe3, 0xa1, 0x1c, 0x28, 0x6f, 0x64,
-	0x80, 0xbc, 0x20, 0xbf, 0x4d, 0x12, 0x82, 0x1c, 0x98, 0x14, 0x4c, 0x59, 0x20, 0x43, 0x87, 0xfe,
-	0xd6, 0x1d, 0xe1, 0x90, 0x82, 0xa3, 0x1c, 0x46, 0x16, 0xad, 0x27, 0xc8, 0xdf, 0x32, 0x09, 0x41,
-	0x0e, 0x4c, 0x0a, 0xa6, 0x5c, 0x0d, 0xc3, 0x92, 0x47, 0x08, 0x72, 0xe0, 0xa8, 0x92, 0xa3, 0x82,
-	0x1a, 0x58, 0x88, 0x2c, 0xcc, 0xb5, 0x78, 0x10, 0x8f, 0xca, 0x3f, 0x65, 0xa1, 0xa1, 0xe6, 0x7d,
-	0x50, 0x8c, 0xaf, 0xc2, 0x4a, 0x3c, 0x30, 0x46, 0x90, 0x7f, 0x1e, 0x43, 0x08, 0xc5, 0xaf, 0x03,
-	0xc0, 0xed, 0x38, 0x39, 0x31, 0x7f, 0x21, 0x26, 0x2b, 0xa3, 0x31, 0xae, 0xfc, 0xaf, 0xc3, 0xc5,
-	0x96, 0xa5, 0xc9, 0x56, 0xdf, 0x44, 0x9a, 0x4d, 0xf0, 0xcd, 0x70, 0xa7, 0x65, 0x89, 0x32, 0xca,
-	0x44, 0xa2, 0x8f, 0xc0, 0xb7, 0x69, 0xfb, 0x6c, 0x23, 0x25, 0x34, 0x4e, 0x9a, 0x48, 0xff, 0x01,
-	0x35, 0x1d, 0xdb, 0x66, 0x3f, 0xa6, 0x04, 0x46, 0x29, 0xc9, 0x89, 0x48, 0xdb, 0x40, 0xe2, 0x3d,
-	0x50, 0x8c, 0x6f, 0xb8, 0x4a, 0x5a, 0x20, 0x47, 0x98, 0x4c, 0xb9, 0x7e, 0xfb, 0xec, 0xa2, 0x2c,
-	0x9c, 0x5f, 0x94, 0x85, 0xf7, 0x17, 0x65, 0xe1, 0xf9, 0x65, 0x39, 0x77, 0x7e, 0x59, 0xce, 0xbd,
-	0xbd, 0x2c, 0xe7, 0xf6, 0xff, 0x30, 0x2d, 0xd2, 0x3d, 0x6e, 0x57, 0x3b, 0xc8, 0x56, 0xbb, 0x83,
-	0x1e, 0xdc, 0x26, 0x50, 0xb7, 0x55, 0x5f, 0xae, 0x07, 0x31, 0xde, 0xf6, 0xe4, 0xd5, 0x93, 0x9d,
-	0x9a, 0x7a, 0xaa, 0x06, 0xbf, 0x13, 0x06, 0x7d, 0x88, 0xdb, 0x33, 0xf4, 0x5f, 0xec, 0xdf, 0x3e,
-	0x06, 0x00, 0x00, 0xff, 0xff, 0x27, 0x39, 0x8e, 0xc2, 0x3e, 0x0c, 0x00, 0x00,
+	// 902 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x57, 0xcb, 0x6e, 0xf3, 0x44,
+	0x14, 0x8e, 0x9b, 0xd2, 0xcb, 0x49, 0x69, 0xa8, 0x29, 0xad, 0x63, 0x4a, 0x52, 0x0c, 0xa8, 0x55,
+	0x45, 0x63, 0x1a, 0x24, 0x90, 0x10, 0x9b, 0x86, 0x6b, 0x25, 0x02, 0xc5, 0x09, 0x08, 0xb5, 0x40,
+	0x65, 0xc7, 0x53, 0xc7, 0x6a, 0xec, 0x89, 0x3c, 0xd3, 0xd2, 0x6c, 0xe1, 0x05, 0x78, 0x07, 0x5e,
+	0x80, 0x05, 0x0f, 0xd1, 0x65, 0xc5, 0x06, 0x56, 0x08, 0xb5, 0x0b, 0x5e, 0x03, 0x79, 0x7c, 0xc9,
+	0xf8, 0x12, 0x27, 0x88, 0xbf, 0xab, 0x66, 0xf2, 0x9d, 0xf3, 0x9d, 0xef, 0x1c, 0x1f, 0x7f, 0xd3,
+	0x40, 0xd5, 0xf0, 0x6c, 0xd3, 0x42, 0x2a, 0xbd, 0x6d, 0x8e, 0x3c, 0x4c, 0xb1, 0x58, 0xe9, 0x63,
+	0x0f, 0x35, 0x83, 0x6f, 0xe5, 0xed, 0x3e, 0x26, 0x0e, 0x26, 0xaa, 0x43, 0x2c, 0xf5, 0xe6, 0xc8,
+	0xff, 0x13, 0x44, 0xc9, 0x8d, 0x30, 0xcd, 0xc1, 0x26, 0x1a, 0x12, 0x95, 0x7a, 0xba, 0x4b, 0xf4,
+	0x3e, 0xb5, 0xb1, 0x1b, 0x06, 0xd4, 0x52, 0x01, 0xf8, 0x0a, 0x4d, 0x81, 0xfa, 0x03, 0xdd, 0x9e,
+	0x02, 0x8d, 0x74, 0x8f, 0x8e, 0x43, 0x68, 0xd3, 0xc2, 0x16, 0x66, 0x1f, 0x55, 0xff, 0x53, 0x94,
+	0x10, 0x08, 0xbc, 0x08, 0x80, 0xe0, 0x10, 0x40, 0xca, 0x2f, 0x02, 0xbc, 0xd4, 0x21, 0x56, 0xf7,
+	0xda, 0x70, 0x6c, 0xda, 0x9b, 0x08, 0x24, 0xe2, 0x3b, 0xb0, 0x4a, 0xd8, 0xb7, 0x14, 0x79, 0x92,
+	0xb0, 0x2b, 0xec, 0xaf, 0xb6, 0xa5, 0xdf, 0x7f, 0x3b, 0xdc, 0x0c, 0xd3, 0x8f, 0x4d, 0xd3, 0x43,
+	0x84, 0x74, 0xa9, 0x67, 0xbb, 0x96, 0x36, 0x09, 0x15, 0xdb, 0xb0, 0xc6, 0x35, 0x4a, 0xa4, 0x85,
+	0xdd, 0xf2, 0x7e, 0xa5, 0x25, 0x35, 0xb9, 0x89, 0x35, 0xb9, 0x42, 0xed, 0xc5, 0xbb, 0xbf, 0x1a,
+	0x25, 0x2d, 0x91, 0xf3, 0xde, 0xfa, 0x8f, 0xff, 0xfc, 0x7a, 0x30, 0xe1, 0x54, 0x1a, 0xf0, 0x4a,
+	0xae, 0x48, 0x0d, 0x91, 0x11, 0x76, 0x09, 0x52, 0xce, 0x60, 0xbd, 0x43, 0xac, 0x13, 0x97, 0x20,
+	0x8f, 0xf6, 0xfc, 0x29, 0x8a, 0x12, 0x2c, 0xf7, 0x3d, 0xa4, 0x53, 0x1c, 0x8a, 0xd7, 0xa2, 0xa3,
+	0xd8, 0x84, 0xe7, 0xd8, 0xa0, 0xa5, 0x85, 0x5d, 0x61, 0xbf, 0xd2, 0x12, 0x93, 0xca, 0x7c, 0x24,
+	0xd4, 0x14, 0x84, 0x29, 0x12, 0x6c, 0x25, 0xb9, 0xe3, 0xaa, 0x3f, 0x09, 0xac, 0xec, 0x57, 0x23,
+	0x53, 0xa7, 0x68, 0x56, 0xd9, 0x1a, 0xac, 0x30, 0xbe, 0x0b, 0xdb, 0x64, 0x95, 0x17, 0xb5, 0x65,
+	0x76, 0x3e, 0x31, 0xc5, 0xf7, 0x61, 0xc5, 0x41, 0x54, 0x37, 0x75, 0xaa, 0x4b, 0x65, 0x26, 0x4a,
+	0xce, 0x8a, 0xea, 0x84, 0x11, 0xa1, 0xb8, 0x38, 0x23, 0xd4, 0xc7, 0x89, 0x88, 0xf5, 0x7d, 0xc4,
+	0xe4, 0x7d, 0x88, 0x86, 0xe8, 0xff, 0xc8, 0x0b, 0x0b, 0x70, 0x34, 0xb9, 0x63, 0xff, 0xc0, 0xdf,
+	0xd0, 0xe2, 0xb1, 0xb3, 0x25, 0xce, 0x1d, 0x3b, 0x4b, 0x8e, 0xc6, 0xce, 0xc2, 0x12, 0x63, 0x67,
+	0x70, 0x6e, 0x5b, 0xb3, 0xaa, 0xd6, 0x60, 0x85, 0xd1, 0x45, 0x6d, 0xf9, 0x90, 0x7f, 0x4e, 0xb5,
+	0x95, 0x2c, 0xf0, 0x1d, 0x54, 0x3b, 0xc4, 0x3a, 0x36, 0x4d, 0xd6, 0xed, 0x89, 0x7b, 0x89, 0x0b,
+	0x2a, 0xbc, 0x05, 0x8b, 0xb6, 0x7b, 0x89, 0xc3, 0x07, 0xb7, 0x95, 0x7d, 0x70, 0x7e, 0x7e, 0xd8,
+	0x1a, 0x8b, 0x54, 0x6a, 0xb0, 0x9d, 0xa2, 0x8f, 0x2b, 0x9b, 0x20, 0x76, 0x88, 0xa5, 0x21, 0x07,
+	0xdf, 0xa0, 0x79, 0x8a, 0x17, 0x2c, 0x15, 0xdf, 0x79, 0x39, 0xd9, 0xf9, 0x0e, 0xc8, 0xd9, 0x2a,
+	0xb1, 0x86, 0x73, 0xd8, 0xf0, 0x5f, 0x36, 0x44, 0x4f, 0x75, 0x8f, 0xda, 0x88, 0x7c, 0x66, 0x13,
+	0x5a, 0x20, 0xe1, 0x4d, 0x58, 0x1e, 0x05, 0x81, 0xe1, 0xab, 0x9e, 0x7c, 0xb2, 0x3e, 0xc9, 0x58,
+	0x8b, 0x42, 0x26, 0xe4, 0x9f, 0xa3, 0x1f, 0x8c, 0x67, 0x4d, 0x6e, 0x80, 0x14, 0x90, 0x7f, 0x82,
+	0xb1, 0x69, 0x8c, 0xd1, 0x53, 0x34, 0x60, 0xb2, 0xd9, 0x75, 0x11, 0x6d, 0x0f, 0xf5, 0xfe, 0xd5,
+	0xd0, 0x26, 0x4f, 0x32, 0xa6, 0x4f, 0x61, 0x33, 0xa8, 0xd2, 0xa5, 0xfa, 0x15, 0xea, 0x0d, 0x3c,
+	0x44, 0x06, 0x78, 0x68, 0x16, 0xf0, 0x6f, 0xc1, 0x92, 0xee, 0xe0, 0x6b, 0x97, 0x86, 0x6b, 0x1e,
+	0x9e, 0x94, 0x8f, 0xd9, 0x46, 0x75, 0x11, 0xed, 0x11, 0xf2, 0xdf, 0x79, 0x9e, 0x8f, 0x79, 0x82,
+	0xa5, 0xf5, 0x79, 0x22, 0x92, 0x78, 0x61, 0xb6, 0x83, 0x2b, 0x24, 0x5e, 0x98, 0x08, 0x68, 0xfd,
+	0xb1, 0x0a, 0xe5, 0x0e, 0xb1, 0x44, 0x13, 0xc4, 0x9c, 0x0b, 0x46, 0x49, 0x0c, 0x20, 0xd7, 0xdf,
+	0xe5, 0x83, 0xd9, 0x31, 0x51, 0x35, 0xf1, 0x0b, 0xa8, 0xf0, 0x4e, 0xf4, 0x72, 0x3a, 0x95, 0x03,
+	0xe5, 0xd7, 0x0a, 0x40, 0x9e, 0x90, 0x37, 0x99, 0x0c, 0x21, 0x07, 0x66, 0x09, 0x73, 0x7c, 0x65,
+	0xa2, 0x30, 0x30, 0xe3, 0x29, 0x0a, 0x19, 0x38, 0x4d, 0x61, 0xc2, 0x7f, 0x7d, 0x42, 0xfe, 0xf2,
+	0xc9, 0x10, 0x72, 0x60, 0x96, 0x30, 0xe7, 0xc6, 0x98, 0xb4, 0x3c, 0x85, 0x90, 0x03, 0xa7, 0xb5,
+	0x9c, 0x24, 0xd4, 0x60, 0x2d, 0xe1, 0xa3, 0x3b, 0xe9, 0x24, 0x1e, 0x95, 0x5f, 0x2f, 0x42, 0x63,
+	0xce, 0x73, 0xa8, 0xa6, 0x1d, 0xb2, 0x91, 0x4e, 0x4c, 0x05, 0xc8, 0x7b, 0x33, 0x02, 0x62, 0xf2,
+	0x53, 0x80, 0xc9, 0x26, 0x8b, 0xf5, 0xcc, 0xfe, 0x25, 0x6c, 0x51, 0x56, 0xa6, 0xe3, 0x31, 0xe3,
+	0xd7, 0xf0, 0x42, 0xec, 0x77, 0x45, 0xbc, 0x9c, 0x23, 0xce, 0xc5, 0xfb, 0x3d, 0x6c, 0x64, 0xac,
+	0x4e, 0x7c, 0x23, 0x27, 0x31, 0xeb, 0x86, 0x73, 0xf1, 0x1b, 0xf0, 0x62, 0x8e, 0xcd, 0x89, 0x7b,
+	0x39, 0xa9, 0x79, 0x5e, 0x38, 0x57, 0x8d, 0x6f, 0x59, 0x0f, 0x29, 0x93, 0x7b, 0x35, 0x27, 0x31,
+	0x19, 0x92, 0x5d, 0x94, 0x3c, 0x63, 0x12, 0xbf, 0x81, 0x6a, 0xda, 0xf8, 0x1a, 0x79, 0x89, 0x5c,
+	0xc0, 0x7c, 0xcc, 0xed, 0x2f, 0xef, 0x1e, 0xea, 0xc2, 0xfd, 0x43, 0x5d, 0xf8, 0xfb, 0xa1, 0x2e,
+	0xfc, 0xfc, 0x58, 0x2f, 0xdd, 0x3f, 0xd6, 0x4b, 0x7f, 0x3e, 0xd6, 0x4b, 0x67, 0xef, 0x5a, 0x36,
+	0x1d, 0x5c, 0x1b, 0xcd, 0x3e, 0x76, 0xd4, 0xc1, 0x78, 0x88, 0x0e, 0x29, 0xd2, 0x1d, 0x35, 0xa0,
+	0x1b, 0x22, 0x42, 0x0e, 0x7d, 0x7a, 0xf5, 0xe6, 0xa8, 0xa5, 0xde, 0xaa, 0xd1, 0xaf, 0x8a, 0xf1,
+	0x08, 0x11, 0x63, 0x89, 0xfd, 0x43, 0xfe, 0xf6, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x7c, 0x96,
+	0x1d, 0x5e, 0x6c, 0x0c, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1245,10 +1246,10 @@ type MsgClient interface {
 	DeleteToken(ctx context.Context, in *MsgDeleteToken, opts ...grpc.CallOption) (*MsgDeleteTokenResponse, error)
 	AddTokenInfo(ctx context.Context, in *MsgAddTokenInfo, opts ...grpc.CallOption) (*MsgAddTokenInfoResponse, error)
 	RemoveTokenInfo(ctx context.Context, in *MsgRemoveTokenInfo, opts ...grpc.CallOption) (*MsgRemoveTokenInfoResponse, error)
-	SetParties(ctx context.Context, in *MsgSetParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetNewbieParties(ctx context.Context, in *MsgSetNewbies, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbye, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
+	SetParties(ctx context.Context, in *MsgSetPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
+	SetNewbieParties(ctx context.Context, in *MsgSetNewbiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
+	SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbyePartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
+	SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
 	SetStakeThreshold(ctx context.Context, in *MsgSetStakeThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error)
 	SetTssThreshold(ctx context.Context, in *MsgSetTssThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error)
 }
@@ -1333,7 +1334,7 @@ func (c *msgClient) RemoveTokenInfo(ctx context.Context, in *MsgRemoveTokenInfo,
 	return out, nil
 }
 
-func (c *msgClient) SetParties(ctx context.Context, in *MsgSetParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
+func (c *msgClient) SetParties(ctx context.Context, in *MsgSetPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
 	out := new(MsgSetPartiesResponse)
 	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetParties", in, out, opts...)
 	if err != nil {
@@ -1342,7 +1343,7 @@ func (c *msgClient) SetParties(ctx context.Context, in *MsgSetParties, opts ...g
 	return out, nil
 }
 
-func (c *msgClient) SetNewbieParties(ctx context.Context, in *MsgSetNewbies, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
+func (c *msgClient) SetNewbieParties(ctx context.Context, in *MsgSetNewbiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
 	out := new(MsgSetPartiesResponse)
 	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetNewbieParties", in, out, opts...)
 	if err != nil {
@@ -1351,7 +1352,7 @@ func (c *msgClient) SetNewbieParties(ctx context.Context, in *MsgSetNewbies, opt
 	return out, nil
 }
 
-func (c *msgClient) SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbye, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
+func (c *msgClient) SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbyePartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
 	out := new(MsgSetPartiesResponse)
 	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetGoodbyeParties", in, out, opts...)
 	if err != nil {
@@ -1360,7 +1361,7 @@ func (c *msgClient) SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbye, op
 	return out, nil
 }
 
-func (c *msgClient) SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
+func (c *msgClient) SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
 	out := new(MsgSetPartiesResponse)
 	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetBlacklistParties", in, out, opts...)
 	if err != nil {
@@ -1398,10 +1399,10 @@ type MsgServer interface {
 	DeleteToken(context.Context, *MsgDeleteToken) (*MsgDeleteTokenResponse, error)
 	AddTokenInfo(context.Context, *MsgAddTokenInfo) (*MsgAddTokenInfoResponse, error)
 	RemoveTokenInfo(context.Context, *MsgRemoveTokenInfo) (*MsgRemoveTokenInfoResponse, error)
-	SetParties(context.Context, *MsgSetParties) (*MsgSetPartiesResponse, error)
-	SetNewbieParties(context.Context, *MsgSetNewbies) (*MsgSetPartiesResponse, error)
-	SetGoodbyeParties(context.Context, *MsgSetGoodbye) (*MsgSetPartiesResponse, error)
-	SetBlacklistParties(context.Context, *MsgSetBlacklistParties) (*MsgSetPartiesResponse, error)
+	SetParties(context.Context, *MsgSetPartiesList) (*MsgSetPartiesResponse, error)
+	SetNewbieParties(context.Context, *MsgSetNewbiesList) (*MsgSetPartiesResponse, error)
+	SetGoodbyeParties(context.Context, *MsgSetGoodbyePartiesList) (*MsgSetPartiesResponse, error)
+	SetBlacklistParties(context.Context, *MsgSetBlacklistPartiesList) (*MsgSetPartiesResponse, error)
 	SetStakeThreshold(context.Context, *MsgSetStakeThreshold) (*MsgSetThresholdResponse, error)
 	SetTssThreshold(context.Context, *MsgSetTssThreshold) (*MsgSetThresholdResponse, error)
 }
@@ -1434,16 +1435,16 @@ func (*UnimplementedMsgServer) AddTokenInfo(ctx context.Context, req *MsgAddToke
 func (*UnimplementedMsgServer) RemoveTokenInfo(ctx context.Context, req *MsgRemoveTokenInfo) (*MsgRemoveTokenInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveTokenInfo not implemented")
 }
-func (*UnimplementedMsgServer) SetParties(ctx context.Context, req *MsgSetParties) (*MsgSetPartiesResponse, error) {
+func (*UnimplementedMsgServer) SetParties(ctx context.Context, req *MsgSetPartiesList) (*MsgSetPartiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetParties not implemented")
 }
-func (*UnimplementedMsgServer) SetNewbieParties(ctx context.Context, req *MsgSetNewbies) (*MsgSetPartiesResponse, error) {
+func (*UnimplementedMsgServer) SetNewbieParties(ctx context.Context, req *MsgSetNewbiesList) (*MsgSetPartiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetNewbieParties not implemented")
 }
-func (*UnimplementedMsgServer) SetGoodbyeParties(ctx context.Context, req *MsgSetGoodbye) (*MsgSetPartiesResponse, error) {
+func (*UnimplementedMsgServer) SetGoodbyeParties(ctx context.Context, req *MsgSetGoodbyePartiesList) (*MsgSetPartiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetGoodbyeParties not implemented")
 }
-func (*UnimplementedMsgServer) SetBlacklistParties(ctx context.Context, req *MsgSetBlacklistParties) (*MsgSetPartiesResponse, error) {
+func (*UnimplementedMsgServer) SetBlacklistParties(ctx context.Context, req *MsgSetBlacklistPartiesList) (*MsgSetPartiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetBlacklistParties not implemented")
 }
 func (*UnimplementedMsgServer) SetStakeThreshold(ctx context.Context, req *MsgSetStakeThreshold) (*MsgSetThresholdResponse, error) {
@@ -1602,7 +1603,7 @@ func _Msg_RemoveTokenInfo_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _Msg_SetParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetParties)
+	in := new(MsgSetPartiesList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1614,13 +1615,13 @@ func _Msg_SetParties_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/core.bridge.Msg/SetParties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetParties(ctx, req.(*MsgSetParties))
+		return srv.(MsgServer).SetParties(ctx, req.(*MsgSetPartiesList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_SetNewbieParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetNewbies)
+	in := new(MsgSetNewbiesList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1632,13 +1633,13 @@ func _Msg_SetNewbieParties_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/core.bridge.Msg/SetNewbieParties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetNewbieParties(ctx, req.(*MsgSetNewbies))
+		return srv.(MsgServer).SetNewbieParties(ctx, req.(*MsgSetNewbiesList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_SetGoodbyeParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetGoodbye)
+	in := new(MsgSetGoodbyePartiesList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1650,13 +1651,13 @@ func _Msg_SetGoodbyeParties_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/core.bridge.Msg/SetGoodbyeParties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetGoodbyeParties(ctx, req.(*MsgSetGoodbye))
+		return srv.(MsgServer).SetGoodbyeParties(ctx, req.(*MsgSetGoodbyePartiesList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_SetBlacklistParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetBlacklistParties)
+	in := new(MsgSetBlacklistPartiesList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1668,7 +1669,7 @@ func _Msg_SetBlacklistParties_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/core.bridge.Msg/SetBlacklistParties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetBlacklistParties(ctx, req.(*MsgSetBlacklistParties))
+		return srv.(MsgServer).SetBlacklistParties(ctx, req.(*MsgSetBlacklistPartiesList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2281,7 +2282,7 @@ func (m *MsgRemoveTokenInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetParties) Marshal() (dAtA []byte, err error) {
+func (m *MsgSetPartiesList) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2291,12 +2292,12 @@ func (m *MsgSetParties) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetParties) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSetPartiesList) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetParties) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSetPartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2325,7 +2326,7 @@ func (m *MsgSetParties) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetNewbies) Marshal() (dAtA []byte, err error) {
+func (m *MsgSetNewbiesList) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2335,12 +2336,12 @@ func (m *MsgSetNewbies) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetNewbies) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSetNewbiesList) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetNewbies) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSetNewbiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2369,7 +2370,7 @@ func (m *MsgSetNewbies) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetGoodbye) Marshal() (dAtA []byte, err error) {
+func (m *MsgSetGoodbyePartiesList) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2379,12 +2380,12 @@ func (m *MsgSetGoodbye) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetGoodbye) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSetGoodbyePartiesList) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetGoodbye) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSetGoodbyePartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2413,7 +2414,7 @@ func (m *MsgSetGoodbye) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetBlacklistParties) Marshal() (dAtA []byte, err error) {
+func (m *MsgSetBlacklistPartiesList) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2423,12 +2424,12 @@ func (m *MsgSetBlacklistParties) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetBlacklistParties) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSetBlacklistPartiesList) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetBlacklistParties) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSetBlacklistPartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2793,7 +2794,7 @@ func (m *MsgRemoveTokenInfoResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetParties) Size() (n int) {
+func (m *MsgSetPartiesList) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2812,7 +2813,7 @@ func (m *MsgSetParties) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetNewbies) Size() (n int) {
+func (m *MsgSetNewbiesList) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2831,7 +2832,7 @@ func (m *MsgSetNewbies) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetGoodbye) Size() (n int) {
+func (m *MsgSetGoodbyePartiesList) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2850,7 +2851,7 @@ func (m *MsgSetGoodbye) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetBlacklistParties) Size() (n int) {
+func (m *MsgSetBlacklistPartiesList) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -4269,7 +4270,7 @@ func (m *MsgRemoveTokenInfoResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetParties) Unmarshal(dAtA []byte) error {
+func (m *MsgSetPartiesList) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4292,10 +4293,10 @@ func (m *MsgSetParties) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetParties: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSetPartiesList: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetParties: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSetPartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4385,7 +4386,7 @@ func (m *MsgSetParties) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetNewbies) Unmarshal(dAtA []byte) error {
+func (m *MsgSetNewbiesList) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4408,10 +4409,10 @@ func (m *MsgSetNewbies) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetNewbies: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSetNewbiesList: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetNewbies: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSetNewbiesList: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4501,7 +4502,7 @@ func (m *MsgSetNewbies) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetGoodbye) Unmarshal(dAtA []byte) error {
+func (m *MsgSetGoodbyePartiesList) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4524,10 +4525,10 @@ func (m *MsgSetGoodbye) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetGoodbye: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSetGoodbyePartiesList: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetGoodbye: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSetGoodbyePartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4617,7 +4618,7 @@ func (m *MsgSetGoodbye) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetBlacklistParties) Unmarshal(dAtA []byte) error {
+func (m *MsgSetBlacklistPartiesList) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4640,10 +4641,10 @@ func (m *MsgSetBlacklistParties) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetBlacklistParties: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSetBlacklistPartiesList: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetBlacklistParties: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSetBlacklistPartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

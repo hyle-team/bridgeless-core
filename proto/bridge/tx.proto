@@ -29,10 +29,10 @@ service Msg {
     rpc AddTokenInfo(MsgAddTokenInfo) returns (MsgAddTokenInfoResponse);
     rpc RemoveTokenInfo(MsgRemoveTokenInfo) returns (MsgRemoveTokenInfoResponse);
 
-    rpc SetParties(MsgSetParties) returns (MsgSetPartiesResponse);
-    rpc SetNewbieParties(MsgSetNewbies) returns (MsgSetPartiesResponse);
-    rpc SetGoodbyeParties(MsgSetGoodbye) returns (MsgSetPartiesResponse);
-    rpc SetBlacklistParties(MsgSetBlacklistParties) returns (MsgSetPartiesResponse);
+    rpc SetParties(MsgSetPartiesList) returns (MsgSetPartiesResponse);
+    rpc SetNewbieParties(MsgSetNewbiesList) returns (MsgSetPartiesResponse);
+    rpc SetGoodbyeParties(MsgSetGoodbyePartiesList) returns (MsgSetPartiesResponse);
+    rpc SetBlacklistParties(MsgSetBlacklistPartiesList) returns (MsgSetPartiesResponse);
 
     rpc SetStakeThreshold(MsgSetStakeThreshold) returns (MsgSetThresholdResponse);
     rpc SetTssThreshold(MsgSetTssThreshold) returns (MsgSetThresholdResponse);
@@ -109,22 +109,22 @@ message MsgRemoveTokenInfoResponse {}
 
 // Signers list
 
-message MsgSetParties {
+message MsgSetPartiesList {
   string creator =1;
   repeated Party parties = 2;
 }
 
-message MsgSetNewbies {
+message MsgSetNewbiesList {
   string creator =1;
   repeated Party parties = 2;
 }
 
-message MsgSetGoodbye {
+message MsgSetGoodbyePartiesList {
   string creator =1;
   repeated Party parties = 2;
 }
 
-message MsgSetBlacklistParties {
+message MsgSetBlacklistPartiesList {
   string creator =1;
   repeated Party parties = 2;
 }

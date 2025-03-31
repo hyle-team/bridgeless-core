@@ -58,13 +58,13 @@ func CmdSubmitParties() *cobra.Command {
 			var msg sdk.Msg
 			switch args[0] {
 			case "default":
-				msg = types.NewMsgSetParties(clientCtx.GetFromAddress().String(), partiesList)
+				msg = types.NewMsgSetPartiesList(clientCtx.GetFromAddress().String(), partiesList)
 			case "newbies":
-				msg = types.NewMsgSetNewbies(clientCtx.GetFromAddress().String(), partiesList)
+				msg = types.NewMsgSetNewbiesList(clientCtx.GetFromAddress().String(), partiesList)
 			case "goodbye":
-				msg = types.NewMsgSetGoodbye(clientCtx.GetFromAddress().String(), partiesList)
+				msg = types.NewMsgSetGoodbyeList(clientCtx.GetFromAddress().String(), partiesList)
 			case "blacklist":
-				msg = types.NewMsgSetBlacklistParties(clientCtx.GetFromAddress().String(), partiesList)
+				msg = types.NewMsgSetBlacklistPartiesList(clientCtx.GetFromAddress().String(), partiesList)
 			default:
 				return errors.New(fmt.Sprintf("invalid parties list type: %s", args[0]))
 			}

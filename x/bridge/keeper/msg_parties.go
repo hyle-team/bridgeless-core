@@ -6,7 +6,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 )
 
-func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetParties) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetPartiesList) (*types.MsgSetPartiesResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	if ok := m.Keeper.IsAdmin(msg.Creator, ctx); !ok {
 		return nil, types.ErrPermissionDenied
@@ -19,7 +19,7 @@ func (m msgServer) SetParties(goCtx context.Context, msg *types.MsgSetParties) (
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetNewbies) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetNewbiesList) (*types.MsgSetPartiesResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	if ok := m.Keeper.IsAdmin(msg.Creator, ctx); !ok {
 		return nil, types.ErrPermissionDenied
@@ -32,7 +32,7 @@ func (m msgServer) SetNewbieParties(goCtx context.Context, msg *types.MsgSetNewb
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetGoodbye) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetGoodbyePartiesList) (*types.MsgSetPartiesResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	if ok := m.Keeper.IsAdmin(msg.Creator, ctx); !ok {
 		return nil, types.ErrPermissionDenied
@@ -45,7 +45,7 @@ func (m msgServer) SetGoodbyeParties(goCtx context.Context, msg *types.MsgSetGoo
 	return &types.MsgSetPartiesResponse{}, nil
 }
 
-func (m msgServer) SetBlacklistParties(goCtx context.Context, msg *types.MsgSetBlacklistParties) (*types.MsgSetPartiesResponse, error) {
+func (m msgServer) SetBlacklistParties(goCtx context.Context, msg *types.MsgSetBlacklistPartiesList) (*types.MsgSetPartiesResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	if err := msg.ValidateBasic(); err != nil {
 		return nil, err
