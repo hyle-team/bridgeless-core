@@ -40,9 +40,5 @@ func (msg *MsgSetPartiesList) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 
-	if len(msg.Parties) == 0 {
-		return nil
-	}
-
 	return validateModuleParties(msg.Parties)
 }
