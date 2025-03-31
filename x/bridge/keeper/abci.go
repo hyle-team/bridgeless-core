@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingTypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/hyle-team/bridgeless-core/v12/cmd/config"
@@ -27,17 +26,15 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 			continue
 		}
 
-		partyIndex := isPartyInList(owner.String(), params.Parties)
-		newbieIndex := isPartyInList(owner.String(), params.Newbies)
-		goodbyeIndex := isPartyInList(owner.String(), params.GoodbyeList)
+		partiesIndex := partyIndex(owner.String(), params.Parties)
+		newbieIndex := partyIndex(owner.String(), params.Newbies)
+		goodbyeIndex := partyIndex(owner.String(), params.GoodbyeList)
 
 		delegationIsEnough := isEnoughDelegation(owner.String(), k.stakingKeeper.GetValidatorDelegations(ctx,
 			validator.GetOperator()), params.StakeThreshold)
-		fmt.Println(owner.String(), " index: ", partyIndex)
-		if partyIndex != -1 {
-			fmt.Println(delegationIsEnough)
+		if isPartyInList(partiesIndex) {
 			if !delegationIsEnough {
-				if goodbyeIndex == -1 {
+				if !isPartyInList(goodbyeIndex) {
 					// If party is an active Tss party but his delegation is not enough it is moved to goodbye list
 					params.GoodbyeList = append(params.GoodbyeList, &types.Party{Address: owner.String()})
 					paramsUpdated = true
@@ -48,7 +45,7 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 		}
 
 		// If party already in newbies list then check whether he has enough delegation
-		if newbieIndex != -1 && !delegationIsEnough {
+		if isPartyInList(newbieIndex) && !delegationIsEnough {
 			// If party was a newbie but his delegation became too small remove him from newbies
 			params.Newbies = append(params.Newbies[:newbieIndex], params.Newbies[newbieIndex+1:]...)
 			paramsUpdated = true
@@ -56,15 +53,15 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 		}
 
 		// If party is now in goodbye list but his delegation became eligible it is removed from list
-		if goodbyeIndex != -1 && delegationIsEnough {
-			params.GoodbyeList = append(params.GoodbyeList[:partyIndex], params.GoodbyeList[partyIndex+1:]...)
+		if isPartyInList(goodbyeIndex) && delegationIsEnough {
+			params.GoodbyeList = append(params.GoodbyeList[:goodbyeIndex], params.GoodbyeList[goodbyeIndex+1:]...)
 			paramsUpdated = true
 			continue
 		}
 
 		// If party was not processed yet and not in blacklist add it to newbies if it has enough delegation
-		if isPartyInList(owner.String(), params.Blacklist) == -1 && delegationIsEnough {
-			if newbieIndex == -1 {
+		if !isPartyInList(partyIndex(owner.String(), params.Blacklist)) && delegationIsEnough {
+			if !isPartyInList(newbieIndex) {
 				params.Newbies = append(params.Newbies, &types.Party{Address: owner.String()})
 				paramsUpdated = true
 			}
@@ -78,13 +75,17 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 	return []abci.ValidatorUpdate{}
 }
 
-func isPartyInList(party string, partyList []*types.Party) int {
+func partyIndex(party string, partyList []*types.Party) int {
 	for i, p := range partyList {
 		if party == p.Address {
 			return i
 		}
 	}
 	return -1
+}
+
+func isPartyInList(i int) bool {
+	return i >= 0
 }
 
 func isEnoughDelegation(partyAddr string, delegations stakingTypes.Delegations, stakingThreshold string) bool {
