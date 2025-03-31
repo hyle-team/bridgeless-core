@@ -25,8 +25,8 @@ func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 		paramtypes.NewParamSetPair(ParamModuleAdminKey, &p.ModuleAdmin, validateModuleAdmin),
 		paramtypes.NewParamSetPair(ParamModulePartiesListKey, &p.Parties, validateModuleParties),
 		paramtypes.NewParamSetPair(ParamModuleNewbiesListKey, &p.Newbies, validateNewbiePartiesList),
-		paramtypes.NewParamSetPair(ParamModuleGoodbyeListKey, &p.GoodbyeList, validateGoodbyePartiesList),
-		paramtypes.NewParamSetPair(ParamModuleBlacklistListKey, &p.Blacklist, validateBlacklistPartiesList),
+		paramtypes.NewParamSetPair(ParamModuleGoodbyePartiesListKey, &p.GoodbyeList, validateGoodbyePartiesList),
+		paramtypes.NewParamSetPair(ParamModuleBlacklistPartiesListKey, &p.Blacklist, validateBlacklistPartiesList),
 		paramtypes.NewParamSetPair(ParamModuleStakingThresholdKey, &p.StakeThreshold, validateStakeThreshold),
 		paramtypes.NewParamSetPair(ParamModuleTssThresholdKey, &p.TssThreshold, validateTssThreshold),
 	}

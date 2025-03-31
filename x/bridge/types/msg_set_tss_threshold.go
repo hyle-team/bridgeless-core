@@ -22,7 +22,7 @@ func (msg *MsgSetTssThreshold) Route() string {
 }
 
 func (msg *MsgSetTssThreshold) Type() string {
-	return TypeMsgSetParties
+	return TypeMsgSetTssThreshold
 }
 
 func (msg *MsgSetTssThreshold) GetSigners() []sdk.AccAddress {

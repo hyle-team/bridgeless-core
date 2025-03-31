@@ -8,13 +8,13 @@ import (
 
 var (
 	// ----- Param Keys -----
-	ParamModuleAdminKey            = []byte("ModuleAdmin")
-	ParamModulePartiesListKey      = []byte("Parties")
-	ParamModuleNewbiesListKey      = []byte("Newbies")
-	ParamModuleGoodbyeListKey      = []byte("Goodbye")
-	ParamModuleBlacklistListKey    = []byte("Blacklist")
-	ParamModuleStakingThresholdKey = []byte("StakingThreshold")
-	ParamModuleTssThresholdKey     = []byte("TssThreshold")
+	ParamModuleAdminKey                = []byte("ModuleAdmin")
+	ParamModulePartiesListKey          = []byte("PartiesList")
+	ParamModuleNewbiesListKey          = []byte("NewbiesList")
+	ParamModuleGoodbyePartiesListKey   = []byte("GoodbyePartiesList")
+	ParamModuleBlacklistPartiesListKey = []byte("BlacklistPartiesList")
+	ParamModuleStakingThresholdKey     = []byte("StakingThreshold")
+	ParamModuleTssThresholdKey         = []byte("TssThreshold")
 )
 
 const (
