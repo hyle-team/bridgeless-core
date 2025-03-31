@@ -52,13 +52,6 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) []abci.ValidatorUpdate {
 			continue
 		}
 
-		// If party is now in goodbye list but his delegation became eligible it is removed from list
-		if isPartyInList(goodbyeIndex) && delegationIsEnough {
-			params.GoodbyeList = append(params.GoodbyeList[:goodbyeIndex], params.GoodbyeList[goodbyeIndex+1:]...)
-			paramsUpdated = true
-			continue
-		}
-
 		// If party was not processed yet and not in blacklist add it to newbies if it has enough delegation
 		if !isPartyInList(partyIndex(owner.String(), params.Blacklist)) && delegationIsEnough {
 			if !isPartyInList(newbieIndex) {
