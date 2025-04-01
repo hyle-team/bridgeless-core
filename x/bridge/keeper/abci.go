@@ -46,7 +46,7 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) {
 			}
 
 			if delegationIsEnough && isPartyInList(goodbyeIndex) {
-				// If party is in goodbye list and has enough delegation
+				// If party is in goodbye list and has enough delegation it is removed from it
 				params.Newbies = append(params.Newbies[:goodbyeIndex], params.Newbies[goodbyeIndex+1:]...)
 				paramsUpdated = true
 			}
@@ -56,7 +56,7 @@ func (k *Keeper) EndBlocker(ctx sdk.Context) {
 
 		// If party already in newbies list then check whether he has enough delegation
 		if isPartyInList(newbieIndex) && !delegationIsEnough {
-			// If party was a newbie but his delegation became too small remove him from newbies
+			// If party was a newbie but his delegation became too small - remove him from newbies
 			params.Newbies = append(params.Newbies[:newbieIndex], params.Newbies[newbieIndex+1:]...)
 			paramsUpdated = true
 		}
