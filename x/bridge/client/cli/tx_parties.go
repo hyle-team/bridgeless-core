@@ -29,9 +29,9 @@ func TxPartiesCmd() *cobra.Command {
 
 func CmdSubmitParties() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "set [list-type (default,goodbye,newbies,blacklist)] [from_key_or_address] [parties-list]",
+		Use:   "set [list-type (default,goodbye,newbies,blacklist)] [from_key_or_address] [pas-list]",
 		Short: "Set a new parties list",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.RangeArgs(2, 3),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cmd.Flags().Set(flags.FlagFrom, args[1])
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -39,22 +39,23 @@ func CmdSubmitParties() *cobra.Command {
 				return errors.Wrap(err, "cannot get client tx context")
 			}
 
-			arg2 := args[2]
-			parties := strings.Split(arg2, ",")
-			for _, party := range parties {
-				_, err = sdk.AccAddressFromBech32(party)
-				if err != nil {
-					return errors.Wrap(err, "failed to set parties")
+			var partiesList []*types.Party
+			if len(args) == 3 {
+				parties := strings.Split(args[2], ",")
+				for _, party := range parties {
+					_, err = sdk.AccAddressFromBech32(party)
+					if err != nil {
+						return errors.Wrap(err, "failed to set parties")
+					}
+				}
+
+				for _, party := range parties {
+					partiesList = append(partiesList, &types.Party{
+						Address: party,
+					})
 				}
 			}
 
-			var partiesList []*types.Party
-
-			for _, party := range parties {
-				partiesList = append(partiesList, &types.Party{
-					Address: party,
-				})
-			}
 			var msg sdk.Msg
 			switch args[0] {
 			case "default":
