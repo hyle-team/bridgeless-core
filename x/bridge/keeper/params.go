@@ -29,10 +29,16 @@ func (k Keeper) IsParty(sender string, ctx sdk.Context) bool {
 
 func (k Keeper) ModuleAdmin(ctx sdk.Context) (adminAddress string) {
 	k.paramstore.Get(ctx, types.ParamModuleAdminKey, &adminAddress)
+
 	return
 }
 
 func (k Keeper) PartiesList(ctx sdk.Context) (parties []*types.Party) {
-	k.paramstore.Get(ctx, types.ParamModulePartiesKey, &parties)
+	k.paramstore.Get(ctx, types.ParamModulePartiesListKey, &parties)
+
 	return
+}
+
+func (k *Keeper) IsAdmin(sender string, ctx sdk.Context) bool {
+	return sender == k.ModuleAdmin(ctx)
 }

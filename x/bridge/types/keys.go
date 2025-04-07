@@ -8,8 +8,13 @@ import (
 
 var (
 	// ----- Param Keys -----
-	ParamModuleAdminKey   = []byte("ModuleAdmin")
-	ParamModulePartiesKey = []byte("Parties")
+	ParamModuleAdminKey                = []byte("ModuleAdmin")
+	ParamModulePartiesListKey          = []byte("PartiesList")
+	ParamModuleNewbiesListKey          = []byte("NewbiesList")
+	ParamModuleGoodbyePartiesListKey   = []byte("GoodbyePartiesList")
+	ParamModuleBlacklistPartiesListKey = []byte("BlacklistPartiesList")
+	ParamModuleStakingThresholdKey     = []byte("StakingThreshold")
+	ParamModuleTssThresholdKey         = []byte("TssThreshold")
 )
 
 const (
@@ -32,7 +37,7 @@ const (
 	StoreChainPrefix       = "chain"
 	StoreTransactionPrefix = "transaction"
 
-	//Attributes keys for bridge events
+	// Attributes keys for bridge events
 	AttributeKeyDepositTxHash     = "deposit_tx_hash"
 	AttributeKeyDepositNonce      = "deposit_nonce"
 	AttributeKeyDepositChainId    = "deposit_chain_id"
