@@ -28,7 +28,7 @@ func TxChainsCmd() *cobra.Command {
 
 func CmdInsertChain() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "insert [from_key_or_address] [token-json]",
+		Use:   "insert [from_key_or_address] [chain-json]",
 		Short: "Set a new chain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {

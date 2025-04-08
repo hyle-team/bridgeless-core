@@ -149,5 +149,6 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	return am.keeper.EndBlocker(ctx)
+	am.keeper.EndBlocker(ctx)
+	return []abci.ValidatorUpdate{}
 }
