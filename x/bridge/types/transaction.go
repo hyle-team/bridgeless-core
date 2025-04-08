@@ -1,6 +1,8 @@
 package types
 
 import (
+	errorsmod "cosmossdk.io/errors"
+	"errors"
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"math/big"
@@ -16,30 +18,30 @@ func validateTransaction(tx *Transaction) error {
 	}
 
 	if _, set := big.NewInt(0).SetString(tx.DepositAmount, 10); !set {
-		return fmt.Errorf("invalid deposit amount: %s", tx.DepositAmount)
+		return errors.New(fmt.Sprintf("invalid deposit amount: %s", tx.DepositAmount))
 	}
 
 	if _, set := big.NewInt(0).SetString(tx.WithdrawalAmount, 10); !set {
-		return fmt.Errorf("invalid withdrawal amount: %s", tx.WithdrawalAmount)
+		return errors.New(fmt.Sprintf("invalid withdrawal amount: %s", tx.WithdrawalAmount))
 	}
 
 	if _, set := big.NewInt(0).SetString(tx.WithdrawalAmount, 10); !set {
-		return fmt.Errorf("invalid commission amount: %s", tx.CommissionAmount)
+		return errors.New(fmt.Sprintf("invalid commission amount: %s", tx.CommissionAmount))
 	}
 
 	if len(tx.DepositChainId) == 0 || len(tx.WithdrawalChainId) == 0 {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "deposit chain id and withdrawal id cannot be empty")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "deposit chain id and withdrawal id cannot be empty")
 	}
 	if tx.WithdrawalChainId == tx.DepositChainId {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "withdrawal chain id cannot be the same as deposit chain id ")
+		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "withdrawal chain id cannot be the same as deposit chain id ")
 	}
 
 	if tx.Receiver == "" {
-		return fmt.Errorf("receiver cannot be empty")
+		return errors.New("receiver cannot be empty")
 	}
 
 	if tx.DepositTxHash == "" {
-		return fmt.Errorf("deposit tx hash cannot be empty")
+		return errors.New("deposit tx hash cannot be empty")
 	}
 
 	return nil
@@ -48,15 +50,15 @@ func validateTransaction(tx *Transaction) error {
 // ValidateChainTransaction is used to validate transaction details depending on certain chain type
 func ValidateChainTransaction(tx *Transaction, chainType ChainType) error {
 	if tx == nil {
-		return fmt.Errorf("transaction is nil")
+		return errors.New("transaction is nil")
 	}
 	if len(chainType.String()) == 0 {
-		return fmt.Errorf("chain type is empty")
+		return errors.New("chain type is empty")
 	}
 
 	// Only ZANO chain can have empty depositor address
 	if len(tx.Depositor) == 0 && chainType != ChainType_ZANO {
-		return fmt.Errorf("depositor address can`t be empty, unless it`s ZANO chain")
+		return errors.New("depositor address can`t be empty, unless it`s ZANO chain")
 	}
 
 	// Place for custom validation logic
