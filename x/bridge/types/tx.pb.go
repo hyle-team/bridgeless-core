@@ -6,11 +6,11 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-proto"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
-	_ "github.com/cosmos/gogoproto/gogoproto"
+	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/regen-network/cosmos-proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -751,23 +751,23 @@ func (m *MsgRemoveTokenInfoResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgRemoveTokenInfoResponse proto.InternalMessageInfo
 
-type MsgSetPartiesList struct {
+type MsgSetParties struct {
 	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
 }
 
-func (m *MsgSetPartiesList) Reset()         { *m = MsgSetPartiesList{} }
-func (m *MsgSetPartiesList) String() string { return proto.CompactTextString(m) }
-func (*MsgSetPartiesList) ProtoMessage()    {}
-func (*MsgSetPartiesList) Descriptor() ([]byte, []int) {
+func (m *MsgSetParties) Reset()         { *m = MsgSetParties{} }
+func (m *MsgSetParties) String() string { return proto.CompactTextString(m) }
+func (*MsgSetParties) ProtoMessage()    {}
+func (*MsgSetParties) Descriptor() ([]byte, []int) {
 	return fileDescriptor_41dc2e30e6049cae, []int{16}
 }
-func (m *MsgSetPartiesList) XXX_Unmarshal(b []byte) error {
+func (m *MsgSetParties) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgSetPartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgSetParties) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgSetPartiesList.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgSetParties.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -777,327 +777,31 @@ func (m *MsgSetPartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return b[:n], nil
 	}
 }
-func (m *MsgSetPartiesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetPartiesList.Merge(m, src)
+func (m *MsgSetParties) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgSetParties.Merge(m, src)
 }
-func (m *MsgSetPartiesList) XXX_Size() int {
+func (m *MsgSetParties) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgSetPartiesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetPartiesList.DiscardUnknown(m)
+func (m *MsgSetParties) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgSetParties.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgSetPartiesList proto.InternalMessageInfo
+var xxx_messageInfo_MsgSetParties proto.InternalMessageInfo
 
-func (m *MsgSetPartiesList) GetCreator() string {
+func (m *MsgSetParties) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgSetPartiesList) GetParties() []*Party {
+func (m *MsgSetParties) GetParties() []*Party {
 	if m != nil {
 		return m.Parties
 	}
 	return nil
 }
-
-type MsgSetNewbiesList struct {
-	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
-}
-
-func (m *MsgSetNewbiesList) Reset()         { *m = MsgSetNewbiesList{} }
-func (m *MsgSetNewbiesList) String() string { return proto.CompactTextString(m) }
-func (*MsgSetNewbiesList) ProtoMessage()    {}
-func (*MsgSetNewbiesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{17}
-}
-func (m *MsgSetNewbiesList) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetNewbiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetNewbiesList.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetNewbiesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetNewbiesList.Merge(m, src)
-}
-func (m *MsgSetNewbiesList) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetNewbiesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetNewbiesList.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetNewbiesList proto.InternalMessageInfo
-
-func (m *MsgSetNewbiesList) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgSetNewbiesList) GetParties() []*Party {
-	if m != nil {
-		return m.Parties
-	}
-	return nil
-}
-
-type MsgSetGoodbyePartiesList struct {
-	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
-}
-
-func (m *MsgSetGoodbyePartiesList) Reset()         { *m = MsgSetGoodbyePartiesList{} }
-func (m *MsgSetGoodbyePartiesList) String() string { return proto.CompactTextString(m) }
-func (*MsgSetGoodbyePartiesList) ProtoMessage()    {}
-func (*MsgSetGoodbyePartiesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{18}
-}
-func (m *MsgSetGoodbyePartiesList) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetGoodbyePartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetGoodbyePartiesList.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetGoodbyePartiesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetGoodbyePartiesList.Merge(m, src)
-}
-func (m *MsgSetGoodbyePartiesList) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetGoodbyePartiesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetGoodbyePartiesList.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetGoodbyePartiesList proto.InternalMessageInfo
-
-func (m *MsgSetGoodbyePartiesList) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgSetGoodbyePartiesList) GetParties() []*Party {
-	if m != nil {
-		return m.Parties
-	}
-	return nil
-}
-
-type MsgSetBlacklistPartiesList struct {
-	Creator string   `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Parties []*Party `protobuf:"bytes,2,rep,name=parties,proto3" json:"parties,omitempty"`
-}
-
-func (m *MsgSetBlacklistPartiesList) Reset()         { *m = MsgSetBlacklistPartiesList{} }
-func (m *MsgSetBlacklistPartiesList) String() string { return proto.CompactTextString(m) }
-func (*MsgSetBlacklistPartiesList) ProtoMessage()    {}
-func (*MsgSetBlacklistPartiesList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{19}
-}
-func (m *MsgSetBlacklistPartiesList) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetBlacklistPartiesList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetBlacklistPartiesList.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetBlacklistPartiesList) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetBlacklistPartiesList.Merge(m, src)
-}
-func (m *MsgSetBlacklistPartiesList) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetBlacklistPartiesList) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetBlacklistPartiesList.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetBlacklistPartiesList proto.InternalMessageInfo
-
-func (m *MsgSetBlacklistPartiesList) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgSetBlacklistPartiesList) GetParties() []*Party {
-	if m != nil {
-		return m.Parties
-	}
-	return nil
-}
-
-type MsgSetStakeThreshold struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Amount  string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-}
-
-func (m *MsgSetStakeThreshold) Reset()         { *m = MsgSetStakeThreshold{} }
-func (m *MsgSetStakeThreshold) String() string { return proto.CompactTextString(m) }
-func (*MsgSetStakeThreshold) ProtoMessage()    {}
-func (*MsgSetStakeThreshold) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{20}
-}
-func (m *MsgSetStakeThreshold) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetStakeThreshold) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetStakeThreshold.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetStakeThreshold) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetStakeThreshold.Merge(m, src)
-}
-func (m *MsgSetStakeThreshold) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetStakeThreshold) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetStakeThreshold.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetStakeThreshold proto.InternalMessageInfo
-
-func (m *MsgSetStakeThreshold) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgSetStakeThreshold) GetAmount() string {
-	if m != nil {
-		return m.Amount
-	}
-	return ""
-}
-
-type MsgSetTssThreshold struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Amount  uint32 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
-}
-
-func (m *MsgSetTssThreshold) Reset()         { *m = MsgSetTssThreshold{} }
-func (m *MsgSetTssThreshold) String() string { return proto.CompactTextString(m) }
-func (*MsgSetTssThreshold) ProtoMessage()    {}
-func (*MsgSetTssThreshold) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{21}
-}
-func (m *MsgSetTssThreshold) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetTssThreshold) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetTssThreshold.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetTssThreshold) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetTssThreshold.Merge(m, src)
-}
-func (m *MsgSetTssThreshold) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetTssThreshold) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetTssThreshold.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetTssThreshold proto.InternalMessageInfo
-
-func (m *MsgSetTssThreshold) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgSetTssThreshold) GetAmount() uint32 {
-	if m != nil {
-		return m.Amount
-	}
-	return 0
-}
-
-type MsgSetThresholdResponse struct {
-}
-
-func (m *MsgSetThresholdResponse) Reset()         { *m = MsgSetThresholdResponse{} }
-func (m *MsgSetThresholdResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgSetThresholdResponse) ProtoMessage()    {}
-func (*MsgSetThresholdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{22}
-}
-func (m *MsgSetThresholdResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgSetThresholdResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgSetThresholdResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgSetThresholdResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgSetThresholdResponse.Merge(m, src)
-}
-func (m *MsgSetThresholdResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgSetThresholdResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgSetThresholdResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgSetThresholdResponse proto.InternalMessageInfo
 
 type MsgSetPartiesResponse struct {
 }
@@ -1106,7 +810,7 @@ func (m *MsgSetPartiesResponse) Reset()         { *m = MsgSetPartiesResponse{} }
 func (m *MsgSetPartiesResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgSetPartiesResponse) ProtoMessage()    {}
 func (*MsgSetPartiesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_41dc2e30e6049cae, []int{23}
+	return fileDescriptor_41dc2e30e6049cae, []int{17}
 }
 func (m *MsgSetPartiesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1152,77 +856,61 @@ func init() {
 	proto.RegisterType((*MsgAddTokenInfoResponse)(nil), "core.bridge.MsgAddTokenInfoResponse")
 	proto.RegisterType((*MsgRemoveTokenInfo)(nil), "core.bridge.MsgRemoveTokenInfo")
 	proto.RegisterType((*MsgRemoveTokenInfoResponse)(nil), "core.bridge.MsgRemoveTokenInfoResponse")
-	proto.RegisterType((*MsgSetPartiesList)(nil), "core.bridge.MsgSetPartiesList")
-	proto.RegisterType((*MsgSetNewbiesList)(nil), "core.bridge.MsgSetNewbiesList")
-	proto.RegisterType((*MsgSetGoodbyePartiesList)(nil), "core.bridge.MsgSetGoodbyePartiesList")
-	proto.RegisterType((*MsgSetBlacklistPartiesList)(nil), "core.bridge.MsgSetBlacklistPartiesList")
-	proto.RegisterType((*MsgSetStakeThreshold)(nil), "core.bridge.MsgSetStakeThreshold")
-	proto.RegisterType((*MsgSetTssThreshold)(nil), "core.bridge.MsgSetTssThreshold")
-	proto.RegisterType((*MsgSetThresholdResponse)(nil), "core.bridge.MsgSetThresholdResponse")
+	proto.RegisterType((*MsgSetParties)(nil), "core.bridge.MsgSetParties")
 	proto.RegisterType((*MsgSetPartiesResponse)(nil), "core.bridge.MsgSetPartiesResponse")
 }
 
 func init() { proto.RegisterFile("bridge/tx.proto", fileDescriptor_41dc2e30e6049cae) }
 
 var fileDescriptor_41dc2e30e6049cae = []byte{
-	// 902 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x57, 0xcb, 0x6e, 0xf3, 0x44,
-	0x14, 0x8e, 0x9b, 0xd2, 0xcb, 0x49, 0x69, 0xa8, 0x29, 0xad, 0x63, 0x4a, 0x52, 0x0c, 0xa8, 0x55,
-	0x45, 0x63, 0x1a, 0x24, 0x90, 0x10, 0x9b, 0x86, 0x6b, 0x25, 0x02, 0xc5, 0x09, 0x08, 0xb5, 0x40,
-	0x65, 0xc7, 0x53, 0xc7, 0x6a, 0xec, 0x89, 0x3c, 0xd3, 0xd2, 0x6c, 0xe1, 0x05, 0x78, 0x07, 0x5e,
-	0x80, 0x05, 0x0f, 0xd1, 0x65, 0xc5, 0x06, 0x56, 0x08, 0xb5, 0x0b, 0x5e, 0x03, 0x79, 0x7c, 0xc9,
-	0xf8, 0x12, 0x27, 0x88, 0xbf, 0xab, 0x66, 0xf2, 0x9d, 0xf3, 0x9d, 0xef, 0x1c, 0x1f, 0x7f, 0xd3,
-	0x40, 0xd5, 0xf0, 0x6c, 0xd3, 0x42, 0x2a, 0xbd, 0x6d, 0x8e, 0x3c, 0x4c, 0xb1, 0x58, 0xe9, 0x63,
-	0x0f, 0x35, 0x83, 0x6f, 0xe5, 0xed, 0x3e, 0x26, 0x0e, 0x26, 0xaa, 0x43, 0x2c, 0xf5, 0xe6, 0xc8,
-	0xff, 0x13, 0x44, 0xc9, 0x8d, 0x30, 0xcd, 0xc1, 0x26, 0x1a, 0x12, 0x95, 0x7a, 0xba, 0x4b, 0xf4,
-	0x3e, 0xb5, 0xb1, 0x1b, 0x06, 0xd4, 0x52, 0x01, 0xf8, 0x0a, 0x4d, 0x81, 0xfa, 0x03, 0xdd, 0x9e,
-	0x02, 0x8d, 0x74, 0x8f, 0x8e, 0x43, 0x68, 0xd3, 0xc2, 0x16, 0x66, 0x1f, 0x55, 0xff, 0x53, 0x94,
-	0x10, 0x08, 0xbc, 0x08, 0x80, 0xe0, 0x10, 0x40, 0xca, 0x2f, 0x02, 0xbc, 0xd4, 0x21, 0x56, 0xf7,
-	0xda, 0x70, 0x6c, 0xda, 0x9b, 0x08, 0x24, 0xe2, 0x3b, 0xb0, 0x4a, 0xd8, 0xb7, 0x14, 0x79, 0x92,
-	0xb0, 0x2b, 0xec, 0xaf, 0xb6, 0xa5, 0xdf, 0x7f, 0x3b, 0xdc, 0x0c, 0xd3, 0x8f, 0x4d, 0xd3, 0x43,
-	0x84, 0x74, 0xa9, 0x67, 0xbb, 0x96, 0x36, 0x09, 0x15, 0xdb, 0xb0, 0xc6, 0x35, 0x4a, 0xa4, 0x85,
-	0xdd, 0xf2, 0x7e, 0xa5, 0x25, 0x35, 0xb9, 0x89, 0x35, 0xb9, 0x42, 0xed, 0xc5, 0xbb, 0xbf, 0x1a,
-	0x25, 0x2d, 0x91, 0xf3, 0xde, 0xfa, 0x8f, 0xff, 0xfc, 0x7a, 0x30, 0xe1, 0x54, 0x1a, 0xf0, 0x4a,
-	0xae, 0x48, 0x0d, 0x91, 0x11, 0x76, 0x09, 0x52, 0xce, 0x60, 0xbd, 0x43, 0xac, 0x13, 0x97, 0x20,
-	0x8f, 0xf6, 0xfc, 0x29, 0x8a, 0x12, 0x2c, 0xf7, 0x3d, 0xa4, 0x53, 0x1c, 0x8a, 0xd7, 0xa2, 0xa3,
-	0xd8, 0x84, 0xe7, 0xd8, 0xa0, 0xa5, 0x85, 0x5d, 0x61, 0xbf, 0xd2, 0x12, 0x93, 0xca, 0x7c, 0x24,
-	0xd4, 0x14, 0x84, 0x29, 0x12, 0x6c, 0x25, 0xb9, 0xe3, 0xaa, 0x3f, 0x09, 0xac, 0xec, 0x57, 0x23,
-	0x53, 0xa7, 0x68, 0x56, 0xd9, 0x1a, 0xac, 0x30, 0xbe, 0x0b, 0xdb, 0x64, 0x95, 0x17, 0xb5, 0x65,
-	0x76, 0x3e, 0x31, 0xc5, 0xf7, 0x61, 0xc5, 0x41, 0x54, 0x37, 0x75, 0xaa, 0x4b, 0x65, 0x26, 0x4a,
-	0xce, 0x8a, 0xea, 0x84, 0x11, 0xa1, 0xb8, 0x38, 0x23, 0xd4, 0xc7, 0x89, 0x88, 0xf5, 0x7d, 0xc4,
-	0xe4, 0x7d, 0x88, 0x86, 0xe8, 0xff, 0xc8, 0x0b, 0x0b, 0x70, 0x34, 0xb9, 0x63, 0xff, 0xc0, 0xdf,
-	0xd0, 0xe2, 0xb1, 0xb3, 0x25, 0xce, 0x1d, 0x3b, 0x4b, 0x8e, 0xc6, 0xce, 0xc2, 0x12, 0x63, 0x67,
-	0x70, 0x6e, 0x5b, 0xb3, 0xaa, 0xd6, 0x60, 0x85, 0xd1, 0x45, 0x6d, 0xf9, 0x90, 0x7f, 0x4e, 0xb5,
-	0x95, 0x2c, 0xf0, 0x1d, 0x54, 0x3b, 0xc4, 0x3a, 0x36, 0x4d, 0xd6, 0xed, 0x89, 0x7b, 0x89, 0x0b,
-	0x2a, 0xbc, 0x05, 0x8b, 0xb6, 0x7b, 0x89, 0xc3, 0x07, 0xb7, 0x95, 0x7d, 0x70, 0x7e, 0x7e, 0xd8,
-	0x1a, 0x8b, 0x54, 0x6a, 0xb0, 0x9d, 0xa2, 0x8f, 0x2b, 0x9b, 0x20, 0x76, 0x88, 0xa5, 0x21, 0x07,
-	0xdf, 0xa0, 0x79, 0x8a, 0x17, 0x2c, 0x15, 0xdf, 0x79, 0x39, 0xd9, 0xf9, 0x0e, 0xc8, 0xd9, 0x2a,
-	0xb1, 0x86, 0x73, 0xd8, 0xf0, 0x5f, 0x36, 0x44, 0x4f, 0x75, 0x8f, 0xda, 0x88, 0x7c, 0x66, 0x13,
-	0x5a, 0x20, 0xe1, 0x4d, 0x58, 0x1e, 0x05, 0x81, 0xe1, 0xab, 0x9e, 0x7c, 0xb2, 0x3e, 0xc9, 0x58,
-	0x8b, 0x42, 0x26, 0xe4, 0x9f, 0xa3, 0x1f, 0x8c, 0x67, 0x4d, 0x6e, 0x80, 0x14, 0x90, 0x7f, 0x82,
-	0xb1, 0x69, 0x8c, 0xd1, 0x53, 0x34, 0x60, 0xb2, 0xd9, 0x75, 0x11, 0x6d, 0x0f, 0xf5, 0xfe, 0xd5,
-	0xd0, 0x26, 0x4f, 0x32, 0xa6, 0x4f, 0x61, 0x33, 0xa8, 0xd2, 0xa5, 0xfa, 0x15, 0xea, 0x0d, 0x3c,
-	0x44, 0x06, 0x78, 0x68, 0x16, 0xf0, 0x6f, 0xc1, 0x92, 0xee, 0xe0, 0x6b, 0x97, 0x86, 0x6b, 0x1e,
-	0x9e, 0x94, 0x8f, 0xd9, 0x46, 0x75, 0x11, 0xed, 0x11, 0xf2, 0xdf, 0x79, 0x9e, 0x8f, 0x79, 0x82,
-	0xa5, 0xf5, 0x79, 0x22, 0x92, 0x78, 0x61, 0xb6, 0x83, 0x2b, 0x24, 0x5e, 0x98, 0x08, 0x68, 0xfd,
-	0xb1, 0x0a, 0xe5, 0x0e, 0xb1, 0x44, 0x13, 0xc4, 0x9c, 0x0b, 0x46, 0x49, 0x0c, 0x20, 0xd7, 0xdf,
-	0xe5, 0x83, 0xd9, 0x31, 0x51, 0x35, 0xf1, 0x0b, 0xa8, 0xf0, 0x4e, 0xf4, 0x72, 0x3a, 0x95, 0x03,
-	0xe5, 0xd7, 0x0a, 0x40, 0x9e, 0x90, 0x37, 0x99, 0x0c, 0x21, 0x07, 0x66, 0x09, 0x73, 0x7c, 0x65,
-	0xa2, 0x30, 0x30, 0xe3, 0x29, 0x0a, 0x19, 0x38, 0x4d, 0x61, 0xc2, 0x7f, 0x7d, 0x42, 0xfe, 0xf2,
-	0xc9, 0x10, 0x72, 0x60, 0x96, 0x30, 0xe7, 0xc6, 0x98, 0xb4, 0x3c, 0x85, 0x90, 0x03, 0xa7, 0xb5,
-	0x9c, 0x24, 0xd4, 0x60, 0x2d, 0xe1, 0xa3, 0x3b, 0xe9, 0x24, 0x1e, 0x95, 0x5f, 0x2f, 0x42, 0x63,
-	0xce, 0x73, 0xa8, 0xa6, 0x1d, 0xb2, 0x91, 0x4e, 0x4c, 0x05, 0xc8, 0x7b, 0x33, 0x02, 0x62, 0xf2,
-	0x53, 0x80, 0xc9, 0x26, 0x8b, 0xf5, 0xcc, 0xfe, 0x25, 0x6c, 0x51, 0x56, 0xa6, 0xe3, 0x31, 0xe3,
-	0xd7, 0xf0, 0x42, 0xec, 0x77, 0x45, 0xbc, 0x9c, 0x23, 0xce, 0xc5, 0xfb, 0x3d, 0x6c, 0x64, 0xac,
-	0x4e, 0x7c, 0x23, 0x27, 0x31, 0xeb, 0x86, 0x73, 0xf1, 0x1b, 0xf0, 0x62, 0x8e, 0xcd, 0x89, 0x7b,
-	0x39, 0xa9, 0x79, 0x5e, 0x38, 0x57, 0x8d, 0x6f, 0x59, 0x0f, 0x29, 0x93, 0x7b, 0x35, 0x27, 0x31,
-	0x19, 0x92, 0x5d, 0x94, 0x3c, 0x63, 0x12, 0xbf, 0x81, 0x6a, 0xda, 0xf8, 0x1a, 0x79, 0x89, 0x5c,
-	0xc0, 0x7c, 0xcc, 0xed, 0x2f, 0xef, 0x1e, 0xea, 0xc2, 0xfd, 0x43, 0x5d, 0xf8, 0xfb, 0xa1, 0x2e,
-	0xfc, 0xfc, 0x58, 0x2f, 0xdd, 0x3f, 0xd6, 0x4b, 0x7f, 0x3e, 0xd6, 0x4b, 0x67, 0xef, 0x5a, 0x36,
-	0x1d, 0x5c, 0x1b, 0xcd, 0x3e, 0x76, 0xd4, 0xc1, 0x78, 0x88, 0x0e, 0x29, 0xd2, 0x1d, 0x35, 0xa0,
-	0x1b, 0x22, 0x42, 0x0e, 0x7d, 0x7a, 0xf5, 0xe6, 0xa8, 0xa5, 0xde, 0xaa, 0xd1, 0xaf, 0x8a, 0xf1,
-	0x08, 0x11, 0x63, 0x89, 0xfd, 0x43, 0xfe, 0xf6, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x7c, 0x96,
-	0x1d, 0x5e, 0x6c, 0x0c, 0x00, 0x00,
+	// 737 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xcd, 0x4e, 0xd4, 0x50,
+	0x14, 0x9e, 0x32, 0x20, 0x70, 0x06, 0x21, 0x69, 0x10, 0x3a, 0x15, 0x67, 0x48, 0x35, 0x91, 0x10,
+	0x99, 0xca, 0x98, 0x68, 0x62, 0xdc, 0x30, 0xea, 0x82, 0xc4, 0x89, 0x5a, 0x30, 0x26, 0x18, 0x43,
+	0x3a, 0xd3, 0x4b, 0x69, 0x9c, 0xf6, 0x4e, 0x7a, 0x2f, 0x84, 0xd9, 0xea, 0x0b, 0xf8, 0x0e, 0xbe,
+	0x80, 0x0b, 0x1f, 0x82, 0x25, 0x71, 0xe5, 0xca, 0x18, 0x58, 0xf8, 0x18, 0x9a, 0xde, 0xde, 0x76,
+	0x6e, 0x7f, 0xc7, 0xc4, 0x15, 0xbd, 0xfd, 0xce, 0xf9, 0xbe, 0xef, 0x9c, 0x9e, 0x73, 0x19, 0x58,
+	0xea, 0xf9, 0x8e, 0x65, 0x23, 0x9d, 0x9e, 0xb5, 0x86, 0x3e, 0xa6, 0x58, 0xae, 0xf5, 0xb1, 0x8f,
+	0x5a, 0xe1, 0x5b, 0x75, 0xb5, 0x8f, 0x89, 0x8b, 0x89, 0xee, 0x12, 0x5b, 0x3f, 0xdd, 0x0e, 0xfe,
+	0x84, 0x51, 0x6a, 0x93, 0xa7, 0xb9, 0xd8, 0x42, 0x03, 0xa2, 0x53, 0xdf, 0xf4, 0x88, 0xd9, 0xa7,
+	0x0e, 0xf6, 0x78, 0x40, 0x3d, 0x15, 0x80, 0x3f, 0xa0, 0x02, 0xa8, 0x7f, 0x6c, 0x3a, 0x05, 0xd0,
+	0xd0, 0xf4, 0xe9, 0x88, 0x43, 0xcb, 0x36, 0xb6, 0x31, 0x7b, 0xd4, 0x83, 0xa7, 0x28, 0x21, 0x34,
+	0x78, 0x18, 0x02, 0xe1, 0x21, 0x84, 0xb4, 0x2f, 0x12, 0xdc, 0xe8, 0x12, 0x7b, 0xef, 0xa4, 0xe7,
+	0x3a, 0x74, 0x7f, 0x6c, 0x90, 0xc8, 0x0f, 0x61, 0x9e, 0xb0, 0xb7, 0x14, 0xf9, 0x8a, 0xb4, 0x2e,
+	0x6d, 0xcc, 0x77, 0x94, 0xef, 0xdf, 0xb6, 0x96, 0x79, 0xfa, 0x8e, 0x65, 0xf9, 0x88, 0x90, 0x3d,
+	0xea, 0x3b, 0x9e, 0x6d, 0x8c, 0x43, 0xe5, 0x0e, 0x2c, 0x08, 0x85, 0x12, 0x65, 0x6a, 0xbd, 0xba,
+	0x51, 0x6b, 0x2b, 0x2d, 0xa1, 0x63, 0x2d, 0x41, 0xa8, 0x33, 0x7d, 0xfe, 0xb3, 0x59, 0x31, 0x12,
+	0x39, 0x8f, 0x17, 0x3f, 0xfe, 0xfe, 0xba, 0x39, 0xe6, 0xd4, 0x9a, 0x70, 0x2b, 0xd7, 0xa4, 0x81,
+	0xc8, 0x10, 0x7b, 0x04, 0x69, 0x07, 0xb0, 0xd8, 0x25, 0xf6, 0xae, 0x47, 0x90, 0x4f, 0xf7, 0x83,
+	0x2e, 0xca, 0x0a, 0xcc, 0xf6, 0x7d, 0x64, 0x52, 0xcc, 0xcd, 0x1b, 0xd1, 0x51, 0x6e, 0xc1, 0x0c,
+	0x6b, 0xb4, 0x32, 0xb5, 0x2e, 0x6d, 0xd4, 0xda, 0x72, 0xd2, 0x59, 0x80, 0x70, 0x4f, 0x61, 0x98,
+	0xa6, 0xc0, 0x4a, 0x92, 0x3b, 0x56, 0xfd, 0x24, 0x31, 0xd9, 0x37, 0x43, 0xcb, 0xa4, 0x68, 0x92,
+	0x6c, 0x1d, 0xe6, 0x18, 0xdf, 0xa1, 0x63, 0x31, 0xe5, 0x69, 0x63, 0x96, 0x9d, 0x77, 0x2d, 0xf9,
+	0x09, 0xcc, 0xb9, 0x88, 0x9a, 0x96, 0x49, 0x4d, 0xa5, 0xca, 0x4c, 0xa9, 0x59, 0x53, 0x5d, 0x1e,
+	0xc1, 0xcd, 0xc5, 0x19, 0xdc, 0x9f, 0x60, 0x22, 0xf6, 0xf7, 0x9c, 0xd9, 0x7b, 0x86, 0x06, 0xe8,
+	0x7f, 0xec, 0x71, 0x01, 0x81, 0x26, 0xb7, 0xed, 0x4f, 0x83, 0x09, 0x2d, 0x6f, 0x3b, 0x1b, 0xe2,
+	0xdc, 0xb6, 0xb3, 0xe4, 0xa8, 0xed, 0x2c, 0x2c, 0xd1, 0x76, 0x06, 0xe7, 0x96, 0x35, 0x49, 0xb5,
+	0x0e, 0x73, 0x8c, 0x2e, 0x2a, 0x2b, 0x80, 0x82, 0x73, 0xaa, 0xac, 0xa4, 0xc0, 0x7b, 0x58, 0xea,
+	0x12, 0x7b, 0xc7, 0xb2, 0x58, 0xb5, 0xbb, 0xde, 0x11, 0x2e, 0x51, 0xb8, 0x0f, 0xd3, 0x8e, 0x77,
+	0x84, 0xf9, 0x87, 0x5b, 0xc9, 0x7e, 0xb8, 0x20, 0x9f, 0x97, 0xc6, 0x22, 0xb5, 0x3a, 0xac, 0xa6,
+	0xe8, 0x63, 0x65, 0x0b, 0xe4, 0x2e, 0xb1, 0x0d, 0xe4, 0xe2, 0x53, 0xf4, 0x2f, 0xe2, 0x25, 0x43,
+	0x25, 0x56, 0x5e, 0x4d, 0x56, 0xbe, 0x06, 0x6a, 0x56, 0x25, 0xf6, 0xf0, 0x16, 0xae, 0x07, 0xcb,
+	0x86, 0xe8, 0x2b, 0xd3, 0xa7, 0x0e, 0x22, 0x25, 0xf2, 0xf7, 0x60, 0x76, 0x18, 0x06, 0xf1, 0x35,
+	0x4f, 0x7e, 0xd5, 0x80, 0x60, 0x64, 0x44, 0x21, 0xda, 0x6a, 0x78, 0xd5, 0xc4, 0xc4, 0x91, 0x62,
+	0xfb, 0xcf, 0x0c, 0x54, 0xbb, 0xc4, 0x96, 0x2d, 0x90, 0x73, 0x2e, 0x22, 0x2d, 0xc1, 0x99, 0x7b,
+	0x0f, 0xa8, 0x9b, 0x93, 0x63, 0x22, 0x35, 0xf9, 0x25, 0xd4, 0xc4, 0x89, 0xbd, 0x99, 0x4e, 0x15,
+	0x40, 0xf5, 0x76, 0x09, 0x28, 0x12, 0x8a, 0xc3, 0x98, 0x21, 0x14, 0xc0, 0x2c, 0x61, 0xce, 0xfc,
+	0x8d, 0x1d, 0x86, 0x4b, 0x5b, 0xe0, 0x90, 0x81, 0x45, 0x0e, 0x13, 0x7b, 0x1a, 0x10, 0x8a, 0x97,
+	0x54, 0x86, 0x50, 0x00, 0xb3, 0x84, 0x39, 0x37, 0xcb, 0xb8, 0xe4, 0x02, 0x42, 0x01, 0x2c, 0x2a,
+	0x39, 0x49, 0x68, 0xc0, 0x42, 0x62, 0xdf, 0xd6, 0xd2, 0x49, 0x22, 0xaa, 0xde, 0x29, 0x43, 0x63,
+	0xce, 0x77, 0xb0, 0x94, 0xde, 0xa4, 0x66, 0x3a, 0x31, 0x15, 0xa0, 0xde, 0x9d, 0x10, 0x10, 0x93,
+	0xbf, 0x00, 0x10, 0x56, 0x44, 0xcd, 0xcc, 0x5f, 0x8c, 0xa9, 0x5a, 0x31, 0x16, 0xb1, 0x75, 0x5e,
+	0x9f, 0x5f, 0x36, 0xa4, 0x8b, 0xcb, 0x86, 0xf4, 0xeb, 0xb2, 0x21, 0x7d, 0xbe, 0x6a, 0x54, 0x2e,
+	0xae, 0x1a, 0x95, 0x1f, 0x57, 0x8d, 0xca, 0xc1, 0x23, 0xdb, 0xa1, 0xc7, 0x27, 0xbd, 0x56, 0x1f,
+	0xbb, 0xfa, 0xf1, 0x68, 0x80, 0xb6, 0x28, 0x32, 0x5d, 0x3d, 0x24, 0x1b, 0x20, 0x42, 0xb6, 0x02,
+	0x72, 0xfd, 0x74, 0xbb, 0xad, 0x9f, 0xe9, 0xd1, 0xaf, 0x94, 0xd1, 0x10, 0x91, 0xde, 0x35, 0xf6,
+	0x0f, 0xfe, 0xc1, 0xdf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xcb, 0x5e, 0xc3, 0x30, 0xbc, 0x08, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1246,12 +934,7 @@ type MsgClient interface {
 	DeleteToken(ctx context.Context, in *MsgDeleteToken, opts ...grpc.CallOption) (*MsgDeleteTokenResponse, error)
 	AddTokenInfo(ctx context.Context, in *MsgAddTokenInfo, opts ...grpc.CallOption) (*MsgAddTokenInfoResponse, error)
 	RemoveTokenInfo(ctx context.Context, in *MsgRemoveTokenInfo, opts ...grpc.CallOption) (*MsgRemoveTokenInfoResponse, error)
-	SetParties(ctx context.Context, in *MsgSetPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetNewbieParties(ctx context.Context, in *MsgSetNewbiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbyePartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
-	SetStakeThreshold(ctx context.Context, in *MsgSetStakeThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error)
-	SetTssThreshold(ctx context.Context, in *MsgSetTssThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error)
+	SetParties(ctx context.Context, in *MsgSetParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error)
 }
 
 type msgClient struct {
@@ -1334,54 +1017,9 @@ func (c *msgClient) RemoveTokenInfo(ctx context.Context, in *MsgRemoveTokenInfo,
 	return out, nil
 }
 
-func (c *msgClient) SetParties(ctx context.Context, in *MsgSetPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
+func (c *msgClient) SetParties(ctx context.Context, in *MsgSetParties, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
 	out := new(MsgSetPartiesResponse)
 	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetParties", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SetNewbieParties(ctx context.Context, in *MsgSetNewbiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
-	out := new(MsgSetPartiesResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetNewbieParties", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SetGoodbyeParties(ctx context.Context, in *MsgSetGoodbyePartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
-	out := new(MsgSetPartiesResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetGoodbyeParties", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SetBlacklistParties(ctx context.Context, in *MsgSetBlacklistPartiesList, opts ...grpc.CallOption) (*MsgSetPartiesResponse, error) {
-	out := new(MsgSetPartiesResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetBlacklistParties", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SetStakeThreshold(ctx context.Context, in *MsgSetStakeThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error) {
-	out := new(MsgSetThresholdResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetStakeThreshold", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SetTssThreshold(ctx context.Context, in *MsgSetTssThreshold, opts ...grpc.CallOption) (*MsgSetThresholdResponse, error) {
-	out := new(MsgSetThresholdResponse)
-	err := c.cc.Invoke(ctx, "/core.bridge.Msg/SetTssThreshold", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1399,12 +1037,7 @@ type MsgServer interface {
 	DeleteToken(context.Context, *MsgDeleteToken) (*MsgDeleteTokenResponse, error)
 	AddTokenInfo(context.Context, *MsgAddTokenInfo) (*MsgAddTokenInfoResponse, error)
 	RemoveTokenInfo(context.Context, *MsgRemoveTokenInfo) (*MsgRemoveTokenInfoResponse, error)
-	SetParties(context.Context, *MsgSetPartiesList) (*MsgSetPartiesResponse, error)
-	SetNewbieParties(context.Context, *MsgSetNewbiesList) (*MsgSetPartiesResponse, error)
-	SetGoodbyeParties(context.Context, *MsgSetGoodbyePartiesList) (*MsgSetPartiesResponse, error)
-	SetBlacklistParties(context.Context, *MsgSetBlacklistPartiesList) (*MsgSetPartiesResponse, error)
-	SetStakeThreshold(context.Context, *MsgSetStakeThreshold) (*MsgSetThresholdResponse, error)
-	SetTssThreshold(context.Context, *MsgSetTssThreshold) (*MsgSetThresholdResponse, error)
+	SetParties(context.Context, *MsgSetParties) (*MsgSetPartiesResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -1435,23 +1068,8 @@ func (*UnimplementedMsgServer) AddTokenInfo(ctx context.Context, req *MsgAddToke
 func (*UnimplementedMsgServer) RemoveTokenInfo(ctx context.Context, req *MsgRemoveTokenInfo) (*MsgRemoveTokenInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveTokenInfo not implemented")
 }
-func (*UnimplementedMsgServer) SetParties(ctx context.Context, req *MsgSetPartiesList) (*MsgSetPartiesResponse, error) {
+func (*UnimplementedMsgServer) SetParties(ctx context.Context, req *MsgSetParties) (*MsgSetPartiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetParties not implemented")
-}
-func (*UnimplementedMsgServer) SetNewbieParties(ctx context.Context, req *MsgSetNewbiesList) (*MsgSetPartiesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetNewbieParties not implemented")
-}
-func (*UnimplementedMsgServer) SetGoodbyeParties(ctx context.Context, req *MsgSetGoodbyePartiesList) (*MsgSetPartiesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetGoodbyeParties not implemented")
-}
-func (*UnimplementedMsgServer) SetBlacklistParties(ctx context.Context, req *MsgSetBlacklistPartiesList) (*MsgSetPartiesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetBlacklistParties not implemented")
-}
-func (*UnimplementedMsgServer) SetStakeThreshold(ctx context.Context, req *MsgSetStakeThreshold) (*MsgSetThresholdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetStakeThreshold not implemented")
-}
-func (*UnimplementedMsgServer) SetTssThreshold(ctx context.Context, req *MsgSetTssThreshold) (*MsgSetThresholdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetTssThreshold not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -1603,7 +1221,7 @@ func _Msg_RemoveTokenInfo_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _Msg_SetParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetPartiesList)
+	in := new(MsgSetParties)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1615,97 +1233,7 @@ func _Msg_SetParties_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/core.bridge.Msg/SetParties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetParties(ctx, req.(*MsgSetPartiesList))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SetNewbieParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetNewbiesList)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SetNewbieParties(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetNewbieParties",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetNewbieParties(ctx, req.(*MsgSetNewbiesList))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SetGoodbyeParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetGoodbyePartiesList)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SetGoodbyeParties(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetGoodbyeParties",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetGoodbyeParties(ctx, req.(*MsgSetGoodbyePartiesList))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SetBlacklistParties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetBlacklistPartiesList)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SetBlacklistParties(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetBlacklistParties",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetBlacklistParties(ctx, req.(*MsgSetBlacklistPartiesList))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SetStakeThreshold_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetStakeThreshold)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SetStakeThreshold(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetStakeThreshold",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetStakeThreshold(ctx, req.(*MsgSetStakeThreshold))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SetTssThreshold_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgSetTssThreshold)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SetTssThreshold(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/core.bridge.Msg/SetTssThreshold",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SetTssThreshold(ctx, req.(*MsgSetTssThreshold))
+		return srv.(MsgServer).SetParties(ctx, req.(*MsgSetParties))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1749,26 +1277,6 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetParties",
 			Handler:    _Msg_SetParties_Handler,
-		},
-		{
-			MethodName: "SetNewbieParties",
-			Handler:    _Msg_SetNewbieParties_Handler,
-		},
-		{
-			MethodName: "SetGoodbyeParties",
-			Handler:    _Msg_SetGoodbyeParties_Handler,
-		},
-		{
-			MethodName: "SetBlacklistParties",
-			Handler:    _Msg_SetBlacklistParties_Handler,
-		},
-		{
-			MethodName: "SetStakeThreshold",
-			Handler:    _Msg_SetStakeThreshold_Handler,
-		},
-		{
-			MethodName: "SetTssThreshold",
-			Handler:    _Msg_SetTssThreshold_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2282,7 +1790,7 @@ func (m *MsgRemoveTokenInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgSetPartiesList) Marshal() (dAtA []byte, err error) {
+func (m *MsgSetParties) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2292,12 +1800,12 @@ func (m *MsgSetPartiesList) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgSetPartiesList) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgSetParties) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgSetPartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgSetParties) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2323,233 +1831,6 @@ func (m *MsgSetPartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0xa
 	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetNewbiesList) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetNewbiesList) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetNewbiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Parties) > 0 {
-		for iNdEx := len(m.Parties) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Parties[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintTx(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetGoodbyePartiesList) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetGoodbyePartiesList) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetGoodbyePartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Parties) > 0 {
-		for iNdEx := len(m.Parties) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Parties[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintTx(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetBlacklistPartiesList) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetBlacklistPartiesList) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetBlacklistPartiesList) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Parties) > 0 {
-		for iNdEx := len(m.Parties) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Parties[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintTx(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetStakeThreshold) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetStakeThreshold) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetStakeThreshold) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Amount) > 0 {
-		i -= len(m.Amount)
-		copy(dAtA[i:], m.Amount)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Amount)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetTssThreshold) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetTssThreshold) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetTssThreshold) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Amount != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.Amount))
-		i--
-		dAtA[i] = 0x10
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgSetThresholdResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgSetThresholdResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgSetThresholdResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
 	return len(dAtA) - i, nil
 }
 
@@ -2794,7 +2075,7 @@ func (m *MsgRemoveTokenInfoResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgSetPartiesList) Size() (n int) {
+func (m *MsgSetParties) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2810,105 +2091,6 @@ func (m *MsgSetPartiesList) Size() (n int) {
 			n += 1 + l + sovTx(uint64(l))
 		}
 	}
-	return n
-}
-
-func (m *MsgSetNewbiesList) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if len(m.Parties) > 0 {
-		for _, e := range m.Parties {
-			l = e.Size()
-			n += 1 + l + sovTx(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *MsgSetGoodbyePartiesList) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if len(m.Parties) > 0 {
-		for _, e := range m.Parties {
-			l = e.Size()
-			n += 1 + l + sovTx(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *MsgSetBlacklistPartiesList) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if len(m.Parties) > 0 {
-		for _, e := range m.Parties {
-			l = e.Size()
-			n += 1 + l + sovTx(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *MsgSetStakeThreshold) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Amount)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	return n
-}
-
-func (m *MsgSetTssThreshold) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Amount != 0 {
-		n += 1 + sovTx(uint64(m.Amount))
-	}
-	return n
-}
-
-func (m *MsgSetThresholdResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
 	return n
 }
 
@@ -4270,7 +3452,7 @@ func (m *MsgRemoveTokenInfoResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgSetPartiesList) Unmarshal(dAtA []byte) error {
+func (m *MsgSetParties) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4293,10 +3475,10 @@ func (m *MsgSetPartiesList) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetPartiesList: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgSetParties: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetPartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgSetParties: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4365,619 +3547,6 @@ func (m *MsgSetPartiesList) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetNewbiesList) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetNewbiesList: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetNewbiesList: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Parties", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Parties = append(m.Parties, &Party{})
-			if err := m.Parties[len(m.Parties)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetGoodbyePartiesList) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetGoodbyePartiesList: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetGoodbyePartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Parties", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Parties = append(m.Parties, &Party{})
-			if err := m.Parties[len(m.Parties)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetBlacklistPartiesList) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetBlacklistPartiesList: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetBlacklistPartiesList: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Parties", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Parties = append(m.Parties, &Party{})
-			if err := m.Parties[len(m.Parties)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetStakeThreshold) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetStakeThreshold: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetStakeThreshold: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Amount = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetTssThreshold) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetTssThreshold: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetTssThreshold: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
-			}
-			m.Amount = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Amount |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgSetThresholdResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgSetThresholdResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgSetThresholdResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
