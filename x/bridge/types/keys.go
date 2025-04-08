@@ -6,17 +6,6 @@ import (
 	"strings"
 )
 
-var (
-	// ----- Param Keys -----
-	ParamModuleAdminKey                = []byte("ModuleAdmin")
-	ParamModulePartiesListKey          = []byte("PartiesList")
-	ParamModuleNewbiesListKey          = []byte("NewbiesList")
-	ParamModuleGoodbyePartiesListKey   = []byte("GoodbyePartiesList")
-	ParamModuleBlacklistPartiesListKey = []byte("BlacklistPartiesList")
-	ParamModuleStakingThresholdKey     = []byte("StakingThreshold")
-	ParamModuleTssThresholdKey         = []byte("TssThreshold")
-)
-
 const (
 	// ModuleName defines the module name
 	ModuleName = "bridge"
@@ -30,6 +19,10 @@ const (
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_bridge"
 
+	// ----- Param Keys -----
+	ParamModuleAdminKey   = "ModuleAdmin"
+	ParamModulePartiesKey = "Parties"
+
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token"
 	StoreTokenInfoPrefix   = "token-info"
@@ -37,7 +30,7 @@ const (
 	StoreChainPrefix       = "chain"
 	StoreTransactionPrefix = "transaction"
 
-	// Attributes keys for bridge events
+	//Attributes keys for bridge events
 	AttributeKeyDepositTxHash     = "deposit_tx_hash"
 	AttributeKeyDepositNonce      = "deposit_nonce"
 	AttributeKeyDepositChainId    = "deposit_chain_id"
