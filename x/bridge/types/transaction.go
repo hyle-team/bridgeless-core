@@ -23,6 +23,10 @@ func validateTransaction(tx *Transaction) error {
 		return fmt.Errorf("invalid withdrawal amount: %s", tx.WithdrawalAmount)
 	}
 
+	if _, set := big.NewInt(0).SetString(tx.WithdrawalAmount, 10); !set {
+		return fmt.Errorf("invalid commission amount: %s", tx.CommissionAmount)
+	}
+
 	if len(tx.DepositChainId) == 0 || len(tx.WithdrawalChainId) == 0 {
 		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "deposit chain id and withdrawal id cannot be empty")
 	}
