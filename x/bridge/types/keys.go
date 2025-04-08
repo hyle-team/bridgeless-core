@@ -30,7 +30,7 @@ const (
 	StoreChainPrefix       = "chain"
 	StoreTransactionPrefix = "transaction"
 
-	//Attributes keys for bridge events
+	// Attributes keys for bridge events
 	AttributeKeyDepositTxHash     = "deposit_tx_hash"
 	AttributeKeyDepositNonce      = "deposit_nonce"
 	AttributeKeyDepositChainId    = "deposit_chain_id"
@@ -45,6 +45,7 @@ const (
 	AttributeKeyWithdrawalToken   = "withdrawal_token"
 	AttributeKeySignature         = "signature"
 	AttributeKeyIsWrapped         = "is_wrapped"
+	AttributeKeyCommissionAmount  = "commission_amount"
 )
 
 func Prefix(p string) []byte {
