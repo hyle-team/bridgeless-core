@@ -4,11 +4,20 @@ import (
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ethereum/go-ethereum/common"
+	"math/big"
 )
 
 func validateToken(token *Token) error {
 	if token == nil {
 		return fmt.Errorf("token is nil")
+	}
+	commission, ok := big.NewInt(0).SetString(token.CommissionRate, 10)
+	if !ok {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid commission rate")
+	}
+
+	if commission.Cmp(big.NewInt(0)) < 0 {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "negative commission rate")
 	}
 
 	return validateTokenMetadata(&token.Metadata)

@@ -1242,6 +1242,8 @@ paths:
                           is_wrapped:
                             type: boolean
                       title: info is the token information on different chains
+                    commission_rate:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -1557,6 +1559,8 @@ paths:
                         is_wrapped:
                           type: boolean
                     title: info is the token information on different chains
+                  commission_rate:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -49439,6 +49443,8 @@ definitions:
                 is_wrapped:
                   type: boolean
             title: info is the token information on different chains
+          commission_rate:
+            type: string
   core.bridge.QueryGetTokenInfoResponse:
     type: object
     properties:
@@ -49513,6 +49519,8 @@ definitions:
                   is_wrapped:
                     type: boolean
               title: info is the token information on different chains
+            commission_rate:
+              type: string
       pagination:
         type: object
         properties:
@@ -49700,6 +49708,8 @@ definitions:
             is_wrapped:
               type: boolean
         title: info is the token information on different chains
+      commission_rate:
+        type: string
   core.bridge.TokenInfo:
     type: object
     properties:
