@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func validateToken(token *Token) error {
+func ValidateToken(token *Token) error {
 	if token == nil {
 		return errors.New("token is nil")
 	}
