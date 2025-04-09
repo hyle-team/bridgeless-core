@@ -45,5 +45,5 @@ func (msg *MsgInsertToken) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
 	}
 
-	return errorsmod.Wrap(ValidateToken(&msg.Token), sdkerrors.ErrInvalidRequest.Error())
+	return errorsmod.Wrap(validateToken(&msg.Token), sdkerrors.ErrInvalidRequest.Error())
 }

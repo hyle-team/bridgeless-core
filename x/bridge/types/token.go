@@ -10,10 +10,11 @@ import (
 	"strings"
 )
 
-func ValidateToken(token *Token) error {
+func validateToken(token *Token) error {
 	if token == nil {
 		return errors.New("token is nil")
 	}
+	fmt.Println("\n\n\n\n" + token.CommissionRate)
 	if len(strings.TrimSpace(token.CommissionRate)) == 0 {
 		return errors.New("commission rate is empty")
 	}

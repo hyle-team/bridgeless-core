@@ -6,6 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/keeper"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
+	"github.com/pkg/errors"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
@@ -24,6 +25,9 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 	for _, tx := range genState.Transactions {
 		k.SetTransaction(ctx, tx)
+	}
+	if err := genState.Validate(); err != nil {
+		panic(errors.Wrap(err, "invalid genesis state"))
 	}
 }
 
