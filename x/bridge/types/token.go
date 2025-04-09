@@ -7,19 +7,28 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
+	"strings"
 )
 
 func validateToken(token *Token) error {
 	if token == nil {
 		return errors.New("token is nil")
 	}
-	commission, ok := big.NewInt(0).SetString(token.CommissionRate, 10)
+	if len(strings.TrimSpace(token.CommissionRate)) == 0 {
+		return errors.New("commission rate is empty")
+	}
+
+	commission, ok := big.NewFloat(0).SetString(token.CommissionRate)
 	if !ok {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "invalid commission rate")
 	}
 
-	if commission.Cmp(big.NewInt(0)) < 0 {
+	if commission.Cmp(big.NewFloat(0)) < 0 {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "negative commission rate")
+	}
+
+	if commission.Cmp(big.NewFloat(100)) >= 0 {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidCoins, "commission rate can not be 100%% or higher than 100%")
 	}
 
 	return validateTokenMetadata(&token.Metadata)
