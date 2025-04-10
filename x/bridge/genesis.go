@@ -1,7 +1,7 @@
 package bridge
 
 import (
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/keeper"
@@ -35,17 +35,17 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	txs, _, err := k.GetPaginatedTransactions(ctx, &query.PageRequest{Limit: query.MaxLimit})
 	if err != nil {
-		panic(fmt.Errorf("failed to export genesis transactions: %w", err))
+		panic(errorsmod.Wrap(err, "failed to export genesis transactions"))
 	}
 
 	tokens, _, err := k.GetTokensWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
 	if err != nil {
-		panic(fmt.Errorf("failed to export genesis tokens: %w", err))
+		panic(errorsmod.Wrap(err, "failed to export genesis tokens"))
 	}
 
 	chains, _, err := k.GetChainsWithPagination(ctx, &query.PageRequest{Limit: query.MaxLimit})
 	if err != nil {
-		panic(fmt.Errorf("failed to export genesis chains: %w", err))
+		panic(errorsmod.Wrap(err, "failed to export genesis chains"))
 	}
 
 	return &types.GenesisState{
