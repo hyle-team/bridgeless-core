@@ -1800,7 +1800,8 @@ paths:
                     withdrawal_amount:
                       type: string
                     commission_amount:
-                      type: string
+                      type: number
+                      format: float
                 description: Transactions is a list of transactions.
               pagination:
                 type: object
@@ -2121,7 +2122,8 @@ paths:
                   withdrawal_amount:
                     type: string
                   commission_amount:
-                    type: string
+                    type: number
+                    format: float
             description: >-
               QueryTransactionByIdResponse is response type for the
               Query/TransactionById RPC method.
@@ -49601,7 +49603,8 @@ definitions:
           withdrawal_amount:
             type: string
           commission_amount:
-            type: string
+            type: number
+            format: float
     description: >-
       QueryTransactionByIdResponse is response type for the
       Query/TransactionById RPC method.
@@ -49644,7 +49647,8 @@ definitions:
             withdrawal_amount:
               type: string
             commission_amount:
-              type: string
+              type: number
+              format: float
         description: Transactions is a list of transactions.
       pagination:
         type: object
@@ -49768,7 +49772,8 @@ definitions:
       withdrawal_amount:
         type: string
       commission_amount:
-        type: string
+        type: number
+        format: float
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
