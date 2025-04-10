@@ -18,7 +18,11 @@ func validateToken(token *Token) error {
 		return errorsmod.Wrap(ErrInvalidCommissionRate, "negative commission rate")
 	}
 
-	if float64(token.CommissionRate)*math.Pow(10, float64(Precision)) >= math.Pow(10, float64(Precision)) {
+	if math.Floor(float64(token.CommissionRate)*ScaleFactor) == 0 {
+		return errorsmod.Wrap(ErrInvalidCommissionRate, "zero commission rate")
+	}
+
+	if math.Floor(float64(token.CommissionRate)*ScaleFactor) >= ScaleFactor {
 		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate can not be 100% or higher than 100%")
 	}
 
