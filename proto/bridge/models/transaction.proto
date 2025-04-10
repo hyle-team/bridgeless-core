@@ -23,5 +23,5 @@ message Transaction {
   string signature = 12;
   bool is_wrapped = 13;
   string withdrawal_amount = 14;
-  float commission_amount = 15;
+  string commission_amount = 15;
 }

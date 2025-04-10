@@ -1243,7 +1243,8 @@ paths:
                             type: boolean
                       title: info is the token information on different chains
                     commission_rate:
-                      type: string
+                      type: number
+                      format: float
               pagination:
                 type: object
                 properties:
@@ -1560,7 +1561,8 @@ paths:
                           type: boolean
                     title: info is the token information on different chains
                   commission_rate:
-                    type: string
+                    type: number
+                    format: float
         default:
           description: An unexpected error response.
           schema:
@@ -1800,8 +1802,7 @@ paths:
                     withdrawal_amount:
                       type: string
                     commission_amount:
-                      type: number
-                      format: float
+                      type: string
                 description: Transactions is a list of transactions.
               pagination:
                 type: object
@@ -2122,8 +2123,7 @@ paths:
                   withdrawal_amount:
                     type: string
                   commission_amount:
-                    type: number
-                    format: float
+                    type: string
             description: >-
               QueryTransactionByIdResponse is response type for the
               Query/TransactionById RPC method.
@@ -49446,7 +49446,8 @@ definitions:
                   type: boolean
             title: info is the token information on different chains
           commission_rate:
-            type: string
+            type: number
+            format: float
   core.bridge.QueryGetTokenInfoResponse:
     type: object
     properties:
@@ -49522,7 +49523,8 @@ definitions:
                     type: boolean
               title: info is the token information on different chains
             commission_rate:
-              type: string
+              type: number
+              format: float
       pagination:
         type: object
         properties:
@@ -49603,8 +49605,7 @@ definitions:
           withdrawal_amount:
             type: string
           commission_amount:
-            type: number
-            format: float
+            type: string
     description: >-
       QueryTransactionByIdResponse is response type for the
       Query/TransactionById RPC method.
@@ -49647,8 +49648,7 @@ definitions:
             withdrawal_amount:
               type: string
             commission_amount:
-              type: number
-              format: float
+              type: string
         description: Transactions is a list of transactions.
       pagination:
         type: object
@@ -49713,7 +49713,8 @@ definitions:
               type: boolean
         title: info is the token information on different chains
       commission_rate:
-        type: string
+        type: number
+        format: float
   core.bridge.TokenInfo:
     type: object
     properties:
@@ -49772,8 +49773,7 @@ definitions:
       withdrawal_amount:
         type: string
       commission_amount:
-        type: number
-        format: float
+        type: string
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
