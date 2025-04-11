@@ -28,7 +28,7 @@ func (msg *MsgInsertToken) Type() string {
 func (msg *MsgInsertToken) GetSigners() []sdk.AccAddress {
 	accAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		panic(errorsmod.Wrap(err, "invalid creator address"))
+		panic(err)
 	}
 
 	return []sdk.AccAddress{accAddress}
@@ -45,9 +45,5 @@ func (msg *MsgInsertToken) ValidateBasic() error {
 		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address: %s", err)
 	}
 
-	if err = validateToken(&msg.Token); err != nil {
-		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, err.Error())
-	}
-
-	return nil
+	return errorsmod.Wrap(validateToken(&msg.Token), sdkerrors.ErrInvalidRequest.Error())
 }

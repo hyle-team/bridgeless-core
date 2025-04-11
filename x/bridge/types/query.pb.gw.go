@@ -937,7 +937,7 @@ var (
 
 	pattern_Query_Transactions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"cosmos", "bridge", "transactions"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_TransactionById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "bridge", "transactions", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_TransactionById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 3, 0, 4, 1, 5, 3}, []string{"cosmos", "bridge", "transactions", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_GetTokenById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmos", "bridge", "tokens", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
