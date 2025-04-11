@@ -2318,6 +2318,7 @@ paths:
           in: path
           required: true
           type: string
+          pattern: .+
       tags:
         - Query
   /cosmos/multisig/group:

@@ -26,7 +26,7 @@ service Query {
 
   // TransactionById queries a transaction by ID.
   rpc TransactionById(QueryTransactionByIdRequest) returns (QueryTransactionByIdResponse) {
-    option (google.api.http).get = "/cosmos/bridge/transactions/{id}";
+    option (google.api.http).get = "/cosmos/bridge/transactions/{id=**}";
   }
 
   // Token by id queries a token by id.
