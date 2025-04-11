@@ -6,7 +6,6 @@ import (
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/ethereum/go-ethereum/common"
-	"math"
 )
 
 func validateToken(token *Token) error {
@@ -15,15 +14,11 @@ func validateToken(token *Token) error {
 	}
 
 	if token.CommissionRate < 0 {
-		return errorsmod.Wrap(ErrInvalidCommissionRate, "negative commission rate")
+		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate must be positive")
 	}
 
-	if math.Floor(float64(token.CommissionRate)*ScaleFactor) == 0 {
-		return errorsmod.Wrap(ErrInvalidCommissionRate, "zero commission rate")
-	}
-
-	if math.Floor(float64(token.CommissionRate)*ScaleFactor) >= ScaleFactor {
-		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate can not be 100% or higher than 100%")
+	if token.CommissionRate > 100 {
+		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate must be <= 100")
 	}
 
 	return validateTokenMetadata(&token.Metadata)
