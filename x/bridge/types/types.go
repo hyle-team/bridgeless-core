@@ -1,3 +1,3 @@
 package types
 
-const Precision int = 5
+const CommissionPrecision int = 5
