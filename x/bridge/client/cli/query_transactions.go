@@ -53,7 +53,7 @@ func CmdQueryTransactionById() *cobra.Command {
 				return err
 			}
 
-			nonce, ok := new(big.Int).SetString(args[2], 10)
+			nonce, ok := big.NewInt(0).SetString(args[2], 10)
 			if !ok {
 				return errors.New(fmt.Sprintf("invalid nonce: %s", args[2]))
 			}
