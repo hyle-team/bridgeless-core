@@ -2079,7 +2079,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmos/bridge/transactions/{id}':
+  '/cosmos/bridge/transactions/{chain_id}/{tx_hash}/{tx_nonce}':
     get:
       summary: TransactionById queries a transaction by ID.
       operationId: CoreBridgeTransactionById
@@ -2313,12 +2313,20 @@ paths:
                           "value": "1.212s"
                         }
       parameters:
-        - name: id
+        - name: chain_id
           description: id defines the unique transaction identifier.
           in: path
           required: true
           type: string
-          pattern: .+
+        - name: tx_hash
+          in: path
+          required: true
+          type: string
+        - name: tx_nonce
+          in: path
+          required: true
+          type: string
+          format: uint64
       tags:
         - Query
   /cosmos/multisig/group:
