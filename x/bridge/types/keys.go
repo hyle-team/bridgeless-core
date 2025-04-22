@@ -22,6 +22,7 @@ const (
 	// ----- Param Keys -----
 	ParamModuleAdminKey   = "ModuleAdmin"
 	ParamModulePartiesKey = "Parties"
+	ParamTssThresholdKey  = "TssThreshold"
 
 	// ---- Store Prefixes ------
 	StoreTokenPrefix       = "token"
