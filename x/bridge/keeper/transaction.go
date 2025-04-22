@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
@@ -48,4 +49,43 @@ func (k Keeper) GetPaginatedTransactions(
 	}
 
 	return transactions, pageRes, nil
+}
+
+func (k Keeper) SubmitTx(ctx sdk.Context, transaction *types.Transaction, submitter string) error {
+	// Check whether tx has enough submissions to be added to core
+	submitters, found := k.GetTransactionSubmitters(ctx, k.TxHash(transaction))
+	threshold := k.GetParams(ctx).TssThreshold
+
+	// If we have already hit the threshold, nothing to do
+	if found && len(submitters) >= int(threshold) {
+		return nil
+	}
+
+	// If tx has been submitted before with the same address new submission is rejected
+	if isSubmitter(submitters, submitter) {
+		return errorsmod.Wrap(types.ErrTranscationAlreadySubmitted,
+			"transaction has been already submitted by this address")
+	}
+
+	submitters = append(submitters, submitter)
+	k.SetTransactionSubmitters(ctx, transaction, submitters)
+
+	// If tx has not been submitted yet or has not enough submissions (less than tss threshold param)
+	// it is not set to core
+	if len(submitters) >= int(threshold) {
+		k.SetTransaction(ctx, *transaction)
+		emitSubmitEvent(ctx, *transaction)
+	}
+
+	return nil
+}
+
+func isSubmitter(submitters []string, submitter string) bool {
+	for _, s := range submitters {
+		if submitter == s {
+			return true
+		}
+	}
+
+	return false
 }

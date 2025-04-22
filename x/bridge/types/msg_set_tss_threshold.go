@@ -41,5 +41,9 @@ func (msg *MsgSetTssThreshold) GetSignBytes() []byte {
 
 func (msg *MsgSetTssThreshold) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
-	return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid submitter address: %s", err)
+	if err != nil {
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid submitter address: %s", err)
+
+	}
+	return nil
 }
