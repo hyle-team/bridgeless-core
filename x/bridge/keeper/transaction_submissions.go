@@ -18,17 +18,17 @@ func (k Keeper) SetTransactionSubmitters(sdkCtx sdk.Context, transaction *types.
 
 }
 
-func (k Keeper) GetTransactionSubmitters(sdkCtx sdk.Context, hash common.Hash) (submitters []string, found bool) {
+func (k Keeper) GetTransactionSubmitters(sdkCtx sdk.Context, hash common.Hash) (submitters []string) {
 	tStore := prefix.NewStore(sdkCtx.KVStore(k.storeKey), types.Prefix(types.StoreTransactionSubmissionsPrefix))
 
 	bz := tStore.Get(hash.Bytes())
 	if bz == nil {
-		return submitters, found
+		return submitters
 	}
 
 	gob.NewDecoder(bytes.NewBuffer(bz)).Decode(&submitters)
 
-	return submitters, true
+	return submitters
 }
 
 func (k Keeper) TxHash(tx *types.Transaction) common.Hash {

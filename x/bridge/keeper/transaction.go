@@ -53,13 +53,8 @@ func (k Keeper) GetPaginatedTransactions(
 
 func (k Keeper) SubmitTx(ctx sdk.Context, transaction *types.Transaction, submitter string) error {
 	// Check whether tx has enough submissions to be added to core
-	submitters, found := k.GetTransactionSubmitters(ctx, k.TxHash(transaction))
+	submitters := k.GetTransactionSubmitters(ctx, k.TxHash(transaction))
 	threshold := k.GetParams(ctx).TssThreshold
-
-	// If we have already hit the threshold, nothing to do
-	if found && len(submitters) >= int(threshold) {
-		return nil
-	}
 
 	// If tx has been submitted before with the same address new submission is rejected
 	if isSubmitter(submitters, submitter) {
@@ -72,7 +67,7 @@ func (k Keeper) SubmitTx(ctx sdk.Context, transaction *types.Transaction, submit
 
 	// If tx has not been submitted yet or has not enough submissions (less than tss threshold param)
 	// it is not set to core
-	if len(submitters) >= int(threshold) {
+	if len(submitters) == int(threshold+1) {
 		k.SetTransaction(ctx, *transaction)
 		emitSubmitEvent(ctx, *transaction)
 	}
