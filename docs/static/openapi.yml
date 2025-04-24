@@ -1246,8 +1246,7 @@ paths:
                             type: boolean
                       title: info is the token information on different chains
                     commission_rate:
-                      type: number
-                      format: float
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -1564,8 +1563,7 @@ paths:
                           type: boolean
                     title: info is the token information on different chains
                   commission_rate:
-                    type: number
-                    format: float
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -49463,8 +49461,7 @@ definitions:
                   type: boolean
             title: info is the token information on different chains
           commission_rate:
-            type: number
-            format: float
+            type: string
   core.bridge.QueryGetTokenInfoResponse:
     type: object
     properties:
@@ -49540,8 +49537,7 @@ definitions:
                     type: boolean
               title: info is the token information on different chains
             commission_rate:
-              type: number
-              format: float
+              type: string
       pagination:
         type: object
         properties:
@@ -49733,8 +49729,7 @@ definitions:
               type: boolean
         title: info is the token information on different chains
       commission_rate:
-        type: number
-        format: float
+        type: string
   core.bridge.TokenInfo:
     type: object
     properties:
