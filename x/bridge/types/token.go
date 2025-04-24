@@ -2,6 +2,7 @@ package types
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	sdkmath "cosmossdk.io/math"
 	"errors"
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -13,12 +14,18 @@ func validateToken(token *Token) error {
 		return errors.New("token is nil")
 	}
 
-	if token.CommissionRate < 0 {
+	rate, err := sdkmath.LegacyNewDecFromStr(token.CommissionRate)
+
+	if err != nil {
+		return errorsmod.Wrap(ErrInvalidCommissionRate, err.Error())
+	}
+
+	if rate.IsNegative() {
 		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate must be positive")
 	}
 
-	if token.CommissionRate > 100 {
-		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate must be <= 100")
+	if rate.GT(sdkmath.LegacyNewDec(1)) {
+		return errorsmod.Wrap(ErrInvalidCommissionRate, "commission rate must be <= 100%")
 	}
 
 	return validateTokenMetadata(&token.Metadata)
