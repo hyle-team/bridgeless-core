@@ -25,3 +25,8 @@ message Transaction {
   string withdrawal_amount = 14;
   string commission_amount = 15;
 }
+
+message TransactionSubmissions{
+  string tx_hash = 1;
+  repeated string submitters = 2;
+}
