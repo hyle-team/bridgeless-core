@@ -170,7 +170,7 @@ import (
 	"github.com/hyle-team/bridgeless-core/v12/x/recovery"
 	recoverykeeper "github.com/hyle-team/bridgeless-core/v12/x/recovery/keeper"
 	recoverytypes "github.com/hyle-team/bridgeless-core/v12/x/recovery/types"
-	revenue "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1"
+	"github.com/hyle-team/bridgeless-core/v12/x/revenue/v1"
 	revenuekeeper "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/keeper"
 	revenuetypes "github.com/hyle-team/bridgeless-core/v12/x/revenue/v1/types"
 	"github.com/hyle-team/bridgeless-core/v12/x/vesting"
@@ -982,6 +982,20 @@ func NewBridge(
 		},
 	)
 
+	app.UpgradeKeeper.SetUpgradeHandler(
+		"v12.1.17-rc1",
+		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
+			bridgeParams := bridgetypes.Params{
+				ModuleAdmin:  app.BridgeKeeper.ModuleAdmin(ctx),
+				Parties:      app.BridgeKeeper.PartiesList(ctx),
+				TssThreshold: 0,
+			}
+			app.BridgeKeeper.SetParams(ctx, bridgeParams)
+
+			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
+		},
+	)
+
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
 			tmos.Exit(err.Error())
@@ -1287,7 +1301,7 @@ func initParamsKeeper(
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	// ethermint subspaces
-	paramsKeeper.Subspace(evmtypes.ModuleName).WithKeyTable(evmtypes.ParamKeyTable()) //nolint: staticcheck
+	paramsKeeper.Subspace(evmtypes.ModuleName).WithKeyTable(evmtypes.ParamKeyTable()) // nolint: staticcheck
 	paramsKeeper.Subspace(feemarkettypes.ModuleName).WithKeyTable(feemarkettypes.ParamKeyTable())
 	// evmos subspaces
 	paramsKeeper.Subspace(erc20types.ModuleName)
