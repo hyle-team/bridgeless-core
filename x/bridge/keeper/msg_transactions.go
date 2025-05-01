@@ -34,11 +34,9 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 			return nil, errorsmod.Wrap(types.InvalidTransaction, err.Error())
 		}
 
-		m.SetTransaction(ctx, tx)
-
-		// emit submit deposit event to notify users about new submitted deposit
-		emitSubmitEvent(ctx, tx)
-
+		if err = m.SubmitTx(ctx, &tx, msg.Submitter); err != nil {
+			return nil, errorsmod.Wrap(types.InvalidTransaction, err.Error())
+		}
 	}
 
 	return &types.MsgSubmitTransactionsResponse{}, nil
@@ -59,5 +57,7 @@ func emitSubmitEvent(sdkCtx sdk.Context, transaction types.Transaction) {
 		sdk.NewAttribute(types.AttributeKeyWithdrawalTxHash, transaction.WithdrawalTxHash),
 		sdk.NewAttribute(types.AttributeKeyWithdrawalToken, transaction.WithdrawalToken),
 		sdk.NewAttribute(types.AttributeKeySignature, transaction.Signature),
-		sdk.NewAttribute(types.AttributeKeyIsWrapped, strconv.FormatBool(transaction.IsWrapped))))
+		sdk.NewAttribute(types.AttributeKeyIsWrapped, strconv.FormatBool(transaction.IsWrapped)),
+		sdk.NewAttribute(types.AttributeKeyCommissionAmount, transaction.CommissionAmount)))
+
 }

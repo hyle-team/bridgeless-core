@@ -6,6 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/keeper"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
+	"github.com/pkg/errors"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
@@ -24,6 +25,14 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 	for _, tx := range genState.Transactions {
 		k.SetTransaction(ctx, tx)
+	}
+
+	for _, txSubmissions := range genState.TransactionsSubmissions {
+		k.SetTransactionSubmissions(ctx, &txSubmissions)
+	}
+
+	if err := genState.Validate(); err != nil {
+		panic(errors.Wrap(err, "invalid genesis state"))
 	}
 }
 
@@ -44,10 +53,13 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 		panic(errorsmod.Wrap(err, "failed to export genesis chains"))
 	}
 
+	txsWithSubmissions, _, err := k.GetPaginatedTransactionsSubmissions(ctx, &query.PageRequest{Limit: query.MaxLimit})
+
 	return &types.GenesisState{
-		Params:       k.GetParams(ctx),
-		Chains:       chains,
-		Tokens:       tokens,
-		Transactions: txs,
+		Params:                  k.GetParams(ctx),
+		Chains:                  chains,
+		Tokens:                  tokens,
+		Transactions:            txs,
+		TransactionsSubmissions: txsWithSubmissions,
 	}
 }
