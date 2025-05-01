@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"math/big"
 )
 
@@ -42,6 +44,20 @@ func validateTransaction(tx *Transaction) error {
 
 	if tx.DepositTxHash == "" {
 		return errors.New("deposit tx hash cannot be empty")
+	}
+
+	return nil
+}
+
+func validateTransactionSubmissions(txSubmissions *TransactionSubmissions) error {
+	if _, err := hexutil.Decode(txSubmissions.TxHash); err != nil {
+		return errorsmod.Wrap(ErrInvalidTxHash, err.Error())
+	}
+
+	for _, submitter := range txSubmissions.Submitters {
+		if !common.IsHexAddress(submitter) {
+			return errorsmod.Wrap(sdkerrors.ErrInvalidAddress, fmt.Sprintf("invalid submitter: %s", submitter))
+		}
 	}
 
 	return nil

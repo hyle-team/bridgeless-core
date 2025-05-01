@@ -8,6 +8,11 @@ import (
 
 var ErrInvalidPeriod = errors.New("period cannot be 0")
 
+const (
+	DefaultPrunePeriod  = 240
+	DefaultVotingPeriod = 120
+)
+
 // NewParams creates a new Params instance
 func NewParams() Params {
 	return Params{}
@@ -15,7 +20,10 @@ func NewParams() Params {
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return NewParams()
+	return Params{
+		PrunePeriod:  DefaultPrunePeriod,
+		VotingPeriod: DefaultVotingPeriod,
+	}
 }
 
 // Validate validates the set of params
