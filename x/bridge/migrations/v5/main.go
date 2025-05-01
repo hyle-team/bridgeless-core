@@ -33,7 +33,7 @@ func migrateTxs(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.BinaryC
 	for ; iterator.Valid(); iterator.Next() {
 
 		// get oldToken data without tx_data field
-		var oldToken transaction
+		var oldToken transaction1
 		cdc.MustUnmarshal(iterator.Value(), &oldToken)
 
 		// set the values of new fields

@@ -23,7 +23,7 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type transaction struct {
+type transaction1 struct {
 	DepositChainId    string `protobuf:"bytes,1,opt,name=deposit_chain_id,json=depositChainId,proto3" json:"deposit_chain_id,omitempty"`
 	DepositTxHash     string `protobuf:"bytes,2,opt,name=deposit_tx_hash,json=depositTxHash,proto3" json:"deposit_tx_hash,omitempty"`
 	DepositTxIndex    uint64 `protobuf:"varint,3,opt,name=deposit_tx_index,json=depositTxIndex,proto3" json:"deposit_tx_index,omitempty"`
@@ -40,16 +40,16 @@ type transaction struct {
 	WithdrawalAmount  string `protobuf:"bytes,14,opt,name=withdrawal_amount,json=withdrawalAmount,proto3" json:"withdrawal_amount,omitempty"`
 }
 
-func (m *transaction) Reset()         { *m = transaction{} }
-func (m *transaction) String() string { return proto.CompactTextString(m) }
-func (*transaction) ProtoMessage()    {}
-func (*transaction) Descriptor() ([]byte, []int) {
+func (m *transaction1) Reset()         { *m = transaction1{} }
+func (m *transaction1) String() string { return proto.CompactTextString(m) }
+func (*transaction1) ProtoMessage()    {}
+func (*transaction1) Descriptor() ([]byte, []int) {
 	return fileDescriptor_8fcaf7a078652736, []int{0}
 }
-func (m *transaction) XXX_Unmarshal(b []byte) error {
+func (m *transaction1) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *transaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *transaction1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Transaction.Marshal(b, m, deterministic)
 	} else {
@@ -61,110 +61,110 @@ func (m *transaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *transaction) XXX_Merge(src proto.Message) {
+func (m *transaction1) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Transaction.Merge(m, src)
 }
-func (m *transaction) XXX_Size() int {
+func (m *transaction1) XXX_Size() int {
 	return m.Size()
 }
-func (m *transaction) XXX_DiscardUnknown() {
+func (m *transaction1) XXX_DiscardUnknown() {
 	xxx_messageInfo_Transaction.DiscardUnknown(m)
 }
 
 var xxx_messageInfo_Transaction proto.InternalMessageInfo
 
-func (m *transaction) GetDepositChainId() string {
+func (m *transaction1) GetDepositChainId() string {
 	if m != nil {
 		return m.DepositChainId
 	}
 	return ""
 }
 
-func (m *transaction) GetDepositTxHash() string {
+func (m *transaction1) GetDepositTxHash() string {
 	if m != nil {
 		return m.DepositTxHash
 	}
 	return ""
 }
 
-func (m *transaction) GetDepositTxIndex() uint64 {
+func (m *transaction1) GetDepositTxIndex() uint64 {
 	if m != nil {
 		return m.DepositTxIndex
 	}
 	return 0
 }
 
-func (m *transaction) GetDepositBlock() uint64 {
+func (m *transaction1) GetDepositBlock() uint64 {
 	if m != nil {
 		return m.DepositBlock
 	}
 	return 0
 }
 
-func (m *transaction) GetDepositToken() string {
+func (m *transaction1) GetDepositToken() string {
 	if m != nil {
 		return m.DepositToken
 	}
 	return ""
 }
 
-func (m *transaction) GetDepositAmount() string {
+func (m *transaction1) GetDepositAmount() string {
 	if m != nil {
 		return m.DepositAmount
 	}
 	return ""
 }
 
-func (m *transaction) GetDepositor() string {
+func (m *transaction1) GetDepositor() string {
 	if m != nil {
 		return m.Depositor
 	}
 	return ""
 }
 
-func (m *transaction) GetReceiver() string {
+func (m *transaction1) GetReceiver() string {
 	if m != nil {
 		return m.Receiver
 	}
 	return ""
 }
 
-func (m *transaction) GetWithdrawalChainId() string {
+func (m *transaction1) GetWithdrawalChainId() string {
 	if m != nil {
 		return m.WithdrawalChainId
 	}
 	return ""
 }
 
-func (m *transaction) GetWithdrawalTxHash() string {
+func (m *transaction1) GetWithdrawalTxHash() string {
 	if m != nil {
 		return m.WithdrawalTxHash
 	}
 	return ""
 }
 
-func (m *transaction) GetWithdrawalToken() string {
+func (m *transaction1) GetWithdrawalToken() string {
 	if m != nil {
 		return m.WithdrawalToken
 	}
 	return ""
 }
 
-func (m *transaction) GetSignature() string {
+func (m *transaction1) GetSignature() string {
 	if m != nil {
 		return m.Signature
 	}
 	return ""
 }
 
-func (m *transaction) GetIsWrapped() bool {
+func (m *transaction1) GetIsWrapped() bool {
 	if m != nil {
 		return m.IsWrapped
 	}
 	return false
 }
 
-func (m *transaction) GetWithdrawalAmount() string {
+func (m *transaction1) GetWithdrawalAmount() string {
 	if m != nil {
 		return m.WithdrawalAmount
 	}
@@ -172,7 +172,7 @@ func (m *transaction) GetWithdrawalAmount() string {
 }
 
 func init() {
-	proto.RegisterType((*transaction)(nil), "core.bridge.transaction")
+	proto.RegisterType((*transaction1)(nil), "core.bridge.transaction1")
 }
 
 func init() { proto.RegisterFile("bridge/models/transaction.proto", fileDescriptor_8fcaf7a078652736) }
@@ -211,7 +211,7 @@ var fileDescriptor_8fcaf7a078652736 = []byte{
 	0xff, 0x17, 0x00, 0x00, 0xff, 0xff, 0xb4, 0xfb, 0xaa, 0x6b, 0x2e, 0x03, 0x00, 0x00,
 }
 
-func (m *transaction) Marshal() (dAtA []byte, err error) {
+func (m *transaction1) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -221,12 +221,12 @@ func (m *transaction) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *transaction) MarshalTo(dAtA []byte) (int, error) {
+func (m *transaction1) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *transaction) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *transaction1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -342,7 +342,7 @@ func encodeVarintTransaction(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *transaction) Size() (n int) {
+func (m *transaction1) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -410,7 +410,7 @@ func sovTransaction(x uint64) (n int) {
 func sozTransaction(x uint64) (n int) {
 	return sovTransaction(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *transaction) Unmarshal(dAtA []byte) error {
+func (m *transaction1) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -433,10 +433,10 @@ func (m *transaction) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: transaction: wiretype end group for non-group")
+			return fmt.Errorf("proto: transaction1: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: transaction: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: transaction1: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
