@@ -16,9 +16,9 @@ func (m msgServer) SetTssThreshold(goCtx context.Context, msg *types.MsgSetTssTh
 		return nil, errorsmod.Wrap(types.ErrPermissionDenied, "msg sender is not module admin")
 	}
 
-	if int(msg.Threshold) != len(params.Parties)*2/3 {
+	if int(msg.Threshold) < len(params.Parties)*2/3 || int(msg.Threshold) > len(params.Parties) {
 		return nil, errorsmod.Wrap(types.ErrInvalidTssThreshold,
-			"tss threshold must be 2/3 of number of parties listed in params")
+			"tss threshold must be 2/3 or more of number of parties listed in params")
 	}
 
 	params.TssThreshold = msg.Threshold
