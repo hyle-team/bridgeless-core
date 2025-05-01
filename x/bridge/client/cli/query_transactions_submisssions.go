@@ -1,19 +1,18 @@
 package cli
 
 import (
-	"errors"
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
 	"github.com/spf13/cobra"
-	"math/big"
 )
 
-func CmdQueryTransactions() *cobra.Command {
+func CmdQueryTransactionsSubmissions() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "transactions",
-		Short: "Query bridge transactions",
+		Use:   "transactions-submissions",
+		Short: "Query bridge transactions submissions",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
@@ -27,7 +26,7 @@ func CmdQueryTransactions() *cobra.Command {
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.Transactions(cmd.Context(), &types.QueryTransactionsRequest{Pagination: pageReq})
+			res, err := queryClient.GetTxsSubmissions(cmd.Context(), &types.QueryGetTxsSubmissions{Pagination: pageReq})
 			if err != nil {
 				return err
 			}
@@ -42,31 +41,25 @@ func CmdQueryTransactions() *cobra.Command {
 	return cmd
 }
 
-func CmdQueryTransactionById() *cobra.Command {
+func CmdQueryTransactionSubmissionsByHash() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "transaction [chain-id] [tx_hash] [tx_nonce]",
-		Short: "Query bridge transaction by its id",
-		Args:  cobra.ExactArgs(3),
+		Use:   "transaction-submissions [tx_hash]",
+		Short: "Query bridge transaction submissions by hash",
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			nonce, ok := big.NewInt(0).SetString(args[2], 10)
-			if !ok {
-				return errors.New(fmt.Sprintf("invalid nonce: %s", args[2]))
-			}
-
-			if nonce.Cmp(big.NewInt(0)) == -1 {
-				return errors.New(fmt.Sprintf("negative nonce: %s", args[2]))
+			_, err = hexutil.Decode(args[0])
+			if err != nil {
+				return errorsmod.Wrap(err, "invalid transaction hash")
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.TransactionById(cmd.Context(), &types.QueryTransactionByIdRequest{
-				ChainId: args[0],
-				TxHash:  args[1],
-				TxNonce: nonce.Uint64(),
+			res, err := queryClient.GetTxSubmissionsByHash(cmd.Context(), &types.QueryGetTxSubmissionsByHash{
+				TxHash: args[0],
 			})
 			if err != nil {
 				return err

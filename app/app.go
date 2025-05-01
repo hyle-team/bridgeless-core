@@ -18,6 +18,7 @@ package app
 
 import (
 	"context"
+	errorsmod "cosmossdk.io/errors"
 	"encoding/json"
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/x/accumulator"
@@ -188,7 +189,7 @@ import (
 func init() {
 	userHomeDir, err := os.UserHomeDir()
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to determine user home directory"))
 	}
 
 	DefaultNodeHome = filepath.Join(userHomeDir, ".bridgeless-cored")
@@ -451,7 +452,7 @@ func NewBridge(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
 	app.BridgeKeeper = bridgekeeper.NewKeeper(
-		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName), app.StakingKeeper,
+		appCodec, keys[bridgetypes.StoreKey], keys[bridgetypes.StoreKey], app.GetSubspace(bridgetypes.ModuleName),
 	)
 
 	app.AccumulatorKeeper = accumulatorkeeper.NewKeeper(
@@ -1023,7 +1024,7 @@ func (app *Bridge) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64)
 	}
 
 	if err := options.Validate(); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed setting ante handler"))
 	}
 
 	app.SetAnteHandler(ante.NewAnteHandler(options))
@@ -1034,7 +1035,7 @@ func (app *Bridge) setPostHandler() {
 		posthandler.HandlerOptions{},
 	)
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "invalid post handler"))
 	}
 
 	app.SetPostHandler(postHandler)
@@ -1071,7 +1072,7 @@ func (app *Bridge) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDelive
 func (app *Bridge) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState simapp.GenesisState
 	if err := json.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to unmarshal genesis state"))
 	}
 
 	app.UpgradeKeeper.SetModuleVersionMap(ctx, app.mm.GetVersionMap())
@@ -1250,7 +1251,7 @@ func (app *Bridge) GetTxConfig() client.TxConfig {
 func RegisterSwaggerAPI(_ client.Context, rtr *mux.Router) {
 	statikFS, err := fs.New()
 	if err != nil {
-		panic(err)
+		panic(errorsmod.Wrap(err, "failed to register swagger API"))
 	}
 
 	staticServer := http.FileServer(statikFS)

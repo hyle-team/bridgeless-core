@@ -6,17 +6,6 @@ import (
 	"strings"
 )
 
-var (
-	// ----- Param Keys -----
-	ParamModuleAdminKey                = []byte("ModuleAdmin")
-	ParamModulePartiesListKey          = []byte("PartiesList")
-	ParamModuleNewbiesListKey          = []byte("NewbiesList")
-	ParamModuleGoodbyePartiesListKey   = []byte("GoodbyePartiesList")
-	ParamModuleBlacklistPartiesListKey = []byte("BlacklistPartiesList")
-	ParamModuleStakingThresholdKey     = []byte("StakingThreshold")
-	ParamModuleTssThresholdKey         = []byte("TssThreshold")
-)
-
 const (
 	// ModuleName defines the module name
 	ModuleName = "bridge"
@@ -30,12 +19,18 @@ const (
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_bridge"
 
+	// ----- Param Keys -----
+	ParamModuleAdminKey   = "ModuleAdmin"
+	ParamModulePartiesKey = "Parties"
+	ParamTssThresholdKey  = "TssThreshold"
+
 	// ---- Store Prefixes ------
-	StoreTokenPrefix       = "token"
-	StoreTokenInfoPrefix   = "token-info"
-	StoreTokenPairsPrefix  = "token-pairs"
-	StoreChainPrefix       = "chain"
-	StoreTransactionPrefix = "transaction"
+	StoreTokenPrefix                  = "token"
+	StoreTokenInfoPrefix              = "token-info"
+	StoreTokenPairsPrefix             = "token-pairs"
+	StoreChainPrefix                  = "chain"
+	StoreTransactionPrefix            = "transaction"
+	StoreTransactionSubmissionsPrefix = "transaction-submissions"
 
 	// Attributes keys for bridge events
 	AttributeKeyDepositTxHash     = "deposit_tx_hash"
@@ -52,6 +47,7 @@ const (
 	AttributeKeyWithdrawalToken   = "withdrawal_token"
 	AttributeKeySignature         = "signature"
 	AttributeKeyIsWrapped         = "is_wrapped"
+	AttributeKeyCommissionAmount  = "commission_amount"
 )
 
 func Prefix(p string) []byte {

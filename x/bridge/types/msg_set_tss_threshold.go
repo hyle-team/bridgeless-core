@@ -10,10 +10,10 @@ const TypeMsgSetTssThreshold = "set_tss_threshold"
 
 var _ sdk.Msg = &MsgSetTssThreshold{}
 
-func NewMsgSetTssThreshold(creator string, amount uint32) *MsgSetTssThreshold {
+func NewMsgSetTssThreshold(submitter string, threshold uint32) *MsgSetTssThreshold {
 	return &MsgSetTssThreshold{
-		Creator: creator,
-		Amount:  amount,
+		Creator:   submitter,
+		Threshold: threshold,
 	}
 }
 
@@ -26,7 +26,12 @@ func (msg *MsgSetTssThreshold) Type() string {
 }
 
 func (msg *MsgSetTssThreshold) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(msg.Creator)}
+	accAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		panic(errorsmod.Wrapf(err, "failed to acc address from bech32 string, given string: %s", msg.Creator))
+	}
+
+	return []sdk.AccAddress{accAddress}
 }
 
 func (msg *MsgSetTssThreshold) GetSignBytes() []byte {
@@ -37,8 +42,8 @@ func (msg *MsgSetTssThreshold) GetSignBytes() []byte {
 func (msg *MsgSetTssThreshold) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
-		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
-	}
+		return errorsmod.Wrapf(sdkerrors.ErrInvalidAddress, "invalid submitter address: %s", err)
 
-	return validateTssThreshold(msg.Amount)
+	}
+	return nil
 }

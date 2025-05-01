@@ -9,10 +9,6 @@ option go_package = "github.com/hyle-team/bridgeless-core/v12/x/bridge/types";
 // Params defines the parameters for the module.
 message Params {
   string module_admin = 1;
-  repeated Party parties =2;
-  repeated Party newbies = 3;
-  repeated Party goodbye_list = 4;
-  repeated Party blacklist = 5;
-  string stakeThreshold = 6;
-  uint32 tssThreshold = 7;
+  repeated Party parties = 2;
+  uint32 tss_threshold = 3;
 }

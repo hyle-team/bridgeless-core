@@ -1,13 +1,12 @@
 package cli
 
 import (
-	"fmt"
+	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"strings"
 )
@@ -29,22 +28,22 @@ func TxPartiesCmd() *cobra.Command {
 
 func CmdSubmitParties() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "set [list-type (default,goodbye,newbies,blacklist)] [from_key_or_address] [parties-list]",
+		Use:   "set [from_key_or_address] [parties-list]",
 		Short: "Set a new parties list",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			cmd.Flags().Set(flags.FlagFrom, args[1])
+			cmd.Flags().Set(flags.FlagFrom, args[0])
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
-				return errors.Wrap(err, "cannot get client tx context")
+				return errorsmod.Wrap(err, "cannot get client tx context")
 			}
 
-			arg2 := args[2]
+			arg2 := args[1]
 			parties := strings.Split(arg2, ",")
 			for _, party := range parties {
 				_, err = sdk.AccAddressFromBech32(party)
 				if err != nil {
-					return errors.Wrap(err, "failed to set parties")
+					return errorsmod.Wrap(err, "failed to set parties")
 				}
 			}
 
@@ -55,21 +54,9 @@ func CmdSubmitParties() *cobra.Command {
 					Address: party,
 				})
 			}
-			var msg sdk.Msg
-			switch args[0] {
-			case "default":
-				msg = types.NewMsgSetPartiesList(clientCtx.GetFromAddress().String(), partiesList)
-			case "newbies":
-				msg = types.NewMsgSetNewbiesList(clientCtx.GetFromAddress().String(), partiesList)
-			case "goodbye":
-				msg = types.NewMsgSetGoodbyeList(clientCtx.GetFromAddress().String(), partiesList)
-			case "blacklist":
-				msg = types.NewMsgSetBlacklistPartiesList(clientCtx.GetFromAddress().String(), partiesList)
-			default:
-				return errors.New(fmt.Sprintf("invalid parties list type: %s", args[0]))
-			}
-
+			msg := types.NewMsgSetParties(clientCtx.GetFromAddress().String(), partiesList)
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
-		}}
+		},
+	}
 	return cmd
 }
