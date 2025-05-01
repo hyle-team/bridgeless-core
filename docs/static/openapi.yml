@@ -1804,6 +1804,8 @@ paths:
                       type: string
                     commission_amount:
                       type: string
+                    tx_data:
+                      type: string
                 description: Transactions is a list of transactions.
               pagination:
                 type: object
@@ -2124,6 +2126,8 @@ paths:
                   withdrawal_amount:
                     type: string
                   commission_amount:
+                    type: string
+                  tx_data:
                     type: string
             description: >-
               QueryTransactionByIdResponse is response type for the
@@ -50184,6 +50188,8 @@ definitions:
             type: string
           commission_amount:
             type: string
+          tx_data:
+            type: string
     description: >-
       QueryTransactionByIdResponse is response type for the
       Query/TransactionById RPC method.
@@ -50226,6 +50232,8 @@ definitions:
             withdrawal_amount:
               type: string
             commission_amount:
+              type: string
+            tx_data:
               type: string
         description: Transactions is a list of transactions.
       pagination:
@@ -50350,6 +50358,8 @@ definitions:
       withdrawal_amount:
         type: string
       commission_amount:
+        type: string
+      tx_data:
         type: string
   core.bridge.TransactionSubmissions:
     type: object
