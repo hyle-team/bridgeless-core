@@ -2350,6 +2350,8 @@ paths:
                       type: array
                       items:
                         type: string
+                    commission_amount:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -2640,6 +2642,8 @@ paths:
                     type: array
                     items:
                       type: string
+                  commission_amount:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -50078,6 +50082,8 @@ definitions:
             type: array
             items:
               type: string
+          commission_amount:
+            type: string
   core.bridge.QueryGetTxsSubmissionsResponse:
     type: object
     properties:
@@ -50092,6 +50098,8 @@ definitions:
               type: array
               items:
                 type: string
+            commission_amount:
+              type: string
       pagination:
         type: object
         properties:
@@ -50352,6 +50360,8 @@ definitions:
         type: array
         items:
           type: string
+      commission_amount:
+        type: string
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
