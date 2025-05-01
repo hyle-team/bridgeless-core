@@ -22,11 +22,10 @@ RUN go mod download
 COPY . .
 
 RUN go mod vendor
-
 RUN git clone https://github.com/hyle-team/cosmos-sdk.git && \
     cd cosmos-sdk/cosmovisor && \
     git checkout 7e87d2103e03dca96073cb519bf3cbe09551c014 && \
-    go install ./cmd/cosmovisor \
+    go install ./cmd/cosmovisor
 
 RUN cp $GOPATH/bin/cosmovisor /usr/local/bin/cosmovisor
 
