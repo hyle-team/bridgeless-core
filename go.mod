@@ -73,7 +73,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
-	github.com/coinbase/rosetta-sdk-go v0.7.9 // indirect
+	github.com/coinbase/rosetta-sdk-go v0.8.9 // indirect
 	github.com/cometbft/cometbft-db v0.7.0 // indirect
 	github.com/confio/ics23/go v0.9.0 // indirect
 	github.com/containerd/continuity v0.3.0 // indirect
@@ -227,8 +227,8 @@ require (
 replace (
 	// use cosmos fork of keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
-
-	github.com/cosmos/cosmos-sdk => github.com/hyle-team/cosmos-sdk v0.46.29
+	github.com/coinbase/rosetta-sdk-go => github.com/coinbase/mesh-sdk-go v0.7.9
+	github.com/cosmos/cosmos-sdk => github.com/hyle-team/cosmos-sdk v0.46.31-0.20250411124134-7e87d2103e03
 	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.0.0-20241031152903-f38c2bf016e9
 
 	// use Evmos geth fork
