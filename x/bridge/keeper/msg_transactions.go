@@ -17,9 +17,6 @@ func (m msgServer) SubmitTransactions(goCtx context.Context, msg *types.MsgSubmi
 	}
 
 	for _, tx := range msg.Transactions {
-		if _, found := m.GetTransaction(ctx, types.TransactionId(&tx)); found {
-			return nil, types.ErrTranscationAlreadySubmitted
-		}
 		chain, found := m.GetChain(ctx, tx.DepositChainId)
 		if !found {
 			return nil, types.ErrSourceChainNotSupported
