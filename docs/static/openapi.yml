@@ -2354,8 +2354,6 @@ paths:
                       type: array
                       items:
                         type: string
-                    commission_amount:
-                      type: string
               pagination:
                 type: object
                 properties:
@@ -2646,8 +2644,6 @@ paths:
                     type: array
                     items:
                       type: string
-                  commission_amount:
-                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -20835,6 +20831,9 @@ paths:
                       Minimum value of Veto votes to Total votes ratio for
                       proposal to be
                        vetoed. Default value: 1/3.
+                  deposit_locking_period:
+                    type: string
+                    title: During this time new delegations cannot be used for voting
             description: >-
               QueryParamsResponse is the response type for the Query/Params RPC
               method.
@@ -50086,8 +50085,6 @@ definitions:
             type: array
             items:
               type: string
-          commission_amount:
-            type: string
   core.bridge.QueryGetTxsSubmissionsResponse:
     type: object
     properties:
@@ -50102,8 +50099,6 @@ definitions:
               type: array
               items:
                 type: string
-            commission_amount:
-              type: string
       pagination:
         type: object
         properties:
@@ -50370,8 +50365,6 @@ definitions:
         type: array
         items:
           type: string
-      commission_amount:
-        type: string
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -63334,6 +63327,9 @@ definitions:
               Minimum value of Veto votes to Total votes ratio for proposal to
               be
                vetoed. Default value: 1/3.
+          deposit_locking_period:
+            type: string
+            title: During this time new delegations cannot be used for voting
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
   cosmos.gov.v1beta1.QueryProposalResponse:
     type: object
@@ -64038,6 +64034,9 @@ definitions:
         description: |-
           Minimum value of Veto votes to Total votes ratio for proposal to be
            vetoed. Default value: 1/3.
+      deposit_locking_period:
+        type: string
+        title: During this time new delegations cannot be used for voting
     description: TallyParams defines the params for tallying votes on governance proposals.
   cosmos.gov.v1beta1.TallyResult:
     type: object
