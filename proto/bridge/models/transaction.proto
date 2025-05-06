@@ -30,5 +30,4 @@ message Transaction {
 message TransactionSubmissions{
   string tx_hash = 1;
   repeated string submitters = 2;
-  string commission_amount = 15;
 }
