@@ -1,0 +1,432 @@
+{
+  "genesis_time": "2025-05-09T10:58:07.839632Z",
+  "chain_id": "bridge_13441-1",
+  "initial_height": "1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "40000000",
+      "time_iota_ms": "1000"
+    },
+    "evidence": {
+      "max_age_num_blocks": "100000",
+      "max_age_duration": "172800000000000",
+      "max_bytes": "1048576"
+    },
+    "validator": {
+      "pub_key_types": [
+        "ed25519"
+      ]
+    },
+    "version": {}
+  },
+  "app_hash": "",
+  "app_state": {
+    "auth": {
+      "params": {
+        "max_memo_characters": "256",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000"
+      },
+      "accounts": [
+        {
+          "@type": "/ethermint.types.v1.EthAccount",
+          "base_account": {
+            "address": "bridge15tzhpy6nz6vq5c3rhrzac2zc2sq67r4lj4077n",
+            "pub_key": null,
+            "account_number": "0",
+            "sequence": "0"
+          },
+          "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+        },
+        {
+          "@type": "/ethermint.types.v1.EthAccount",
+          "base_account": {
+            "address": "bridge1hgu8wjawevgjtnmgj4ufvg7fp5m68arpald7p00gdnufjyx03j3qv3lnyr",
+            "pub_key": null,
+            "account_number": "0",
+            "sequence": "0"
+          },
+          "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+        },
+        {
+          "@type": "/ethermint.types.v1.EthAccount",
+          "base_account": {
+            "address": "bridge199ywxzvcz0asa3ppr35uqdj0awsrp2hg39yazt",
+            "pub_key": null,
+            "account_number": "0",
+            "sequence": "0"
+          },
+          "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+        },
+        {
+          "@type": "/ethermint.types.v1.EthAccount",
+          "base_account": {
+            "address": "bridge1ef9qertvdpm9lvj9r2m9kr879zqeyaa2agza8j",
+            "pub_key": null,
+            "account_number": "0",
+            "sequence": "0"
+          },
+          "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+        },
+        {
+          "@type": "/ethermint.types.v1.EthAccount",
+          "base_account": {
+            "address": "bridge1ps7vz3w4m4jrmqmp73pqsk6fa9dktc4nwnkmnp",
+            "pub_key": null,
+            "account_number": "0",
+            "sequence": "0"
+          },
+          "code_hash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+        }
+      ]
+    },
+    "authz": {
+      "authorization": []
+    },
+    "bank": {
+      "params": {
+        "send_enabled": [],
+        "default_send_enabled": true
+      },
+      "balances": [
+        {
+          "address": "bridge1ps7vz3w4m4jrmqmp73pqsk6fa9dktc4nwnkmnp",
+          "coins": [
+            {
+              "denom": "abridge",
+              "amount": "306634120000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "bridge199ywxzvcz0asa3ppr35uqdj0awsrp2hg39yazt",
+          "coins": [
+            {
+              "denom": "abridge",
+              "amount": "306634120000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "bridge15tzhpy6nz6vq5c3rhrzac2zc2sq67r4lj4077n",
+          "coins": [
+            {
+              "denom": "abridge",
+              "amount": "10000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "bridge1hgu8wjawevgjtnmgj4ufvg7fp5m68arpald7p00gdnufjyx03j3qv3lnyr",
+          "coins": [
+            {
+              "denom": "abridge",
+              "amount": "80097630000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "bridge1ef9qertvdpm9lvj9r2m9kr879zqeyaa2agza8j",
+          "coins": [
+            {
+              "denom": "abridge",
+              "amount": "306634120000000000000000000"
+            }
+          ]
+        }
+      ],
+      "supply": [
+        {
+          "denom": "abridge",
+          "amount": "1000000000000000000000000000"
+        }
+      ],
+      "denom_metadata": []
+    },
+    "bridge": {
+      "params": {
+        "module_admin": "bridge15tzhpy6nz6vq5c3rhrzac2zc2sq67r4lj4077n",
+        "parties": [],
+        "tss_threshold": 0
+      },
+      "chains": [],
+      "tokens": [],
+      "transactions": [],
+      "transactions_submissions": []
+    },
+    "capability": {
+      "index": "1",
+      "owners": []
+    },
+    "claims": {
+      "params": {
+        "enable_claims": true,
+        "airdrop_start_time": "0001-01-01T00:00:00Z",
+        "duration_until_decay": "2629800s",
+        "duration_of_decay": "5259600s",
+        "claims_denom": "abridge",
+        "authorized_channels": [
+          "channel-0",
+          "channel-3"
+        ],
+        "evm_channels": [
+          "channel-2"
+        ]
+      },
+      "claims_records": []
+    },
+    "crisis": {
+      "constant_fee": {
+        "denom": "abridge",
+        "amount": "1000"
+      }
+    },
+    "distribution": {
+      "params": {
+        "community_tax": "0.020000000000000000",
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "nft_proposer_reward": "0.020000000000000000",
+        "withdraw_addr_enabled": true
+      },
+      "fee_pool": {
+        "community_pool": []
+      },
+      "delegator_withdraw_infos": [],
+      "previous_proposer": "",
+      "outstanding_rewards": [],
+      "validator_accumulated_commissions": [],
+      "validator_historical_rewards": [],
+      "validator_current_rewards": [],
+      "delegator_starting_infos": [],
+      "validator_slash_events": []
+    },
+    "erc20": {
+      "params": {
+        "enable_erc20": true,
+        "enable_evm_hook": true
+      },
+      "token_pairs": []
+    },
+    "evidence": {
+      "evidence": []
+    },
+    "evm": {
+      "accounts": [],
+      "params": {
+        "evm_denom": "abridge",
+        "enable_create": true,
+        "enable_call": true,
+        "extra_eips": [],
+        "chain_config": {
+          "homestead_block": "0",
+          "dao_fork_block": "0",
+          "dao_fork_support": true,
+          "eip150_block": "0",
+          "eip150_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "eip155_block": "0",
+          "eip158_block": "0",
+          "byzantium_block": "0",
+          "constantinople_block": "0",
+          "petersburg_block": "0",
+          "istanbul_block": "0",
+          "muir_glacier_block": "0",
+          "berlin_block": "0",
+          "london_block": "0",
+          "arrow_glacier_block": "0",
+          "gray_glacier_block": "0",
+          "merge_netsplit_block": "0",
+          "shanghai_block": "0",
+          "cancun_block": "0"
+        },
+        "allow_unprotected_txs": false
+      }
+    },
+    "feegrant": {
+      "allowances": []
+    },
+    "feemarket": {
+      "params": {
+        "no_base_fee": true,
+        "base_fee_change_denominator": 8,
+        "elasticity_multiplier": 2,
+        "enable_height": "0",
+        "base_fee": "1000000000",
+        "min_gas_price": "0.000000000000000000",
+        "min_gas_multiplier": "0.500000000000000000"
+      },
+      "block_gas": "0"
+    },
+    "genutil": {
+      "gen_txs": []
+    },
+    "gov": {
+      "starting_proposal_id": "1",
+      "deposits": [],
+      "votes": [],
+      "proposals": [],
+      "deposit_params": {
+        "min_deposit": [
+          {
+            "denom": "abridge",
+            "amount": "10000000"
+          }
+        ],
+        "max_deposit_period": "7200s"
+      },
+      "voting_params": {
+        "voting_period": "7200s"
+      },
+      "tally_params": {
+        "quorum": "0.334000000000000000",
+        "threshold": "0.500000000000000000",
+        "veto_threshold": "0.334000000000000000",
+        "deposit_locking_period": "0s"
+      }
+    },
+    "ibc": {
+      "client_genesis": {
+        "clients": [],
+        "clients_consensus": [],
+        "clients_metadata": [],
+        "params": {
+          "allowed_clients": [
+            "06-solomachine",
+            "07-tendermint"
+          ]
+        },
+        "create_localhost": false,
+        "next_client_sequence": "0"
+      },
+      "connection_genesis": {
+        "connections": [],
+        "client_connection_paths": [],
+        "next_connection_sequence": "0",
+        "params": {
+          "max_expected_time_per_block": "30000000000"
+        }
+      },
+      "channel_genesis": {
+        "channels": [],
+        "acknowledgements": [],
+        "commitments": [],
+        "receipts": [],
+        "send_sequences": [],
+        "recv_sequences": [],
+        "ack_sequences": [],
+        "next_channel_sequence": "0"
+      }
+    },
+    "interchainaccounts": {
+      "controller_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
+        "ports": [],
+        "params": {
+          "controller_enabled": true
+        }
+      },
+      "host_genesis_state": {
+        "active_channels": [],
+        "interchain_accounts": [],
+        "port": "icahost",
+        "params": {
+          "host_enabled": true,
+          "allow_messages": [
+            "*"
+          ]
+        }
+      }
+    },
+    "mint": {
+      "params": {
+        "mint_denom": "abridge",
+        "halving_blocks": "1000000",
+        "max_halving_periods": 7,
+        "current_halving_period": 0,
+        "block_reward": {
+          "denom": "abridge",
+          "amount": "6400000000000000000"
+        }
+      }
+    },
+    "multisig": {
+      "params": {
+        "groupSequence": "0",
+        "proposalSequence": "0",
+        "prunePeriod": "240",
+        "votingPeriod": "120"
+      },
+      "groupList": [],
+      "proposalList": [],
+      "voteList": []
+    },
+    "nft": {
+      "params": {},
+      "nfts": []
+    },
+    "noaccumulator": {
+      "params": {
+        "super_admin": "bridge15tzhpy6nz6vq5c3rhrzac2zc2sq67r4lj4077n"
+      },
+      "admins": []
+    },
+    "params": null,
+    "recovery": {
+      "params": {
+        "enable_recovery": true,
+        "packet_timeout_duration": "14400s"
+      }
+    },
+    "revenue": {
+      "params": {
+        "enable_revenue": true,
+        "developer_shares": "0.500000000000000000",
+        "addr_derivation_cost_create": "50"
+      },
+      "revenues": []
+    },
+    "slashing": {
+      "params": {
+        "signed_blocks_window": "100",
+        "min_signed_per_window": "0.500000000000000000",
+        "downtime_jail_duration": "600s",
+        "slash_fraction_double_sign": "0.050000000000000000",
+        "slash_fraction_downtime": "0.010000000000000000"
+      },
+      "signing_infos": [],
+      "missed_blocks": []
+    },
+    "staking": {
+      "params": {
+        "unbonding_time": "1814400s",
+        "max_validators": 100,
+        "max_entries": 7,
+        "historical_entries": 10000,
+        "bond_denom": "abridge",
+        "min_commission_rate": "0.050000000000000000",
+        "minimal_delegation_amount": "1000000000000000000"
+      },
+      "last_total_power": "0",
+      "last_validator_powers": [],
+      "validators": [],
+      "delegations": [],
+      "unbonding_delegations": [],
+      "redelegations": [],
+      "exported": false
+    },
+    "transfer": {
+      "port_id": "transfer",
+      "denom_traces": [],
+      "params": {
+        "send_enabled": true,
+        "receive_enabled": true
+      }
+    },
+    "upgrade": {},
+    "vesting": {}
+  }
+}
