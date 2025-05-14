@@ -237,7 +237,7 @@ message MsgInsertToken {
 ```
 ___
 ### UpdateToken
-**UpdateToken** - updates queried token data on core.
+**UpdateToken** - updates queried token metadata on core.
 
 Message example:
 
@@ -285,7 +285,7 @@ ___
 ___
 
 ### AddTokenInfo
-**AddTokenInfo** - stores token info to core.
+**AddTokenInfo** - adds new token info to existing one on core.
 
 Message example:
 
@@ -363,7 +363,7 @@ Example of `chain.json`:
 ```
 ___
 ### DeleteChain
-**DeleteChain**-deletes chain data from core.
+**DeleteChain**-deletes chain data by chain id from core.
 
 ```
  bridgeless-cored tx bridge chains remove bridge1... 1
@@ -414,7 +414,7 @@ Example of `token.json`:
 ```
 ___
 ### UpdateToken
-**UpdateToken** - updates queried token data on core.
+**UpdateToken** - updates queried token metadata on core.
 
 ```
 bridgeless-cored tx bridge tokens update bridge1... token.json
@@ -422,7 +422,7 @@ bridgeless-cored tx bridge tokens update bridge1... token.json
 ___
 
 ### DeleteToken
-**DeleteToken** - deletes token data from core.
+**DeleteToken** - deletes token data by token id from core.
 
 ```
  bridgeless-cored tx bridge tokens remove bridge1... 1
@@ -444,7 +444,7 @@ ___
 ___
 
 ### AddTokenInfo
-**AddTokenInfo** - stores token info to core.
+**AddTokenInfo** - adds new token info to existing one on core.
 
 ```
 bridgeless-cored tx bridge tokens add-info bridge1... info.json
@@ -454,7 +454,7 @@ ___
 ### RemoveTokenInfo
 
 ```
-bridgeless-cored tx bridge tokens remove-info bridge1... 1 1
+bridgeless-cored tx bridge tokens remove-info bridge1... 1 [token-id] 1 [chain-id]
 ```
 ___
 ### Parties
@@ -621,7 +621,7 @@ ___
 ### QueryTokenInfo
 
 ```
-bridgeless-core % bridgeless-cored query bridge token-info 1 0x...
+bridgeless-cored query bridge token-info 1 0x...
 ```
 
 Response example:
