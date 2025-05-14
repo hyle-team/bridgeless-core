@@ -1,7 +1,6 @@
 package cli
 
 import (
-	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -29,7 +28,7 @@ func TxChainsCmd() *cobra.Command {
 
 func CmdInsertChain() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "insert [from_key_or_address] [path-to-chain-json]",
+		Use:   "insert [from_key_or_address] [token-json]",
 		Short: "Set a new chain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -39,14 +38,14 @@ func CmdInsertChain() *cobra.Command {
 				return err
 			}
 
-			chain, err := parseInsertChain(args[1])
-			if err != nil {
-				return errorsmod.Wrap(err, "failed unmarshalling chain")
+			chain := types.Chain{}
+			if err = types.ModuleCdc.UnmarshalJSON([]byte(args[1]), &chain); err != nil {
+				return err
 			}
 
 			msg := types.NewMsgInsertChain(
 				clientCtx.GetFromAddress().String(),
-				*chain,
+				chain,
 			)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
