@@ -340,7 +340,7 @@ ___
 ## CLI
 ___
 
-### Transactions
+## Transactions
 ___
 ### Chains
 ___
@@ -350,6 +350,16 @@ ___
 
 ```
 bridgeless-cored tx bridge chains insert bridge1... chain.json
+```
+
+Example of `chain.json`:
+```json
+{
+  "id": "0",
+  "type": 0,
+  "bridge_address": "0x0000000000000000000000000000000000000000",
+  "operator": "0x0000000000000000000000000000000000000000"
+}
 ```
 ___
 ### DeleteChain
@@ -371,6 +381,36 @@ ___
 
 ```
  bridgeless-cored tx bridge tokens insert bridge1... token.json
+```
+
+Example of `token.json`: 
+```json
+{
+  "id": 1,
+  "commission_rate": "0.5",
+  "metadata": {
+    "name": "TESTNET",
+    "symbol": "TEST",
+    "uri": "https://example.com"
+  },
+  "info": [
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "decimals": 18,
+      "chain_id": "00000",
+      "token_id": 1,
+      "is_wrapped": true
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "decimals": 18,
+      "chain_id": "00000",
+      "token_id": 1,
+      "is_wrapped": false
+    }
+  ]
+}
+
 ```
 ___
 ### UpdateToken
@@ -433,7 +473,7 @@ ___
  bridgeless-cored tx bridge threshold set-tss-threshold bridge1... 5
 ```
 ___
-### Query
+## Query
 ___
 
 ### Params
@@ -528,7 +568,7 @@ tokens:
   metadata:
     name: TESTNET
     symbol: TEST
-    uri:
+    uri: https://example.com
 ```
 
 ___
@@ -557,7 +597,7 @@ tokens:
   metadata:
     name: TESTNET
     symbol: TEST
-    uri:
+    uri: https://example.com
 ```
 ___
 
