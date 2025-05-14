@@ -20,14 +20,14 @@ func parseSubmitTx(path string) ([]types.Transaction, error) {
 }
 
 func parseInsertToken(path string) (*types.Token, error) {
-	return ParseJSONFile[types.Token](path)
+	return readFromJSON[types.Token](path)
 }
 
 func parseInsertChain(path string) (*types.Chain, error) {
-	return ParseJSONFile[types.Chain](path)
+	return readFromJSON[types.Chain](path)
 }
 
-func ParseJSONFile[T any](path string) (*T, error) {
+func readFromJSON[T any](path string) (*T, error) {
 	var result T
 	contents, err := os.ReadFile(path)
 	if err != nil {
