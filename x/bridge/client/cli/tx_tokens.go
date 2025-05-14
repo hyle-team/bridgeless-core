@@ -50,7 +50,7 @@ func CmdInsertToken() *cobra.Command {
 
 			msg := types.NewMsgInsertToken(
 				clientCtx.GetFromAddress().String(),
-				token,
+				*token,
 			)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)

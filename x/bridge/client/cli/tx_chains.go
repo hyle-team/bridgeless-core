@@ -46,7 +46,7 @@ func CmdInsertChain() *cobra.Command {
 
 			msg := types.NewMsgInsertChain(
 				clientCtx.GetFromAddress().String(),
-				chain,
+				*chain,
 			)
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)

@@ -1,9 +1,9 @@
 package cli
 
 import (
-	"cosmossdk.io/errors"
 	"encoding/json"
 	"github.com/hyle-team/bridgeless-core/v12/x/bridge/types"
+	"github.com/pkg/errors"
 	"os"
 )
 
@@ -19,28 +19,23 @@ func parseSubmitTx(path string) ([]types.Transaction, error) {
 	return txs, nil
 }
 
-func parseInsertToken(path string) (types.Token, error) {
-	var token types.Token
-	contents, err := os.ReadFile(path)
-	if err != nil {
-		return token, errors.Wrap(err, "error reading file")
-	}
-	if err = json.Unmarshal(contents, &token); err != nil {
-		return token, errors.Wrap(err, "failed to unmarshal token")
-	}
-
-	return token, nil
+func parseInsertToken(path string) (*types.Token, error) {
+	return ParseJSONFile[types.Token](path)
 }
 
-func parseInsertChain(path string) (types.Chain, error) {
-	var chain types.Chain
+func parseInsertChain(path string) (*types.Chain, error) {
+	return ParseJSONFile[types.Chain](path)
+}
+
+func ParseJSONFile[T any](path string) (*T, error) {
+	var result T
 	contents, err := os.ReadFile(path)
 	if err != nil {
-		return chain, errors.Wrap(err, "error reading file")
+		return nil, errors.Wrap(err, "error reading file")
 	}
-	if err = json.Unmarshal(contents, &chain); err != nil {
-		return chain, errors.Wrap(err, "failed to unmarshal chain")
+	if err = json.Unmarshal(contents, &result); err != nil {
+		return nil, errors.Wrap(err, "failed to unmarshal JSON")
 	}
 
-	return chain, nil
+	return &result, nil
 }
