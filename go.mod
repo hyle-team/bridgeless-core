@@ -230,7 +230,7 @@ replace (
 
 	github.com/coinbase/rosetta-sdk-go => github.com/coinbase/mesh-sdk-go v0.7.9
 	github.com/cosmos/cosmos-sdk => github.com/hyle-team/cosmos-sdk v0.46.33
-	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.0.0-20241031152903-f38c2bf016e9
+	github.com/cosmos/ibc-go/v6 => github.com/hyle-team/ibc-go/v6 v6.1.9
 
 	// use Evmos geth fork
 	github.com/ethereum/go-ethereum => github.com/evmos/go-ethereum v1.10.26
