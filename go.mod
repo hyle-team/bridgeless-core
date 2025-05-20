@@ -1,6 +1,6 @@
 module github.com/hyle-team/bridgeless-core/v12
 
-go 1.23.0
+go 1.20
 
 require (
 	cosmossdk.io/errors v1.0.0-beta.7
