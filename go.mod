@@ -39,7 +39,7 @@ require (
 	github.com/tidwall/sjson v1.2.5
 	go.opencensus.io v0.24.0
 	golang.org/x/net v0.26.0
-	golang.org/x/text v0.25.0
+	golang.org/x/text v0.16.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240723171418-e6d459c13d2a
 	google.golang.org/grpc v1.64.1
 	google.golang.org/protobuf v1.34.2
@@ -192,6 +192,7 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.4.0 // indirect
+	github.com/tyler-smith/go-bip39 v1.1.0 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
@@ -204,13 +205,13 @@ require (
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
-	golang.org/x/crypto v0.38.0 // indirect
+	golang.org/x/crypto v0.25.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/term v0.32.0 // indirect
+	golang.org/x/sync v0.7.0 // indirect
+	golang.org/x/sys v0.24.0 // indirect
+	golang.org/x/term v0.22.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.21.1-0.20240508182429-e35e4ccd0d2d // indirect
 	google.golang.org/api v0.169.0 // indirect
@@ -244,6 +245,6 @@ replace (
 	// use cometbft
 
 	github.com/tendermint/tendermint => github.com/cometbft/cometbft v0.34.29
-	github.com/tyler-smith/go-bip39 => github.com/EduardMikhrin/go-bip39 v0.0.0-20250520100756-0fc6bbd1e3a8
+	github.com/tyler-smith/go-bip39 => github.com/EduardMikhrin/go-bip39 v0.0.0-20250520110429-260285377285
 	nhooyr.io/websocket => github.com/coder/websocket v1.8.7
 )
