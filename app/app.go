@@ -19,6 +19,7 @@ package app
 import (
 	"context"
 	errorsmod "cosmossdk.io/errors"
+	sdkmath "cosmossdk.io/math"
 	"encoding/json"
 	"fmt"
 	"github.com/cosmos/cosmos-sdk/x/accumulator"
@@ -874,6 +875,18 @@ func NewBridge(
 	app.UpgradeKeeper.SetUpgradeHandler(
 		"v12.1.19",
 		func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
+			mintParams := minttypes.Params{
+				MintDenom:            "abridge",
+				HalvingBlocks:        6306900,
+				MaxHalvingPeriods:    7,
+				CurrentHalvingPeriod: 0,
+				BlockReward: sdk.Coin{
+					Denom:  "abridge",
+					Amount: sdkmath.NewInt(6400000000000000000),
+				},
+			}
+
+			app.MintKeeper.SetParams(ctx, mintParams)
 			return app.mm.RunMigrations(ctx, app.configurator, fromVM)
 		},
 	)
