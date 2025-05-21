@@ -622,15 +622,14 @@
     "mint": {
       "params": {
         "mint_denom": "abridge",
-        "halving_blocks": 6306900,
-        "max_halving_periods": 7,
-        "current_halving_period": 0,
-        "block_reward": {
+        "blocks_per_month": "518400",
+        "end_block": "24883200",
+        "month_reward": {
           "denom": "abridge",
-          "amount": "6400000000000000000"
+          "amount": "208333333333000000000000"
         }
       }
-    },,
+    },
     "multisig": {
       "params": {
         "groupSequence": "0",
